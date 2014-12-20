@@ -37,7 +37,7 @@ class Hotel
     def remap_with_ids
       arr = []
 
-      Hotel.limit(10).offset(20).each do |hotel|
+      Hotel.each do |hotel|
         arr << hotel.hotel_id
       end
 

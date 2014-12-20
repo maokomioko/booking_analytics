@@ -4,7 +4,7 @@ class Block
   embedded_in :block_availability
   embeds_many :incremental_price
 
-  field :name, type: String
+  field :name
 end
 
 class IncrementalPrice
@@ -12,7 +12,7 @@ class IncrementalPrice
 
   embedded_in :block
 
-  field :currency, type: String
+  field :currency
   field :price, type: Float
 end
 

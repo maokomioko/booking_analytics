@@ -41,7 +41,7 @@ gem 'jquery-turbolinks', '~> 2.1.0'
 gem 'mini_magick'
 gem 'mime-types'
 gem 'mail-logger'
-gem 'mongoid', '>= 4'
+gem 'mongoid', github: 'mongoid/mongoid'
 gem 'mongoid_rails_migrations'
 gem 'mongoid_slug'
 

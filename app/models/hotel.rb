@@ -8,38 +8,38 @@ class Hotel
   scope :with_score_lt, -> (score){ self.lt(review_score: score) }
   scope :property_type, -> (type_id){ where(hoteltype_id: type_id) }
 
-  belongs_to :block_availability, foreign_key: 'hotel_id'
+  has_many :rooms, foreign_key: :hotel_id
   embeds_one :location
 
-  has_many :rooms
-
   field :hotel_id, type: String
-  field :_id, type: String, default: ->{ hotel_id }
+  field :_id, type: String, default: -> { hotel_id.to_s.parameterize }
+  index({ hotel_id: 1 }, { background: true })
 
-  field :name, type: String
-  field :hoteltype_id, type: String
+  field :name
+  field :hoteltype_id
+  field :facilities, type: Array
 
   field :exact_class, type: Float
   field :review_score, type: Float
 
-  field :district, type: String
-  field :zip, type: String
+  field :district
+  field :zip
 
   class << self
 
   end
 
-  def rooms_v1
-    Room.where(hotel_id: hotel_id)
-  end
+  # def rooms
+  #   Room.where(hotel_id: hotel_id)
+  # end
 end
 
 class Location
   include MongoWrapper
   embedded_in :hotel
 
-  field :latitude, type: String
-  field :longitude, type: String
+  field :latitude
+  field :longitude
 end
 
 # {

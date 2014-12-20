@@ -1,13 +1,12 @@
 class BlockAvailability
   include MongoWrapper
 
-  has_many :hotels
   embeds_many :block
 
-  field :departure_date, type: String
-  field :arrival_date, type: String
+  field :departure_date
+  field :arrival_date
 
-  field :hotel_id, type: String
+  field :hotel_id
 
   scope :by_departure, -> (date){ where(departure_date: date) }
   scope :by_arrival, -> (date){ where(arrival_date: date) }

@@ -9,6 +9,8 @@ class Hotel
   scope :property_type, -> (type_id){ where(hoteltype_id: type_id) }
 
   has_many :rooms, foreign_key: :hotel_id
+  has_many :block_availabilities
+
   embeds_one :location
   embeds_one :checkin
   embeds_one :checkout

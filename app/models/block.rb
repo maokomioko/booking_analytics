@@ -5,6 +5,7 @@ class Block
   embeds_many :incremental_price
 
   field :name
+  field :max_occupancy
 end
 
 class IncrementalPrice

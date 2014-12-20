@@ -1,6 +1,7 @@
 class BlockAvailability
   include MongoWrapper
 
+  belongs_to :hotel, foreign_key: :hotel_id
   embeds_many :block
 
   field :departure_date

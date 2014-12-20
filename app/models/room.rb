@@ -21,19 +21,20 @@ class Room
   class << self
     def remap_with_ids
       arr = []
+
       Room.all.each do |room|
         arr << room.room_id
       end
+
       arr.each do |arr_el|
         room = Room.find_by(room_id: arr_el)
-        up_room = Room.new(
-          {room_id: arr_el,
+        up_room = Room.new({
+          room_id: arr_el,
           facilities: room.facilities,
           max_persons: room.max_persons,
           roomtype: room.roomtype,
           max_price: room.max_price,
-          min_price: room.min_price},
-        )
+          min_price: room.min_price})
         up_room.save!
         unless room.bedding.nil?
           bedding = Bedding.new

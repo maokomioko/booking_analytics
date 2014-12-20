@@ -10,6 +10,8 @@ class Hotel
 
   has_many :rooms, foreign_key: :hotel_id
   embeds_one :location
+  embeds_one :checkin
+  embeds_one :checkout
 
   field :hotel_id, type: String
   field :_id, type: String, default: -> { hotel_id.to_s.parameterize }
@@ -17,6 +19,12 @@ class Hotel
 
   field :name
   field :hoteltype_id
+
+  field :city
+  field :city_id
+  field :address
+  field :url
+
   field :facilities, type: Array
 
   field :exact_class, type: Float
@@ -26,7 +34,41 @@ class Hotel
   field :zip
 
   class << self
+    def remap_with_ids
+      arr = []
 
+      Hotel.limit(10).offset(20).each do |hotel|
+        arr << hotel.hotel_id
+      end
+
+      arr.each do |arr_el|
+        hotel = Hotel.find_by(hotel_id: arr_el)
+        up_hotel = Hotel.new({
+          hotel_id: hotel.hotel_id,
+          name: hotel.name,
+          hoteltype_id: hotel.hoteltype_id,
+          city: hotel.city,
+          city_id: hotel.city_id,
+          address: hotel.address,
+          url: hotel.url,
+          facilities: hotel.facilities,
+          exact_class: hotel.exact_class,
+          review_score: hotel.review_score,
+          district: hotel.district,
+          zip: hotel.zip
+        })
+        up_hotel.save!
+
+        unless hotel.location.nil?
+          location = Location.new
+          location.latitude = hotel.location.latitude
+          location.longitude = hotel.location.longitude
+          up_hotel.location = location
+        end
+
+        hotel.destroy!
+      end
+    end
   end
 
   # def rooms
@@ -42,6 +84,20 @@ class Location
   field :longitude
 end
 
+class Checkin
+  include MongoWrapper
+  embedded_in :hotel
+
+  field :to
+  field :from
+end
+
+class Checkout
+  include MongoWrapper
+  embedded_in :hotel
+  field :to
+  field :from
+end
 # {
 #   "_id" : ObjectId("548872bc40ab8c550e64ee34"),
 #   "countrycode" : "cz",

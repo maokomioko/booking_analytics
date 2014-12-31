@@ -8,30 +8,26 @@ class BlockAvailability
   field :arrival_date
 
   field :hotel_id
+  index({ hotel_id: 1 }, { background: true })
 
-  scope :by_departure, -> (date){ where(departure_date: date) }
+  scope :for_hotels, -> (hotel_ids){ where(:hotel_id.in => hotel_ids) }
   scope :by_arrival, -> (date){ where(arrival_date: date) }
+  scope :by_departure, -> (date){ where(departure_date: date) }
 
   class << self
-    def hotels_for_block(keywords, date)
-      Hotel.with_facilities(keywords).map(&:hotel_id)
-    end
 
-    def blocks_for_date(date, data_type)
-      case data_type
-      when 'departure'
-        blocks = by_departure(date)
-      when 'arrival'
-        blocks = by_arrival(date)
+    def blocks_for_date(arrival, departure)
+      unless departure.nil?
+        blocks = by_arrival(arrival).by_departure(departure)
+      else
+        blocks = by_arrival(arrival)
       end
-
-      blocks
+      blocks.map(&:hotel_id)
     end
 
-    def get_block_prices(ids)
-      ranged_block_avail = where(:id.in => ids)
+    def get_prices(blocks)
       arr = []
-      ranged_block_avail.each do |block_avail|
+      blocks.each do |block_avail|
         begin
           hotel_name = Hotel.find_by(hotel_id: block_avail.hotel_id).name
           arr << block_avail.block.collect{|x| [hotel_name, x.incremental_price[0].currency, x.incremental_price[0].price]}.sort_by(&:last)
@@ -43,13 +39,6 @@ class BlockAvailability
       arr.flatten(1).sort_by(&:last)
     end
 
-    def blocks_for_hotels_to_date(date, data_type)
-      blocks = blocks_for_date(date, data_type)
-      blocks.where(:hotel_id.in => hotel_ids)
-    end
-
-    def rooms_for_date()
-    end
   end
 
   private

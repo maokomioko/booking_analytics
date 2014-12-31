@@ -1,9 +1,12 @@
 class Hotel
   include MongoWrapper
   include HotelTypeSelection
+  include Combinator
 
-  scope :with_facilities, -> (keywords){ self.in(facilities: [keywords]) }
-  scope :with_stars, -> (rate){ where(class: rate) }
+  scope :contains_facilities, -> (keywords){ self.in(facilities: [keywords]) }
+  scope :with_facilities, -> (keywords){ all_in(facilities: [keywords]) }
+
+  scope :with_stars, -> (rate){ where(exact_class: rate) }
   scope :with_score_gt, -> (score){ self.gt(review_score: score) }
   scope :with_score_lt, -> (score){ self.lt(review_score: score) }
   scope :property_type, -> (type_id){ where(hoteltype_id: type_id) }
@@ -34,6 +37,20 @@ class Hotel
 
   field :district
   field :zip
+
+  def amenities_mix(hotel_ids = nil)
+    ids = []
+    1.upto(facilities.size) do
+      if hotel_ids.nil?
+        ids = Hotel.with_facilities(facilities.powerset_enum.next)
+      else
+        ids = Hotel.where(:id.in => hotel_ids).with_facilities(facilities.powerset_enum.next)
+      end
+      ids = ids.map(&:hotel_id)
+    end
+
+    ids.uniq!
+  end
 
   class << self
     def remap_with_ids
@@ -72,10 +89,6 @@ class Hotel
       end
     end
   end
-
-  # def rooms
-  #   Room.where(hotel_id: hotel_id)
-  # end
 end
 
 class Location

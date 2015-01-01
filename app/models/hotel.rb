@@ -39,15 +39,18 @@ class Hotel
 
   def amenities_mix(hotel_ids = nil)
     ids = []
-    1.upto(facilities.size) do
-      if hotel_ids.nil?
-        hotels = Hotel.with_facilities(facilities.powerset_enum.next)
+    ps = facilities.powerset_enum
+    #1.upto(2**facilities.count - 1) do
+    1.upto(facilities.count) do
+      next_set = ps.next.join(', ')
+      unless hotel_ids
+        hotels = Hotel.with_facilities(next_set)
       else
-        hotels = Hotel.where(:id.in => hotel_ids).with_facilities(facilities.powerset_enum.next)
+        hotels = Hotel.where(:id.in => hotel_ids).with_facilities(next_set)
       end
       ids << hotels.map(&:hotel_id)
     end
-    puts ids
+    ids.flatten!
     ids.uniq!
   end
 

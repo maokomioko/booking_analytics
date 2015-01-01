@@ -1,7 +1,6 @@
 class Hotel
   include MongoWrapper
   include HotelTypeSelection
-  include Combinator
 
   scope :contains_facilities, -> (keywords){ self.in(facilities: [keywords]) }
   scope :with_facilities, -> (keywords){ all_in(facilities: [keywords]) }
@@ -42,13 +41,13 @@ class Hotel
     ids = []
     1.upto(facilities.size) do
       if hotel_ids.nil?
-        ids = Hotel.with_facilities(facilities.powerset_enum.next)
+        hotels = Hotel.with_facilities(facilities.powerset_enum.next)
       else
-        ids = Hotel.where(:id.in => hotel_ids).with_facilities(facilities.powerset_enum.next)
+        hotels = Hotel.where(:id.in => hotel_ids).with_facilities(facilities.powerset_enum.next)
       end
-      ids = ids.map(&:hotel_id)
+      ids << hotels.map(&:hotel_id)
     end
-
+    puts ids
     ids.uniq!
   end
 

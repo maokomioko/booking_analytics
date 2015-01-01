@@ -15,7 +15,7 @@ Bundler.require(*Rails.groups)
 module BookingAnalytics
   class Application < Rails::Application
     config.autoload_paths << Rails.root.join('lib')
-
+    config.allow_concurrency = true
     config.i18n.default_locale = :en
   end
 end

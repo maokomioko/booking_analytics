@@ -14,8 +14,6 @@ gem 'draper', '~> 1.4'
 gem 'devise', github: 'plataformatec/devise'
 gem 'devise-encryptable'
 gem 'devise-async'
-gem 'delayed_job', '~> 4.0.4'
-gem 'delayed_job_mongoid'
 
 gem 'encryptor'
 
@@ -25,7 +23,7 @@ gem 'google-analytics-turbolinks'
 
 gem 'haml-rails'
 
-gem 'i18n', '0.6.11'
+gem 'i18n', '0.7'
 
 gem 'log4r'
 
@@ -52,7 +50,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
 
-gem 'rails', '~> 4.1.8'
+gem 'rails', '~> 4.2'
 gem 'raphael-rails'
 gem 'redis'
 gem 'redis-store'
@@ -61,12 +59,13 @@ gem 'redis-rails'
 gem 'sanitize'
 gem 'stringex'
 gem 'state_machine', github: 'seuros/state_machine'
-gem 'turbolinks', '~> 2.5.2'
+gem 'sidekiq'
+gem 'turbolinks', '~> 2.5.3'
 
 gem 'wicked_pdf'
 gem 'whenever'
 
-gem 'sass-rails', '~> 4.0.5'
+gem 'sass-rails', '>= 5'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'uglifier', '>= 1.3.0'
 

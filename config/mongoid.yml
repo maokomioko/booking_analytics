@@ -4,6 +4,10 @@ defaults: &defaults
       database: ba
       hosts:
         - localhost:19000
+      options:
+        pool_size: 5
+        refresh_interval: 10
+        timeout: 5
 
 development:
   <<: *defaults

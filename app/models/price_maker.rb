@@ -42,7 +42,7 @@ class PriceMaker
     puts '=== FILTERED HOTELS ==='
     puts filtered_hotel_ids
     puts '======='
-    blocks = BlockAvailability.for_hotels(filtered_hotel_ids)
+    blocks = BlockAvailability.for_hotels(filtered_hotel_ids.to_a)
 
     puts '=== BLOCKS ==='
     puts blocks

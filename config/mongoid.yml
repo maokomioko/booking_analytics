@@ -5,7 +5,7 @@ defaults: &defaults
       hosts:
         - localhost:19000
       options:
-        pool_size: 50
+        pool_size: 35
         refresh_interval: 10
         timeout: 30
 

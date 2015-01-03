@@ -1,6 +1,7 @@
 class HotelWorker
   include Celluloid
   include Celluloid::IO
+
   attr_reader :amenities_mix
 
   def initialize(hotel_id, hotel_ids, c_width)

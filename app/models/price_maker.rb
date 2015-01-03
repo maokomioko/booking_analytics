@@ -42,8 +42,21 @@ class PriceMaker
     puts '=== FILTERED HOTELS ==='
     puts filtered_hotel_ids
     puts '======='
-    blocks = BlockAvailability.for_hotels(filtered_hotel_ids.to_a)
 
-    @price_blocks = BlockAvailability.get_prices(blocks)
+    blocks_arr = []
+
+    filtered_hotel_ids.to_a.split(30).pmap do |i|
+      blocks_arr << AvailabilityWorker.new(i).get_blocks
+    end
+
+    blocks_arr = blocks_arr.flatten!.uniq!
+
+    price_blocks = []
+
+    blocks_arr.split(30).pmap do |i|
+      price_blocks << AvailabilityWorker.new(nil, i).get_prices
+    end
+
+    @price_blocks = price_blocks.flatten!.uniq!
   end
 end

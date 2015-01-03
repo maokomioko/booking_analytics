@@ -10,7 +10,7 @@ class BlockAvailability
   field :hotel_id
   index({ hotel_id: 1 }, { background: true })
 
-  scope :for_hotels, -> (hotel_ids){ where(:hotel_id.in => hotel_ids).uniq! }
+  scope :for_hotels, -> (hotel_ids){ where(:hotel_id.in => hotel_ids) }
   scope :by_arrival, -> (date){ where(arrival_date: date) }
   scope :by_departure, -> (date){ where(departure_date: date) }
 

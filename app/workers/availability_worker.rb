@@ -18,10 +18,12 @@ class AvailabilityWorker
   end
 
   def get_blocks
+    puts "blocks processing..."
     BlockAvailability.for_hotels(@hotel_ids)
   end
 
   def get_prices
+    puts "prices processing..."
     BlockAvailability.get_prices(@block_ids)
   end
 end

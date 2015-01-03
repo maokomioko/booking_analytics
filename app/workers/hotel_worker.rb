@@ -25,6 +25,6 @@ class HotelWorker
     end
 
     ids.flatten!
-    return ids.uniq!
+    ids.uniq!
   end
 end

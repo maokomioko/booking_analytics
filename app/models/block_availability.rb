@@ -27,7 +27,8 @@ class BlockAvailability
 
     def get_prices(blocks)
       arr = []
-      blocks.each do |block_avail|
+
+      blocks.each.pmap do |block_avail|
         begin
           hotel_name = Hotel.find_by(hotel_id: block_avail.hotel_id).name
           arr << block_avail.block.collect{|x| [hotel_name, x.incremental_price[0].currency, x.incremental_price[0].price]}.sort_by(&:last)

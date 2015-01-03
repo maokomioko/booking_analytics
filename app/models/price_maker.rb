@@ -1,6 +1,5 @@
 class PriceMaker
   include Celluloid
-  using Powerset
 
   HOTELS_PER_PAGE = 15
 
@@ -38,7 +37,7 @@ class PriceMaker
     puts '=== HOTELS ==='
     puts hotel_ids
     puts '======='
-    filtered_hotel_ids = Hotel.find(@hotel_id).amenities_mix(hotel_ids)
+    filtered_hotel_ids = Hotel.find(@hotel_id).amenities_calc(hotel_ids)
 
     puts '=== FILTERED HOTELS ==='
     puts filtered_hotel_ids

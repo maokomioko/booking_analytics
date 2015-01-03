@@ -39,17 +39,13 @@ class Hotel
   field :district
   field :zip
 
-  def amenities_calc
+  def amenities_calc(hotel_ids)
     n = 2**validate_amenities.size - 1
     results = 2.times.pmap do |i|
-      HotelWorker.new(hotel_id, nil, i).amenities_mix
+      HotelWorker.new(hotel_id, hotel_ids, i).amenities_mix
     end
 
-    results.flatten!
-    results.uniq!
-    results.reject(&:blank?)
-
-    results
+    results.flatten!.uniq!.reject(&:blank?)
   end
 
   def validate_amenities

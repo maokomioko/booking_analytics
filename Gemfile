@@ -7,6 +7,9 @@ gem 'bson_ext'
 gem 'cancancan', '~> 1.9.2'
 gem 'carrierwave'
 
+gem 'celluloid', github: 'celluloid/celluloid'
+gem 'celluloid-io'
+
 gem 'date_validator'
 gem 'daemons'
 gem 'draper', '~> 1.4'
@@ -29,6 +32,7 @@ gem 'log4r'
 
 gem 'progress_bar'
 gem 'premailer-rails'
+gem 'puma'
 
 gem 'remotipart', '~> 1.2.1'
 
@@ -50,16 +54,17 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
 
+gem 'racc'
 gem 'rails', '~> 4.2'
 gem 'raphael-rails'
 gem 'redis'
 gem 'redis-store'
 gem 'redis-rails'
+gem 'rubysl'
 
 gem 'sanitize'
 gem 'stringex'
 gem 'state_machine', github: 'seuros/state_machine'
-gem 'sidekiq'
 gem 'turbolinks', '~> 2.5.3'
 
 gem 'wicked_pdf'
@@ -89,7 +94,6 @@ group :development, :test do
   gem 'fabrication'
   gem 'pry-rails'
   gem 'meta_request'
-  gem 'thin', '~> 1.6.3'
   gem 'rb-readline', '~> 0.5.1' # http://stackoverflow.com/questions/19496932/guard-causing-error-cant-modify-string-temporarily-locked
   gem 'traceroute'
   gem 'better_errors'

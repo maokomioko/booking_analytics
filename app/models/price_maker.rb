@@ -1,4 +1,5 @@
 class PriceMaker
+  include Celluloid
   using Powerset
 
   HOTELS_PER_PAGE = 15
@@ -44,9 +45,6 @@ class PriceMaker
     puts '======='
     blocks = BlockAvailability.for_hotels(filtered_hotel_ids.to_a)
 
-    puts '=== BLOCKS ==='
-    puts blocks
-    puts '======'
     @price_blocks = BlockAvailability.get_prices(blocks)
   end
 end

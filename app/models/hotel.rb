@@ -1,9 +1,13 @@
 class Hotel
   include MongoWrapper
-  include HotelTypeSelection
+  include ParamSelectable
+  include Celluloid
+  include Celluloid::IO
 
-  scope :contains_facilities, -> (keywords){ self.in(facilities: [keywords]) }
-  scope :with_facilities, -> (keywords){ all_in(facilities: [keywords]) }
+  trap_exit :recover
+
+  scope :contains_facilities, -> (keywords){ self.in(facilities: keywords) }
+  scope :with_facilities, -> (keywords){ all_in(facilities: keywords) }
 
   scope :with_stars, -> (rate){ where(exact_class: rate) }
   scope :with_score_gt, -> (score){ self.gt(review_score: score) }
@@ -37,21 +41,28 @@ class Hotel
   field :district
   field :zip
 
-  def amenities_mix(hotel_ids = nil)
-    ids = []
-    ps = facilities.powerset_enum
-    #1.upto(2**facilities.count - 1) do
-    1.upto(facilities.count) do
-      next_set = ps.next.join(', ')
-      unless hotel_ids
-        hotels = Hotel.with_facilities(next_set)
-      else
-        hotels = Hotel.where(:id.in => hotel_ids).with_facilities(next_set)
-      end
-      ids << hotels.map(&:hotel_id)
+  def amenities_calc
+    arr = []
+    #n = validate_amenities.size
+
+    2.times.pmap do |i|
+      arr << HotelWorker.new(hotel_id, nil, i).future(:amenities_mix).value
     end
-    ids.flatten!
-    ids.uniq!
+
+    arr.flatten!
+    arr.uniq!
+
+    puts arr
+  end
+
+  def validate_amenities
+    arr = []
+
+    facilities.each do |f|
+     arr << f if Hotel.base_facilities.include? f
+    end
+
+    arr
   end
 
   class << self

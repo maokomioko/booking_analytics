@@ -1,7 +1,7 @@
-require 'celluloid'
-
 class HotelWorker
   include Celluloid
+  include Celluloid::IO
+  attr_reader :amenities_mix
 
   def initialize(hotel_id, hotel_ids, c_width)
     @hotel_ids = hotel_ids
@@ -10,6 +10,7 @@ class HotelWorker
   end
 
   def amenities_mix
+    puts "Working..."
     ids = []
     options = @hotel.validate_amenities.combination(@c_width)
 
@@ -24,6 +25,6 @@ class HotelWorker
     end
 
     ids.flatten!
-    ids.uniq!
+    return ids.uniq!
   end
 end

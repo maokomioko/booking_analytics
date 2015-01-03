@@ -4,8 +4,6 @@ class Hotel
   include Celluloid
   include Celluloid::IO
 
-  trap_exit :recover
-
   scope :contains_facilities, -> (keywords){ self.in(facilities: keywords) }
   scope :with_facilities, -> (keywords){ all_in(facilities: keywords) }
 
@@ -42,17 +40,16 @@ class Hotel
   field :zip
 
   def amenities_calc
-    arr = []
-    #n = validate_amenities.size
-
-    2.times.pmap do |i|
-      arr << HotelWorker.new(hotel_id, nil, i).future(:amenities_mix).value
+    n = 2**validate_amenities.size - 1
+    results = 2.times.pmap do |i|
+      HotelWorker.new(hotel_id, nil, i).amenities_mix
     end
 
-    arr.flatten!
-    arr.uniq!
+    results.flatten!
+    results.uniq!
+    results.reject(&:blank?)
 
-    puts arr
+    results
   end
 
   def validate_amenities

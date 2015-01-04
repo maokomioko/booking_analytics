@@ -42,11 +42,15 @@ class Hotel
     hw_pool = HotelWorker.pool(size: 4)
 
     n = 2**validate_amenities.size - 1
-    results = n.times.map do |i|
-      hw_pool.future.amenities_mix(hotel_id, hotel_ids, i)
-    end
+    begin
+      results = n.times.map do |i|
+        hw_pool.future.amenities_mix(hotel_id, hotel_ids, i)
+      end
 
-    results.map(&:value).flatten!.uniq!
+      results.map(&:value).flatten!.uniq!
+    rescue
+      puts 'Actor has crashed'
+    end
   end
 
   def validate_amenities

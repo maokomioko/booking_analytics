@@ -8,6 +8,7 @@ class HotelWorker
   end
 
   def amenities_mix(hotel_id, hotel_ids, c_width)
+    puts "Processing.."
     ids = []
     options = Hotel.find(hotel_id).validate_amenities.combination(c_width)
 
@@ -21,6 +22,8 @@ class HotelWorker
       ids << hotels.map(&:hotel_id)
     end
 
-    ids.flatten!.uniq! unless ids.nil?
+    puts 'IDS mapping...'
+    ids.flatten!.uniq! unless ids.blank?
+    puts 'DONE!'
   end
 end

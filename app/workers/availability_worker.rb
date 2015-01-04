@@ -4,26 +4,16 @@ class AvailabilityWorker
 
   attr_reader :get_blocks, :get_prices
 
-  def initialize(hotel_ids = nil, block_ids = nil)
-    @hotel_ids = hotel_ids
-    @block_ids = block_ids
+  def initialize
   end
 
-  def split_hotels
-    @hotel_ids.split(30)
-  end
-
-  def split_blocks
-    @block_ids.split(30)
-  end
-
-  def get_blocks
+  def get_blocks(ids)
     puts "blocks processing..."
-    BlockAvailability.for_hotels(@hotel_ids).map(&:id)
+    BlockAvailability.for_hotels(ids).map(&:id)
   end
 
-  def get_prices
+  def get_prices(ids)
     puts "prices processing..."
-    BlockAvailability.get_prices(@block_ids)
+    BlockAvailability.get_prices(ids)
   end
 end

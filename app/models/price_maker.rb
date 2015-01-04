@@ -37,30 +37,32 @@ class PriceMaker
 
     puts 'Hotels with amenities... Done!'
 
-    blocks_arr = []
+    aw_pool = AvailabilityWorker.pool(size: 4)
     begin
-      filtered_hotel_ids.to_a.limit(10).to_a.pmap do |i|
-        blocks_arr << AvailabilityWorker.new(i).get_blocks
+      blocks = filtered_hotel_ids.to_a.limit(10).to_a.map do |i|
+        aw_pool.future.get_blocks(i)
       end
 
+      blocks = blocks.map(&:value).flatten!.uniq!
       puts 'Filtered blocks for those hotels... Done!'
     rescue
-      puts 'No blocks found'
+      puts 'Actor has crashed'
     end
 
-    puts blocks_arr
 
-    # blocks_arr = blocks_arr.flatten!.uniq!
+    pr_pool = AvailabilityWorker.pool(size: 4)
+    begin
+      pr_blocks = blocks.limit(10).map do |i|
+        pr_pool.future.get_prices(i)
+      end
 
-    # puts "blocks #{blocks_arr}"
-    # price_blocks = []
+      pr_blocks = pr_blocks.map(&:value).flatten!.uniq!
+      puts 'Ordered prices... Done!'
+    rescue
+      'Actor has crashed'
+    end
 
-    # blocks_arr.each_slice(30).to_a.pmap do |i|
-    #   price_blocks << AvailabilityWorker.new(nil, i).get_prices
-    # end
 
-    # puts 'Ordered prices... Done!'
-
-    # @price_blocks = price_blocks.flatten!.uniq!
+    @price_blocks = price_blocks.flatten!.uniq!
   end
 end

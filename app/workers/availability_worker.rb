@@ -19,7 +19,7 @@ class AvailabilityWorker
 
   def get_blocks
     puts "blocks processing..."
-    BlockAvailability.for_hotels(@hotel_ids)
+    BlockAvailability.for_hotels(@hotel_ids).map(&:id)
   end
 
   def get_prices

@@ -1,21 +1,21 @@
 class PriceMaker
   HOTELS_PER_PAGE = 15
 
+  attr_reader :get_top_prices, :min_price_listing
+
   def initialize(hotel_id, arrival, departure)
     @hotel_id = hotel_id
     @arrival = arrival
     @departure = departure
 
-    safe_init
+    #safe_init
   end
 
-  def safe_init
-    min_price_listing
-    split_chunks
-    get_top_prices
-  end
-
-  protected
+  # def safe_init
+  #   min_price_listing
+  #   split_chunks
+  #   get_top_prices
+  # end
 
   def get_top_prices
     prices = []
@@ -38,23 +38,29 @@ class PriceMaker
     puts 'Hotels with amenities... Done!'
 
     blocks_arr = []
+    begin
+      filtered_hotel_ids.to_a.limit(10).to_a.pmap do |i|
+        blocks_arr << AvailabilityWorker.new(i).get_blocks
+      end
 
-    filtered_hotel_ids.to_a.each_slice(30).to_a.pmap do |i|
-      blocks_arr << AvailabilityWorker.new(i).get_blocks
+      puts 'Filtered blocks for those hotels... Done!'
+    rescue
+      puts 'No blocks found'
     end
 
-    puts 'Filtered blocks for those hotels... Done!'
+    puts blocks_arr
 
-    blocks_arr = blocks_arr.flatten!.uniq!
+    # blocks_arr = blocks_arr.flatten!.uniq!
 
-    price_blocks = []
+    # puts "blocks #{blocks_arr}"
+    # price_blocks = []
 
-    blocks_arr.each_slice(30).to_a.pmap do |i|
-      price_blocks << AvailabilityWorker.new(nil, i).get_prices
-    end
+    # blocks_arr.each_slice(30).to_a.pmap do |i|
+    #   price_blocks << AvailabilityWorker.new(nil, i).get_prices
+    # end
 
-    puts 'Ordered prices... Done!'
+    # puts 'Ordered prices... Done!'
 
-    @price_blocks = price_blocks.flatten!.uniq!
+    # @price_blocks = price_blocks.flatten!.uniq!
   end
 end

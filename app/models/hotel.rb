@@ -1,6 +1,7 @@
 class Hotel
   include MongoWrapper
   include ParamSelectable
+  include Celluloid
 
   scope :contains_facilities, -> (keywords){ self.in(facilities: keywords) }
   scope :with_facilities, -> (keywords){ all_in(facilities: keywords) }
@@ -38,16 +39,14 @@ class Hotel
   field :zip
 
   def amenities_calc(hotel_ids = nil)
+    hw_pool = HotelWorker.pool(size: 4)
+
     n = 2**validate_amenities.size - 1
-    results = n.times.pmap do |i|
-      HotelWorker.new(hotel_id, hotel_ids, i).amenities_mix
+    results = n.times.map do |i|
+      hw_pool.future.amenities_mix(hotel_id, hotel_ids, i)
     end
 
-    begin
-      results.flatten!.uniq!.reject(&:blank?)
-    rescue
-      puts "No results"
-    end
+    results.map(&:value).flatten!.uniq!
   end
 
   def validate_amenities

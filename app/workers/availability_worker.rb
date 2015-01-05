@@ -7,9 +7,9 @@ class AvailabilityWorker
   def initialize
   end
 
-  def get_blocks(ids)
+  def get_blocks(hotel_ids, arrival, departure)
     puts "blocks processing..."
-    BlockAvailability.for_hotels(ids).map(&:id)
+    BlockAvailability.to_date(hotel_ids, arrival, departure)
   end
 
   def get_prices(ids)

@@ -16,13 +16,15 @@ class BlockAvailability
 
   class << self
 
-    def blocks_for_date(arrival, departure)
-      unless departure.nil?
-        blocks = by_arrival(arrival).by_departure(departure)
+    def to_date(hotel_ids, arrival, departure)
+      blocks = for_hotels(hotel_ids)
+
+      if departure.nil?
+        blocks = blocks.by_arrival(arrival)
       else
-        blocks = by_arrival(arrival)
+        blocks = blocks.by_departure(departure)
       end
-      blocks.map(&:hotel_id)
+      blocks
     end
 
     def get_prices(blocks)

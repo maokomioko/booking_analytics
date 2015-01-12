@@ -1,23 +1,55 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  shared:
+    registration: "Registration"
+    reset_instructions: "Send me password reset instructions"
+    current_price: "current"
+    date_locked: "Date locked"
+    recommended_price: "Recommended %{price} €"
+    sold: "Sold"
+  devise:
+    links:
+      login: "Log in with your account"
+      signup: "Create a new account"
+      password: "Forgot your password?"
+      confirmation: "Didn't receive confirmation instructions?"
+      unlock: "Didn't receive unlock instructions?"
+  calendar:
+    menu:
+      all_dates: "All dates"
+      apply_prices: "Apply <br> prices"
+      set_prices: "Set prices <br> manually"
+      cal: "Calendar"
+      forecast: "Forecast"
+      analytics: "Analytics"
+      preferences: "Preferences"
+    days:
+      mon: "Monday"
+      tue: "Tuesday"
+      wed: "Wednesday"
+      thu: "Thursday"
+      fri: "Friday"
+      sat: "Saturday"
+      sun: "Sunday"
+  auth:
+    new:
+      title: "Welcome aboard!"
+      subtitle: "Enter your email and password below."
+      form_title: "Sign in here!"
+      connect_via: "Add %{provider} connection"
+    new_account:
+      title: "Sign up"
+      subtitle: "One step from the awesomeness!"
+      form_title: "Give us some info."
+    password_restore:
+      title: "Password reset"
+      subtitle: "Password reset instructions will be sent to this email."
+      form_title: "Please enter your account email."
+    fields:
+      email: "Email"
+      password: "Password"
+      password_confirmation: "Password confirmation"
+      lcode: "Lcode"
+    buttons:
+      login: "Log in"
+      signup: "Sign up"
+      connect: "Connect"

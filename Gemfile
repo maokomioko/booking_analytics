@@ -19,6 +19,7 @@ gem 'devise-encryptable'
 gem 'devise-async'
 
 gem 'encryptor'
+gem 'erb2haml'
 
 gem 'geocoder'
 gem 'globalize', github: 'globalize/globalize'
@@ -32,7 +33,6 @@ gem 'log4r'
 
 gem 'progress_bar'
 gem 'premailer-rails'
-gem 'puma'
 
 gem 'remotipart', '~> 1.2.1'
 
@@ -74,8 +74,13 @@ gem 'sass-rails', '>= 5'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'uglifier', '>= 1.3.0'
 
+group :production do
+  gem 'puma'
+end
+
 group :development do
   gem 'awesome_print', github: 'eoinkelly/awesome_print'
+  gem "thin"
 end
 
 group :development, :test do

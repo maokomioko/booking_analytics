@@ -1,0 +1,22 @@
+- @body_class = 'login_page'
+
+.panel.transitioned1000
+  %h1
+    %i.fa.fa-sign-in.fa-2x
+    %span= t('auth.new_account.title')
+  %p= t('auth.new_account.subtitle')
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = devise_error_messages!
+  #login
+    %h2= t('auth.new_account.form_title')
+    .field
+      = f.email_field :email, autofocus: true, placeholder: t('auth.fields.email')
+    .field
+      = f.password_field :password, autocomplete: "off", placeholder: t('auth.fields.password')
+    .field
+      = f.password_field :password_confirmation, autocomplete: "off", placeholder: t('auth.fields.password_confirmation')
+    .actions
+      = f.submit t('auth.buttons.signup')
+      = render "devise/shared/links"
+

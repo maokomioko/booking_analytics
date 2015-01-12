@@ -1,0 +1,19 @@
+= render partial: 'partials/menu'
+
+#main_container
+  #preferences_container
+    .ps_title
+      = t('auth.new.connect_via', provider: 'WuBook')
+
+    = form_for @wb, url: new_channel_manager_path, html: { class: 'connect_form' } do |f|
+
+      = f.label :login
+      = f.text_field :login
+
+      = f.label :password
+      = f.password_field :password
+
+      = f.label :lcode, class: 's2_wbubook'
+      = f.text_field :lcode
+
+      = f.submit t('auth.buttons.connect'), class: 'button transitioned200'

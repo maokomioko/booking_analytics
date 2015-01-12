@@ -15,6 +15,10 @@ Bundler.require(*Rails.groups)
 module BookingAnalytics
   class Application < Rails::Application
     config.autoload_paths << Rails.root.join('lib')
+
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    config.assets.precompile += %w( .svg .eot .woff .ttf)
+
     config.allow_concurrency = true
     config.i18n.default_locale = :en
   end

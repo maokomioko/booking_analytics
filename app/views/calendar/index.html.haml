@@ -1,0 +1,38 @@
+= render partial: 'partials/menu'
+
+#main_container
+  #calendar_container
+    .sticky_header
+      %span= DateTime.now.strftime("%B %Y") + ' - ' + (DateTime.now + 2.month).strftime("%B %Y")
+      #tr_room_title
+      #tr_rooms_list.transitioned200
+      .weekdays
+        %span= t('calendar.days.mon')
+        %span= t('calendar.days.tue')
+        %span= t('calendar.days.wed')
+        %span= t('calendar.days.thu')
+        %span= t('calendar.days.fri')
+        %span= t('calendar.days.sat')
+        %span= t('calendar.days.sun')
+    #calendar
+      %table.calendar
+        - @months.each do |month|
+          = calendar month do |date|
+            - unless date < Date.today
+              .day
+                - unless date.day == 1
+                  = date.day
+                - else
+                  = date.strftime("%B").limit(3) + ' 1st'
+              .current_price
+                %span= t('shared.current_price')
+                %span.ccp_price 6180.00 €
+
+              .bar.bar_manual
+                %span= t('shared.date_locked')
+
+              .bar.bar_recommended
+                %span= t('shared.recommended_price', price: '6536')
+
+              .bar.bar_sold
+                %span= t('shared.locked')

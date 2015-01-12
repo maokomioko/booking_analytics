@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/celluloid/celluloid.git
-  revision: dfd1cb8b6635647bf8148a2d5b91926fe6a3986b
+  revision: 4cebf877d822b0ea2bb27e00c32d35d643cfeac6
   specs:
     celluloid (0.16.0)
       timers (~> 4.0.0)
@@ -21,7 +21,7 @@ GIT
 
 GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: cd9ad04fe6a2b39650bd1005120e9daf3d8ae1e4
+  revision: 597034613e3b7faea6db35f7e02034380f22b15a
   specs:
     mongoid (4.0.0)
       activemodel (~> 4.0)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: git://github.com/plataformatec/devise.git
-  revision: 7946f681a9c19f6043ba62c892c25a16ffd5c720
+  revision: d6972ab2640bdf4cfe6bee8f467686f61a8ddea9
   specs:
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: git://github.com/seuros/state_machine.git
-  revision: 1a373b2d23a21037d95cc369a4c5b0a9c551d326
+  revision: b5baef856b170f18dc2fdc36def2411c255335b9
   specs:
     state_machine (1.2.0)
 
@@ -181,6 +181,8 @@ GEM
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
     encryptor (1.3.0)
+    erb2haml (0.1.5)
+      html2haml
     erubis (2.7.0)
     eventmachine (1.0.4)
     execjs (2.2.2)
@@ -198,12 +200,14 @@ GEM
     globalid (0.3.0)
       activesupport (>= 4.1.0)
     google-analytics-turbolinks (0.0.4)
-    guard (2.10.5)
+    guard (2.11.0)
       formatador (>= 0.2.4)
       listen (~> 2.7)
       lumberjack (~> 1.0)
       nenv (~> 0.1)
+      notiffany (~> 0.0)
       pry (>= 0.9.12)
+      shellany (~> 0.0)
       thor (>= 0.18.1)
     guard-compat (1.2.0)
     guard-livereload (2.4.0)
@@ -288,10 +292,10 @@ GEM
     mini_magick (4.0.1)
     mini_portile (0.6.2)
     minitest (5.5.0)
-    mongoid-rspec (1.10.0)
-      mongoid (>= 3.0.1)
+    mongoid-rspec (2.0.0)
+      mongoid (~> 4.0.0)
       rake
-      rspec (>= 2.14)
+      rspec (~> 3.1)
     mongoid_rails_migrations (1.1.0)
       activesupport (>= 4.2.0)
       bundler (>= 1.0.0)
@@ -319,6 +323,9 @@ GEM
       mini_portile (~> 0.6.0)
     nokogumbo (1.2.0)
       nokogiri
+    notiffany (0.0.2)
+      nenv (~> 0.1)
+      shellany (~> 0.0)
     ntlm-http (0.1.1)
     oauth (0.4.7)
     oauth2 (1.0.0)
@@ -669,6 +676,7 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
     sexp_processor (4.4.4)
+    shellany (0.0.1)
     shoulda-callback-matchers (1.1.1)
       activesupport (>= 3)
     shoulda-matchers (2.6.2)
@@ -688,6 +696,10 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     stringex (2.5.2)
+    thin (1.6.3)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0)
+      rack (~> 1.0)
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
@@ -748,6 +760,7 @@ DEPENDENCIES
   devise-encryptable
   draper (~> 1.4)
   encryptor
+  erb2haml
   fabrication
   ffaker
   fuubar
@@ -805,6 +818,7 @@ DEPENDENCIES
   shoulda-matchers (~> 2.6.0)
   state_machine!
   stringex
+  thin
   timecop
   traceroute
   turbolinks (~> 2.5.3)

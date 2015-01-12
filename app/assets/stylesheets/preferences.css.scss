@@ -1,0 +1,177 @@
+@import "mixins";
+
+input, select {
+  border: 1px solid #B5B5B5;
+}
+
+.ps_title {
+  line-height: 60px;
+  text-align: center;
+  font-size: 26px;
+}
+
+.ps_subtitle {
+  text-align: center;
+  font-size: 16px;
+  a! {}
+}
+
+.ps_foot_message {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  line-height: 60px;
+  text-align: center;
+}
+
+.button {
+  background: #51a7f9;
+  color: #fff;
+  width: 100%;
+  display: block;
+  line-height: 60px;
+  text-align: center;
+  font-size: 16px;
+  &:hover {
+    background: #0072c6;
+  }
+}
+
+#ps_provider_select {
+  padding: 6px 10px;
+  position: absolute;
+  top: 50%;
+  margin-top: -22px;
+  left: 50%;
+  margin-left: -76px;
+}
+
+#preferences_container {
+  position: relative;
+  form {
+    margin: 25% auto;
+    position: relative;
+    text-align: left;
+    width: 300px;
+    label {
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+    }
+    input[type=text], input[type=password] {
+      padding: 6px 10px;
+      font-size: 16px;
+      margin: 6px 0 10px 0;
+      width: calc(100% - 23px);
+    }
+    input[type=submit] {
+      line-height: 40px;
+    }
+  }
+}
+
+#prefercences_container {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+}
+
+.not_valid {
+  border: 1px solid #FF6F6F;
+}
+
+.ps_message {
+  position: absolute;
+  left: 50%;
+  margin-left: -42px;
+  top: 50%;
+  margin-top: -10px;
+}
+
+#ps_step3_foot_success_msg {
+  display: none;
+}
+
+.spinner {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  margin: 0px auto;
+  top: -13px;
+  left: 50%;
+  margin-left: -115px;
+  -webkit-animation: rotation 1.6s infinite linear;
+  -moz-animation: rotation 1.6s infinite linear;
+  -o-animation: rotation 1.6s infinite linear;
+  animation: rotation 1.6s infinite linear;
+  border: 6px solid;
+  border-color: rgba(0, 114, 198, 0.15) rgba(0, 114, 198, 0.15) rgba(0, 114, 198, 0.15) rgba(0, 114, 198, 0.8);
+  border-radius: 100%;
+  display: inline-block;
+}
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+
+@-moz-keyframes rotation {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(359deg);
+  }
+}
+
+
+@-o-keyframes rotation {
+  from {
+    -o-transform: rotate(0deg);
+  }
+  to {
+    -o-transform: rotate(359deg);
+  }
+}
+
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+
+.ps_step3_check {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  margin: 0px auto;
+  top: -16px;
+  left: 50%;
+  margin-left: -96px;
+}
+
+#ps_step3_message {
+  color: #0072c6;
+  position: absolute;
+  left: 50%;
+  margin-left: -42px;
+  top: 50%;
+  margin-top: -10px;
+}
+
+.msg_error {
+  color: #FF6F6F;
+  font-weight: 600;
+}

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   namespace :api do
     namespace :v1 do
       resources :views_data do
@@ -12,4 +11,11 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :calendar, controller: :calendar
+
+  resources :channel_manager, contoller: 'channel_manager'
+
+  root to: 'calendar#index'
+  devise_for :users
 end

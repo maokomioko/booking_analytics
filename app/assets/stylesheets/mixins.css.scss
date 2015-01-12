@@ -1,0 +1,68 @@
+$prefixes: -webkit-, -moz-, -o-, "";
+
+@mixin border-radius($size...) {
+  @if length($size) == 1 {
+    @each $prefix in $prefixes {
+      #{$prefix}border-radius: $size;
+    }
+  }
+  @else {
+    @include customBorderRadius($size...);
+  }
+}
+
+@mixin customBorderRadius($topLeft: 0, $topRight: 0, $bottomRight: 0, $bottomLeft: 0) {
+  @each $prefix in $prefixes {
+    @if $prefix == "-moz-" {
+      @if $topLeft != 0 {
+        -moz-border-radius-topleft: $topLeft;
+      }
+      @if $topRight != 0 {
+        -moz-border-radius-topright: $topRight;
+      }
+      @if $bottomRight != 0 {
+        -moz-border-radius-bottomright: $bottomRight;
+      }
+      @if $bottomLeft != 0 {
+        -moz-border-radius-bottomleft: $bottomLeft;
+      }
+    }
+    @else {
+      @if $topLeft != 0 {
+        #{$prefix}border-top-left-radius: $topLeft;
+      }
+      @if $topRight != 0 {
+        #{$prefix}border-top-right-radius: $topRight;
+      }
+      @if $bottomRight != 0 {
+        #{$prefix}border-bottom-right-radius: $bottomRight;
+      }
+      @if $bottomLeft != 0 {
+        #{$prefix}border-bottom-left-radius: $bottomLeft;
+      }
+    }
+  }
+}
+
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin declare-font-face($font-family, $font-filename, $font-weight: normal, $font-style: normal, $font-stretch: normal) {
+  @font-face {
+    font-family: #{$font-family};
+    src: url(font-path("#{$font-filename}.eot"));
+    src: url(font-path("#{$font-filename}.eot?#iefix")) format("embedded-opentype"), url(font-path("#{$font-filename}.woff")) format("woff"), url(font-path("#{$font-filename}.ttf")) format("truetype"), url(font-path("#{$font-filename}.svg##{$font-family}")) format("svg");
+    font-weight: $font-weight;
+    font-style: $font-style;
+    font-stretch: $font-stretch;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+$red: rgb(250, 0, 0);
+$red_focus: rgb(255, 220, 220);

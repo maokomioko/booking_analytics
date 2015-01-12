@@ -1,5 +1,5 @@
 class Api::V1Controller < ApplicationController
-  #before_filter :disable_render
+  before_filter :disable_render
   before_filter :set_destination
   before_filter :set_namespace
 

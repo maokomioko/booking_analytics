@@ -20,7 +20,7 @@ class PriceMaker
     #get_top_prices
   end
 
-  def get_top_prices
+  def kjgu
     prices = []
     @chunks.first(3).each do |x|
       prices << x[0..2]

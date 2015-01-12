@@ -1,0 +1,14 @@
+#top_row
+  = link_to image_tag('logo_white.png', id: 'ba_logo'), root_path
+  #tr_hotel_title
+
+  - unless current_user
+    = link_to new_user_registration_path do
+      %span#tr_sign_in_cont.transitioned200
+        %i#tr_sign_in.fa.fa-sign-in.fa-2x
+        = t('shared.registration')
+  - else
+    = link_to destroy_user_session_path, method: :delete do
+      %span#tr_sign_in_cont.transitioned200
+        %i#tr_sign_in.fa.fa-sign-in.fa-2x
+        = current_user.email

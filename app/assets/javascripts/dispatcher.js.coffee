@@ -1,6 +1,10 @@
 class Dispatcher
   constructor: ->
+    @initGlobalScripts()
     @initPageScripts()
+
+  initGlobalScripts: ->
+    new FlashMessage()
 
   initPageScripts: ->
     page = $('body').attr('data-page')

@@ -8,4 +8,11 @@
   %body{class: @body_class, data: { page: body_data_page }}
     = render partial: 'partials/header'
     #main_frame
+      #flash_container
+        - flash.each do |key, value|
+          .alert{class: "#{key}"}
+            %strong= value
+            %a.close{href: "#"}
+        - unless flash
+          .none
       = yield

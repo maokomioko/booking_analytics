@@ -5,7 +5,7 @@
     .ps_title
       = t('auth.new.connect_via', provider: 'WuBook')
 
-    = form_for @wb, url: new_channel_manager_path, html: { class: 'connect_form' } do |f|
+    = form_for @wb, url: { action: :create }, html: { class: 'connect_form' } do |f|
 
       = f.label :login
       = f.text_field :login

@@ -1,6 +1,6 @@
 class Api::V1::ViewsDataController < Api::V1Controller
-  require "uri"
-  require "net/http"
+  require 'uri'
+  require 'net/http'
 
   def get_views
     external_post(@api_prefix)

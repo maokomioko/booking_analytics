@@ -6,6 +6,10 @@ en:
     date_locked: "Date locked"
     recommended_price: "Recommended %{price} €"
     sold: "Sold"
+  messages:
+    cm_verified: "Verification completed!"
+    cm_already_added: "Only one channel manager can be added at this point."
+    cm_verification_error: "Error! Please check entered credentials."
   devise:
     links:
       login: "Log in with your account"

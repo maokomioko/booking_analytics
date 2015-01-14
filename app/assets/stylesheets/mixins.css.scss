@@ -1,6 +1,6 @@
 $prefixes: -webkit-, -moz-, -o-, "";
 
-@mixin border-radius($size...) {
+@mixin borderRadius($size...) {
   @if length($size) == 1 {
     @each $prefix in $prefixes {
       #{$prefix}border-radius: $size;
@@ -64,5 +64,13 @@ $prefixes: -webkit-, -moz-, -o-, "";
   }
 }
 
+$action: rgb(64, 170, 61);
+
 $red: rgb(250, 0, 0);
 $red_focus: rgb(255, 220, 220);
+
+$primary: rgb(0, 158, 226);
+
+$danger: rgb(226, 6, 19);
+$default_text: rgb(65, 65, 65);
+$default_text_o10: rgba(65, 65, 65, 0.1);

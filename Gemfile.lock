@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/celluloid/celluloid.git
-  revision: 4cebf877d822b0ea2bb27e00c32d35d643cfeac6
+  revision: 6a5c9cd5791306e6c09afbb9be1e8a2d5512204d
   specs:
     celluloid (0.16.0)
       timers (~> 4.0.0)
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: git://github.com/globalize/globalize.git
-  revision: 324791dc599dd80b4e8bfcb618e1510b0865dbbc
+  revision: c0f909d5c7a6146903e4109da7ceb4b9d8eef685
   specs:
     globalize (4.0.3)
       activemodel (>= 4.0.0, < 5)
@@ -21,7 +21,7 @@ GIT
 
 GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: 597034613e3b7faea6db35f7e02034380f22b15a
+  revision: 45dbee4f77db837e110258f908f72b1415465558
   specs:
     mongoid (4.0.0)
       activemodel (~> 4.0)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: git://github.com/plataformatec/devise.git
-  revision: d6972ab2640bdf4cfe6bee8f467686f61a8ddea9
+  revision: 5eb9f187438b1c55337e40dbaea3b5cde0e55e05
   specs:
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -101,7 +101,7 @@ GEM
     ansi (1.4.3)
     arel (6.0.0)
     bcrypt (3.1.9)
-    better_errors (2.1.0)
+    better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
@@ -186,10 +186,10 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.4)
     execjs (2.2.2)
-    fabrication (2.11.3)
-    faraday (0.9.0)
+    fabrication (2.12.0)
+    faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
-    ffaker (1.25.0)
+    ffaker (1.31.0)
     ffi (1.9.6)
     ffi2-generators (0.1.1)
     formatador (0.2.5)
@@ -200,7 +200,7 @@ GEM
     globalid (0.3.0)
       activesupport (>= 4.1.0)
     google-analytics-turbolinks (0.0.4)
-    guard (2.11.0)
+    guard (2.11.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
       lumberjack (~> 1.0)
@@ -222,7 +222,7 @@ GEM
       rspec (>= 2.99.0, < 4.0)
     haml (4.1.0.beta.1)
       tilt
-    haml-rails (0.6.0)
+    haml-rails (0.7.0)
       actionpack (>= 4.0.1)
       activesupport (>= 4.0.1)
       haml (>= 3.1, < 5.0)
@@ -253,7 +253,7 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
-    json (1.8.1)
+    json (1.8.2)
     json_spec (1.1.4)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
@@ -262,7 +262,7 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.3.0)
       launchy (~> 2.2)
-    listen (2.8.4)
+    listen (2.8.5)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -289,9 +289,9 @@ GEM
       railties (>= 3.0.0, < 5.0.0)
     method_source (0.8.2)
     mime-types (2.4.3)
-    mini_magick (4.0.1)
+    mini_magick (4.0.2)
     mini_portile (0.6.2)
-    minitest (5.5.0)
+    minitest (5.5.1)
     mongoid-rspec (2.0.0)
       mongoid (~> 4.0.0)
       rake
@@ -317,13 +317,13 @@ GEM
     net-http-persistent (2.9.4)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.9.1)
-    nio4r (1.0.1)
+    net-ssh (2.9.2)
+    nio4r (1.1.0)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     nokogumbo (1.2.0)
       nokogiri
-    notiffany (0.0.2)
+    notiffany (0.0.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
     ntlm-http (0.1.1)
@@ -376,7 +376,7 @@ GEM
     rack (1.6.0)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
-    rack-test (0.6.2)
+    rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.0)
       actionmailer (= 4.2.0)
@@ -662,7 +662,7 @@ GEM
     rubysl-weakref (2.0.0)
     rubysl-webrick (2.0.0)
     rubysl-xmlrpc (2.0.0)
-    rubysl-yaml (2.0.4)
+    rubysl-yaml (2.1.0)
     rubysl-zlib (2.0.1)
     sanitize (3.1.0)
       crass (~> 1.0.1)
@@ -714,7 +714,7 @@ GEM
       ansi
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.6.1)
+    uglifier (2.7.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unf (0.1.4)

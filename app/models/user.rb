@@ -1,7 +1,7 @@
 class User
   include MongoWrapper
 
-  has_many :woobook_auth
+  has_many :wubook_auth, dependent: :destroy
 
   index({ email: 1 }, { background: true })
 

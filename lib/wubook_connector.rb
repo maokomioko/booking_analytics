@@ -20,7 +20,8 @@ class WubookConnector
   end
 
   def get_rooms
-    @server.call('fetch_rooms', @token, @hotel_id)
+    response = @server.call('fetch_rooms', @token, @lcode)
+    response[1].length > 0 ? response[1] : nil
   end
 
   def get_token

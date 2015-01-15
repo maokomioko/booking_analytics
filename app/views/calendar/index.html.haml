@@ -17,6 +17,7 @@
         %span= t('calendar.days.sun')
     #calendar
       %table.calendar
+        - i = 0
         - @months.each do |month|
           = calendar month do |date|
             - unless date < Date.today
@@ -27,8 +28,9 @@
                   = date.strftime("%B").limit(3) + ' 1st'
               .current_price
                 %span= t('shared.current_price')
-                %span.ccp_price 6180.00 €
-
+                %span.ccp_price
+                  = set_price(@room_prices[i]['price']) unless @room_prices[i].nil?
+                  - i = i + 1
               .bar.bar_manual
                 %span= t('shared.date_locked')
 

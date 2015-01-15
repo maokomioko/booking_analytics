@@ -14,13 +14,26 @@ class WubookConnector
 
   def initialize(wb_params)
     flatten_params(wb_params)
-
     set_server
+
     @token = get_token
   end
 
   def get_rooms
     response = @server.call('fetch_rooms', @token, @lcode)
+    response[1].length > 0 ? response[1] : nil
+  end
+
+  def get_room_prices(room_ids = nil)
+    from_date = Date.today.strftime('%d/%m/%Y')
+    to_date = (Date.today + 2.months).strftime('%d/%m/%Y')
+
+    unless room_ids.nil?
+      response = @server.call('fetch_rooms_values', @token, @lcode, from_date, to_date, room_ids)
+    else
+      response = @server.call('fetch_rooms_values', @token, @lcode, from_date, to_date)
+    end
+
     response[1].length > 0 ? response[1] : nil
   end
 

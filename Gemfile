@@ -60,7 +60,7 @@ gem 'raphael-rails'
 gem 'redis'
 gem 'redis-store'
 gem 'redis-rails'
-gem 'rubysl'
+#gem 'rubysl'
 
 gem 'sanitize'
 gem 'stringex'

@@ -10,7 +10,7 @@ class WubookConnector
     path: '/xrws'
   }
 
-  attr_accessor :get_rooms, :get_token
+  attr_accessor :get_rooms, :set_room_prices, :get_token
 
   def initialize(wb_params)
     flatten_params(wb_params)
@@ -37,6 +37,19 @@ class WubookConnector
     response[1].length > 0 ? response[1] : nil
   end
 
+  def set_room_prices
+    from_date = Date.today.strftime('%d/%m/%Y')
+    rooms_data = [{
+      'id': '69289',
+      'days': [{
+        'avail': '1',
+        'price': '50',
+        'min_stay': '1',
+      }]
+    }]
+    @server.call('update_rooms_values', @token, @lcode, from_date, rooms_data)
+  end
+
   def get_token
     response = @server.call('get_token', @login, @password)
     response[1].to_i > 0 ? response[1] : nil
@@ -49,6 +62,10 @@ class WubookConnector
     @login = wb_f[0]
     @password = wb_f[1]
     @lcode = wb_f[2]
+  end
+
+  def prepare_room_prices
+
   end
 
   def set_server

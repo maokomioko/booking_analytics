@@ -38,6 +38,10 @@ class WubookAuth
     connector.get_room_prices(room_ids)
   end
 
+  def apply_room_prices
+    connector.set_room_prices
+  end
+
   def connector
     WubookConnector.new({login: login, password: password, lcode: lcode})
   end

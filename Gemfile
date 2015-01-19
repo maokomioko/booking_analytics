@@ -37,6 +37,7 @@ gem 'premailer-rails'
 gem 'remotipart', '~> 1.2.1'
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'jbuilder'
 gem 'jquery-turbolinks', '~> 2.1.0'
 

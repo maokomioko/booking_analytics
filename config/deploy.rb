@@ -1,7 +1,7 @@
 lock '3.2.1'
 set :ssh_options, keepalive: true
 set :application, 'booking_analytics'
-set :repo_url, 'git@ba-app.imarto.com/var/www/ba_app'
+set :repo_url, 'git@ba-dev.imarto.com:ba_app.git'
 set :rvm_ruby_version, "2.2.0"
 
 Rake::Task["deploy:compile_assets"].clear
@@ -28,7 +28,6 @@ namespace :deploy do
     invoke 'deploy:assets:backup_manifest'
   end
 
-
   namespace :assets do
 
     desc "Precompile assets locally and then rsync to web servers"
@@ -53,6 +52,13 @@ namespace :deploy do
 
   end
 
+  desc "Create MongoDB indexes"
+  task :mongo_indexes do
+    run "cd #{current_path} && #{bundle_cmd} exec rake db:mongoid:create_indexes", once: true
+  end
+
+  after :publishing, :mongo_indexes
+
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -60,5 +66,5 @@ namespace :deploy do
     end
   end
 
-  after :publishing, :restart
+  after :mongo_indexes, :restart
 end

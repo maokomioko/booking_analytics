@@ -1,0 +1,17 @@
+.sticky_header
+  %span= DateTime.now.strftime("%B %Y") + ' - ' + (DateTime.now + 2.month).strftime("%B %Y")
+  = link_to @selected_room.name, '#', id: 'room_title'
+  #rooms_list.transitioned200
+    %ul
+      - @wba.rooms.each do |room|
+        %li
+          %i.fa.fa-cube
+          = link_to room.name, root_path(room_id: room.room_id), class: "#{active_class(root_path(room_id: room.room_id))}", data: { 'no-turbolink' => false }
+  .weekdays
+    %span= t('calendar.days.mon')
+    %span= t('calendar.days.tue')
+    %span= t('calendar.days.wed')
+    %span= t('calendar.days.thu')
+    %span= t('calendar.days.fri')
+    %span= t('calendar.days.sat')
+    %span= t('calendar.days.sun')

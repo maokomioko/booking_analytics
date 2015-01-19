@@ -1,10 +1,9 @@
 #left_menu
-  - if request.fullpath == 'calendar'
+  - if controller_name == 'calendar'
     %ul#rs_date_list
       %li.rsdl_date.transitioned200.rsld_active_perm{"data-day-id" => "all"}
         .rsldd_title
-          %strong All
-          Dates
+          = t('calendar.menu.all_dates').html_safe
         %table.rsdld_controls
           %tbody
             %tr

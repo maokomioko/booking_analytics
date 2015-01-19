@@ -19,7 +19,7 @@ en:
       unlock: "Didn't receive unlock instructions?"
   calendar:
     menu:
-      all_dates: "All dates"
+      all_dates: "<strong>All</strong> dates"
       apply_prices: "Apply <br> prices"
       set_prices: "Set prices <br> manually"
       cal: "Calendar"
@@ -55,5 +55,6 @@ en:
       lcode: "Lcode"
     buttons:
       login: "Log in"
+      logout: "Log out"
       signup: "Sign up"
       connect: "Connect"

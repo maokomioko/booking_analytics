@@ -54,7 +54,13 @@ namespace :deploy do
 
   desc "Create MongoDB indexes"
   task :mongo_indexes do
-    run "cd #{current_path} && #{bundle_cmd} exec rake db:mongoid:create_indexes", once: true
+    on roles(:app) do
+      within release_path do
+        with rails_env: :production do
+          execute :rake, 'db:mongoid:create_indexes'
+        end
+      end
+    end
   end
 
   after :publishing, :mongo_indexes

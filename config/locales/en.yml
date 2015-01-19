@@ -1,4 +1,6 @@
 en:
+  meta:
+    title: "Booking Analytics | Beta"
   shared:
     registration: "Registration"
     reset_instructions: "Send me password reset instructions"

@@ -19,6 +19,10 @@ class ChannelManagerController < ApplicationController
     end
   end
 
+  def update_prices
+    raise "#{request.fullpath}"
+  end
+
   private
 
   def wubook_auth

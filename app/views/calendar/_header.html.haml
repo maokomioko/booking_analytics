@@ -1,6 +1,6 @@
 .sticky_header
   %span= DateTime.now.strftime("%B %Y") + ' - ' + (DateTime.now + 2.month).strftime("%B %Y")
-  = link_to @selected_room.name, '#', id: 'room_title'
+  = link_to @selected_room.name, '#', id: 'room_title', room_id: @selected_room.room_id
   #rooms_list.transitioned200
     %ul
       - @wba.rooms.each do |room|

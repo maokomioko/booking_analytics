@@ -1,6 +1,6 @@
 #left_menu
   - if controller_name == 'calendar'
-    %ul#rs_date_list
+    %ul#rs_date_list.hidden
       %li.rsdl_date.transitioned200.rsld_active_perm{"data-day-id" => "all"}
         .rsldd_title
           = t('calendar.menu.all_dates').html_safe

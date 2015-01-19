@@ -37,6 +37,10 @@ i.fa {
   font-style: normal;
 }
 
+.hidden {
+  display: none;
+}
+
 .transitioned300 {
   transition: 0.3s all;
   -o-transition: 0.3s all;

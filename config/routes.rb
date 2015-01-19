@@ -14,7 +14,11 @@ Rails.application.routes.draw do
 
   resources :calendar, controller: :calendar
 
-  resources :channel_manager, contoller: 'channel_manager'
+  resources :channel_manager, contoller: 'channel_manager' do
+    collection do
+      post :update_prices
+    end
+  end
 
   root to: 'calendar#index'
   devise_for :users

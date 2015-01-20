@@ -6,7 +6,8 @@ en:
     reset_instructions: "Send me password reset instructions"
     current_price: "current"
     date_locked: "Date locked"
-    recommended_price: "Recommended %{price} €"
+    no_price: "No price suggestion"
+    recommended_price: "Recommended %{price}"
     sold: "Sold"
   messages:
     cm_verified: "Verification completed!"

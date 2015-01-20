@@ -8,8 +8,8 @@ class PriceMaker
 
   def initialize(hotel_id, arrival, departure)
     @hotel_id = hotel_id
-    @arrival = arrival
-    @departure = departure
+    @arrival = arrival.strftime("%Y-%m-%d")
+    @departure = departure.strftime("%Y-%m-%d")
 
     safe_init
   end
@@ -17,10 +17,10 @@ class PriceMaker
   def safe_init
     min_price_listing
     split_chunks
-    #get_top_prices
+    get_top_prices
   end
 
-  def kjgu
+  def get_top_prices
     prices = []
     @chunks.first(3).each do |x|
       prices << x[0..2]

@@ -7,17 +7,20 @@ class BlockAvailability
   field :departure_date
   field :arrival_date
 
+  field :max_occupancy
+
   field :hotel_id
   index({ hotel_id: 1 }, { background: true })
 
   scope :for_hotels, -> (hotel_ids){ where(:hotel_id.in => hotel_ids) }
+  scope :with_occupancy, -> (occupancy){ where('block.max_occupancy' => occupancy.to_s) }
   scope :by_arrival, -> (date){ where(arrival_date: date) }
   scope :by_departure, -> (date){ where(departure_date: date) }
 
   class << self
 
-    def to_date(hotel_ids, arrival, departure)
-      blocks = for_hotels(hotel_ids)
+    def to_date(hotel_ids, occupancy, arrival, departure)
+      blocks = for_hotels(hotel_ids).with_occupancy(occupancy)
 
       if departure.nil?
         blocks = blocks.by_arrival(arrival)

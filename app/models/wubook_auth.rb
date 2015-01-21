@@ -3,17 +3,19 @@ class WubookAuth
   #include ActiveModel::SecurePassword
 
   belongs_to :user
-  has_many :rooms, class_name: 'Wubook::Room'
+  has_many :rooms, class_name: 'Wubook::Room', dependent: :destroy
 
   validates :login, :password, :lcode, presence: true
+  validate :hotel_existence
 
   field :user_id, type: String
   index({ user_id: 1 }, { background: true })
 
   field :login, type: String
   field :password, type: String
-  field :lcode, type: String
 
+  field :lcode, type: String
+  field :booking_id, type: String
   #has_secure_password
 
   def create_rooms
@@ -39,10 +41,17 @@ class WubookAuth
   end
 
   def apply_room_prices
-    connector.set_room_prices
+    rooms.first
+    connector.set_room_prices(rooms)
   end
 
   def connector
     WubookConnector.new({login: login, password: password, lcode: lcode})
+  end
+
+  def hotel_existence
+    unless booking_id.present? && Hotel.find(booking_id).present?
+      errors.add(:booking_id, I18n.t('errors.booking_id'))
+    end
   end
 end

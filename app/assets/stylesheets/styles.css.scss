@@ -214,7 +214,6 @@ i.fa {
 }
 
 #room_title {
-  display: block;
   position: absolute;
   top: 0;
   right: 0;
@@ -246,9 +245,11 @@ i.fa {
 #rooms_list {
   background-color: #0072c6;
   position: fixed;
-  right: -500px;
-  z-index: 290;
   top: 120px;
+  right: -500px;
+  height: 100%;
+  z-index: 290;
+  overflow-y: scroll;
   &.visible {
     right: 0px;
   }

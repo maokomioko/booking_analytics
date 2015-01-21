@@ -9,6 +9,10 @@ en:
     no_price: "No price suggestion"
     recommended_price: "Recommended %{price}"
     sold: "Sold"
+  errors:
+    booking_id: "Hotel doesn't exist"
+  labels:
+    booking_id: "Hotel ID (login) at Booking.com"
   messages:
     cm_verified: "Verification completed!"
     cm_already_added: "Only one channel manager can be added at this point."

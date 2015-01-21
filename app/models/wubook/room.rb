@@ -2,7 +2,7 @@ class Wubook::Room
   include MongoWrapper
 
   belongs_to :wubook_auth
-  has_many :room_prices
+  has_many :room_prices, dependent: :destroy
 
   field :wubook_auth_id, type: String
   field :room_id, type: String
@@ -31,15 +31,14 @@ class Wubook::Room
 
   def fill_prices(dates = nil)
     dates = [*Date.today..Date.today + 5.days]
-    # dates.each do |date|
-    #   PriceMaker.new(wubook_auth.lcode, date, date + 1.day)
-    # end
-
     dates.each do |date|
-      RoomPrice.create(room_id: id,
-                       date: date.strftime("%Y-%m-%d"),
-                       price: Random.rand(10)
-                       )
+      price = PriceMaker.new(wubook_auth.booking_id, occupancy, date, date + 1.day).get_top_prices
+      puts price
+      # RoomPrice.create(
+      #   room_id: id,
+      #   date: date.strftime("%Y-%m-%d"),
+      #   price: price.last
+      # )
     end
   end
 end

@@ -6,8 +6,10 @@ class PriceMaker
 
   attr_reader :get_top_prices, :min_price_listing
 
-  def initialize(hotel_id, arrival, departure)
+  def initialize(hotel_id, occupancy, arrival, departure)
     @hotel_id = hotel_id
+    @occupancy = occupancy
+
     @arrival = arrival.strftime("%Y-%m-%d")
     @departure = departure.strftime("%Y-%m-%d")
 
@@ -17,7 +19,6 @@ class PriceMaker
   def safe_init
     min_price_listing
     split_chunks
-    get_top_prices
   end
 
   def get_top_prices
@@ -39,31 +40,23 @@ class PriceMaker
     aw_pool = AvailabilityWorker.pool(size: 4)
     h_slices = hotel_ids.to_a.each_slice(30)
 
-    #begin
-      blocks = 2.times.map do
-        not_blank = h_slices.next.reject(&:blank?)
-        aw_pool.future.get_blocks(not_blank, @arrival, @departure)
-      end
+    # Filtered blocks for hotels
+    blocks = 2.times.map do
+      not_blank = h_slices.next.reject(&:blank?)
+      aw_pool.future.get_blocks(not_blank, @occupancy, @arrival, @departure)
+    end
 
-      blocks = blocks.map(&:value).flatten!
-      #puts 'Filtered blocks for those hotels... Done!'
-    # rescue
-    #   puts 'Blocks Actor has crashed'
-    # end
+    blocks = blocks.map(&:value).flatten!
 
     pr_pool = AvailabilityWorker.pool(size: 4)
     b_slices = blocks.each_slice(30)
 
-    # #begin
-      pr_blocks = b_slices.count.times.map do
-        pr_pool.future.get_prices(b_slices.next)
-      end
+    # Ordered prices
+    pr_blocks = b_slices.count.times.map do
+      pr_pool.future.get_prices(b_slices.next)
+    end
 
-      pr_blocks = pr_blocks.map(&:value).flatten!.uniq!
-    #   puts 'Ordered prices... Done!'
-    # # rescue
-    # #   'Prices Actor has crashed'
-    # # end
+    pr_blocks = pr_blocks.map(&:value).flatten!.uniq!
 
     @price_blocks = pr_blocks
   end

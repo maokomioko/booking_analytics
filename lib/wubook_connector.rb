@@ -37,22 +37,38 @@ class WubookConnector
     response[1].length > 0 ? response[1] : nil
   end
 
-  def set_room_prices
+  def set_room_prices(room, dates)
     from_date = Date.today.strftime('%d/%m/%Y')
-    rooms_data = [{
-      'id': '69289',
-      'days': [{
-        'avail': '1',
-        'price': '50',
-        'min_stay': '1',
-      }]
-    }]
+    rooms_data = []
+
+    rooms.each do room
+      rooms_data << {
+        id: room[:room_id],
+        days: [{
+          avail: 1,
+          price: room[:price],
+          min_stay: 1
+          }]
+      }
+    end
+
     @server.call('update_rooms_values', @token, @lcode, from_date, rooms_data)
   end
 
   def get_token
-    response = @server.call('get_token', @login, @password)
-    response[1].to_i > 0 ? response[1] : nil
+    cache = ActiveSupport::Cache::MemoryStore.new
+
+    if cache.fetch('wb_token').nil?
+      response = @server.call('get_token', @login, @password)
+      if response[1].to_i > 0
+        cache.write('wb_token', response[1])
+        response[1]
+      else
+        nil
+      end
+    else
+      cache.fetch('wb_token')
+    end
   end
 
   private

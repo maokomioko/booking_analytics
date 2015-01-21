@@ -10,6 +10,8 @@ gem 'carrierwave'
 gem 'celluloid', github: 'celluloid/celluloid'
 gem 'celluloid-io'
 
+gem 'coffee-rails', '~> 4.1.0'
+
 gem 'date_validator'
 gem 'daemons'
 gem 'draper', '~> 1.4'
@@ -63,16 +65,18 @@ gem 'redis-store'
 gem 'redis-rails'
 #gem 'rubysl'
 
+gem 'sass-rails', '>= 5'
 gem 'sanitize'
 gem 'stringex'
 gem 'state_machine', github: 'seuros/state_machine'
+gem 'sidekiq'
+gem 'sidetiq'
+
 gem 'turbolinks', '~> 2.5.3'
 
 gem 'wicked_pdf'
 gem 'whenever'
 
-gem 'sass-rails', '>= 5'
-gem 'coffee-rails', '~> 4.1.0'
 gem 'uglifier', '>= 1.3.0'
 
 group :production do
@@ -90,6 +94,7 @@ group :development, :test do
   gem 'capistrano-rvm'
   gem 'capistrano-bundler', '~> 1.1.2'
   gem 'capistrano-rails', '~> 1.1.1'
+  gem 'capistrano-sidekiq'
   gem 'quiet_assets'
   gem 'guard'
   gem 'guard-rspec'

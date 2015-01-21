@@ -29,16 +29,17 @@ class Wubook::Room
     end
   end
 
-  def fill_prices(dates = nil)
-    dates = [*Date.today..Date.today + 5.days]
+  def fill_prices
+    RoomPrice.where(room_id: id).destroy_all
+
+    dates = [*Date.today..Date.today + 3.month]
     dates.each do |date|
       price = PriceMaker.new(wubook_auth.booking_id, occupancy, date, date + 1.day).get_top_prices
-      puts price
-      # RoomPrice.create(
-      #   room_id: id,
-      #   date: date.strftime("%Y-%m-%d"),
-      #   price: price.last
-      # )
+      RoomPrice.create(
+        room_id: id,
+        date: date.strftime("%Y-%m-%d"),
+        price: price.last
+      )
     end
   end
 end

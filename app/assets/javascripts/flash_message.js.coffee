@@ -14,7 +14,7 @@ class @FlashMessage
   hidePersistent: ->
     $(document).on 'click', "#flash_container .close", (e) ->
       e.preventDefault()
-      $(@).parent().parent().slideUp 'slow'
+      $("#flash_container").slideUp 'slow'
 
     $(document).ready ->
       hideContainer() if $('#flash_container').html().length > 0
@@ -29,4 +29,4 @@ class @FlashMessage
     return
 
   hideContainer = ->
-    $("#flash_container .alert").delay(5000).slideUp 'slow'
+    $("#flash_container").delay(5000).slideUp 'slow'

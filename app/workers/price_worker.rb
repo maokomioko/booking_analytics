@@ -4,7 +4,7 @@ class PriceWorker
 
   sidekiq_options retry: false, unique: true
 
-  #recurrence { hourly(1) }
+  recurrence { hourly(1) }
 
   def perform
     WubookAuth.each do |auth|

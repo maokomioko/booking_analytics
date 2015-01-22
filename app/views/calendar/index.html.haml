@@ -26,11 +26,10 @@
                 .bar.bar_recommended
                   - rec_price = set_price(@selected_room.recommended_price(date))
                   %span
-                    - if rec_price.to_i > 0
-                      = t('shared.recommended_price', price: rec_price)
-                    - else
-                      = t('shared.no_price')
-
+                    //- if rec_price.to_i > 0
+                    = t('shared.recommended_price', price: rec_price)
+                    //- else
+                    //  = t('shared.no_price')
 
                 .bar.bar_sold
                   %span= t('shared.locked')

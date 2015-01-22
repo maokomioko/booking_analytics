@@ -1,4 +1,4 @@
-#= require jquery2
+#= require jquery
 #= require jquery.turbolinks
 #= require turbolinks
 
@@ -9,8 +9,7 @@
 #= require_tree .
 
 ready = ->
-  # $("#calendar").mCustomScrollbar
-  #   theme: "dark"
+  $("#calendar").perfectScrollbar()
 
   window.isMouseDown = false
   $(document).mouseup ->

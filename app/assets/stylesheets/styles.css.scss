@@ -377,6 +377,11 @@ i.fa {
 
 #calendar_container {
   position: relative;
+  #calendar {
+    position: relative;
+    overflow: hidden;
+    height: calc(100vh - 60px);
+  }
 }
 
 #calendar_days_cont {
@@ -411,6 +416,7 @@ i.fa {
 .calendar {
   margin-top: 83px;
   width: 100%;
+  height: auto;
   table-layout: fixed;
   td {
     border: 1px solid #e0e0e0;

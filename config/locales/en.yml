@@ -11,8 +11,10 @@ en:
     sold: "Sold"
   errors:
     booking_id: "Hotel doesn't exist"
+    hotel_name: "Hotel name can't be blank"
   labels:
     booking_id: "Hotel ID (login) at Booking.com"
+    hotel_name: "Name of your Hotel"
   messages:
     cm_verified: "Verification completed!"
     cm_already_added: "Only one channel manager can be added at this point."

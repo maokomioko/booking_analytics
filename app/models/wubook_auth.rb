@@ -5,7 +5,7 @@ class WubookAuth
   belongs_to :user
   has_many :rooms, class_name: 'Wubook::Room', dependent: :destroy
 
-  validates :login, :password, :lcode, :hotel_name, presence: true
+  validates :login, :password, :lcode, :booking_id, :hotel_name, presence: true
   validate :hotel_existence
 
   field :user_id, type: String
@@ -22,18 +22,14 @@ class WubookAuth
   def create_rooms
     rooms_data = connector.get_rooms
     rooms_data.each do |rd|
-      begin
-        Wubook::Room.find(rd['id'])
-      rescue
-        wb_room = rooms.new
+      wb_room = rooms.new
 
-        %w(id name price max_people subroom children occupancy availability).each do |field|
-          field == 'id' ? model_field = 'room_id' : model_field = field
-          wb_room.send(model_field + '=', rd[field])
-        end
-
-        wb_room.save
+      %w(id name price max_people subroom children occupancy availability).each do |field|
+        field == 'id' ? model_field = 'room_id' : model_field = field
+        wb_room.send(model_field + '=', rd[field])
       end
+
+      wb_room.save
     end
   end
 
@@ -56,7 +52,7 @@ class WubookAuth
   end
 
   def hotel_existence
-    unless booking_id.present? && Hotel.find(booking_id).present?
+    unless Hotel.find(booking_id).present?
       errors.add(:booking_id, I18n.t('errors.booking_id'))
     end
   end

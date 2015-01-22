@@ -9,4 +9,14 @@ module ApplicationHelper
   def active_class(url)
     request.fullpath.include?(url) ? 'active' : ''
   end
+
+  def header_title
+    if controller_name == 'channel_manager' && action_name == 'new'
+      t('auth.new.connect_via', provider: 'WuBook')
+    else
+      if current_user && current_user.wubook_auth.size > 0
+        current_user.wubook_auth.first.hotel_name
+      end
+    end
+  end
 end

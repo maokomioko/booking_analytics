@@ -19,6 +19,7 @@ class CalendarController < ApplicationController
   def fetch_rooms
     unless @wba.rooms.count > 0
       @wba.create_rooms
+      redirect_to calendar_index_path
     end
   end
 end

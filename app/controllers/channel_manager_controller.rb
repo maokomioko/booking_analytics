@@ -40,6 +40,6 @@ class ChannelManagerController < ApplicationController
   end
 
   def wb_params
-    params.require(:wubook_auth).permit(:login, :password, :lcode, :booking_id)
+    params.require(:wubook_auth).permit(:login, :password, :lcode, :booking_id, :hotel_name)
   end
 end

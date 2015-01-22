@@ -8,6 +8,10 @@ defaults: &defaults
         pool_size: 35
         refresh_interval: 10
         timeout: 30
+  options:
+    raise_not_found_error: false
+    use_activesupport_time_zone: false
+    use_utc: true
 
 development:
   <<: *defaults

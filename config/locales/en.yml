@@ -17,6 +17,8 @@ en:
     cm_verified: "Verification completed!"
     cm_already_added: "Only one channel manager can be added at this point."
     cm_verification_error: "Error! Please check entered credentials."
+    prices_updated: "Suggested prices where applied successfully!"
+    price_update_failed: "Error during prices update! Please contact technical support."
   devise:
     links:
       login: "Log in with your account"
@@ -27,7 +29,7 @@ en:
   calendar:
     menu:
       all_dates: "<strong>All</strong> dates"
-      apply_prices: "Apply <br> prices"
+      apply_prices: "Apply suggested <br> prices"
       set_prices: "Set prices <br> manually"
       cal: "Calendar"
       forecast: "Forecast"

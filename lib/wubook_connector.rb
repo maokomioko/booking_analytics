@@ -37,22 +37,20 @@ class WubookConnector
     response[1].length > 0 ? response[1] : nil
   end
 
-  def set_room_prices(room, dates)
-    from_date = Date.today.strftime('%d/%m/%Y')
-    rooms_data = []
+  def set_room_prices(room, dates, prices)
 
-    rooms.each do room
-      rooms_data << {
-        id: room[:room_id],
+    dates.each_with_index do |date, i|
+      data = {
+        id: room,
         days: [{
           avail: 1,
-          price: room[:price],
+          price: prices[i],
           min_stay: 1
           }]
-      }
-    end
+        }
 
-    @server.call('update_rooms_values', @token, @lcode, from_date, rooms_data)
+      @server.call_async('update_rooms_values', @token, @lcode, date, data)
+    end
   end
 
   def get_token

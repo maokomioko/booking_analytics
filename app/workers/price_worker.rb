@@ -4,11 +4,14 @@ class PriceWorker
 
   sidekiq_options retry: false, unique: true
 
-  recurrence { hourly(1) }
+  #recurrence { hourly(1) }
 
   def perform
-    WubookAuth.first.rooms.each do |room|
-      room.fill_prices
+    rooms = WubookAuth.first.rooms
+    unless rooms.nil?
+      rooms.each do |room|
+        room.fill_prices
+      end
     end
   end
 end

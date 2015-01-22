@@ -5,7 +5,7 @@ class WubookAuth
   belongs_to :user
   has_many :rooms, class_name: 'Wubook::Room', dependent: :destroy
 
-  validates :login, :password, :lcode, presence: true
+  validates :login, :password, :lcode, :hotel_name, presence: true
   validate :hotel_existence
 
   field :user_id, type: String
@@ -16,6 +16,7 @@ class WubookAuth
 
   field :lcode, type: String
   field :booking_id, type: String
+  field :hotel_name, type: String
   #has_secure_password
 
   def create_rooms
@@ -40,9 +41,14 @@ class WubookAuth
     connector.get_room_prices(room_ids)
   end
 
-  def apply_room_prices
-    rooms.first
-    connector.set_room_prices(rooms)
+  def apply_room_prices(room_id, dates)
+    begin
+      prices = Wubook::Room.find_by(room_id: room_id).within_dates(dates).map(&:price)
+      connector.set_room_prices(room_id, dates, prices)
+      return true
+    rescue
+      false
+    end
   end
 
   def connector

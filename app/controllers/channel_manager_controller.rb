@@ -20,7 +20,16 @@ class ChannelManagerController < ApplicationController
   end
 
   def update_prices
-    raise "#{request.fullpath}"
+    dates = params[:dates]
+    dates.delete("")
+
+    if current_user.connector.apply_room_prices(params[:room_id], dates)
+      flash[:success] = t('messages.prices_updated')
+      render json: {status: :ok}
+    else
+      flash[:error] = t('messages.price_update_failed')
+      render json: {status: :unprocessable_entity}
+    end
   end
 
   private

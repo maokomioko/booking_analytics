@@ -35,8 +35,6 @@ class Wubook::Room
     dates = [*Date.today..Date.today + 3.month]
     dates.each do |date|
       price = PriceMaker.new(wubook_auth.booking_id, occupancy, date, date + 1.day).get_top_prices
-      puts price
-      puts 'last price ' + price.last.last.to_s
       RoomPrice.create(
         room_id: id,
         date: date.strftime("%Y-%m-%d"),

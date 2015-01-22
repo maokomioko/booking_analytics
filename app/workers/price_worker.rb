@@ -7,10 +7,11 @@ class PriceWorker
   #recurrence { hourly(1) }
 
   def perform
-    rooms = WubookAuth.first.rooms
-    unless rooms.nil?
-      rooms.each do |room|
-        room.fill_prices
+    WubookAuth.each do |auth|
+      unless auth.rooms.nil?
+        auth.rooms.each do |room|
+          room.fill_prices
+        end
       end
     end
   end

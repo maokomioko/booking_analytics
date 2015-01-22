@@ -22,7 +22,7 @@ class Room
     def remap_with_ids
       arr = []
 
-      Room.all.each do |room|
+      Room.each do |room|
         arr << room.room_id
       end
 

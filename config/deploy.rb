@@ -2,7 +2,7 @@ lock '3.2.1'
 set :ssh_options, keepalive: true
 set :application, 'booking_analytics'
 set :repo_url, 'git@ba-dev.imarto.com:ba_app.git'
-set :rvm_ruby_version, "2.2.0"
+set :rvm_ruby_version, "rbx-2.5.0"
 
 Rake::Task["deploy:compile_assets"].clear
 

@@ -1,4 +1,4 @@
-class Calendar < Struct.new(:view, :date, :callback)
+class Calendar < Struct.new(:view, :date, :month_offset, :callback)
     START_DAY = :monday
 
     delegate :content_tag, to: :view
@@ -11,8 +11,7 @@ class Calendar < Struct.new(:view, :date, :callback)
 
     def week_rows
       weeks.map do |week|
-        unless week.count { |day| day < Date.today } == 7 or
-          week.count { |day| day.month != date.month } > 1
+        unless week.count { |day| day < Date.today } == 7
           content_tag :tr do
             week.map { |day| day_cell(day) }.join.html_safe
           end
@@ -33,7 +32,8 @@ class Calendar < Struct.new(:view, :date, :callback)
 
     def weeks
       first = date.beginning_of_month.beginning_of_week(START_DAY)
-      last = date.end_of_month.end_of_week(START_DAY)
+      last = (date + month_offset.month).end_of_month.end_of_week(START_DAY)
+
       (first..last).to_a.in_groups_of(7)
     end
 end

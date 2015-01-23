@@ -6,30 +6,29 @@
     #calendar
       %table.calendar
         - i = 0
-        - @months.each do |month|
-          = calendar month do |date|
-            - unless date < Date.today
-              .container
-                .day
-                  - unless date.day == 1
-                    = date.day
+        = calendar do |date|
+          - unless date < Date.today
+            .container
+              .day
+                - unless date.day == 1
+                  = date.day
+                - else
+                  = date.strftime("%B").limit(3) + ' 1st'
+              .current_price
+                %span= t('shared.current_price')
+                %span.ccp_price
+                  = set_price(@room_prices[i]['price']) unless @room_prices[i].nil?
+                  - i = i + 1
+              .bar.bar_manual
+                %span= t('shared.date_locked')
+
+              .bar.bar_recommended
+                - rec_price = set_price(@selected_room.recommended_price(date))
+                %span
+                  - if rec_price.to_i > 0
+                    = t('shared.recommended_price', price: rec_price)
                   - else
-                    = date.strftime("%B").limit(3) + ' 1st'
-                .current_price
-                  %span= t('shared.current_price')
-                  %span.ccp_price
-                    = set_price(@room_prices[i]['price']) unless @room_prices[i].nil?
-                    - i = i + 1
-                .bar.bar_manual
-                  %span= t('shared.date_locked')
+                    = t('shared.no_price')
 
-                .bar.bar_recommended
-                  - rec_price = set_price(@selected_room.recommended_price(date))
-                  %span
-                    - if rec_price.to_i > 0
-                      = t('shared.recommended_price', price: rec_price)
-                    - else
-                      = t('shared.no_price')
-
-                .bar.bar_sold
-                  %span= t('shared.locked')
+              .bar.bar_sold
+                %span= t('shared.locked')

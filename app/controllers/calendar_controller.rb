@@ -2,8 +2,6 @@ class CalendarController < ApplicationController
   before_filter :set_wubook, :fetch_rooms
 
   def index
-    @months = [Date.today, Date.today + 1.month, Date.today + 2.month, Date.today + 3.month]
-
     params[:room_id].nil? ? room_id = @wba.rooms.first.room_id : room_id = params[:room_id]
 
     @selected_room = @wba.rooms.find_by(room_id: room_id)

@@ -46,6 +46,8 @@ class PriceMaker
       aw_pool.future.get_blocks(not_blank, @occupancy, @arrival, @departure)
     end
 
+    aw_pool.terminate
+
     blocks = blocks.map(&:value).flatten!
 
     pr_pool = AvailabilityWorker.pool(size: 4)
@@ -55,6 +57,8 @@ class PriceMaker
     pr_blocks = b_slices.count.times.map do
       pr_pool.future.get_prices(b_slices.next)
     end
+
+    pr_pool.terminate
 
     pr_blocks = pr_blocks.map(&:value).flatten!.uniq!
 

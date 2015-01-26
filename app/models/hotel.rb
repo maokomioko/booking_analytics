@@ -47,6 +47,8 @@ class Hotel
       hw_pool.future.amenities_mix(hotel_id, exact_class, i)
     end
 
+    hw_pool.terminate
+
     return results.map(&:value).flatten!.uniq! unless results.blank?
   end
 

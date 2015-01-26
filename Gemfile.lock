@@ -146,9 +146,6 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
-    celluloid-io (0.16.1)
-      celluloid (>= 0.16.0)
-      nio4r (>= 1.0.0)
     choice (0.1.7)
     chronic (0.10.2)
     coderay (1.1.0)
@@ -323,7 +320,6 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
-    nio4r (1.1.0)
     nokogiri (1.6.6.1)
       mini_portile (~> 0.6.0)
     nokogumbo (1.2.0)
@@ -768,7 +764,6 @@ DEPENDENCIES
   capybara-webkit
   carrierwave
   celluloid!
-  celluloid-io
   coffee-rails (~> 4.1.0)
   daemons
   date_validator

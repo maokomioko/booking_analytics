@@ -8,7 +8,6 @@ gem 'cancancan', '~> 1.9.2'
 gem 'carrierwave'
 
 gem 'celluloid', github: 'celluloid/celluloid'
-gem 'celluloid-io'
 
 gem 'coffee-rails', '~> 4.1.0'
 

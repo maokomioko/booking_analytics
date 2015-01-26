@@ -2,7 +2,6 @@ class Hotel
   include MongoWrapper
   include ParamSelectable
   include Celluloid
-  include Celluloid::IO
 
   scope :contains_facilities, -> (keywords){ self.in(facilities: keywords) }
   scope :with_facilities, -> (keywords){ all_in(facilities: keywords) }
@@ -46,8 +45,6 @@ class Hotel
     results = n.times.map do |i|
       hw_pool.future.amenities_mix(hotel_id, exact_class, i)
     end
-
-    hw_pool.terminate
 
     return results.map(&:value).flatten!.uniq! unless results.blank?
   end

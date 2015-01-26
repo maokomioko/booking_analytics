@@ -1,6 +1,5 @@
 class AvailabilityWorker
   include Celluloid
-  include Celluloid::IO
 
   attr_reader :get_blocks, :get_prices
 

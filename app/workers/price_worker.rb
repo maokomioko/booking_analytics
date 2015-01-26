@@ -11,7 +11,6 @@ class PriceWorker
       unless auth.rooms.nil?
         auth.rooms.each do |room|
           room.fill_prices
-          #sleep 5
         end
       end
     end

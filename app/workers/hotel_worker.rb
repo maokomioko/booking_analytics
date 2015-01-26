@@ -1,6 +1,5 @@
 class HotelWorker
   include Celluloid
-  include Celluloid::IO
 
   attr_reader :amenities_mix
 

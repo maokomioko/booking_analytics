@@ -4,6 +4,8 @@ class Wubook::Room
   belongs_to :wubook_auth
   has_many :room_prices, dependent: :destroy
 
+  scope :real, -> { self.in(subroom: [0, '', nil]) }
+
   field :wubook_auth_id, type: String
   field :room_id, type: String
 

@@ -9,7 +9,7 @@ class PriceWorker
   def perform
     WubookAuth.each do |auth|
       unless auth.rooms.nil?
-        auth.rooms.each do |room|
+        auth.rooms.real.each do |room|
           room.fill_prices
         end
       end

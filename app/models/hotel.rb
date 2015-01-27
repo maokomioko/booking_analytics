@@ -43,10 +43,13 @@ class Hotel
     n = 2**validate_amenities.size - 1
 
     results = n.times.map do |i|
-      hw_pool.future.amenities_mix(hotel_id, exact_class, i)
+      begin
+        hw_pool.future.amenities_mix(hotel_id, exact_class, i)
+      rescue DeadActorError, MailboxError
+      end
     end
 
-    return results.map(&:value).flatten!.uniq! unless results.blank?
+    results.map(&:value).flatten!.uniq! unless results.blank?
   end
 
   def validate_amenities

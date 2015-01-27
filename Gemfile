@@ -78,10 +78,6 @@ gem 'whenever'
 
 gem 'uglifier', '>= 1.3.0'
 
-group :production do
-  gem 'puma'
-end
-
 group :development do
   gem 'awesome_print', github: 'eoinkelly/awesome_print'
   gem "thin"

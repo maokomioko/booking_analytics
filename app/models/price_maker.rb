@@ -41,8 +41,11 @@ class PriceMaker
 
     # Filtered blocks for hotels
     blocks = 2.times.map do
-      not_blank = h_slices.next.reject(&:blank?)
-      aw_pool.future.get_blocks(not_blank, @occupancy, @arrival, @departure)
+      begin
+        not_blank = h_slices.next.reject(&:blank?)
+        aw_pool.future.get_blocks(not_blank, @occupancy, @arrival, @departure)
+      rescue DeadActorError, MailboxError
+      end
     end
 
     blocks = blocks.map(&:value).flatten!
@@ -52,7 +55,10 @@ class PriceMaker
 
     # Ordered prices
     pr_blocks = b_slices.count.times.map do
-      pr_pool.future.get_prices(b_slices.next)
+      begin
+        pr_pool.future.get_prices(b_slices.next)
+      rescue DeadActorError, MailboxError
+      end
     end
 
     pr_blocks = pr_blocks.map(&:value).flatten!.uniq!

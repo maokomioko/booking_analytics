@@ -60,8 +60,11 @@ class PriceMaker
       end
     end
 
-    pr_blocks = pr_blocks.map(&:value).flatten!.uniq!
-
-    @price_blocks = pr_blocks
+    begin
+      pr_blocks = pr_blocks.map(&:value).flatten!.uniq!
+      @price_blocks = pr_blocks
+    rescue
+      nil
+    end
   end
 end

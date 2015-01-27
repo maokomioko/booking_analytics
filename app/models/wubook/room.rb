@@ -31,10 +31,11 @@ class Wubook::Room
 
   def fill_prices
     RoomPrice.where(room_id: id).destroy_all
+    hotel_ids = Hotel.find(wubook_auth.booking_id).amenities_calc
 
     dates = [*Date.today..Date.today + 3.month]
     dates.each do |date|
-      price = PriceMaker.new(wubook_auth.booking_id, occupancy, date, date + 1.day).get_top_prices
+      price = PriceMaker.new(hotel_ids, occupancy, date, date + 1.day).get_top_prices
       RoomPrice.create(
         room_id: id,
         date: date.strftime("%Y-%m-%d"),

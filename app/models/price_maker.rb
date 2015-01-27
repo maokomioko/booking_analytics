@@ -5,8 +5,8 @@ class PriceMaker
 
   attr_reader :get_top_prices, :min_price_listing
 
-  def initialize(hotel_id, occupancy, arrival, departure)
-    @hotel_id = hotel_id
+  def initialize(hotel_ids, occupancy, arrival, departure)
+    @hotel_ids = hotel_ids
     @occupancy = occupancy
 
     @arrival = arrival.strftime("%Y-%m-%d")
@@ -34,10 +34,9 @@ class PriceMaker
   end
 
   def min_price_listing
-    hotel_ids = Hotel.find(@hotel_id).amenities_calc
 
     aw_pool = AvailabilityWorker.pool(size: 4)
-    h_slices = hotel_ids.to_a.each_slice(30)
+    h_slices = @hotel_ids.to_a.each_slice(30)
 
     # Filtered blocks for hotels
     blocks = 2.times.map do

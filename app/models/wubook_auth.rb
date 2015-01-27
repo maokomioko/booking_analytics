@@ -22,14 +22,16 @@ class WubookAuth
   def create_rooms
     rooms_data = connector.get_rooms
     rooms_data.each do |rd|
-      wb_room = rooms.new
+      if [0, nil, ''].include? rd['subroom']
+        wb_room = rooms.new
 
-      %w(id name price max_people subroom children occupancy availability).each do |field|
-        field == 'id' ? model_field = 'room_id' : model_field = field
-        wb_room.send(model_field + '=', rd[field])
+        %w(id name price max_people subroom children occupancy availability).each do |field|
+          field == 'id' ? model_field = 'room_id' : model_field = field
+          wb_room.send(model_field + '=', rd[field])
+        end
+
+        wb_room.save
       end
-
-      wb_room.save
     end
   end
 

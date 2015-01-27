@@ -23,12 +23,15 @@ class ChannelManagerController < ApplicationController
     dates = params[:dates]
     dates.delete("")
 
-    if current_user.connector.apply_room_prices(params[:room_id], dates)
-      flash[:success] = t('messages.prices_updated')
-      render json: {status: :ok}
-    else
-      flash[:error] = t('messages.price_update_failed')
-      render json: {status: :unprocessable_entity}
+    wba = wubook_for_user(params[:room_id])
+    unless wba == nil
+      if wba.apply_room_prices(params[:room_id], dates)
+        flash[:success] = t('messages.prices_updated')
+        render json: {status: :ok}
+      else
+        flash[:error] = t('messages.price_update_failed')
+        render json: {status: :unprocessable_entity}
+      end
     end
   end
 
@@ -37,6 +40,15 @@ class ChannelManagerController < ApplicationController
   def wubook_auth
     connector = WubookConnector.new(wb_params)
     connector.get_token.nil? ? false : true
+  end
+
+  def wubook_for_user(room_id)
+    begin
+      room = Wubook::Room.find_by(room_id: params[:room_id])
+      room.wubook_auth
+    rescue
+      nil
+    end
   end
 
   def wb_params

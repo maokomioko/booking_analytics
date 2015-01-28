@@ -380,6 +380,7 @@ i.fa {
   #calendar {
     position: relative;
     overflow: hidden;
+    margin-top: 83px;
     height: calc(100vh - 60px);
   }
 }
@@ -414,7 +415,6 @@ i.fa {
 }
 
 .calendar {
-  margin-top: 83px;
   width: 100%;
   height: auto;
   table-layout: fixed;
@@ -819,17 +819,16 @@ i.fa {
 }
 
 #login, #recover {
-  width: 400px;
   position: absolute;
+  top: 15%;
   left: 50%;
   margin-left: -200px;
-  height: 194px;
-  top: 15%;
+  width: 400px;
 }
 
 form {
-  height: calc(100% - 300px);
   position: relative;
+  height: calc(100% - 200px);
   h2 {
     margin: 0px 0px 20px 0;
     font-weight: 400;
@@ -904,13 +903,15 @@ form {
 }
 
 #welcome_panel {
-  display: block;
-  height: 240px;
+  ~ form {
+    background: #f2f2f2;
+  }
 }
 
 .panel {
+  display: block;
   width: 100%;
-  height: 240px;
+  height: 210px;
   background: #fff;
   position: relative;
   overflow: hidden;
@@ -941,7 +942,7 @@ form {
       display: inline-block;
       vertical-align: super;
     }
-    top: 76px;
+    top: 56px;
     font-weight: 400;
     font-size: 28px;
     box-sizing: border-box;

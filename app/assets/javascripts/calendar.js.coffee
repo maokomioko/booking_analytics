@@ -11,7 +11,7 @@ class @Calendar
       $('#rooms_list').toggleClass('visible')
 
   selectDates: ->
-    $('tbody td').mousedown(->
+    $('tbody td.selectable').mousedown(->
       window.isMouseDown = true
 
       $(@).toggleClass 'selected'
@@ -63,4 +63,5 @@ class @Calendar
     $.ajax
       type: "POST",
       url: window.dates_update_path,
-      data: {dates: arr, room_id: room_id}
+      data: {dates: arr, room_id: room_id},
+      success: $('td.selected .container').addClass('with_applied_price')

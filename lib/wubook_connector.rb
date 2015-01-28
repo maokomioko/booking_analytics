@@ -25,8 +25,8 @@ class WubookConnector
   end
 
   def get_room_prices(room_ids = nil)
-    from_date = Date.today.strftime('%d/%m/%Y')
-    to_date = (Date.today + 2.months).strftime('%d/%m/%Y')
+    from_date = format_date(Date.today)
+    to_date = format_date(Date.today + 2.months)
 
     unless room_ids.nil?
       response = @server.call('fetch_rooms_values', @token, @lcode, from_date, to_date, room_ids)
@@ -38,18 +38,19 @@ class WubookConnector
   end
 
   def set_room_prices(room, dates, prices)
-
     dates.each_with_index do |date, i|
-      data = {
+      date = format_date(date.to_date)
+      data = [{
         id: room,
         days: [{
           avail: 1,
           price: prices[i],
           min_stay: 1
           }]
-        }
+        }]
 
-      @server.call_async('update_rooms_values', @token, @lcode, date, data)
+      response = @server.call_async('update_rooms_values', @token, @lcode, date, data)
+      return response[1].length > 0 ? response[1] : nil
     end
   end
 
@@ -80,6 +81,10 @@ class WubookConnector
 
   def prepare_room_prices
 
+  end
+
+  def format_date(date)
+    date.strftime('%d/%m/%Y')
   end
 
   def set_server

@@ -8,7 +8,7 @@
         - i = 0
         = calendar do |date|
           - unless date < Date.today
-            .container
+            .container{class: ('with_applied_price' if @selected_room.recommended_in_use(date))}
               .day
                 - unless date.day == 1
                   = date.day
@@ -19,16 +19,19 @@
                 %span.ccp_price
                   = set_price(@room_prices[i]['price']) unless @room_prices[i].nil?
                   - i = i + 1
-              .bar.bar_manual
+              .bar.manual
                 %span= t('shared.date_locked')
 
-              .bar.bar_recommended
-                - rec_price = set_price(@selected_room.recommended_price(date))
+              .bar.recommended
+                - rec_price = set_price(@selected_room.price_value(date))
                 %span
                   - if rec_price.to_i > 0
                     = t('shared.recommended_price', price: rec_price)
                   - else
                     = t('shared.no_price')
 
-              .bar.bar_sold
+              .bar.sold
                 %span= t('shared.locked')
+
+              %i.fa.fa-thumbs-o-up
+              %i.fa.fa-lock

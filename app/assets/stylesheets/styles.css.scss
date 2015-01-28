@@ -436,7 +436,26 @@ i.fa {
     .container {
       position: relative;
       padding: 10px 5px;
+      height: 200px;
       z-index: -50;
+      &.with_applied_price {
+        i:first-of-type {
+          display: block;
+        }
+      }
+      i {
+        display: none;
+        position: absolute;
+        bottom: 5px;
+        font-size: 64px;
+        color: #cde6f7;
+        &:first-of-type {
+          left: 5px;
+        }
+        &:last-of-type {
+          right: 5px;
+        }
+      }
     }
     .day {
       margin-bottom: 12px;
@@ -481,22 +500,20 @@ i.fa {
         padding-left: 5%;
         font-size: 14px;
       }
+      &.manual {
+        display: none;
+        background: #FFF1B3;
+      }
+      &.sold {
+        display: none;
+        background: #C1FED9;
+      }
     }
   }
 }
 
-.bar_manual {
-  display: none;
-  background: #FFF1B3;
-}
-
-.bar_sold {
-  display: none;
-  background: #C1FED9;
-}
-
 .manual {
-  .bar_recommended, .bar_manual {
+  .recommended, .manual {
     display: block;
   }
 }
@@ -505,7 +522,7 @@ i.fa {
   .bar_sold {
     display: block;
   }
-  .bar_recommended {
+  .recommended {
     display: none;
   }
 }
@@ -651,6 +668,10 @@ i.fa {
   .rsdld_the_price {
     color: rgb(0, 255, 77);
   }
+}
+
+.rsldd_title {
+  border-right: 1px solid #e0e0e0;
 }
 
 .rsldd_title, .rsldad_title {
@@ -902,12 +923,6 @@ form {
   }
 }
 
-#welcome_panel {
-  ~ form {
-    background: #f2f2f2;
-  }
-}
-
 .panel {
   display: block;
   width: 100%;
@@ -928,6 +943,9 @@ form {
   }
   &.active_panel {
     z-index: 200;
+  }
+  ~ form {
+    background: #f2f2f2;
   }
   > * {
     width: 400px;

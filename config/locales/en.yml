@@ -31,7 +31,7 @@ en:
   calendar:
     menu:
       all_dates: "<strong>All</strong> dates"
-      apply_prices: "Apply suggested <br> prices"
+      apply_prices: "Use suggested <br> prices"
       set_prices: "Set prices <br> manually"
       cal: "Calendar"
       forecast: "Forecast"

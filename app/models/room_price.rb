@@ -10,4 +10,6 @@ class RoomPrice
 
   field :date, type: Date
   field :price, type: Float
+
+  field :enabled, type: Boolean
 end

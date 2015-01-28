@@ -27,8 +27,9 @@ input, select {
 }
 
 .connect_form {
-  margin: 25% auto;
-  position: relative;
+  position: absolute;
+  top: 25%;
+  left: 48%;
   text-align: left;
   width: 300px;
   label {

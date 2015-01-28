@@ -24,10 +24,24 @@ class Wubook::Room
 
   def recommended_price(date)
     begin
-      date = date.strftime("%Y-%m-%d")
-      room_prices.find_by(date: date).price
+      date = format_date(date)
+      room_prices.find_by(date: date)
     rescue
-      0
+      nil
+    end
+  end
+
+  def price_value(date)
+    price_obj = recommended_price(date)
+    price_obj.nil? ? 0 : price_obj.price
+  end
+
+  def recommended_in_use(date)
+    price_obj = recommended_price(date)
+    begin
+      price_obj.enabled
+    rescue
+      false
     end
   end
 
@@ -41,12 +55,18 @@ class Wubook::Room
         price = PriceMaker.new(hotel_ids, occupancy, date, date + 1.day).get_top_prices
         RoomPrice.create(
           room_id: id,
-          date: date.strftime("%Y-%m-%d"),
+          date: format_date(date),
           price: price.last.last
         )
       rescue
         puts "No price"
       end
     end
+  end
+
+  private
+
+  def format_date(date)
+    date.strftime("%Y-%m-%d")
   end
 end

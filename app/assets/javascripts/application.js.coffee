@@ -1,6 +1,4 @@
-#= require jquery
-#= require jquery.turbolinks
-#= require turbolinks
+#= require jquery2
 
 #= require jquery_ujs
 #= require jquery-ui
@@ -12,6 +10,8 @@ ready = ->
   $("#calendar").perfectScrollbar()
 
   window.isMouseDown = false
+  window.isPriceUpdLocked = false
+
   $(document).mouseup ->
     window.isMouseDown = false
 

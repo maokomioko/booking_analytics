@@ -35,8 +35,19 @@ class WubookAuth
     end
   end
 
-  def room_prices(room_ids = nil)
+  def fetch_room_prices(room_ids = nil)
     connector.get_room_prices(room_ids)
+  end
+
+  def create_room_prices(room_id, id)
+    price_blocks = fetch_room_prices([room_id.to_i]).map{|key, value| value}[0]
+    price_blocks.each_with_index do |block, i|
+      RoomPrice.create(
+        room_id: id,
+        date: Date.today + i.days,
+        default_price: block['price']
+      )
+    end
   end
 
   def apply_room_prices(room_id, dates)

@@ -4,7 +4,11 @@ module CalendarHelper
   end
 
   def set_price(price)
-    price = price.modulo(1) > 0 ? price : price.to_i
-    price.to_s + ' €'
+    begin
+      price = price.modulo(1) > 0 ? price : price.to_i
+      price.to_s + ' €'
+    rescue
+      t('errors.price_value_missing')
+    end
   end
 end

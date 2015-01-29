@@ -5,10 +5,11 @@
     = render partial: 'header'
     #calendar
       %table.calendar
-        - i = 0
         = calendar do |date|
-          - unless date < Date.today
-            .container{class: ('with_applied_price' if @selected_room.recommended_in_use(date))}
+          - price_block = @room.room_prices.find_by(date: date)
+
+          - unless date < Date.today || price_block.nil?
+            .container{ class: ('with_applied_price' if price_block.enabled) }
               .day
                 - unless date.day == 1
                   = date.day
@@ -17,18 +18,20 @@
               .current_price
                 %span= t('shared.current_price')
                 %span.ccp_price
-                  = set_price(@room_prices[i]['price']) unless @room_prices[i].nil?
-                  - i = i + 1
+                  = set_price(price_block.default_price)
               .bar.manual
                 %span= t('shared.date_locked')
 
               .bar.recommended
-                - rec_price = set_price(@selected_room.price_value(date))
-                %span
-                  - if rec_price.to_i > 0
-                    = t('shared.recommended_price', price: rec_price)
-                  - else
-                    = t('shared.no_price')
+                - if price_block.enabled
+                  %span= t('shared.recommended_applied')
+                - else
+                  - rec_price = set_price(price_block.price)
+                  %span
+                    - if rec_price.to_i > 0
+                      = t('shared.recommended_price', price: rec_price)
+                    - else
+                      = t('shared.no_price')
 
               .bar.sold
                 %span= t('shared.locked')

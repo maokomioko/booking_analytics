@@ -9,6 +9,8 @@ class RoomPrice
   index({ room_id: 1 }, { background: true })
 
   field :date, type: Date
+
+  field :default_price, type: Float
   field :price, type: Float
 
   field :enabled, type: Boolean

@@ -4,6 +4,7 @@ class @Calendar
     @selectDates()
     @clearSelection()
     @togglePriceControls()
+    @toggleManualPriceInput()
 
   roomsList: ->
     $('#room_title').click (e) ->
@@ -23,38 +24,53 @@ class @Calendar
         $(@).toggleClass 'selected'
         $(@).parent().toggleClass 'with_selection'
 
-        #submitDates()
-        #if $(@).siblings('.selected').length
-
-        #if $(@).parent().siblings('.with_selection').length
-
       return
 
     $(document).mouseup ->
       window.isMouseDown = false
-      setTimeout (->
-        $(document).trigger('contentClicked')
-        false
-        ), 1000
       return
 
   clearSelection: ->
     $(document).click (e) ->
-      if !$(event.target).closest('#calendar').length
-        $('#calendar td.selected').removeClass('selected')
-
+      console.log e
+      # setTimeout (->
+      #   if !$(e.target).closest('#calendar').length
+      #     console.log 'happened'
+      #     $('#calendar td.selected').removeClass('selected')
+      #   ), 1000
   togglePriceControls: ->
-    $(document).on 'contentClicked', ->
+    $(document).click ->
       if $('td.selected').length
-        $('#rs_date_list').removeClass 'hidden'
+        $('#rs_date_list li:first-of-type').removeClass 'hidden'
 
-        $('#rs_date_list a:first-of-type').click (e) ->
+        $('#rs_date_list a').click (e) ->
           e.preventDefault()
-          submitDates()
+
+        if window.isPriceUpdLocked == false
+          $('#rs_date_list a')[0].click ->
+            submitDates()
+
+          $('#rs_date_list a')[1].click ->
+            $(document).trigger('manualPriceInputCalled')
+            manualPriceApply()
+
       else
         $('#rs_date_list').addClass 'hidden'
 
-  submitDates = ->
+  toggleManualPriceInput: ->
+    $(document).on 'manualPriceInputCalled', ->
+      $('#rs_date_list li:last-of-type').toggleClass 'hidden'
+
+   manualPriceApply = ->
+    $('#custom_price').change ->
+      $val = $(@).value()
+      setTimeout (->
+        submitDates($val)
+        ), 500
+
+      return
+
+  submitDates = (custom_price = null) ->
     room_id = $('#room_title').attr('room_id')
     arr = []
     $('td.selected').each ->
@@ -63,5 +79,7 @@ class @Calendar
     $.ajax
       type: "POST",
       url: window.dates_update_path,
-      data: {dates: arr, room_id: room_id},
-      success: $('td.selected .container').addClass('with_applied_price')
+      data: {price: custom_price, dates: arr, room_id: room_id},
+      success: ->
+          $('td.selected .container').addClass('with_applied_price')
+          window.isPriceUpdLocked = true

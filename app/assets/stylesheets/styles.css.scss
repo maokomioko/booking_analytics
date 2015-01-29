@@ -442,13 +442,17 @@ i.fa {
         i:first-of-type {
           display: block;
         }
+        .recommended {
+          color: #fff;
+          background: #1d9d74;
+        }
       }
       i {
         display: none;
         position: absolute;
         bottom: 5px;
-        font-size: 64px;
-        color: #cde6f7;
+        font-size: 64pt;
+        color: #fafafa;
         &:first-of-type {
           left: 5px;
         }
@@ -527,32 +531,34 @@ i.fa {
   }
 }
 
-.rsld_active_perm {
-  height: 122px !important;
-}
-
-#rs_date_list li.rsld_active_perm {
-  background: #f2f2f2;
-  color: #000;
-}
-
-.rsld_active_perm .rsdld_controls td {
-  border: 1px solid #e0e0e0;
-  border-right: none;
-}
-
 #rs_date_list {
+  position: relative;
   height: calc(100% - 244px);
+  li {
+    line-height: 60px;
+    &:last-of-type {
+      position: absolute;
+      bottom: 90px;
+      left: 0;
+      width: 100%;
+      input {
+        padding: 0 20px;
+        width: 210px;
+        height: 60px;
+        border-width: 1px 0 1px 0;
+        text-align: center;
+        font-weight: 100;
+        font-size: 30px;
+      }
+    }
+  }
 }
 
 .rsdl_date {
-  text-align: center;
-  cursor: pointer;
-  line-height: 60px;
-  overflow: hidden;
-  height: 60px;
   position: relative;
-  &.rsld_active! {}
+  cursor: pointer;
+  overflow: hidden;
+  height: 122px;
   &:hover {
     background: #0072c6;
     color: #fff;
@@ -563,12 +569,6 @@ i.fa {
   background: #0072c6;
   color: #fff;
 }
-
-#rsdl_cont {
-  padding-bottom: 120px;
-}
-
-.rsd_year! {}
 
 .rsdld_all_dates_controls {
   background: #fff;
@@ -671,76 +671,7 @@ i.fa {
 }
 
 .rsldd_title {
-  border-right: 1px solid #e0e0e0;
-}
-
-.rsldd_title, .rsldad_title {
-  padding: 0 40px;
-}
-
-.rsldd_title .done_svg {
-  position: absolute;
-  top: -5px;
-  left: 12px;
-  display: none;
-}
-
-.rsld_done .rsldd_title .done_svg {
-  display: block;
-  width: 25px;
-}
-
-.rsld_active .done_path, .rsld_active_perm .done_path {
-  fill: #ffffff;
-}
-
-.done_path {
-  fill: #0072c6;
-}
-
-.rsdl_date:hover .done_path {
-  fill: #ffffff;
-}
-
-.rsld_locked_to_manual! {}
-
-.rsldd_title .lock_manual_ico {
-  top: 23px;
-  right: 20px;
-  color: #0072c6;
-  display: none;
-  position: absolute;
-}
-
-.rsld_locked_to_manual .lock_manual_ico {
-  display: block;
-}
-
-.rsld_active .lock_manual_ico, .rsld_active_perm .lock_manual_ico, .rsdl_date:hover .lock_manual_ico {
-  color: #ffffff;
-}
-
-.rsdld_unlock {
-  display: none;
-  &:hover {
-    background: #0072c6;
-    color: rgb(0, 255, 77);
-  }
-}
-
-.rsld_locked_to_manual {
-  .rsdld_apply {
-    display: none;
-  }
-  .rsdld_unlock {
-    display: block;
-    padding: 10px 0px;
-  }
-}
-
-.rsdld_unlock:before {
-  content: "";
-  background: none;
+  text-align: center;
 }
 
 .rsdld_set_manual_price_td {
@@ -752,50 +683,6 @@ i.fa {
   &:hover {
     background: #0072c6;
     color: rgb(0, 255, 77);
-  }
-}
-
-.rsdld_manual_price_input, .rsld_locked_to_manual .rsdld_set {
-  display: none;
-}
-
-.rsdld_set_manual_price:before {
-  content: "";
-  background: none;
-}
-
-.rsld_locked_to_manual {
-  .rsdld_manual_price_td {
-    position: relative;
-    &:before {
-      content: "EUR";
-      position: absolute;
-      top: -21px;
-      right: 53px;
-      width: 30px;
-      height: 30px;
-      font-size: 10px;
-      color: #0072c6;
-      font-weight: 300;
-      z-index: 10;
-    }
-  }
-  .rsdld_manual_price_input {
-    width: 80px;
-    text-align: center;
-    border: none;
-    color: #0072c6;
-    font-size: 24px;
-    font-weight: 300;
-    line-height: 46px;
-    display: block;
-    outline: none;
-    margin: 16px auto 0px;
-    position: relative;
-  }
-  .rsdld_set_manual_price_td {
-    display: block;
-    margin-top: 0px;
   }
 }
 
@@ -827,15 +714,6 @@ i.fa {
 .sold {
   .ma_ico, .pa_ico {
     display: none;
-  }
-}
-
-.selected {
-  .pa_ico .done_path {
-    fill: #ffffff;
-  }
-  .ma_ico {
-    color: #ffffff;
   }
 }
 

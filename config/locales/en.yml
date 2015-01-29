@@ -8,13 +8,17 @@ en:
     date_locked: "Date locked"
     no_price: "No price suggestion"
     recommended_price: "Recommended %{price}"
+    recommended_applied: "Recommended price applied"
     sold: "Sold"
   errors:
     booking_id: "Hotel doesn't exist"
     hotel_name: "Hotel name can't be blank"
+    price_value_missing: "No price"
   labels:
     booking_id: "Hotel ID (login) at Booking.com"
     hotel_name: "Name of your Hotel"
+  placeholders:
+    zero_euro: "0 EUR"
   messages:
     cm_verified: "Verification completed!"
     cm_already_added: "Only one channel manager can be added at this point."
@@ -33,6 +37,7 @@ en:
       all_dates: "<strong>All</strong> dates"
       apply_prices: "Use suggested <br> prices"
       set_prices: "Set prices <br> manually"
+      manual_input: "<strong>Enter</strong> new price"
       cal: "Calendar"
       forecast: "Forecast"
       analytics: "Analytics"

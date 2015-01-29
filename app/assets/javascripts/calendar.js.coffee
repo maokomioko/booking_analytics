@@ -40,13 +40,11 @@ class @Calendar
       e.preventDefault()
 
     $('#apply_suggested').click ->
-      alert "FIRST"
       submitDates()
       $('#left_menu ul:first-of-type li:first-of-type').addClass 'hidden'
       $('#calendar td.selected').removeClass('selected')
 
     $('#set_manually').click ->
-      alert "SECOND"
       $(document).trigger('manualPriceInputCalled')
       manualPriceApply()
 
@@ -56,13 +54,14 @@ class @Calendar
 
    manualPriceApply = ->
     $('#custom_price').change ->
-      $val = $(@).value()
+      $val = $(@).val()
       setTimeout (->
         submitDates($val)
-        $(document).trigger('manualPriceInputCalled')
-        ), 500
+        #$(document).trigger('manualPriceInputCalled')
+        false
+        ), 5000
 
-      return
+      false
 
   submitDates = (custom_price = null) ->
     room_id = $('#room_title').attr('room_id')

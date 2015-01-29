@@ -50,18 +50,20 @@ class WubookAuth
     end
   end
 
-  def apply_room_prices(room_id, dates)
+  def apply_room_prices(room_id, dates, custom_price)
     room = Wubook::Room.find_by(room_id: room_id)
+
     if dates.size > 1
       price_blocks = room.room_prices.within_dates(dates)
     else
       price_blocks = room.room_prices.where(date: dates[0])
     end
 
-    prices = price_blocks.map(&:price)
     dates = price_blocks.map(&:date)
+    prices = custom_price.nil? ? price_blocks.map(&:price) : [custom_price]
 
     response = connector.set_room_prices(room_id, dates, prices)
+
     if response == 'Ok'
       price_blocks.update_all(enabled: true)
       return true

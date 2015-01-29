@@ -38,13 +38,14 @@ class WubookConnector
   end
 
   def set_room_prices(room, dates, prices)
+
     dates.each_with_index do |date, i|
       date = format_date(date.to_date)
       data = [{
         id: room,
         days: [{
           avail: 1,
-          price: prices[i],
+          price: prices.size > 0 ? prices[i] : prices[0],
           min_stay: 1
           }]
         }]

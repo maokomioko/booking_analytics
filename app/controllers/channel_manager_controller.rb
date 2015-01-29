@@ -20,13 +20,13 @@ class ChannelManagerController < ApplicationController
   end
 
   def update_prices
-    unless params[:dates].nil?
+    unless params[:dates].blank?
       dates = params[:dates]
       dates.delete("")
 
       wba = wubook_for_user(params[:room_id])
       unless wba.nil?
-        if wba.apply_room_prices(params[:room_id], dates)
+        if wba.apply_room_prices(params[:room_id], dates, params[:price])
           flash[:success] = t('messages.prices_updated')
           render json: {status: :ok}
         else

@@ -12,7 +12,6 @@ ready = ->
   $("#calendar").perfectScrollbar()
 
   window.isMouseDown = false
-  window.isPriceUpdLocked = false
 
   $(document).mouseup ->
     window.isMouseDown = false

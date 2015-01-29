@@ -34,9 +34,9 @@ en:
       unlock: "Didn't receive unlock instructions?"
   calendar:
     menu:
-      all_dates: "<strong>All</strong> dates"
-      apply_prices: "Use suggested <br> prices"
-      set_prices: "Set prices <br> manually"
+      all_dates: "<strong>Price</strong> controls"
+      apply_prices: "Apply suggested"
+      set_prices: "Manual override"
       manual_input: "<strong>Enter</strong> new price"
       cal: "Calendar"
       forecast: "Forecast"

@@ -2,8 +2,8 @@ class @Calendar
   constructor: ->
     @roomsList()
     @selectDates()
-    @clearSelection()
     @togglePriceControls()
+    @setPrices()
     @toggleManualPriceInput()
 
   roomsList: ->
@@ -30,42 +30,36 @@ class @Calendar
       window.isMouseDown = false
       return
 
-  clearSelection: ->
-    $(document).click (e) ->
-      console.log e
-      # setTimeout (->
-      #   if !$(e.target).closest('#calendar').length
-      #     console.log 'happened'
-      #     $('#calendar td.selected').removeClass('selected')
-      #   ), 1000
   togglePriceControls: ->
     $(document).click ->
       if $('td.selected').length
-        $('#rs_date_list li:first-of-type').removeClass 'hidden'
+        $('#left_menu ul:first-of-type li:first-of-type').removeClass 'hidden'
 
-        $('#rs_date_list a').click (e) ->
-          e.preventDefault()
+  setPrices: ->
+    $('#left_menu a').click (e) ->
+      e.preventDefault()
 
-        if window.isPriceUpdLocked == false
-          $('#rs_date_list a')[0].click ->
-            submitDates()
+    $('#apply_suggested').click ->
+      alert "FIRST"
+      submitDates()
+      $('#left_menu ul:first-of-type li:first-of-type').addClass 'hidden'
+      $('#calendar td.selected').removeClass('selected')
 
-          $('#rs_date_list a')[1].click ->
-            $(document).trigger('manualPriceInputCalled')
-            manualPriceApply()
-
-      else
-        $('#rs_date_list').addClass 'hidden'
+    $('#set_manually').click ->
+      alert "SECOND"
+      $(document).trigger('manualPriceInputCalled')
+      manualPriceApply()
 
   toggleManualPriceInput: ->
     $(document).on 'manualPriceInputCalled', ->
-      $('#rs_date_list li:last-of-type').toggleClass 'hidden'
+      $('#left_menu ul:first-of-type li:last-of-type').toggleClass 'hidden'
 
    manualPriceApply = ->
     $('#custom_price').change ->
       $val = $(@).value()
       setTimeout (->
         submitDates($val)
+        $(document).trigger('manualPriceInputCalled')
         ), 500
 
       return
@@ -82,4 +76,6 @@ class @Calendar
       data: {price: custom_price, dates: arr, room_id: room_id},
       success: ->
           $('td.selected .container').addClass('with_applied_price')
+          if custom_price > 0
+            $('td.selected .container').addClass('with_lock')
           window.isPriceUpdLocked = true

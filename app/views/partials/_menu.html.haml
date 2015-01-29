@@ -1,23 +1,19 @@
 #left_menu
   - if controller_name == 'calendar'
-    %ul#rs_date_list
-      %li.rsdl_date.transitioned200.hidden
-        .rsldd_title
-          = t('calendar.menu.all_dates').html_safe
-        %table.rsdld_controls
-          %tbody
-            %tr
-              %td
-                %a.rsdldad_apply.rsdlad_btn.transitioned200
-                  = t('calendar.menu.apply_prices').html_safe
-              %td
-                %a.rsdldad_set.rsdlad_btn.transitioned200
-                  = t('calendar.menu.set_prices').html_safe
+    %ul.transitioned200
       %li.hidden
-        .rsldd_title
+        %span= t('calendar.menu.all_dates').html_safe
+        %a#apply_suggested.transitioned200{href: '#'}
+          %i.fa.fa-check
+          = t('calendar.menu.apply_prices')
+        %a#set_manually.transitioned200{href: '#'}
+          %i.fa.fa-pencil-square-o
+          = t('calendar.menu.set_prices')
+      %li.hidden
+        %span
           = t('calendar.menu.manual_input').html_safe
         = number_field_tag :custom_price, nil, min: 0, placeholder: t('placeholders.zero_euro')
-  %ul#lm_list.transitioned300
+  %ul.transitioned300
     %li
       = link_to t('calendar.menu.cal'), calendar_index_path, class: "transitioned200 cal_i #{active_class(calendar_index_path)}"
     %li

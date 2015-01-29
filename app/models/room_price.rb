@@ -14,4 +14,5 @@ class RoomPrice
   field :price, type: Float
 
   field :enabled, type: Boolean
+  field :locked, type: Boolean
 end

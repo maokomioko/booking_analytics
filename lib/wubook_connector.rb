@@ -37,13 +37,12 @@ class WubookConnector
     set_response(response)
   end
 
-  def set_plan_prices(plan_id, room_id, from_date = nil, prices)
+  def set_plan_prices(plan_id, room_id, from_date, prices)
     data = {
       room_id => prices
     }
-    from_date = from_date.nil? ? format_date(Date.tomorrow) : format_date(from_date)
 
-    response = @server.call_async('update_plan_prices', @token, @lcode, plan_id, from_date, data)
+    response = @server.call_async('update_plan_prices', @token, @lcode, plan_id, format_date(from_date), data)
     set_response(response)
   end
 

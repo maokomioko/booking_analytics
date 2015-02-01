@@ -58,23 +58,18 @@ class WubookAuth
       price_blocks = room.room_prices.where(date: dates[0])
     end
 
-    unless costom_price.nil?
+    if custom_price.nil?
       new_prices = price_blocks.map(&:price)
     else
       new_prices = [custom_price]
+      price_blocks.update_all(default_price: custom_price)
     end
 
-    begin
-      price_blocks.map(&:date).each do |date|
-        connector.set_plan_prices(non_refundable_pid, room_id, from_date, new_prices)
-      end
-
-      price_blocks.update_all(enabled: true)
-      return true
-
-    rescue
-      return false
+    price_blocks.map(&:date).each do |date|
+      connector.set_plan_prices(non_refundable_pid, room_id, date, new_prices)
     end
+
+    price_blocks.update_all(enabled: true)
   end
 
   def connector

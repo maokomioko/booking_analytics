@@ -33,9 +33,7 @@ class ChannelManagerController < ApplicationController
           flash[:error] = t('messages.price_update_failed')
           render json: {status: :unprocessable_entity}
         end
-      else render json: {status: :unprocessable_entity} end
-
-      render json: {status: :unprocessable_entity}
+      end
     end
   end
 

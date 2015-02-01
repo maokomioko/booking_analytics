@@ -77,4 +77,5 @@ class @Calendar
           $('td.selected .container').addClass('with_applied_price')
           if custom_price > 0
             $('td.selected .container').addClass('with_lock')
+          $('td.selected .container').removeClass('selected')
           window.isPriceUpdLocked = true

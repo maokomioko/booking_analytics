@@ -5,7 +5,7 @@ class WubookAuth
   belongs_to :user
   has_many :rooms, class_name: 'Wubook::Room', dependent: :destroy
 
-  validates :login, :password, :lcode, :booking_id, :hotel_name, presence: true
+  validates :login, :password, :lcode, :booking_id, :hotel_name, :non_refundable_pid, :default_pid, presence: true
   validate :hotel_existence
 
   field :user_id, type: String
@@ -17,6 +17,9 @@ class WubookAuth
   field :lcode, type: String
   field :booking_id, type: String
   field :hotel_name, type: String
+
+  field :non_refundable_pid, type: Integer
+  field :default_pid, type: Integer
   #has_secure_password
 
   def create_rooms
@@ -35,22 +38,18 @@ class WubookAuth
     end
   end
 
-  def fetch_room_prices(room_ids = nil)
-    connector.get_room_prices(room_ids)
-  end
-
-  def create_room_prices(room_id, id)
-    price_blocks = fetch_room_prices([room_id.to_i]).map{|key, value| value}[0]
-    price_blocks.each_with_index do |block, i|
+  def setup_room_prices(room_id, room_obj_id)
+    price_array = connector.get_plan_prices(non_refundable_pid, [room_id]).map{|key, value| value}[0]
+    price_array.each_with_index do |price, i|
       RoomPrice.create(
-        room_id: id,
+        room_id: room_obj_id,
         date: Date.today + i.days,
-        default_price: block['price']
+        default_price: price
       )
     end
   end
 
-  def apply_room_prices(room_id, dates, custom_price)
+  def apply_room_prices(room_id, dates, custom_price = nil)
     room = Wubook::Room.find_by(room_id: room_id)
 
     if dates.size > 1
@@ -59,15 +58,21 @@ class WubookAuth
       price_blocks = room.room_prices.where(date: dates[0])
     end
 
-    dates = price_blocks.map(&:date)
-    prices = custom_price.nil? ? price_blocks.map(&:price) : [custom_price]
+    unless costom_price.nil?
+      new_prices = price_blocks.map(&:price)
+    else
+      new_prices = [custom_price]
+    end
 
-    response = connector.set_room_prices(room_id, dates, prices)
+    begin
+      price_blocks.map(&:date).each do |date|
+        connector.set_plan_prices(non_refundable_pid, room_id, from_date, new_prices)
+      end
 
-    if response == 'Ok'
       price_blocks.update_all(enabled: true)
       return true
-    else
+
+    rescue
       return false
     end
   end

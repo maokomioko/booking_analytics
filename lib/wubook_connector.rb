@@ -10,7 +10,7 @@ class WubookConnector
     path: '/xrws'
   }
 
-  attr_accessor :get_rooms, :set_room_prices, :get_token
+  attr_accessor :get_rooms, :get_plan_prices, :set_room_prices, :get_token
 
   def initialize(wb_params)
     flatten_params(wb_params)
@@ -21,38 +21,30 @@ class WubookConnector
 
   def get_rooms
     response = @server.call('fetch_rooms', @token, @lcode)
-    response[1].length > 0 ? response[1] : nil
+    set_response(response)
   end
 
-  def get_room_prices(room_ids = nil)
+  def get_plans
+    response = @server.call('get_pricing_plans', @token, @lcode)
+    set_response(response)
+  end
+
+  def get_plan_prices(plan_id, room_ids)
     from_date = format_date(Date.today)
-    to_date = format_date(Date.today + 2.months)
+    to_date = format_date(Date.today + 3.months)
 
-    unless room_ids.nil?
-      response = @server.call('fetch_rooms_values', @token, @lcode, from_date, to_date, room_ids)
-    else
-      response = @server.call('fetch_rooms_values', @token, @lcode, from_date, to_date)
-    end
-
-    response[1].length > 0 ? response[1] : nil
+    response = @server.call_async('fetch_plan_prices', @token, @lcode, plan_id, from_date, to_date, room_ids)
+    set_response(response)
   end
 
-  def set_room_prices(room, dates, prices)
+  def set_plan_prices(plan_id, room_id, from_date = nil, prices)
+    data = {
+      room_id => prices
+    }
+    from_date = from_date.nil? ? format_date(Date.tomorrow) : format_date(from_date)
 
-    dates.each_with_index do |date, i|
-      date = format_date(date.to_date)
-      data = [{
-        id: room,
-        days: [{
-          avail: 1,
-          price: prices.size > 0 ? prices[i] : prices[0],
-          min_stay: 1
-          }]
-        }]
-
-      response = @server.call_async('update_rooms_values', @token, @lcode, date, data)
-      return response[1].length > 0 ? response[1] : nil
-    end
+    response = @server.call_async('update_plan_prices', @token, @lcode, plan_id, from_date, data)
+    set_response(response)
   end
 
   def get_token
@@ -80,8 +72,8 @@ class WubookConnector
     @lcode = wb_f[2]
   end
 
-  def prepare_room_prices
-
+  def set_response(response)
+    response[1].length > 0 ? response[1] : nil
   end
 
   def format_date(date)

@@ -7,7 +7,7 @@ class Wubook::Room
   scope :real, -> { self.in(subroom: [0, '', nil]) }
 
   field :wubook_auth_id, type: String
-  field :room_id, type: String
+  field :room_id, type: Integer
 
   index({ wubook_auth_id: 1 }, { background: true })
   index({ room_id: 1 }, { background: true })

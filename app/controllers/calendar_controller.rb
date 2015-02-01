@@ -13,7 +13,7 @@ class CalendarController < ApplicationController
 
     @wba.create_rooms unless @wba.rooms.size > 0
     @wba.rooms.each do |room|
-      @wba.create_room_prices(room.room_id, room.id) unless room.room_prices.size > 0
+      @wba.setup_room_prices(room.room_id, room.id) unless room.room_prices.size > 0
     end
   end
 end

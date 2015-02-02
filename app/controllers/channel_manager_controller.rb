@@ -19,6 +19,10 @@ class ChannelManagerController < ApplicationController
     end
   end
 
+  def edit
+    @wb = current_user.wubook_auth.first
+  end
+
   def update_prices
     unless params[:dates].blank?
       dates = params[:dates]

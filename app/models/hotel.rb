@@ -39,7 +39,7 @@ class Hotel
   field :zip
 
   def amenities_calc
-    hw_pool = HotelWorker.pool(size: 8)
+    hw_pool = HotelWorker.pool(size: 4)
     n = 2**validate_amenities.size - 1
 
     results = n.times.map do |i|

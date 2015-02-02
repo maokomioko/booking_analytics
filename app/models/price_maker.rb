@@ -35,7 +35,7 @@ class PriceMaker
 
   def min_price_listing
 
-    aw_pool = AvailabilityWorker.pool(size: 8)
+    aw_pool = AvailabilityWorker.pool(size: 4)
     h_slices = @hotel_ids.to_a.each_slice(30)
 
     # Filtered blocks for hotels
@@ -49,7 +49,7 @@ class PriceMaker
 
     blocks = blocks.map(&:value).flatten!
 
-    pr_pool = AvailabilityWorker.pool(size: 8)
+    pr_pool = AvailabilityWorker.pool(size: 4)
     b_slices = blocks.each_slice(30)
 
     # Ordered prices

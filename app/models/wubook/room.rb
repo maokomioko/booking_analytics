@@ -29,7 +29,7 @@ class Wubook::Room
       begin
         price = PriceMaker.new(hotel_ids, 1, date, date + 1.day).get_top_prices
         rp = room_prices.find_by(date: date)
-        rp.update_attribute(:price, price.last.last) unless rp.locked
+        rp.update_attribute(:price, price.second.first) unless rp.locked
       rescue
         puts "No price"
       end

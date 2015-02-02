@@ -20,7 +20,7 @@ class ChannelManagerController < ApplicationController
   end
 
   def edit
-    @wb = current_user.wubook_auth.first
+    @wb = WubookAuth.find(params[:id])
   end
 
   def update_prices

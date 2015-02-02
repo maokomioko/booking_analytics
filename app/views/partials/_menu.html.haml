@@ -1,18 +1,17 @@
 #left_menu
-  - if controller_name == 'calendar'
-    %ul.transitioned200
-      %li.hidden
-        %span= t('calendar.menu.all_dates').html_safe
-        %a#apply_suggested.transitioned200{href: '#'}
-          %i.fa.fa-check
-          = t('calendar.menu.apply_prices')
-        %a#set_manually.transitioned200{href: '#'}
-          %i.fa.fa-pencil-square-o
-          = t('calendar.menu.set_prices')
-      %li.hidden
-        %span
-          = t('calendar.menu.manual_input').html_safe
-        = number_field_tag :custom_price, nil, min: 0, placeholder: t('placeholders.zero_euro')
+  %ul.transitioned200
+    %li.hidden
+      %span= t('calendar.menu.all_dates').html_safe
+      %a#apply_suggested.transitioned200{href: '#'}
+        %i.fa.fa-check
+        = t('calendar.menu.apply_prices')
+      %a#set_manually.transitioned200{href: '#'}
+        %i.fa.fa-pencil-square-o
+        = t('calendar.menu.set_prices')
+    %li.hidden
+      %span
+        = t('calendar.menu.manual_input').html_safe
+      = number_field_tag :custom_price, nil, min: 0, placeholder: t('placeholders.zero_euro')
   %ul.transitioned300
     %li
       = link_to t('calendar.menu.cal'), calendar_index_path, class: "transitioned200 cal_i #{active_class(calendar_index_path)}"
@@ -21,4 +20,7 @@
     %li
       = link_to t('calendar.menu.analytics'), '#', class: 'disabled transitioned200, analy_i'
     %li
-      = link_to t('calendar.menu.preferences'),new_channel_manager_path, class: "transitioned200 pref_i #{active_class(new_channel_manager_path)}"
+      - if current_user && current_user.wubook_auth.size > 0
+        = link_to t('calendar.menu.preferences'),edit_channel_manager_path(current_user.wubook_auth.first.id), class: "transitioned200 pref_i #{active_class(edit_channel_manager_path(current_user.wubook_auth.first.id))}"
+      - else
+        = link_to t('calendar.menu.preferences'),new_channel_manager_path, class: "transitioned200 pref_i #{active_class(new_channel_manager_path)}"

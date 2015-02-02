@@ -700,29 +700,6 @@ form {
   }
 }
 
-#wrong_panel {
-  > h1, i {
-    color: #FF6F6F;
-    /*red*/
-  }
-}
-
-#exist_panel {
-  > h1, i {
-    color: #FF6F6F;
-    /*red*/
-  }
-}
-
-#recovered_panel i, #registered_panel i {
-  color: #5BE498;
-  /*green*/
-}
-
-.wrong_input {
-  border: 1px solid #FF6F6F;
-}
-
 #notifications_container {
   position: fixed;
   bottom: 0px;

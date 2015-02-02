@@ -1,18 +1,18 @@
-  = form_for @wb, url: { action: :create }, html: { class: 'connect_form' } do |f|
+= form_for @wb, url: { action: :create }, html: { class: 'connect_form' } do |f|
 
-    = f.label :login
-    = f.text_field :login
+  = f.label :login
+  = f.text_field :login
 
-    = f.label :password
-    = f.password_field :password
+  = f.label :password
+  = f.password_field :password
 
-    = f.label :lcode, class: 's2_wbubook'
-    = f.text_field :lcode
+  = f.label :lcode, class: 's2_wbubook'
+  = f.text_field :lcode
 
-    = f.label :booking_id, t('labels.booking_id')
-    = f.text_field :booking_id
+  = f.label :booking_id, t('labels.booking_id')
+  = f.text_field :booking_id
 
-    = f.label :hotel_name, t('labels.hotel_name')
-    = f.text_field :hotel_name
+  = f.label :hotel_name, t('labels.hotel_name')
+  = f.text_field :hotel_name
 
-    = f.submit t('auth.buttons.connect'), class: 'button transitioned200'
+  = f.submit t("auth.buttons.#{action_name}"), class: 'button transitioned200'

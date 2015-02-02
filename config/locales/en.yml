@@ -59,6 +59,8 @@ en:
       subtitle: "Enter your email and password below."
       form_title: "Sign in here!"
       connect_via: "Add %{provider} connection"
+    edit:
+      edit_connection: "Edit your %{provider} connection"
     new_account:
       title: "Sign up"
       subtitle: "One step from the awesomeness!"
@@ -76,4 +78,5 @@ en:
       login: "Log in"
       logout: "Log out"
       signup: "Sign up"
-      connect: "Connect"
+      new: "Create"
+      edit: "Update settings"

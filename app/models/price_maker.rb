@@ -43,7 +43,7 @@ class PriceMaker
       begin
         not_blank = h_slices.next.reject(&:blank?)
         aw_pool.future.get_blocks(not_blank, @occupancy, @arrival, @departure)
-      rescue DeadActorError, MailboxError
+      rescue DeadActorError
       end
     end
 
@@ -56,7 +56,7 @@ class PriceMaker
     pr_blocks = b_slices.count.times.map do
       begin
         pr_pool.future.get_prices(b_slices.next)
-      rescue DeadActorError, MailboxError
+      rescue DeadActorError
       end
     end
 

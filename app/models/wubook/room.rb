@@ -24,7 +24,6 @@ class Wubook::Room
 
   def fill_prices
     hotel_ids = Hotel.find(wubook_auth.booking_id).amenities_calc
-
     dates = [*Date.today..Date.today + 3.month]
     dates.each do |date|
       begin

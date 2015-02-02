@@ -14,6 +14,9 @@ class Hotel
   has_many :rooms, foreign_key: :hotel_id
   has_many :block_availabilities
 
+  has_and_belongs_to_many :hotels, class_name: 'Hotel', inverse_of: :related_hotels
+  has_and_belongs_to_many :related_hotels, class_name: 'Hotel', inverse_of: :hotels
+
   embeds_one :location
   embeds_one :checkin
   embeds_one :checkout
@@ -39,17 +42,22 @@ class Hotel
   field :zip
 
   def amenities_calc
-    hw_pool = HotelWorker.pool(size: 4)
-    n = 2**validate_amenities.size - 1
+    if hotel_ids.blank?
+      hw_pool = HotelWorker.pool(size: 8)
+      n = 2**validate_amenities.size - 1
 
-    results = n.times.map do |i|
-      begin
-        hw_pool.future.amenities_mix(hotel_id, exact_class, i)
-      rescue DeadActorError, MailboxError
+      results = n.times.map do |i|
+        begin
+          hw_pool.future.amenities_mix(hotel_id, exact_class, i)
+        rescue DeadActorError
+        end
+      end
+
+      unless results.blank?
+        update_attribute(:hotel_ids, results.map(&:value).flatten!.uniq!.compact)
       end
     end
-
-    results.map(&:value).flatten!.uniq! unless results.blank?
+    hotel_ids
   end
 
   def validate_amenities
@@ -123,63 +131,3 @@ class Checkout
   field :to
   field :from
 end
-# {
-#   "_id" : ObjectId("548872bc40ab8c550e64ee34"),
-#   "countrycode" : "cz",
-#   "review_nr" : null,
-#   "city_id" : "-553173",
-#   "facilities" : [
-#     "Parking",
-#     "Private Parking",
-#     "WiFi Available in All Areas",
-#     "Internet",
-#     "Wi-Fi",
-#     "Free Wi-Fi",
-#     "Grocery Deliveries",
-#     "Bicycle Rental",
-#     "Airport Shuttle (surcharge)",
-#     "Shared Lounge/TV Area",
-#     "Laundry",
-#     "Family Rooms",
-#     "Honeymoon Suite",
-#     "Heating"
-#   ],
-#   "exact_class" : "3.0",
-#   "languagecode" : "de",
-#   "is_closed" : 0,
-#   "nr_rooms" : "1",
-#   "zip" : "110 00",
-#   "minrate" : null,
-#   "commission" : 0,
-#   "location" : {
-#     "latitude" : "50.08134367302403",
-#     "longitude" : "14.422453644705229"
-#   },
-#   "checkout" : {
-#     "to" : "12:00",
-#     "from" : ""
-#   },
-#   "currencycode" : "EUR",
-#   "ranking" : null,
-#   "city" : "Prague",
-#   "checkin" : {
-#     "to" : "",
-#     "from" : "14:00"
-#   },
-#   "hotel_id" : "1070485",
-#   "district" : "",
-#   "preferred" : "0",
-#   "address" : "Palackeho 2/5",
-#   "pagename" : "jungmanka",
-#   "class" : "3",
-#   "review_score" : 0,
-#   "name" : "Jungmanka",
-#   "created" : "2014-05-30 16:08:28",
-#   "url" : "http://www.booking.com/hotel/cz/jungmanka.html",
-#   "hoteltype_id" : "2",
-#   "max_rooms_in_reservation" : "0",
-#   "max_persons_in_reservation" : "0",
-#   "maxrate" : null,
-#   "class_is_estimated" : 0,
-#   "contractchain_id" : ""
-# }

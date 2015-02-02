@@ -34,6 +34,8 @@ class @Calendar
     $(document).click ->
       if $('td.selected').length
         $('#left_menu ul:first-of-type li:first-of-type').removeClass 'hidden'
+      else
+        $('#left_menu ul:first-of-type li:first-of-type').addClass 'hidden'
 
   setPrices: ->
     $('#left_menu a').click (e) ->
@@ -53,19 +55,35 @@ class @Calendar
       $('#left_menu ul:first-of-type li:last-of-type').toggleClass 'hidden'
 
    manualPriceApply = ->
-    $('#custom_price').change ->
+    $('#custom_price').keypress ->
       $val = $(@).val()
       setTimeout (->
-        submitDates($val)
-        #$(document).trigger('manualPriceInputCalled')
+        modalConfirmation() if $val > 0
         false
-        ), 5000
-
+        ), 1000
       false
 
-  submitDates = (custom_price = null) ->
+  modalConfirmation = ->
+    $('#dialog-confirm').dialog
+      resizable: false
+      width: 400
+      height: 200
+      modal: true
+      buttons:
+        'Apply custom price': ->
+          $(@).dialog 'close'
+          submitDates()
+          $(document).trigger('manualPriceInputCalled')
+          return
+        Cancel: ->
+          $(@).dialog 'close'
+          return
+
+  submitDates = ->
     room_id = $('#room_title').attr('room_id')
     arr = []
+    custom_price = $('#custom_price').val()
+
     $('td.selected').each ->
       arr.push $(@).attr('date')
 
@@ -74,8 +92,8 @@ class @Calendar
       url: window.dates_update_path,
       data: {price: custom_price, dates: arr, room_id: room_id},
       success: ->
-          $('td.selected .container').addClass('with_applied_price')
+          $('td.selected .container').addClass('with_applied_price').removeClass('selected')
           if custom_price > 0
             $('td.selected .container').addClass('with_lock')
-          $('td.selected .container').removeClass('selected')
+
           window.isPriceUpdLocked = true

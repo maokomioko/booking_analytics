@@ -2,6 +2,7 @@ en:
   meta:
     title: "Booking Analytics | Beta"
   shared:
+    action_confirmation: "Please confirm your action"
     registration: "Registration"
     reset_instructions: "Send me password reset instructions"
     current_price: "current"
@@ -9,6 +10,7 @@ en:
     no_price: "No price suggestion"
     recommended_price: "Recommended %{price}"
     recommended_applied: "Recommended price applied"
+    custom_applied: "Custom price in use"
     sold: "Sold"
   errors:
     booking_id: "Hotel doesn't exist"
@@ -25,6 +27,7 @@ en:
     cm_verification_error: "Error! Please check entered credentials."
     prices_updated: "Suggested prices where applied successfully!"
     price_update_failed: "Error during prices update! Please contact technical support."
+    price_update_confirmation: "You are about to apply custom price for selected dates.<br>Are you sure about this?"
   devise:
     links:
       login: "Log in with your account"

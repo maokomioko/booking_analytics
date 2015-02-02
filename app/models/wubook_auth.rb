@@ -62,7 +62,7 @@ class WubookAuth
       new_prices = price_blocks.map(&:price)
     else
       new_prices = [custom_price]
-      price_blocks.update_all(default_price: custom_price)
+      price_blocks.update_all(default_price: custom_price, locked: true)
     end
 
     price_blocks.map(&:date).each do |date|

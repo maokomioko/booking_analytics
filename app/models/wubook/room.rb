@@ -27,13 +27,13 @@ class Wubook::Room
 
     dates = [*Date.today..Date.today + 3.month]
     dates.each do |date|
-      begin
+      #begin
         price = PriceMaker.new(hotel_ids, occupancy, date, date + 1.day).get_top_prices
-        rp = room_price.find_by(date: date)
+        rp = room_prices.find_by(date: date)
         rp.update_attribute(:price, price.last.last) unless rp.locked
-      rescue
-        puts "No price"
-      end
+      #rescue
+      #   puts "No price"
+      # end
     end
   end
 

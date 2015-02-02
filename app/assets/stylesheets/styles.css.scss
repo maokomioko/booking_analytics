@@ -164,6 +164,17 @@ i.fa {
   }
 }
 
+.ui-dialog {
+  font-size: 15px !important;
+}
+
+#dialog-confirm {
+  span {
+    float: left;
+    margin: 0 7px 20px 0;
+  }
+}
+
 /*TOP CONTROL PANNEL*/
 
 #top_controls {

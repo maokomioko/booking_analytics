@@ -9,7 +9,7 @@
           - price_block = @room.room_prices.find_by(date: date)
 
           - unless date < Date.today || price_block.nil?
-            .container{ class: ('with_applied_price' if price_block.enabled) }
+            .container{ class: set_day_class(price_block) }
               .day
                 - unless date.day == 1
                   = date.day
@@ -24,7 +24,10 @@
 
               .bar.recommended
                 - if price_block.enabled
-                  %span= t('shared.recommended_applied')
+                  - if price_block.locked
+                    %span= t('shared.custom_applied')
+                  - else
+                    %span= t('shared.recommended_applied')
                 - else
                   - rec_price = set_price(price_block.price)
                   %span

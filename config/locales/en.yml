@@ -25,6 +25,8 @@ en:
     cm_verified: "Verification completed!"
     cm_already_added: "Only one channel manager can be added at this point."
     cm_verification_error: "Error! Please check entered credentials."
+    cm_updated: "Settings where updated successfully!"
+    cm_update_error: Settings update failed!
     prices_updated: "Suggested prices where applied successfully!"
     price_update_failed: "Error during prices update! Please contact technical support."
     price_update_confirmation: "You are about to apply custom price for selected dates.<br>Are you sure about this?"

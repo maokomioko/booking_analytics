@@ -23,6 +23,18 @@ class ChannelManagerController < ApplicationController
     @wb = WubookAuth.find(params[:id])
   end
 
+  def update
+    wb = WubookAuth.find(params[:id])
+
+    if wb.update_attributes(wb_params)
+      redirect_to calendar_index_path
+      flash[:success] = t('messages.cm_update_failure')
+    else
+      redirect_to edit_channel_manager_path(wb.id)
+      flash[:error] = t('messages.cm_update_error')
+    end
+  end
+
   def update_prices
     unless params[:dates].blank?
       dates = params[:dates]

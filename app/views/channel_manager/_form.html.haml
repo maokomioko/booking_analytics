@@ -1,4 +1,4 @@
-= form_for @wb, url: { action: :create }, html: { class: 'connect_form' } do |f|
+= form_for @wb, url: { action: (action_name == 'new' ? :create : :update) }, html: { class: 'connect_form' } do |f|
 
   = f.label :login
   = f.text_field :login

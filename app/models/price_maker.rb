@@ -26,7 +26,7 @@ class PriceMaker
       prices << x[0..2]
     end
 
-    prices
+    prices.sort
   end
 
   def split_chunks

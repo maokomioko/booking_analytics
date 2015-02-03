@@ -48,7 +48,7 @@ class Hotel
 
       results = n.times.map do |i|
         begin
-          hw_pool.future.amenities_mix(hotel_id, exact_class, i)
+          hw_pool.future.amenities_mix(hotel_id, exact_class, review_score.to_i, i)
         rescue DeadActorError
         end
       end

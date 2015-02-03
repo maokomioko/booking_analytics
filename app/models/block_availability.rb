@@ -35,10 +35,10 @@ class BlockAvailability
 
       blocks.each do |block_avail|
         hotel_name = Hotel.find(block_avail.hotel_id).name
-        arr << block_avail.block.collect{|x| [hotel_name, x.incremental_price[0].currency, x.incremental_price[0].price]}.sort_by(&:last)
+        arr << block_avail.block.collect{|x| x.incremental_price[0].price}
       end
 
-      arr.flatten(1).sort_by(&:last)
+      arr.sort
     end
 
   end

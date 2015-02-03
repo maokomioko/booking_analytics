@@ -18,7 +18,6 @@ class Wubook::Room
   field :availability, type: Integer
   field :occupancy, type: Integer
 
-  field :subroom, type: Integer
   field :children, type: Integer
 
   def fill_prices

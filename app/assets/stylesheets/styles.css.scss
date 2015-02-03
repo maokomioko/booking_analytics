@@ -393,6 +393,11 @@ svg.spinner {
   td {
     border: 1px solid #e0e0e0;
     font-weight: 600;
+    &.today {
+      .container {
+        background: #f1f1f1;
+      }
+    }
     &.selected {
       .container {
         background: #0072c6;

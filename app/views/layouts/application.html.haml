@@ -16,6 +16,11 @@
             %a.close{href: "#"}
         - unless flash
           .none
+
+      #spinner_placeholder.hidden
+        = render partial: 'partials/spinner'
+        %p.loading_text= t('shared.loading')
+
       = yield
-      = render partial: 'partials/modal'
+
       = render partial: 'partials/javascript'

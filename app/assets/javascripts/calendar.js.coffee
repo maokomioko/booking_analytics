@@ -42,6 +42,7 @@ class @Calendar
       e.preventDefault()
 
     $('#apply_suggested').click ->
+      triggerSpinner()
       submitDates()
       $('#left_menu ul:first-of-type li:first-of-type').addClass 'hidden'
       $('#calendar td.selected').removeClass('selected')
@@ -55,29 +56,11 @@ class @Calendar
       $('#left_menu ul:first-of-type li:last-of-type').toggleClass 'hidden'
 
    manualPriceApply = ->
-    $('#custom_price').keypress ->
-      $val = $(@).val()
-      setTimeout (->
-        modalConfirmation() if $val > 0
-        false
-        ), 1000
-      false
-
-  modalConfirmation = ->
-    $('#dialog-confirm').dialog
-      resizable: false
-      width: 400
-      height: 200
-      modal: true
-      buttons:
-        'Apply custom price': ->
-          $(@).dialog 'close'
-          submitDates()
-          $(document).trigger('manualPriceInputCalled')
-          return
-        Cancel: ->
-          $(@).dialog 'close'
-          return
+    $('#apply_custom_price').click ->
+      if $('#custom_price').val()
+        triggerSpinner()
+        submitDates()
+        $(document).trigger('manualPriceInputCalled')
 
   submitDates = ->
     room_id = $('#room_title').attr('room_id')
@@ -97,3 +80,4 @@ class @Calendar
             $('td.selected .container').addClass('with_lock')
 
           window.isPriceUpdLocked = true
+          triggerSpinner()

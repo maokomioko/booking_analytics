@@ -41,6 +41,10 @@ i.fa {
   display: none;
 }
 
+.no-scroll {
+  overflow: hidden !important;
+}
+
 .transitioned300 {
   transition: 0.3s all;
   -o-transition: 0.3s all;
@@ -164,15 +168,50 @@ i.fa {
   }
 }
 
-.ui-dialog {
-  font-size: 15px !important;
+#spinner_placeholder {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: $black_70;
+  p.loading_text {
+    display: block;
+    margin: 35px auto 0;
+    position: absolute;
+    z-index: 1500;
+    top: 55%;
+    left: calc(50% - 40px);
+    font-size: 1.2em;
+    text-align: center;
+    color: $white;
+    font-weight: 100;
+  }
 }
 
-#dialog-confirm {
-  span {
-    float: left;
-    margin: 0 7px 20px 0;
-  }
+div.spinner {
+  @include flexbox-display-flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  z-index: 1500;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  margin: -20px 0 0 -28px;
+  height: 40px;
+  width: 40px;
+}
+
+svg.spinner {
+  @include animation(rotation 1.8s linear infinite);
+}
+
+.spinner_circle {
+  stroke-dasharray: $offset;
+  stroke-dashoffset: 0;
+  @include animation(dash 3.2s ease infinite);
 }
 
 /*TOP CONTROL PANNEL*/
@@ -480,7 +519,7 @@ i.fa {
   ul {
     &:first-of-type {
       position: relative;
-      height: calc(100% - 205px);
+      height: calc(100% - 250px);
       a {
         i {
           float: left;
@@ -492,7 +531,7 @@ i.fa {
       }
       li:last-of-type {
         position: absolute;
-        bottom: 90px;
+        bottom: 20px;
         left: 0;
         width: 100%;
         input {
@@ -503,6 +542,10 @@ i.fa {
           text-align: center;
           font-weight: 100;
           font-size: 30px;
+        }
+        a {
+          margin-top: -4px;
+          text-align: center;
         }
       }
     }

@@ -2,16 +2,19 @@
   %ul.transitioned200
     %li.hidden
       %span= t('calendar.menu.all_dates').html_safe
-      %a#apply_suggested.transitioned200{href: '#'}
+      = link_to '#', id: 'apply_suggested', class: 'transitioned200' do
         %i.fa.fa-check
         = t('calendar.menu.apply_prices')
-      %a#set_manually.transitioned200{href: '#'}
+
+      = link_to '#', id: 'set_manually', class: 'transitioned200' do
         %i.fa.fa-pencil-square-o
         = t('calendar.menu.set_prices')
+
     %li.hidden
       %span
         = t('calendar.menu.manual_input').html_safe
       = number_field_tag :custom_price, nil, min: 0, placeholder: t('placeholders.zero_euro')
+      = link_to t('shared.apply_custom_price'), '#', id: 'apply_custom_price'
   %ul.transitioned300
     %li
       = link_to t('calendar.menu.cal'), calendar_index_path, class: "transitioned200 cal_i #{active_class(calendar_index_path)}"

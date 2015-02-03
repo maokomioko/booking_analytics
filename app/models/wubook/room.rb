@@ -17,7 +17,6 @@ class Wubook::Room
 
   field :availability, type: Integer
   field :occupancy, type: Integer
-  field :price, type: Float
 
   field :subroom, type: Integer
   field :children, type: Integer
@@ -27,7 +26,7 @@ class Wubook::Room
     dates = [*Date.today..Date.today + 3.month]
     dates.each do |date|
       begin
-        price = PriceMaker.new(hotel_ids, 1, date, date + 1.day).get_top_prices
+        price = PriceMaker.new(hotel_ids, occupancy, date, date + 1.day).get_top_prices
         rp = room_prices.find_by(date: date)
         rp.update_attribute(:price, price.second.first) unless rp.locked
       rescue

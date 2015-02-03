@@ -72,7 +72,7 @@ class WubookAuth
       price_blocks = room.room_prices.where(date: dates[0])
     end
 
-    if custom_price.nil?
+    if ['', nil].include? custom_price
       new_prices = price_blocks.map(&:price)
     else
       new_prices = [custom_price]

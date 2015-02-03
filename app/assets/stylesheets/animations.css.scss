@@ -1,5 +1,7 @@
 @import "mixins";
 
+$offset: 187;
+
 @mixin keyframes($name) {
   @-o-keyframes $name {
     @content;

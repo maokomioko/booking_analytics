@@ -12,6 +12,8 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+Rack::Utils.multipart_part_limit = 0
+
 module BookingAnalytics
   class Application < Rails::Application
     config.autoload_paths << Rails.root.join('lib')

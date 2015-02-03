@@ -9,7 +9,7 @@ class ChannelManagerController < ApplicationController
   def create
     wb = WubookAuth.new(wb_params)
     wb.user_id = current_user.id
-    if wb.save && wubook_auth == true
+    if wb.save && wubook_auth_state
       current_user.update_attribute(:wb_auth, true) unless current_user.wb_auth?
       redirect_to calendar_index_path
       flash[:success] = t('messages.cm_verified')
@@ -55,7 +55,7 @@ class ChannelManagerController < ApplicationController
 
   private
 
-  def wubook_auth
+  def wubook_auth_state
     connector = WubookConnector.new(wb_params)
     connector.get_token.nil? ? false : true
   end

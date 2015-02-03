@@ -410,7 +410,7 @@ svg.spinner {
       padding: 10px 5px;
       height: 200px;
       z-index: -50;
-      &.with_applied_price {
+      &.with_auto_price {
         i:first-of-type {
           display: block;
         }
@@ -482,7 +482,6 @@ svg.spinner {
         font-size: 14px;
       }
       &.manual {
-        display: none;
         background: #FFF1B3;
       }
       &.sold {
@@ -490,21 +489,6 @@ svg.spinner {
         background: #C1FED9;
       }
     }
-  }
-}
-
-.manual {
-  .recommended, .manual {
-    display: block;
-  }
-}
-
-.sold {
-  .bar_sold {
-    display: block;
-  }
-  .recommended {
-    display: none;
   }
 }
 

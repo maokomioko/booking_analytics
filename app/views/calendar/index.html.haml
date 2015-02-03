@@ -19,15 +19,13 @@
                 %span= t('shared.current_price')
                 %span.ccp_price
                   = set_price(price_block.default_price)
-              .bar.manual
-                %span= t('shared.date_locked')
+
+              .bar.manual{class: ('hidden' unless price_block.locked)}
+                %span= t('shared.custom_applied')
 
               .bar.recommended
-                - if price_block.enabled
-                  - if price_block.locked
-                    %span= t('shared.custom_applied')
-                  - else
-                    %span= t('shared.recommended_applied')
+                - if price_block.enabled && !price_block.locked
+                  %span= t('shared.recommended_applied')
                 - else
                   - rec_price = set_price(price_block.price)
                   %span

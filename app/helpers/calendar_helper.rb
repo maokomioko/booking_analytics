@@ -6,8 +6,7 @@ module CalendarHelper
   def set_day_class(price_block)
     klasses = []
 
-    klasses << 'with_applied_price' if price_block.enabled
-    klasses << 'with_lock' if price_block.locked
+    klasses << 'with_auto_price' if price_block.enabled && !price_block.locked
 
     return klasses.join(' ').html_safe
   end

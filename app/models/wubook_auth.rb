@@ -74,6 +74,9 @@ class WubookAuth
 
     if ['', nil].include? custom_price
       new_prices = price_blocks.map(&:price)
+      price_blocks.each do |block|
+        block.update_attribute(:default_price, block.price)
+      end
     else
       new_prices = [custom_price]
       price_blocks.update_all(default_price: custom_price, locked: true)

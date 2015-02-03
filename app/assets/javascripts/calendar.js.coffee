@@ -36,18 +36,17 @@ class @Calendar
         $('#left_menu ul:first-of-type li:first-of-type').removeClass 'hidden'
       else
         $('#left_menu ul:first-of-type li:first-of-type').addClass 'hidden'
+        $(document).trigger('manualPriceInputHide')
 
   setPrices: ->
-    $('#left_menu a').click (e) ->
+    $('#apply_suggested').click (e) ->
       e.preventDefault()
-
-    $('#apply_suggested').click ->
       triggerSpinner()
       submitDates()
       $('#left_menu ul:first-of-type li:first-of-type').addClass 'hidden'
-      $('#calendar td.selected').removeClass('selected')
 
-    $('#set_manually').click ->
+    $('#set_manually').click (e) ->
+      e.preventDefault()
       $(document).trigger('manualPriceInputCalled')
       manualPriceApply()
 
@@ -55,8 +54,16 @@ class @Calendar
     $(document).on 'manualPriceInputCalled', ->
       $('#left_menu ul:first-of-type li:last-of-type').toggleClass 'hidden'
 
+    $(document).on 'manualPriceInputHide', ->
+      $('#left_menu ul:first-of-type li:last-of-type').addClass 'hidden'
+
+    $(document).on 'manualPriceInputCalled', 'manualPriceInputHide', ->
+      $('#custom_price').val(0)
+
    manualPriceApply = ->
-    $('#apply_custom_price').click ->
+    $('#apply_custom_price').click (e) ->
+      e.preventDefault()
+
       if $('#custom_price').val()
         triggerSpinner()
         submitDates()
@@ -75,9 +82,9 @@ class @Calendar
       url: window.dates_update_path,
       data: {price: custom_price, dates: arr, room_id: room_id},
       success: ->
-          $('td.selected .container').addClass('with_applied_price').removeClass('selected')
+          $('td.selected .container').addClass('with_auto_price').removeClass('selected')
           if custom_price > 0
-            $('td.selected .container').addClass('with_lock')
+            $('td.selected .container .manual').removeClass 'hidden'
 
           window.isPriceUpdLocked = true
           triggerSpinner()

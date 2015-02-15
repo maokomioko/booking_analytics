@@ -3,5 +3,5 @@
 * Rails 4.2 +
 * PostgreSQL 9.4.1
 * MongoDB local instance
-* SSH local proxy to access Mongo
+* SSH local proxy to access MongoDB directly from server
 <tt>rake doc:app</tt>.

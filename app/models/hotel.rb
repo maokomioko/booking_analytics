@@ -1,48 +1,32 @@
-class Hotel
-  include MongoWrapper
+class Hotel < ActiveRecord::Base
   include ParamSelectable
   include Celluloid
 
-  scope :contains_facilities, -> (keywords){ self.in(facilities: keywords) }
-  scope :with_facilities, -> (keywords){ all_in(facilities: keywords) }
+  scope :contains_facilities, -> (ids){ includes(:facilities).where(hotel_facilities: { id: ids }) }
+  scope :with_facilities, -> (ids){ contains_facilities(ids).select{|h| (ids - h.facilities.map(&:id)).size.zero? } }
 
   scope :with_stars, -> (rate){ where(exact_class: rate) }
-  scope :with_score_gt, -> (score){ self.gt(review_score: score) }
-  scope :with_score_lt, -> (score){ self.lt(review_score: score) }
+  scope :with_score_gt, -> (score){ where("review_score > ?", score) }
+  scope :with_score_lt, -> (score){ where("review_score < ?", score) }
   scope :property_type, -> (type_id){ where(hoteltype_id: type_id) }
 
   has_many :rooms, foreign_key: :hotel_id
   has_many :block_availabilities
 
-  has_and_belongs_to_many :hotels, class_name: 'Hotel', inverse_of: :related_hotels
-  has_and_belongs_to_many :related_hotels, class_name: 'Hotel', inverse_of: :hotels
+  has_and_belongs_to_many :related,
+                          class_name: 'Hotel',
+                          join_table: :related_hotels,
+                          foreign_key: :hotel_id,
+                          association_foreign_key: :related_id
 
-  embeds_one :location
-  embeds_one :checkin
-  embeds_one :checkout
+  has_and_belongs_to_many :facilities, class_name: 'HotelFacility' # counter as PG trigger
 
-  field :hotel_id, type: String
-  field :_id, type: String, default: -> { hotel_id.to_s.parameterize }
-  index({ hotel_id: 1 }, { background: true })
-
-  field :name
-  field :hoteltype_id
-
-  field :city
-  field :city_id
-  field :address
-  field :url
-
-  field :facilities, type: Array
-
-  field :exact_class, type: Float
-  field :review_score, type: Float
-
-  field :district
-  field :zip
+  has_one :location
+  has_one :checkin
+  has_one :checkout
 
   def amenities_calc
-    if hotel_ids.blank?
+    if related_ids.blank?
       hw_pool = HotelWorker.pool(size: 8)
       n = 2**validate_amenities.size - 1
 
@@ -54,17 +38,17 @@ class Hotel
       end
 
       unless results.blank?
-        update_attribute(:hotel_ids, results.map(&:value).flatten!.uniq!.compact)
+        self.related_ids = results.map(&:value).flatten!.uniq!.compact
       end
     end
-    hotel_ids
+    related_ids
   end
 
   def validate_amenities
     arr = []
 
     facilities.each do |f|
-     arr << f if Hotel.base_facilities.include? f
+     arr << f.id if Hotel.base_facilities.include? f
     end
 
     arr
@@ -107,27 +91,4 @@ class Hotel
       end
     end
   end
-end
-
-class Location
-  include MongoWrapper
-  embedded_in :hotel
-
-  field :latitude
-  field :longitude
-end
-
-class Checkin
-  include MongoWrapper
-  embedded_in :hotel
-
-  field :to
-  field :from
-end
-
-class Checkout
-  include MongoWrapper
-  embedded_in :hotel
-  field :to
-  field :from
 end

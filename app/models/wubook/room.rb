@@ -1,24 +1,8 @@
-class Wubook::Room
-  include MongoWrapper
-
+class Wubook::Room < ActiveRecord::Base
   belongs_to :wubook_auth
   has_many :room_prices, dependent: :destroy
 
   scope :real, -> { self.in(subroom: [0, '', nil]) }
-
-  field :wubook_auth_id, type: String
-  field :room_id, type: Integer
-
-  index({ wubook_auth_id: 1 }, { background: true })
-  index({ room_id: 1 }, { background: true })
-
-  field :name, type: String
-  field :max_people, type: Integer
-
-  field :availability, type: Integer
-  field :occupancy, type: Integer
-
-  field :children, type: Integer
 
   def fill_prices
     hotel_ids = Hotel.find(wubook_auth.booking_id).amenities_calc

@@ -1,12 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
-require "active_model/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "action_view/railtie"
-require "sprockets/railtie"
-require "rails/test_unit/railtie"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -23,5 +18,13 @@ module BookingAnalytics
 
     config.allow_concurrency = true
     config.i18n.default_locale = :en
+
+    config.generators do |g|
+      g.test_framework :rspec, fixture_replacement: :fabrication
+      g.fixture_replacement :fabrication, dir: 'spec/fabricators'
+
+      g.view_specs false
+      g.helper_specs false
+    end
   end
 end

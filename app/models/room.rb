@@ -1,22 +1,12 @@
-class Room
-  include MongoWrapper
+class Room < ActiveRecord::Base
+  scope :with_facilities, -> (ids){
+    includes(:facilities).where(room_facilities: { id: ids })
+        .select{|h| (ids - h.facilities.map(&:id)).size.zero? }
+  }
 
-  scope :with_facilities, -> (keywords){ self.in(facilities: [keywords]) }
-
-  belongs_to :hotel, foreign_key: :hotel_id
-  embeds_one :bedding
-
-  field :room_id, type: String
-  field :_id, type: String, default: -> { room_id.to_s.parameterize }
-  index({ room_id: 1 }, { background: true })
-  field :hotel_id
-
-  field :facilities, type: Array
-  field :max_persons
-  field :roomtype
-
-  field :max_price, type: Float
-  field :min_price, type: Float
+  belongs_to :hotel
+  has_and_belongs_to_many :facilities, class_name: 'RoomFacility' # counter as PG trigger
+  has_one :bedding
 
   class << self
     def remap_with_ids
@@ -50,20 +40,4 @@ class Room
       end
     end
   end
-end
-
-class Bedding
-  include MongoWrapper
-  embedded_in :room
-  embeds_many :beds
-
-  accepts_nested_attributes_for :beds
-end
-
-class Bed
-  include MongoWrapper
-  embedded_in :bedding
-
-  field :amount
-  field :type
 end

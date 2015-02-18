@@ -1,28 +1,12 @@
-class WubookAuth
-  include MongoWrapper
-  #include ActiveModel::SecurePassword
-
+class WubookAuth < ActiveRecord::Base
   belongs_to :user
+  belongs_to :hotel, foreign_key: :booking_id
   has_many :rooms, class_name: 'Wubook::Room', dependent: :destroy
 
   validates :login, :password, :lcode, :booking_id, :hotel_name, :non_refundable_pid, :default_pid, presence: true
   validate :hotel_existence
 
   before_create :setup_tarif_plans
-
-  field :user_id, type: String
-  index({ user_id: 1 }, { background: true })
-
-  field :login, type: String
-  field :password, type: String
-
-  field :lcode, type: String
-  field :booking_id, type: String
-  field :hotel_name, type: String
-
-  field :non_refundable_pid, type: Integer
-  field :default_pid, type: Integer
-  #has_secure_password
 
   def non_refundable_candidate
     connector.get_plans[0]['name']

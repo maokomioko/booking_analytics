@@ -45,9 +45,6 @@ gem 'jquery-turbolinks', '~> 2.1.0'
 gem 'mini_magick'
 gem 'mime-types'
 gem 'mail-logger'
-gem 'mongoid', github: 'mongoid/mongoid'
-gem 'mongoid_rails_migrations'
-gem 'mongoid_slug'
 
 gem 'nokogiri'
 gem "nokogiri_truncate_html", github: 'sebastien-madru/nokogiri_truncate_html'
@@ -55,6 +52,8 @@ gem "nokogiri_truncate_html", github: 'sebastien-madru/nokogiri_truncate_html'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
+
+gem 'pg'
 
 gem 'racc'
 gem 'rails', '~> 4.2'
@@ -117,7 +116,7 @@ group :test do
   gem 'fuubar'
   gem 'turn', require: false
   gem 'mechanize'
-  gem 'mongoid-rspec'
+  # gem 'mongoid-rspec'
   gem 'capybara', '~> 2.4.4'
   gem 'capybara-webkit'
   gem 'shoulda-matchers', '~> 2.6.0'

@@ -53,42 +53,4 @@ class Hotel < ActiveRecord::Base
 
     arr
   end
-
-  class << self
-    def remap_with_ids
-      arr = []
-
-      Hotel.each do |hotel|
-        arr << hotel.hotel_id
-      end
-
-      arr.each do |arr_el|
-        hotel = Hotel.find_by(hotel_id: arr_el)
-        up_hotel = Hotel.new({
-          hotel_id: hotel.hotel_id,
-          name: hotel.name,
-          hoteltype_id: hotel.hoteltype_id,
-          city: hotel.city,
-          city_id: hotel.city_id,
-          address: hotel.address,
-          url: hotel.url,
-          facilities: hotel.facilities,
-          exact_class: hotel.exact_class,
-          review_score: hotel.review_score,
-          district: hotel.district,
-          zip: hotel.zip
-        })
-        up_hotel.save!
-
-        unless hotel.location.nil?
-          location = Location.new
-          location.latitude = hotel.location.latitude
-          location.longitude = hotel.location.longitude
-          up_hotel.location = location
-        end
-
-        hotel.destroy!
-      end
-    end
-  end
 end

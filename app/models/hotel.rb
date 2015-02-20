@@ -10,7 +10,7 @@ class Hotel < ActiveRecord::Base
   scope :with_score_lt, -> (score){ where("review_score < ?", score) }
   scope :property_type, -> (type_id){ where(hoteltype_id: type_id) }
 
-  has_many :rooms, foreign_key: :hotel_id
+  has_many :rooms
   has_many :block_availabilities
 
   has_and_belongs_to_many :related,

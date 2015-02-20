@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219100243) do
+ActiveRecord::Schema.define(version: 20150220081416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,14 +80,11 @@ ActiveRecord::Schema.define(version: 20150219100243) do
     t.string "city_id"
     t.string "address"
     t.string "url"
-    t.text   "facilities",   default: [], array: true
     t.float  "exact_class"
     t.float  "review_score"
     t.string "district"
     t.string "zip"
   end
-
-  add_index "hotels", ["facilities"], name: "index_hotels_on_facilities", using: :gin
 
   create_table "incremental_prices", force: :cascade do |t|
     t.string  "currency"
@@ -136,16 +133,30 @@ ActiveRecord::Schema.define(version: 20150219100243) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.text    "facilities",  default: [], array: true
-    t.string  "max_persons"
     t.string  "roomtype"
     t.float   "max_price"
     t.float   "min_price"
     t.integer "hotel_id"
+    t.string  "name"
+    t.integer "availability"
+    t.integer "occupancy"
+    t.integer "children"
+    t.integer "wubook_auth_id"
+    t.integer "subroom"
+    t.integer "max_people"
+    t.float   "price"
   end
 
-  add_index "rooms", ["facilities"], name: "index_rooms_on_facilities", using: :gin
   add_index "rooms", ["hotel_id"], name: "index_rooms_on_hotel_id", using: :btree
+  add_index "rooms", ["wubook_auth_id"], name: "index_rooms_on_wubook_auth_id", using: :btree
+
+  create_table "rooms_wubook_auths", force: :cascade do |t|
+    t.integer "room_id"
+    t.integer "wubook_auth_id"
+  end
+
+  add_index "rooms_wubook_auths", ["room_id", "wubook_auth_id"], name: "index_rooms_wubook_auths_on_room_id_and_wubook_auth_id", unique: true, using: :btree
+  add_index "rooms_wubook_auths", ["wubook_auth_id"], name: "index_rooms_wubook_auths_on_wubook_auth_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -178,14 +189,5 @@ ActiveRecord::Schema.define(version: 20150219100243) do
   end
 
   add_index "wubook_auths", ["user_id"], name: "index_wubook_auths_on_user_id", using: :btree
-
-  create_table "wubook_rooms", force: :cascade do |t|
-    t.string  "name"
-    t.integer "max_people"
-    t.integer "availability"
-    t.integer "occupancy"
-    t.integer "children"
-    t.integer "wubook_auth_id"
-  end
 
 end

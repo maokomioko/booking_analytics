@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150220081416) do
+ActiveRecord::Schema.define(version: 20150222120136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,22 +27,34 @@ ActiveRecord::Schema.define(version: 20150220081416) do
   end
 
   create_table "block_availabilities", force: :cascade do |t|
-    t.string  "departure_date"
-    t.string  "arrival_date"
-    t.string  "max_occupancy"
-    t.jsonb   "data"
-    t.integer "hotel_id"
+    t.string   "departure_date"
+    t.string   "arrival_date"
+    t.string   "max_occupancy"
+    t.jsonb    "data"
+    t.integer  "hotel_id"
+    t.integer  "booking_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
+  add_index "block_availabilities", ["booking_id"], name: "index_block_availabilities_on_booking_id", using: :btree
   add_index "block_availabilities", ["hotel_id"], name: "index_block_availabilities_on_hotel_id", using: :btree
 
   create_table "blocks", force: :cascade do |t|
-    t.string  "name"
-    t.string  "max_occupancy"
-    t.integer "block_availability_id"
+    t.string   "name"
+    t.string   "max_occupancy"
+    t.integer  "block_availability_id"
+    t.string   "block_id",              limit: 40
+    t.boolean  "refundable"
+    t.string   "refundable_until"
+    t.boolean  "deposit_required"
+    t.boolean  "breakfast_included"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "blocks", ["block_availability_id"], name: "index_blocks_on_block_availability_id", using: :btree
+  add_index "blocks", ["block_id"], name: "index_blocks_on_block_id", using: :btree
 
   create_table "checkouts", force: :cascade do |t|
     t.string  "from"
@@ -74,17 +86,20 @@ ActiveRecord::Schema.define(version: 20150220081416) do
   add_index "hotel_facilities_hotels", ["hotel_id"], name: "index_hotel_facilities_hotels_on_hotel_id", using: :btree
 
   create_table "hotels", force: :cascade do |t|
-    t.string "name"
-    t.string "hoteltype_id"
-    t.string "city"
-    t.string "city_id"
-    t.string "address"
-    t.string "url"
-    t.float  "exact_class"
-    t.float  "review_score"
-    t.string "district"
-    t.string "zip"
+    t.string  "name"
+    t.string  "hoteltype_id"
+    t.string  "city"
+    t.string  "city_id"
+    t.string  "address"
+    t.string  "url"
+    t.float   "exact_class"
+    t.float   "review_score"
+    t.string  "district"
+    t.string  "zip"
+    t.integer "booking_id"
   end
+
+  add_index "hotels", ["booking_id"], name: "index_hotels_on_booking_id", using: :btree
 
   create_table "incremental_prices", force: :cascade do |t|
     t.string  "currency"

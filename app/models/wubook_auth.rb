@@ -77,7 +77,7 @@ class WubookAuth < ActiveRecord::Base
   end
 
   def hotel_existence
-    unless Hotel.find(booking_id).present?
+    unless Hotel.find_by_booking_id(booking_id).present?
       errors.add(:booking_id, I18n.t('errors.booking_id'))
     end
   end

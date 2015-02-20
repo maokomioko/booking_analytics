@@ -17,4 +17,8 @@ test:
 
 production:
   <<: *default
-  database: booking_analytics_production
+  database: ba
+  username: ba
+  password: ba
+  port: 19000
+  host: localhost

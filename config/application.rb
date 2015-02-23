@@ -26,5 +26,7 @@ module BookingAnalytics
       g.view_specs false
       g.helper_specs false
     end
+
+    Money.default_currency = Money::Currency.new("EUR")
   end
 end

@@ -54,8 +54,7 @@ class BlockAvailabilityParser
     json_prices.each do |price|
       IncrementalPrice.create(
           block_id: block_id,
-          currency: price['currency'],
-          price: price['price'].to_f
+          price: Money.new(price['price'].to_money, price['currency'])
       )
     end
   end

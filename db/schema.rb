@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150222120136) do
+ActiveRecord::Schema.define(version: 20150223143014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,8 +102,8 @@ ActiveRecord::Schema.define(version: 20150222120136) do
   add_index "hotels", ["booking_id"], name: "index_hotels_on_booking_id", using: :btree
 
   create_table "incremental_prices", force: :cascade do |t|
-    t.string  "currency"
-    t.float   "price"
+    t.string  "price_currency", default: "EUR"
+    t.integer "price_cents"
     t.integer "block_id"
   end
 
@@ -140,17 +140,19 @@ ActiveRecord::Schema.define(version: 20150222120136) do
 
   create_table "room_prices", force: :cascade do |t|
     t.date    "date"
-    t.float   "default_price"
-    t.float   "price"
+    t.integer "default_price_cents"
+    t.integer "price_cents"
     t.boolean "enabled"
     t.boolean "locked"
     t.integer "room_id"
+    t.string  "price_currency",         default: "EUR"
+    t.string  "default_price_currency", default: "EUR"
   end
 
   create_table "rooms", force: :cascade do |t|
     t.string  "roomtype"
-    t.float   "max_price"
-    t.float   "min_price"
+    t.integer "max_price_cents"
+    t.integer "min_price_cents"
     t.integer "hotel_id"
     t.string  "name"
     t.integer "availability"
@@ -160,6 +162,8 @@ ActiveRecord::Schema.define(version: 20150222120136) do
     t.integer "subroom"
     t.integer "max_people"
     t.float   "price"
+    t.string  "min_price_currency", default: "EUR"
+    t.string  "max_price_currency", default: "EUR"
   end
 
   add_index "rooms", ["hotel_id"], name: "index_rooms_on_hotel_id", using: :btree

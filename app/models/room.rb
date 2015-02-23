@@ -14,4 +14,7 @@ class Room < ActiveRecord::Base
   has_and_belongs_to_many :wubook_auths
 
   has_one :bedding
+
+  monetize :min_price_cents
+  monetize :max_price_cents
 end

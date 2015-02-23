@@ -20,5 +20,11 @@ production:
   database: ba
   username: ba
   password: ba
-  port: 19000
+  host: localhost
+
+staging:
+  <<: *default
+  database: ba
+  username: ba
+  password: ba
   host: localhost

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223143014) do
+ActiveRecord::Schema.define(version: 20150224150855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,10 +72,13 @@ ActiveRecord::Schema.define(version: 20150223143014) do
 
   add_index "chekins", ["hotel_id"], name: "index_chekins_on_hotel_id", using: :btree
 
-  create_table "hotel_facilities", force: :cascade do |t|
+  create_table "hotel_facilities", id: false, force: :cascade do |t|
+    t.integer "id",                null: false
     t.string  "name"
     t.integer "count", default: 0
   end
+
+  add_index "hotel_facilities", ["id"], name: "index_hotel_facilities_on_id", unique: true, using: :btree
 
   create_table "hotel_facilities_hotels", id: false, force: :cascade do |t|
     t.integer "hotel_facility_id"
@@ -125,10 +128,13 @@ ActiveRecord::Schema.define(version: 20150223143014) do
   add_index "related_hotels", ["hotel_id"], name: "index_related_hotels_on_hotel_id", using: :btree
   add_index "related_hotels", ["related_id", "hotel_id"], name: "index_related_hotels_on_related_id_and_hotel_id", unique: true, using: :btree
 
-  create_table "room_facilities", force: :cascade do |t|
+  create_table "room_facilities", id: false, force: :cascade do |t|
+    t.integer "id",                null: false
     t.string  "name"
     t.integer "count", default: 0
   end
+
+  add_index "room_facilities", ["id"], name: "index_room_facilities_on_id", unique: true, using: :btree
 
   create_table "room_facilities_rooms", id: false, force: :cascade do |t|
     t.integer "room_facility_id"
@@ -164,8 +170,12 @@ ActiveRecord::Schema.define(version: 20150223143014) do
     t.float   "price"
     t.string  "min_price_currency", default: "EUR"
     t.string  "max_price_currency", default: "EUR"
+    t.integer "booking_id"
+    t.integer "booking_hotel_id"
   end
 
+  add_index "rooms", ["booking_hotel_id"], name: "index_rooms_on_booking_hotel_id", using: :btree
+  add_index "rooms", ["booking_id"], name: "index_rooms_on_booking_id", using: :btree
   add_index "rooms", ["hotel_id"], name: "index_rooms_on_hotel_id", using: :btree
   add_index "rooms", ["wubook_auth_id"], name: "index_rooms_on_wubook_auth_id", using: :btree
 

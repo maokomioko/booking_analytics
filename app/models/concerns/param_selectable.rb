@@ -1,6 +1,21 @@
 module ParamSelectable
   extend ActiveSupport::Concern
 
+  BASE_FACILITIES = [
+      'Wi-Fi',
+      'Parking',
+      'Airport Shuttle (surcharge)', 'Airport Shuttle (free)',
+      'Fitness Center',
+      'Non-smoking Rooms',
+      'Indoor Pool',
+      'Spa',
+      'Family Rooms',
+      'Outdoor Pool',
+      'Pet Friendly',
+      'Facilities for Disabled Guests',
+      'Restaurant'
+  ]
+
   module ClassMethods
     def by_old_property_type(type)
       case type
@@ -47,20 +62,7 @@ module ParamSelectable
     end
 
     def base_facilities
-      [
-        'Wi-Fi',
-        'Parking',
-        'Airport Shuttle (surcharge)', 'Airport Shuttle (free)',
-        'Fitness Center',
-        'Non-smoking Rooms',
-        'Indoor Pool',
-        'Spa',
-        'Family Rooms',
-        'Outdoor Pool',
-        'Pet Friendly',
-        'Facilities for Disabled Guests',
-        'Restaurant'
-      ]
+      HotelFacility.where(name: BASE_FACILITIES)
     end
   end
 end

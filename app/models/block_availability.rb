@@ -1,19 +1,9 @@
-class BlockAvailability
-  include MongoWrapper
+class BlockAvailability < ActiveRecord::Base
+  belongs_to :hotel
+  has_many :blocks
 
-  belongs_to :hotel, foreign_key: :hotel_id
-  embeds_many :block
-
-  field :departure_date
-  field :arrival_date
-
-  field :max_occupancy
-
-  field :hotel_id
-  index({ hotel_id: 1 }, { background: true })
-
-  scope :for_hotels, -> (hotel_ids){ where(:hotel_id.in => hotel_ids) }
-  scope :with_occupancy, -> (occupancy){ where('block.max_occupancy' => occupancy.to_s) }
+  scope :for_hotels, -> (hotel_ids){ where(hotel_id: hotel_ids) }
+  scope :with_occupancy, -> (occupancy){ includes(:blocks).where(blocks: { max_occupancy: occupancy.to_s }) }
   scope :by_arrival, -> (date){ where(arrival_date: date) }
   scope :by_departure, -> (date){ where(departure_date: date) }
 
@@ -35,7 +25,7 @@ class BlockAvailability
 
       blocks.each do |block_avail|
         hotel_name = Hotel.find(block_avail.hotel_id).name
-        arr << block_avail.block.collect{|x| x.incremental_price[0].price}
+        arr << block_avail.blocks.collect{|x| x.incremental_prices[0].price}
       end
 
       arr.sort

@@ -1,18 +1,8 @@
-class RoomPrice
-  include MongoWrapper
+class RoomPrice < ActiveRecord::Base
+  belongs_to :room
 
-  belongs_to :room, class_name: 'Wubook::Room'
+  monetize :default_price_cents
+  monetize :price_cents
 
-  scope :within_dates, -> (dates){ where(:date.in => dates)}
-
-  field :room_id
-  index({ room_id: 1 }, { background: true })
-
-  field :date, type: Date
-
-  field :default_price, type: Float
-  field :price, type: Float
-
-  field :enabled, type: Boolean
-  field :locked, type: Boolean
+  scope :within_dates, -> (dates){ where(date: dates)}
 end

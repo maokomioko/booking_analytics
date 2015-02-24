@@ -1,69 +1,20 @@
-class Room
-  include MongoWrapper
+class Room < ActiveRecord::Base
+  include WubookRoom
 
-  scope :with_facilities, -> (keywords){ self.in(facilities: [keywords]) }
+  scope :with_facilities, -> (ids){
+    includes(:facilities).where(room_facilities: { id: ids })
+        .select{|h| (ids - h.facilities.map(&:id)).size.zero? }
+  }
 
-  belongs_to :hotel, foreign_key: :hotel_id
-  embeds_one :bedding
+  belongs_to :hotel
 
-  field :room_id, type: String
-  field :_id, type: String, default: -> { room_id.to_s.parameterize }
-  index({ room_id: 1 }, { background: true })
-  field :hotel_id
+  has_many :room_prices, dependent: :destroy
 
-  field :facilities, type: Array
-  field :max_persons
-  field :roomtype
+  has_and_belongs_to_many :facilities, class_name: 'RoomFacility' # counter as PG trigger
+  has_and_belongs_to_many :wubook_auths
 
-  field :max_price, type: Float
-  field :min_price, type: Float
+  has_one :bedding
 
-  class << self
-    def remap_with_ids
-      arr = []
-
-      Room.each do |room|
-        arr << room.room_id
-      end
-
-      arr.each do |arr_el|
-        room = Room.find_by(room_id: arr_el)
-        up_room = Room.new({
-          room_id: arr_el,
-          facilities: room.facilities,
-          max_persons: room.max_persons,
-          roomtype: room.roomtype,
-          max_price: room.max_price,
-          min_price: room.min_price})
-        up_room.save!
-        unless room.bedding.nil?
-          bedding = Bedding.new
-
-          room.bedding.beds.each do |bed|
-            bedding.beds << bed
-          end
-          up_room.bedding = bedding
-          up_room.bedding.save!
-        end
-
-        room.destroy!
-      end
-    end
-  end
-end
-
-class Bedding
-  include MongoWrapper
-  embedded_in :room
-  embeds_many :beds
-
-  accepts_nested_attributes_for :beds
-end
-
-class Bed
-  include MongoWrapper
-  embedded_in :bedding
-
-  field :amount
-  field :type
+  monetize :min_price_cents
+  monetize :max_price_cents
 end

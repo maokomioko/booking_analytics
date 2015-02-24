@@ -62,8 +62,8 @@ class ChannelManagerController < ApplicationController
 
   def wubook_for_user(room_id)
     begin
-      room = Wubook::Room.find_by(room_id: params[:room_id])
-      room.wubook_auth
+      room = Room.find(room_id)
+      room.wubook_auths.where(user: current_user).first
     rescue
       nil
     end

@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      resources :views_data do
-        collection do
-          get :get_views
-          get :get_rejections
-          get :get_destinations
-          get :get_sources
-        end
+  namespace :api, defaults: { format: :json } do
+    mount Graph::Engine, at: '/graph'
+
+    resources :views_data do
+      collection do
+        get :get_views
+        get :get_rejections
+        get :get_destinations
+        get :get_sources
       end
     end
   end

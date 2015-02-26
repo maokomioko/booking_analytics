@@ -1,9 +1,15 @@
-class Api::V1Controller < ApplicationController
-  before_filter :disable_render
+class ApiController < ApplicationController
+  before_filter :set_default_format
   before_filter :set_destination
   before_filter :set_namespace
 
+  respond_to :json
+
   private
+
+  def set_default_format
+    request.format = 'json' unless params[:format]
+  end
 
   def disable_render
     render nothing: true

@@ -46,8 +46,18 @@ GIT
   specs:
     state_machine (1.2.0)
 
+PATH
+  remote: graph
+  specs:
+    graph (0.0.1)
+      coffee-rails (~> 4.1.0)
+      morrisjs-rails
+      rails (~> 4.2.0)
+      raphael-rails
+      sass-rails (>= 5)
+
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     actionmailer (4.2.0)
       actionpack (= 4.2.0)
@@ -295,6 +305,8 @@ GEM
       monetize (~> 1.1.0)
       money (~> 6.5.0)
       railties (>= 3.0)
+    morrisjs-rails (0.5.1)
+      railties (> 3.1, < 5)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -761,6 +773,7 @@ DEPENDENCIES
   geocoder
   globalize!
   google-analytics-turbolinks
+  graph!
   guard
   guard-livereload
   guard-rails
@@ -796,7 +809,6 @@ DEPENDENCIES
   rails (~> 4.2)
   rails-dev-tweaks
   rails-erd
-  raphael-rails
   rb-readline (~> 0.5.1)
   redis
   redis-rails

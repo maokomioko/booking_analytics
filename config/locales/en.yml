@@ -1,6 +1,6 @@
 en:
   meta:
-    title: "Booking Analytics | Beta"
+    title: "Hotel Commander | v 0.9a"
   shared:
     registration: "Registration"
     reset_instructions: "Send me password reset instructions"
@@ -17,6 +17,8 @@ en:
     booking_id: "Hotel doesn't exist"
     hotel_name: "Hotel name can't be blank"
     price_value_missing: "No price"
+    unauthorized: Unauthorized
+    no_ch_manager: No channel manager defined
   labels:
     booking_id: "Hotel ID (login) at Booking.com"
     hotel_name: "Name of your Hotel"

@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
-    mount Graph::Engine, at: '/graph'
-
     resources :views_data do
       collection do
         get :get_views
@@ -11,6 +9,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  mount Graph::Engine, at: '/graph'
 
   resources :calendar, controller: :calendar
 

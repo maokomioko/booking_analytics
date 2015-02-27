@@ -51,6 +51,7 @@ PATH
   specs:
     graph (0.0.1)
       coffee-rails (~> 4.1.0)
+      haml-rails
       morrisjs-rails
       rails (~> 4.2.0)
       raphael-rails

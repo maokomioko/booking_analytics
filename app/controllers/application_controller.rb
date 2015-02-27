@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     if !devise_controller? && !user_signed_in?
       respond_to do |f|
         f.json { render json: { error: t('errors.unauthorized') }, status: 401 }
-        f.all { redirect_to [:new, :user, :session] }
+        f.all { redirect_to [main_app, :new, :user, :session] }
       end
     end
   end
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     if current_user && !current_user.wb_auth?
       respond_to do |f|
         f.json { render json: { error: t('errors.no_ch_manager') }, status: 403 }
-        f.all { redirect_to new_channel_manager_path unless controller_name == 'channel_manager' }
+        f.all { redirect_to main_app.new_channel_manager_path unless controller_name == 'channel_manager' }
       end
     end
   end

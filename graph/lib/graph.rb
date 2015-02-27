@@ -1,4 +1,16 @@
+require 'raphael-rails'
+require 'morrisjs-rails'
+require 'haml-rails'
+require 'sass-rails'
+
 module Graph
+  mattr_accessor :parent_controller
+  @@parent_controller = "ApplicationController"
+
+  def self.setup
+    yield self
+  end
+
   class Engine < ::Rails::Engine
     isolate_namespace Graph
 

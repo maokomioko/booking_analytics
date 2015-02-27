@@ -1,7 +1,11 @@
 Graph::Engine.routes.draw do
-  resources :graph do
+  root to: 'hotels#index'
+
+  resources :hotels, only: [:index] do
     collection do
-      get :holder
+      get :simple
+      get :competitors
+      get :cherry_pick
     end
   end
 end

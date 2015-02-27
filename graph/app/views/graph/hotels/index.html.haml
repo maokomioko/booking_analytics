@@ -1,0 +1,18 @@
+= render partial: 'partials/menu'
+
+#main_container
+  %h1 Some graphics are here! Only for test!
+
+  = form_tag [:simple, :hotels], remote: true, method: :get do
+    = label_tag :id, 'Select hotel: '
+    = select_tag :id, options_for_select([["Test hotel 1", 1], ["Test hotel 2", 2]], 1)
+
+    = label_tag :range, 'Select range in days: '
+    = number_field_tag :range, 5, max: 95, min: 5, step: 10
+
+    = label_tag :future, 'Future?'
+    = check_box_tag :future, "1", false
+
+    = submit_tag 'Show graph'
+
+  #line-example

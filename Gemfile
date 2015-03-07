@@ -4,7 +4,7 @@ gem 'browser'
 gem 'bullet'
 gem 'bson_ext'
 
-gem 'cancancan', '~> 1.9.2'
+gem 'cancancan'
 gem 'carrierwave'
 
 gem 'celluloid', github: 'celluloid/celluloid'
@@ -41,7 +41,6 @@ gem 'remotipart', '~> 1.2.1'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder'
-gem 'jquery-turbolinks', '~> 2.1.0'
 
 gem 'mini_magick'
 gem 'mime-types'
@@ -119,8 +118,9 @@ group :test do
   gem 'fuubar'
   gem 'turn', require: false
   gem 'mechanize'
-  gem 'capybara', '~> 2.4.4'
-  gem 'capybara-webkit'
-  gem 'shoulda-matchers', '~> 2.6.0'
-  gem 'shoulda-callback-matchers', '~> 1.0'
+  gem 'capybara', github: 'jnicklas/capybara'
+  gem 'poltergeist', github: 'teampoltergeist/poltergeist'
+  gem 'simplecov', github: 'colszowka/simplecov'
+  gem 'shoulda-matchers', '~> 2.8.0'
+  gem 'shoulda-callback-matchers', '~> 1.1.2'
 end

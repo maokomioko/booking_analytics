@@ -1,0 +1,11 @@
+$('#line-example').empty();
+Morris.Line({
+    element: 'line-example',
+    data: <%= raw @data.to_json %>,
+    xkey: 'day',
+    parseTime: false,
+    ykeys: ['price'],
+    labels: ['Price'],
+    postUnits: '€',
+    smooth: false
+});

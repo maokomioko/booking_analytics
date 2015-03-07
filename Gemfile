@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'browser'
 gem 'bullet'
@@ -26,6 +26,7 @@ gem 'eu_central_bank'
 gem 'geocoder'
 gem 'globalize', github: 'globalize/globalize'
 gem 'google-analytics-turbolinks'
+gem 'graph', path: 'graph'
 
 gem 'haml-rails'
 
@@ -59,7 +60,6 @@ gem 'pg'
 
 gem 'racc'
 gem 'rails', '~> 4.2'
-gem 'raphael-rails'
 gem 'redis'
 gem 'redis-store'
 gem 'redis-rails'

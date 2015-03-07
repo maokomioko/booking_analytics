@@ -1,6 +1,8 @@
-class Api::V1::ViewsDataController < Api::V1Controller
+class Api::ViewsDataController < ApiController
   require 'uri'
   require 'net/http'
+
+  before_filter :disable_render
 
   def get_views
     external_post(@api_prefix)

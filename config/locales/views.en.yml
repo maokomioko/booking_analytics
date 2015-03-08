@@ -1,0 +1,4 @@
+en:
+  application:
+    no_company:
+      error_text: No company defined. Please contact with your administrator.

@@ -22,4 +22,6 @@ Rails.application.routes.draw do
 
   root to: 'calendar#index'
   devise_for :users
+
+  get :no_company, controller: :application
 end

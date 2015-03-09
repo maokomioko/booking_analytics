@@ -1,4 +1,4 @@
-class AvailabilityWorker
+class PriceMaker::AvailabilityWorker
   include Celluloid
 
   attr_reader :get_blocks, :get_prices

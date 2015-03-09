@@ -1,4 +1,4 @@
-class HotelWorker
+class PriceMaker::HotelWorker
   include Celluloid
 
   attr_reader :amenities_mix

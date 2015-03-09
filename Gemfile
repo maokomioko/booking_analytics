@@ -34,11 +34,6 @@ gem 'i18n', '0.7'
 
 gem 'log4r'
 
-gem 'progress_bar'
-gem 'premailer-rails'
-
-gem 'remotipart', '~> 1.2.1'
-
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder'
@@ -57,12 +52,16 @@ gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
 
 gem 'pg'
+gem 'premailer-rails'
+gem 'progress_bar'
+gem 'price_maker', path: 'price_maker'
 
 gem 'racc'
 gem 'rails', '~> 4.2'
 gem 'redis'
 gem 'redis-store'
 gem 'redis-rails'
+gem 'remotipart', '~> 1.2.1'
 gem 'rubysl'
 
 gem 'sass-rails', '>= 5'

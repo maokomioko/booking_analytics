@@ -1,5 +1,5 @@
 class Room < ActiveRecord::Base
-  include WubookRoom
+  include PriceMaker::Wubook
 
   scope :with_facilities, -> (ids){
     includes(:facilities).where(room_facilities: { id: ids })

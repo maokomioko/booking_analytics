@@ -1,6 +1,5 @@
 class Hotel < ActiveRecord::Base
   include ParamSelectable
-  include Celluloid
 
   scope :contains_facilities, -> (ids){ includes(:facilities).where(hotel_facilities: { id: ids }) }
   scope :with_facilities, -> (ids){ contains_facilities(ids).select{|h| (ids - h.facilities.map(&:id)).size.zero? } }
@@ -19,7 +18,7 @@ class Hotel < ActiveRecord::Base
                           foreign_key: :hotel_id,
                           association_foreign_key: :related_id
 
-  has_and_belongs_to_many :facilities, class_name: 'HotelFacility' # counter as PG trigger
+  has_and_belongs_to_many :facilities, class_name: 'Facility::Hotel' # counter as PG trigger
 
   has_one :location
   has_one :checkin

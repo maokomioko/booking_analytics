@@ -41,6 +41,17 @@ GIT
       xpath (~> 2.0)
 
 GIT
+  remote: git://github.com/jnicklas/capybara.git
+  revision: 9dcd6d7546a4ac4f4b585a9c52b55801628af5b4
+  specs:
+    capybara (2.5.0.dev)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+
+GIT
   remote: git://github.com/plataformatec/devise.git
   revision: ef28bf28140001745e6ec67ba0620864ef4b1350
   specs:

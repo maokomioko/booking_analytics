@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224150855) do
+ActiveRecord::Schema.define(version: 20150308114508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,14 @@ ActiveRecord::Schema.define(version: 20150224150855) do
   end
 
   add_index "chekins", ["hotel_id"], name: "index_chekins_on_hotel_id", using: :btree
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "wb_auth",    default: false
+    t.integer  "owner_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "hotel_facilities", id: false, force: :cascade do |t|
     t.integer "id",                null: false
@@ -198,11 +206,12 @@ ActiveRecord::Schema.define(version: 20150224150855) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.boolean  "wb_auth"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
+  add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
@@ -214,9 +223,9 @@ ActiveRecord::Schema.define(version: 20150224150855) do
     t.string  "hotel_name"
     t.integer "non_refundable_pid"
     t.integer "default_pid"
-    t.integer "user_id"
+    t.integer "company_id"
   end
 
-  add_index "wubook_auths", ["user_id"], name: "index_wubook_auths_on_user_id", using: :btree
+  add_index "wubook_auths", ["company_id"], name: "index_wubook_auths_on_company_id", using: :btree
 
 end

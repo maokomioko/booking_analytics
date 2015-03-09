@@ -1,6 +1,6 @@
 class ChannelManagerController < ApplicationController
   def new
-    unless current_user.wb_auth?
+    unless current_user.company.wb_auth?
       @wb = WubookAuth.new
     else redirect_to calendar_index_path, notice: t('messages.cm_already_added')
     end
@@ -8,9 +8,9 @@ class ChannelManagerController < ApplicationController
 
   def create
     wb = WubookAuth.new(wb_params)
-    wb.user_id = current_user.id
+    wb.company = current_user.company
     if wb.save && wubook_auth_state
-      current_user.update_attribute(:wb_auth, true) unless current_user.wb_auth?
+      current_user.company.update_attribute(:wb_auth, true) unless current_user.company.wb_auth?
       redirect_to calendar_index_path
       flash[:success] = t('messages.cm_verified')
     else
@@ -40,7 +40,7 @@ class ChannelManagerController < ApplicationController
       dates = params[:dates]
       dates.delete("")
 
-      wba = wubook_for_user(params[:room_id])
+      wba = wubook_for_company(params[:room_id])
       unless wba.nil?
         if wba.apply_room_prices(params[:room_id], dates, params[:price])
           flash[:success] = t('messages.prices_updated')
@@ -60,10 +60,10 @@ class ChannelManagerController < ApplicationController
     connector.get_token.nil? ? false : true
   end
 
-  def wubook_for_user(room_id)
+  def wubook_for_company(room_id)
     begin
       room = Room.find(room_id)
-      room.wubook_auths.where(user: current_user).first
+      room.wubook_auths.where(company: current_user.company).first
     rescue
       nil
     end

@@ -1,7 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_filter :auth_user, :ch_manager_present
+  before_filter :auth_user, :company_present, :ch_manager_present
   after_filter :flash_to_headers
+
+  def no_company
+  end
 
   private
 
@@ -14,8 +17,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def company_present
+    if current_user && !current_user.company.present?
+      respond_to do |f|
+        f.json { render json: { error: t('errors.no_company') }, status: 403 }
+        f.all { redirect_to [main_app, :no_company] unless action_name == 'no_company' }
+      end
+    end
+  end
+
   def ch_manager_present
-    if current_user && !current_user.wb_auth?
+    if current_user && current_user.company.present? && !current_user.company.wb_auth?
       respond_to do |f|
         f.json { render json: { error: t('errors.no_ch_manager') }, status: 403 }
         f.all { redirect_to main_app.new_channel_manager_path unless controller_name == 'channel_manager' }

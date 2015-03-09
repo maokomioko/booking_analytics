@@ -1,5 +1,5 @@
 #= require jquery2
-#= require jquery.turbolinks
+# require jquery.turbolinks
 #= require turbolinks
 
 #= require jquery_ujs

@@ -1,5 +1,5 @@
 class WubookAuth < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :company
   belongs_to :hotel, foreign_key: :booking_id
   has_and_belongs_to_many :rooms
 

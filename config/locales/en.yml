@@ -18,6 +18,7 @@ en:
     hotel_name: "Hotel name can't be blank"
     price_value_missing: "No price"
     unauthorized: Unauthorized
+    no_company: No attached company to this account
     no_ch_manager: No channel manager defined
   labels:
     booking_id: "Hotel ID (login) at Booking.com"

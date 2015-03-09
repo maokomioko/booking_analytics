@@ -18,7 +18,7 @@ class Hotel < ActiveRecord::Base
                           foreign_key: :hotel_id,
                           association_foreign_key: :related_id
 
-  has_and_belongs_to_many :facilities, class_name: 'Facility::Hotel' # counter as PG trigger
+  has_and_belongs_to_many :facilities, class_name: 'Facility::Hotel', association_foreign_key: 'hotel_facility_id' # counter as PG trigger
 
   has_one :location
   has_one :checkin

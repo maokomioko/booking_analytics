@@ -62,7 +62,7 @@ module ParamSelectable
     end
 
     def base_facilities
-      HotelFacility.where(name: BASE_FACILITIES)
+      Facility::Hotel.where(name: BASE_FACILITIES)
     end
   end
 end

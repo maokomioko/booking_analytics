@@ -23,4 +23,8 @@ class Hotel < ActiveRecord::Base
   has_one :location
   has_one :checkin
   has_one :checkout
+
+  def class_fallback
+    exact_class.to_i == 0 ? 3 : exact_class
+  end
 end

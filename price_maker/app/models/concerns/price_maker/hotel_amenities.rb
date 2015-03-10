@@ -9,17 +9,18 @@ module PriceMaker
           n = 2**validate_amenities.size - 1
 
           results = n.times.map do |i|
-            begin
-              hw_pool.future.amenities_mix(id, exact_class, review_score.to_i, i)
-            rescue DeadActorError
+            unless i == 0
+              begin
+                hw_pool.future.amenities_mix(id, class_fallback, review_score.to_i, 1)
+              rescue DeadActorError
+              end
             end
           end
 
-          puts results
-
           unless results.blank? && !results[0].nil?
-            self.related_ids = results.map(&:value).flatten!.uniq!.compact
+            self.related_ids = results.map(&:value).flatten!.uniq.compact
           end
+
         end
         related_ids
       end

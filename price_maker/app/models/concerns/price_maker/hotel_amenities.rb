@@ -11,7 +11,7 @@ module PriceMaker
           results = n.times.map do |i|
             begin
               hw_pool.future.amenities_mix(id, class_fallback, review_score.to_i, i + 1)
-            rescue DeadActorError
+            rescue Celluloid::DeadActorError
             end
           end
 

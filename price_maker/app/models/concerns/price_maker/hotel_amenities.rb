@@ -9,16 +9,15 @@ module PriceMaker
           n = 2**validate_amenities.size - 1
 
           results = n.times.map do |i|
-            unless i == 0
-              begin
-                hw_pool.future.amenities_mix(id, class_fallback, review_score.to_i, 1)
-              rescue DeadActorError
-              end
+            begin
+              hw_pool.future.amenities_mix(id, class_fallback, review_score.to_i, i + 1)
+            rescue DeadActorError
             end
           end
 
           unless results.blank? && !results[0].nil?
             self.related_ids = results.map(&:value).flatten!.uniq.compact
+            hw_pool.terminate
           end
 
         end
@@ -26,13 +25,13 @@ module PriceMaker
       end
 
       def validate_amenities
-        arr = []
+        base_facilities = Hotel.base_facilities.ids
 
-        facilities.each do |f|
-          arr << f.id if Hotel.base_facilities.include? f
+        [].tap do |arr|
+          facilities.ids.each do |fid|
+            arr << fid if base_facilities.include? fid
+          end
         end
-
-        arr
       end
     end
   end

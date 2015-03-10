@@ -62,7 +62,7 @@ gem 'redis'
 gem 'redis-store'
 gem 'redis-rails'
 gem 'remotipart', '~> 1.2.1'
-gem 'rubysl'
+gem 'rubysl', platform: :rbx
 
 gem 'sass-rails', '>= 5'
 gem 'sanitize'

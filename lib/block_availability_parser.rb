@@ -20,6 +20,12 @@ class BlockAvailabilityParser
       end
 
       @object.booking_id = @json['hotel_id']
+
+      hotel = Hotel.find_by_booking_id(@json['hotel_id'])
+      if hotel.present?
+        @object.hotel_id = hotel.id
+      end
+
       @object.save
     end
   end

@@ -40,7 +40,7 @@ class BlockAvailability < ActiveRecord::Base
 
         blocks.each do |block_avail|
           # hotel_name = Hotel.find(block_avail.hotel_id).name
-          arr << block_avail.blocks.collect{|x| x.incremental_prices[0].price}
+          arr << block_avail.blocks.map(&:min_price)
         end
       rescue ActiveRecord::ConnectionTimeoutError
         puts 'wait for free db pool...'

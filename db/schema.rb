@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310143246) do
+ActiveRecord::Schema.define(version: 20150311120624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150310143246) do
   end
 
   add_index "block_availabilities", ["booking_id"], name: "index_block_availabilities_on_booking_id", using: :btree
+  add_index "block_availabilities", ["hotel_id", "departure_date"], name: "index_block_availabilities_on_hotel_id_and_departure_date", using: :btree
   add_index "block_availabilities", ["hotel_id"], name: "index_block_availabilities_on_hotel_id", using: :btree
 
   create_table "block_availability", force: :cascade do |t|
@@ -168,6 +169,8 @@ ActiveRecord::Schema.define(version: 20150310143246) do
     t.string  "price_currency",         default: "EUR"
     t.string  "default_price_currency", default: "EUR"
   end
+
+  add_index "room_prices", ["date", "room_id"], name: "index_room_prices_on_date_and_room_id", unique: true, using: :btree
 
   create_table "rooms", force: :cascade do |t|
     t.string  "roomtype"

@@ -13,8 +13,12 @@ module PriceMaker
           dates.each do |date|
             begin
               price = PriceMaker::Algorithm.new(hotel_ids, occupancy, date, date + 1.day).get_top_prices
-              rp = room_prices.find_by(date: date)
-              rp.update_attribute(:price, price.second.first) unless rp.locked
+              # be aware that prices in cents
+
+              rp = RoomPrice.find_or_initialize_by(date: date, room: self)
+
+              rp.price = Money.new(price.second.first)
+              rp.save unless rp.locked
             rescue
               puts "No price"
             end

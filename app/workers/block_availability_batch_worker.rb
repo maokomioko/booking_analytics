@@ -4,7 +4,7 @@ class BlockAvailabilityBatchWorker
   sidekiq_options retry: false
 
   def perform(ids)
-    BlockAvailability.where(id: ids) do |block|
+    BlockAvailability.where(id: ids).each do |block|
       BlockAvailabilityParser.new(block).parse rescue nil
     end
   end

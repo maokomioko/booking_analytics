@@ -3,6 +3,6 @@ class Block < ActiveRecord::Base
   has_many :incremental_prices
 
   def min_price
-    incremental_prices.minimum(:price)
+    incremental_prices.minimum(:price_cents) || 0
   end
 end

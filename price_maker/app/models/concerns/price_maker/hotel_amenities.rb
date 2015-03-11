@@ -17,9 +17,9 @@ module PriceMaker
 
           unless results.blank? && !results[0].nil?
             self.related_ids = results.map(&:value).flatten!.uniq.compact
-            hw_pool.terminate
           end
 
+          hw_pool.terminate
         end
         related_ids
       end

@@ -10,23 +10,44 @@ class BlockAvailability < ActiveRecord::Base
   class << self
 
     def to_date(hotel_ids, occupancy, arrival, departure)
-      blocks = for_hotels(hotel_ids).with_occupancy(occupancy)
+      begin
+        blocks = for_hotels(hotel_ids)
 
-      if departure.nil?
-        blocks = blocks.by_arrival(arrival)
-      else
-        blocks = blocks.by_departure(departure)
+        unless occupancy.nil?
+          blocks = blocks.with_occupancy(occupancy)
+        end
+
+        if departure.nil?
+          blocks = blocks.by_arrival(arrival)
+        else
+          blocks = blocks.by_departure(departure)
+        end
+
+        blocks = blocks.to_a # for correct release DB connection
+      rescue ActiveRecord::ConnectionTimeoutError
+        puts 'wait for free db pool...'
+        retry
       end
+
+      ActiveRecord::Base.connection_pool.release_connection(Thread.current.object_id)
+
       blocks
     end
 
     def get_prices(blocks)
-      arr = []
+      begin
+        arr = []
 
-      blocks.each do |block_avail|
-        hotel_name = Hotel.find(block_avail.hotel_id).name
-        arr << block_avail.blocks.collect{|x| x.incremental_prices[0].price}
+        blocks.each do |block_avail|
+          # hotel_name = Hotel.find(block_avail.hotel_id).name
+          arr << block_avail.blocks.collect{|x| x.incremental_prices[0].price}
+        end
+      rescue ActiveRecord::ConnectionTimeoutError
+        puts 'wait for free db pool...'
+        retry
       end
+
+      ActiveRecord::Base.connection_pool.release_connection(Thread.current.object_id)
 
       arr.sort
     end

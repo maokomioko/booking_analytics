@@ -1,3 +1,5 @@
+require 'block_availability'
+
 class PriceMaker::AvailabilityWorker
   include Celluloid
 

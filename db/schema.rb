@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311120624) do
+ActiveRecord::Schema.define(version: 20150312112906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,11 +41,6 @@ ActiveRecord::Schema.define(version: 20150311120624) do
   add_index "block_availabilities", ["hotel_id", "departure_date"], name: "index_block_availabilities_on_hotel_id_and_departure_date", using: :btree
   add_index "block_availabilities", ["hotel_id"], name: "index_block_availabilities_on_hotel_id", using: :btree
 
-  create_table "block_availability", force: :cascade do |t|
-    t.jsonb "data"
-    t.date  "created", default: "now()", null: false
-  end
-
   create_table "blocks", force: :cascade do |t|
     t.string   "name"
     t.string   "max_occupancy"
@@ -61,6 +56,13 @@ ActiveRecord::Schema.define(version: 20150311120624) do
 
   add_index "blocks", ["block_availability_id"], name: "index_blocks_on_block_availability_id", using: :btree
   add_index "blocks", ["block_id"], name: "index_blocks_on_block_id", using: :btree
+
+  create_table "checkins", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "hotel_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "checkouts", force: :cascade do |t|
     t.string  "from"

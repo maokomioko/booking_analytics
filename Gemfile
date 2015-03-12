@@ -110,6 +110,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'rspec-its'
+  gem 'database_cleaner'
   gem 'ffaker'
   gem 'json_spec'
   gem 'timecop'

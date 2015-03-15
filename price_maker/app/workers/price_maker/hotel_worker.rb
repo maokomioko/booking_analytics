@@ -25,6 +25,6 @@ class PriceMaker::HotelWorker
     end
 
 
-    ids.flatten! unless ids.blank?
+    ids.flatten unless ids.blank?
   end
 end

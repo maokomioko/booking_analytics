@@ -24,6 +24,7 @@ class BlockAvailability < ActiveRecord::Base
         end
 
         blocks = blocks.to_a # for correct release DB connection
+
       rescue ActiveRecord::ConnectionTimeoutError
         puts 'wait for free db pool...'
         retry
@@ -39,9 +40,9 @@ class BlockAvailability < ActiveRecord::Base
         arr = []
 
         blocks.each do |block_avail|
-          # hotel_name = Hotel.find(block_avail.hotel_id).name
           arr << block_avail.blocks.map(&:min_price)
         end
+
       rescue ActiveRecord::ConnectionTimeoutError
         puts 'wait for free db pool...'
         retry

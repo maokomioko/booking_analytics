@@ -49,7 +49,7 @@ module PriceMaker
         end
       end
 
-      blocks = blocks.map(&:value).flatten!
+      blocks = blocks.map(&:value).flatten
       aw_pool.terminate
 
       return if blocks.reject(&:blank?).empty?
@@ -66,7 +66,7 @@ module PriceMaker
       end
 
       begin
-        pr_blocks = pr_blocks.map(&:value).flatten!.uniq!
+        pr_blocks = pr_blocks.map(&:value).flatten.uniq
         @price_blocks = pr_blocks
       rescue
         nil

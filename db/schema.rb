@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312112906) do
+ActiveRecord::Schema.define(version: 20150316190251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,15 +31,20 @@ ActiveRecord::Schema.define(version: 20150312112906) do
     t.string   "arrival_date"
     t.string   "max_occupancy"
     t.jsonb    "data"
-    t.integer  "hotel_id"
     t.integer  "booking_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "block_availabilities", ["arrival_date"], name: "index_block_availabilities_on_arrival_date", using: :btree
   add_index "block_availabilities", ["booking_id"], name: "index_block_availabilities_on_booking_id", using: :btree
-  add_index "block_availabilities", ["hotel_id", "departure_date"], name: "index_block_availabilities_on_hotel_id_and_departure_date", using: :btree
-  add_index "block_availabilities", ["hotel_id"], name: "index_block_availabilities_on_hotel_id", using: :btree
+  add_index "block_availabilities", ["departure_date"], name: "index_block_availabilities_on_departure_date", using: :btree
+  add_index "block_availabilities", ["max_occupancy"], name: "index_block_availabilities_on_max_occupancy", using: :btree
+
+  create_table "block_availability", force: :cascade do |t|
+    t.jsonb "data"
+    t.date  "created", default: "now()", null: false
+  end
 
   create_table "blocks", force: :cascade do |t|
     t.string   "name"
@@ -52,10 +57,8 @@ ActiveRecord::Schema.define(version: 20150312112906) do
     t.boolean  "breakfast_included"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.jsonb    "price_data"
   end
-
-  add_index "blocks", ["block_availability_id"], name: "index_blocks_on_block_availability_id", using: :btree
-  add_index "blocks", ["block_id"], name: "index_blocks_on_block_id", using: :btree
 
   create_table "checkins", force: :cascade do |t|
     t.string   "name"
@@ -126,8 +129,6 @@ ActiveRecord::Schema.define(version: 20150312112906) do
     t.integer "price_cents"
     t.integer "block_id"
   end
-
-  add_index "incremental_prices", ["block_id"], name: "index_incremental_prices_on_block_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string  "latitude"

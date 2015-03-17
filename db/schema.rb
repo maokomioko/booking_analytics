@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317164059) do
+ActiveRecord::Schema.define(version: 20150317222242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,8 +27,6 @@ ActiveRecord::Schema.define(version: 20150317164059) do
   end
 
   create_table "block_availabilities", force: :cascade do |t|
-    t.string   "departure_date"
-    t.string   "arrival_date"
     t.string   "max_occupancy"
     t.jsonb    "data"
     t.integer  "booking_id"
@@ -36,9 +34,7 @@ ActiveRecord::Schema.define(version: 20150317164059) do
     t.datetime "updated_at"
   end
 
-  add_index "block_availabilities", ["arrival_date"], name: "index_block_availabilities_on_arrival_date", using: :btree
   add_index "block_availabilities", ["booking_id"], name: "index_block_availabilities_on_booking_id", using: :btree
-  add_index "block_availabilities", ["departure_date"], name: "index_block_availabilities_on_departure_date", using: :btree
   add_index "block_availabilities", ["max_occupancy"], name: "index_block_availabilities_on_max_occupancy", using: :btree
 
   create_table "block_availability", force: :cascade do |t|

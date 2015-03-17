@@ -11,17 +11,17 @@ module PriceMaker
         if hotel_ids
           dates = [*Date.today..Date.today + 3.month]
           dates.each do |date|
-            begin
-              price = PriceMaker::Algorithm.new(hotel_ids, occupancy, date, date + 1.day).get_top_prices
-              # be aware that prices in cents
+            #begin
+              price = PriceMaker::Algorithm.new(hotel_ids, occupancy_fallback, date, date + 1.day).get_top_prices
+              # be aware, that prices are in cents
 
-              rp = RoomPrice.find_or_initialize_by(date: date, room: self)
+              #rp = RoomPrice.find_or_initialize_by(date: date, price_cents: Money.new(price.second.first), room: self)
 
-              rp.price = Money.new(price.second.first)
-              rp.save unless rp.locked
-            rescue
-              puts "No price"
-            end
+              #rp.price = Money.new(price.second.first)
+              #rp.save! unless rp.locked == true
+            # rescue
+            #   puts "No price"
+            # end
           end
         end
       end

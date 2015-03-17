@@ -1,11 +1,21 @@
 class BlockAvailability < ActiveRecord::Base
   belongs_to :hotel, foreign_key: 'booking_id'
-  has_many :blocks
 
   scope :for_hotels, -> (hotel_ids){ where(booking_id: hotel_ids) }
-  scope :with_occupancy, -> (occupancy){ includes(:blocks).where(blocks: { max_occupancy: occupancy.to_s }) }
+  scope :with_occupancy, -> (occupancy){ where("jsonb2arr((data->'block'), 'max_occupancy') @> '{\"?\"}'::text[]", occupancy) }
   scope :by_arrival, -> (date){ where(arrival_date: date) }
   scope :by_departure, -> (date){ where(departure_date: date) }
+
+  def block_prices(occupancy)
+    blocks = data['block'].select {|block| block['max_occupancy'] == occupancy}
+
+    names = []
+    blocks.each do |block|
+      names << block.fetch('incremental_price')
+    end
+
+    names
+  end
 
   class << self
 

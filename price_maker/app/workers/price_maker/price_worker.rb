@@ -5,7 +5,7 @@ module PriceMaker
 
     sidekiq_options retry: false, unique: true
 
-    recurrence { hourly(3) }
+    # recurrence { hourly(3) }
 
     def perform
       WubookAuth.each do |auth|

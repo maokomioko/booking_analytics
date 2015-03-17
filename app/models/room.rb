@@ -17,4 +17,8 @@ class Room < ActiveRecord::Base
 
   monetize :min_price_cents
   monetize :max_price_cents
+
+  def occupancy_fallback
+    occupancy.to_i == 0 ? 1 : occupancy
+  end
 end

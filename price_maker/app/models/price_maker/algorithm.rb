@@ -38,7 +38,7 @@ module PriceMaker
     def min_price_listing
 
       aw_pool = PriceMaker::AvailabilityWorker.pool(size: 4)
-      h_slices = @hotel_ids.to_a.each_slice(30)
+      h_slices = @hotel_ids.to_a.each_slice(20)
 
       # Filtered blocks for hotels
       blocks = h_slices.count.times.map do
@@ -50,6 +50,7 @@ module PriceMaker
       end
 
       blocks = blocks.map(&:value).flatten
+      puts "GENERATED BLOCKS #{blocks}"
       aw_pool.terminate
 
       return if blocks.reject(&:blank?).empty?
@@ -65,12 +66,12 @@ module PriceMaker
         end
       end
 
-      begin
-        pr_blocks = pr_blocks.map(&:value).flatten.uniq
-        @price_blocks = pr_blocks
-      rescue
-        nil
-      end
+      #begin
+        @price_blocks = pr_blocks.map(&:value).flatten.uniq
+        inspect "PEW #{@price_blocks}"
+      #rescue
+      #   nil
+      # end
 
       pr_pool.terminate
     end

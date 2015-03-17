@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316190251) do
+ActiveRecord::Schema.define(version: 20150317095022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,20 +44,6 @@ ActiveRecord::Schema.define(version: 20150316190251) do
   create_table "block_availability", force: :cascade do |t|
     t.jsonb "data"
     t.date  "created", default: "now()", null: false
-  end
-
-  create_table "blocks", force: :cascade do |t|
-    t.string   "name"
-    t.string   "max_occupancy"
-    t.integer  "block_availability_id"
-    t.string   "block_id",              limit: 40
-    t.boolean  "refundable"
-    t.string   "refundable_until"
-    t.boolean  "deposit_required"
-    t.boolean  "breakfast_included"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.jsonb    "price_data"
   end
 
   create_table "checkins", force: :cascade do |t|

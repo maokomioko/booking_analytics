@@ -1,18 +1,16 @@
 class BlockAvailability < ActiveRecord::Base
-  belongs_to :hotel, foreign_key: 'booking_id'
-
   scope :for_hotels, -> (hotel_ids){ where("(data->>'hotel_id')::integer IN (?)", hotel_ids) }
   scope :with_occupancy, -> (occupancy){ where("jsonb2arr((data->'block'), 'max_occupancy') @> '{\"?\"}'::text[]", occupancy) }
 
   scope :by_arrival, -> (date){ where("(data->>'arrival_date') = ?", date.to_date.strftime("%Y-%m-%d")) }
   scope :by_departure, -> (date){ where("(data->>'departure_date') = ?", date.to_date.strftime("%Y-%m-%d")) }
 
-  def block_prices(occupancy)
+  def block_prices(occupancy, price_position)
     blocks = data['block'].select { |block| block['max_occupancy'] == occupancy.to_s }
 
     arr = []
     blocks.each do |block|
-      arr << block.fetch('incremental_price').map{|x| x['price']}.sort.first
+      arr << block.fetch('incremental_price').map{|x| x['price']}.sort.price_position
     end
 
     arr
@@ -25,7 +23,9 @@ class BlockAvailability < ActiveRecord::Base
         blocks = for_hotels(hotel_ids)
 
         blocks = blocks.with_occupancy(occupancy) unless occupancy.nil?
-        blocks = departure.nil? ? blocks.by_arrival(arrival) : blocks.by_departure(departure)
+        blocks = blocks.by_arrival(arrival) unless arrival.nil?
+        blocks.by_departure(departure) unless departure.nil?
+
         blocks = blocks.to_a # correct DB connection release
 
       rescue ActiveRecord::ConnectionTimeoutError

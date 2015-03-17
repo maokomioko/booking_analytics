@@ -2,7 +2,7 @@ module PriceMaker
   class Algorithm
     HOTELS_PER_PAGE = 15
 
-    attr_reader :get_top_prices, :min_price_listing
+    attr_reader :get_top_prices, :price_tiers
 
     def initialize(hotel_ids, occupancy, arrival, departure)
       @hotel_ids = hotel_ids
@@ -18,7 +18,7 @@ module PriceMaker
     end
 
     def safe_init
-      min_price_listing
+      price_tiers
       split_chunks
     end
 
@@ -35,45 +35,23 @@ module PriceMaker
       @chunks = @price_blocks.each_slice(HOTELS_PER_PAGE).to_a rescue []
     end
 
-    def min_price_listing
+    def price_tiers
 
-      aw_pool = PriceMaker::AvailabilityWorker.pool(size: 4)
+      pool = PriceMaker::AvailabilityWorker.pool(size: 8)
       h_slices = @hotel_ids.to_a.each_slice(20)
 
       # Filtered blocks for hotels
-      blocks = h_slices.count.times.map do
+      price_blocks = h_slices.count.times.map do
         begin
           not_blank = h_slices.next.reject(&:blank?)
-          aw_pool.future.get_blocks(not_blank, @occupancy, @arrival, @departure)
+          pool.future.get_block_prices(not_blank, @occupancy, @arrival, @departure)
         rescue Celluloid::DeadActorError
         end
       end
 
-      blocks = blocks.map(&:value).flatten
-      puts "GENERATED BLOCKS #{blocks}"
-      aw_pool.terminate
-
-      return if blocks.reject(&:blank?).empty?
-
-      pr_pool = PriceMaker::AvailabilityWorker.pool(size: 4)
-      b_slices = blocks.each_slice(30)
-
-      # Ordered prices
-      pr_blocks = b_slices.count.times.map do
-        begin
-          pr_pool.future.get_prices(b_slices.next)
-        rescue Celluloid::DeadActorError
-        end
-      end
-
-      #begin
-        @price_blocks = pr_blocks.map(&:value).flatten.uniq
-        inspect "PEW #{@price_blocks}"
-      #rescue
-      #   nil
-      # end
-
-      pr_pool.terminate
+      @price_blocks = price_blocks.map(&:value).flatten.uniq
+      puts "GENERATED BLOCKS #{@price_blocks}"
+      pool.terminate
     end
   end
 end

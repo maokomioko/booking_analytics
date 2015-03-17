@@ -8,13 +8,17 @@ class PriceMaker::AvailabilityWorker
   def initialize
   end
 
-  def get_blocks(hotel_ids, occupancy, arrival, departure)
+  def get_block_prices(hotel_ids, occupancy, arrival, departure)
     puts "blocks processing..."
-    BlockAvailability.to_date(hotel_ids, occupancy, arrival, departure)
-  end
 
-  def get_prices(ids)
-    puts "prices processing..."
-    BlockAvailability.get_prices(ids)
+    blocks = BlockAvailability.for_hotels(hotel_ids).
+              by_arrival(arrival).by_departure(departure).with_occupancy(occupancy).limit(60)
+
+    arr = []
+    blocks.each do |block|
+      arr << block.block_prices(occupancy, 0)
+    end
+
+    arr.flatten.sort
   end
 end

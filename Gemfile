@@ -70,6 +70,7 @@ gem 'stringex'
 gem 'state_machine', github: 'seuros/state_machine'
 gem 'sidekiq'
 gem 'sidetiq'
+gem 'sinatra', :require => nil
 
 gem 'turbolinks', '~> 2.5.3'
 

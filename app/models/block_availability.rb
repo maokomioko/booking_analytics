@@ -1,8 +1,8 @@
 class BlockAvailability < ActiveRecord::Base
-  belongs_to :hotel
+  belongs_to :hotel, foreign_key: 'booking_id'
   has_many :blocks
 
-  scope :for_hotels, -> (hotel_ids){ where(hotel_id: hotel_ids) }
+  scope :for_hotels, -> (hotel_ids){ where(booking_id: hotel_ids) }
   scope :with_occupancy, -> (occupancy){ includes(:blocks).where(blocks: { max_occupancy: occupancy.to_s }) }
   scope :by_arrival, -> (date){ where(arrival_date: date) }
   scope :by_departure, -> (date){ where(departure_date: date) }
@@ -13,25 +13,17 @@ class BlockAvailability < ActiveRecord::Base
       begin
         blocks = for_hotels(hotel_ids)
 
-        unless occupancy.nil?
-          blocks = blocks.with_occupancy(occupancy)
-        end
-
-        if departure.nil?
-          blocks = blocks.by_arrival(arrival)
-        else
-          blocks = blocks.by_departure(departure)
-        end
-
-        blocks = blocks.to_a # for correct release DB connection
+        blocks = blocks.with_occupancy(occupancy) unless occupancy.nil?
+        blocks = departure.nil? ? blocks.by_arrival(arrival) : blocks.by_departure(departure)
+        blocks = blocks.to_a # correct DB connection release
 
       rescue ActiveRecord::ConnectionTimeoutError
-        puts 'wait for free db pool...'
+        puts 'Cleaning DB Pool.. Please wait'
         retry
       end
 
       ActiveRecord::Base.connection_pool.release_connection(Thread.current.object_id)
-
+      puts "#{blocks}"
       blocks
     end
 
@@ -44,7 +36,7 @@ class BlockAvailability < ActiveRecord::Base
         end
 
       rescue ActiveRecord::ConnectionTimeoutError
-        puts 'wait for free db pool...'
+        puts 'Cleaning DB Pool.. Please wait'
         retry
       end
 

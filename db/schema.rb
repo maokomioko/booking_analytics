@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317222242) do
+ActiveRecord::Schema.define(version: 20150318065952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_block_availabilities", force: :cascade do |t|
+    t.string   "max_occupancy"
+    t.jsonb    "data"
+    t.integer  "booking_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "active_block_availabilities", ["booking_id"], name: "index_active_block_availabilities_on_booking_id", using: :btree
+  add_index "active_block_availabilities", ["max_occupancy"], name: "index_active_block_availabilities_on_max_occupancy", using: :btree
+
+  create_table "archive_block_availabilities", id: false, force: :cascade do |t|
+    t.integer  "id"
+    t.string   "max_occupancy"
+    t.jsonb    "data"
+    t.integer  "booking_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "beddings", force: :cascade do |t|
     t.integer "room_id"
@@ -24,22 +44,6 @@ ActiveRecord::Schema.define(version: 20150317222242) do
     t.string  "amount"
     t.string  "type"
     t.integer "bedding_id"
-  end
-
-  create_table "block_availabilities", force: :cascade do |t|
-    t.string   "max_occupancy"
-    t.jsonb    "data"
-    t.integer  "booking_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "block_availabilities", ["booking_id"], name: "index_block_availabilities_on_booking_id", using: :btree
-  add_index "block_availabilities", ["max_occupancy"], name: "index_block_availabilities_on_max_occupancy", using: :btree
-
-  create_table "block_availability", force: :cascade do |t|
-    t.jsonb "data"
-    t.date  "created", default: "now()", null: false
   end
 
   create_table "checkins", force: :cascade do |t|

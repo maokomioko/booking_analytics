@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: active_block_availabilities
+#
+#  id            :integer
+#  max_occupancy :string
+#  data          :jsonb
+#  booking_id    :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 class BlockAvailability < ActiveRecord::Base
   self.table_name = 'active_block_availabilities'
 

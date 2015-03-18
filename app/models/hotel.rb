@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: hotels
+#
+#  id           :integer          not null, primary key
+#  name         :string
+#  hoteltype_id :string
+#  city         :string
+#  city_id      :string
+#  address      :string
+#  url          :string
+#  exact_class  :float
+#  review_score :float
+#  district     :string
+#  zip          :string
+#  booking_id   :integer
+#
+
 class Hotel < ActiveRecord::Base
   include ParamSelectable
 
@@ -9,6 +27,7 @@ class Hotel < ActiveRecord::Base
   scope :with_score_lt, -> (score){ where("review_score < ?", score) }
 
   has_many :rooms
+  has_many :channel_managers
 
   has_and_belongs_to_many :related,
                           class_name: 'Hotel',

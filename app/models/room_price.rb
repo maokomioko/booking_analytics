@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: room_prices
+#
+#  id                     :integer          not null, primary key
+#  date                   :date
+#  default_price_cents    :integer
+#  price_cents            :integer
+#  enabled                :boolean
+#  locked                 :boolean
+#  room_id                :integer
+#  price_currency         :string           default("EUR")
+#  default_price_currency :string           default("EUR")
+#
+
 class RoomPrice < ActiveRecord::Base
   belongs_to :room
 

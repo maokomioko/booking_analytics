@@ -85,11 +85,11 @@ group :development do
 end
 
 group :development, :test do
-  gem 'annotate', '>= 2.6.0'
-  gem 'capistrano', '~> 3.2.1'
+  gem 'annotate'
+  gem 'capistrano'
   gem 'capistrano-rvm'
-  gem 'capistrano-bundler', '~> 1.1.2'
-  gem 'capistrano-rails', '~> 1.1.1'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
   gem 'capistrano-sidekiq'
   gem 'quiet_assets'
   gem 'guard'

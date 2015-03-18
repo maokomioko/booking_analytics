@@ -11,21 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318065952) do
+ActiveRecord::Schema.define(version: 20150318195536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "active_block_availabilities", force: :cascade do |t|
+  create_table "active_block_availabilities", id: false, force: :cascade do |t|
+    t.integer  "id"
     t.string   "max_occupancy"
     t.jsonb    "data"
     t.integer  "booking_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "active_block_availabilities", ["booking_id"], name: "index_active_block_availabilities_on_booking_id", using: :btree
-  add_index "active_block_availabilities", ["max_occupancy"], name: "index_active_block_availabilities_on_max_occupancy", using: :btree
 
   create_table "archive_block_availabilities", id: false, force: :cascade do |t|
     t.integer  "id"
@@ -45,6 +43,20 @@ ActiveRecord::Schema.define(version: 20150318065952) do
     t.string  "type"
     t.integer "bedding_id"
   end
+
+  create_table "channel_managers", force: :cascade do |t|
+    t.string  "login"
+    t.string  "password"
+    t.string  "lcode"
+    t.integer "booking_id"
+    t.string  "hotel_name"
+    t.integer "non_refundable_pid"
+    t.integer "default_pid"
+    t.integer "company_id"
+    t.string  "type",               null: false
+  end
+
+  add_index "channel_managers", ["company_id"], name: "index_channel_managers_on_company_id", using: :btree
 
   create_table "checkins", force: :cascade do |t|
     t.string   "name"
@@ -206,18 +218,5 @@ ActiveRecord::Schema.define(version: 20150318065952) do
   add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "wubook_auths", force: :cascade do |t|
-    t.string  "login"
-    t.string  "password"
-    t.string  "lcode"
-    t.integer "booking_id"
-    t.string  "hotel_name"
-    t.integer "non_refundable_pid"
-    t.integer "default_pid"
-    t.integer "company_id"
-  end
-
-  add_index "wubook_auths", ["company_id"], name: "index_wubook_auths_on_company_id", using: :btree
 
 end

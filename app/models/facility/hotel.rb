@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: hotel_facilities
+#
+#  id    :integer          not null, primary key
+#  name  :string
+#  count :integer          default(0)
+#
+
 class Facility::Hotel < ActiveRecord::Base
   include FacilityMethods
 

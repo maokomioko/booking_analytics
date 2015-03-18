@@ -24,7 +24,6 @@ class PriceMaker::HotelWorker
       retry
     end
 
-
     ids.flatten unless ids.blank?
   end
 end

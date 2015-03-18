@@ -1,5 +1,5 @@
 module PriceMaker
-  module Wubook
+  module ChannelManager
     extend ActiveSupport::Concern
 
     included do

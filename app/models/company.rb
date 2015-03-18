@@ -11,7 +11,7 @@
 #
 
 class Company < ActiveRecord::Base
-  has_many :users
+  has_many :users, dependent: :destroy
   has_many :channel_managers, dependent: :destroy
 
   belongs_to :owner, class_name: 'User'

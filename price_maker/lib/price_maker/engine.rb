@@ -14,7 +14,7 @@ module PriceMaker
     initializer 'price_maker.concerns' do
       ActionDispatch::Reloader.to_prepare do
         if (Room.connection rescue nil)
-          Room.send(:include, PriceMaker::Wubook)
+          Room.send(:include, PriceMaker::ChannelManager)
         end
 
         if (Hotel.connection rescue nil)

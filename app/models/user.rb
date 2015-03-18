@@ -19,8 +19,8 @@
 #
 
 class User < ActiveRecord::Base
-  has_many :hotels, through: :wubook_auth
-  has_many :wubook_auth, through: :company
+  has_many :hotels, through: :channel_managers
+  has_many :channel_managers, through: :company
 
   belongs_to :company
 

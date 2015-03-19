@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/FortAwesome/font-awesome-sass.git
+  revision: e6b0271a946e4525cbc4eeb1c9b7293d188452cb
+  specs:
+    font-awesome-sass (4.3.2.1)
+      sass (~> 3.2)
+
+GIT
   remote: git://github.com/celluloid/celluloid.git
   revision: 64ed9602298852360cfc17aafffe279beaaa23be
   specs:
@@ -237,8 +244,6 @@ GEM
     ffaker (2.0.0)
     ffi (1.9.8)
     ffi2-generators (0.1.1)
-    font-awesome-sass (4.3.2)
-      sass (~> 3.2)
     formatador (0.2.5)
     fuubar (2.0.0)
       rspec (~> 3.0)
@@ -826,7 +831,7 @@ DEPENDENCIES
   eu_central_bank
   fabrication
   ffaker
-  font-awesome-sass (~> 4.3.0)
+  font-awesome-sass!
   fuubar
   geocoder
   globalize!

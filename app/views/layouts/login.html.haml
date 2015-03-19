@@ -21,15 +21,11 @@
         HOTEL
         %i.clip-clip>
         COMMANDER
+      - unless flash.empty?
+        - flash.each do |type, message|
+          = render 'partials/flash', type: type, message: message
       = yield
       .copyright= render 'partials/copyright'
-    #flash_container
-      - flash.each do |key, value|
-        .alert{class: "#{key}"}
-          %strong= value
-          %a.close{href: "#"}
-      - unless flash
-        .none
 
     #spinner_placeholder.hidden
       = render partial: 'partials/spinner'

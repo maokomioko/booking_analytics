@@ -7,14 +7,14 @@ default: &default
   password: ba
   port: 19000
   timeout: 30
-  pool: 5
+  pool: 10
 
 development:
   <<: *default
-  database: booking_analytics_development
-  username: postgres
-  password:
-  port: 5432
+#  database: booking_analytics_development
+#  username: postgres
+#  password:
+#  port: 5432
 
 test:
   <<: *default

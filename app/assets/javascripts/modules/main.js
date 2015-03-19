@@ -129,12 +129,12 @@ var Main = function() {
 
 			e.preventDefault();
 		});
-		$("#page-sidebar .media a").on("click", function(e) {
-			$(this).closest(".tab-pane").css({
-				right: $("#page-sidebar").outerWidth()
-			});
-			e.preventDefault();
-		});
+		//$("#page-sidebar .media a").on("click", function(e) {
+		//	$(this).closest(".tab-pane").css({
+		//		right: $("#page-sidebar").outerWidth()
+		//	});
+		//	e.preventDefault();
+		//});
 		$("#page-sidebar .sidebar-back").on("click", function(e) {
 			$(this).closest(".tab-pane").css({
 				right: 0

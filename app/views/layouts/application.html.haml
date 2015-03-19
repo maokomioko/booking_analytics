@@ -25,14 +25,16 @@
     .main-container
       = render 'partials/menu'
       .main-content
-        - flash.each do |key, value|
-          .alert{class: "#{key}"}
-            %strong= value
-            %a.close{href: "#"}
-        = yield
-      #spinner_placeholder.hidden
-        = render partial: 'partials/spinner'
-        %p.loading_text= t('shared.loading')
+        .container
+          = yield(:main_content_header)
+          - unless flash.empty?
+            - flash.each do |type, message|
+              = render 'partials/flash', type: type, message: message
+          = yield
+    = render 'partials/sidebar'
+    #spinner_placeholder.hidden
+      = render partial: 'partials/spinner'
+      %p.loading_text= t('shared.loading')
 
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = yield(:page_js)

@@ -1,7 +1,8 @@
 en:
   application:
     no_company:
-      error_text: No company defined. Please contact with your administrator.
+      header: No company defined
+      error_text: Please contact with your administrator.
   channel_manager:
     new:
       header: Define your connection options

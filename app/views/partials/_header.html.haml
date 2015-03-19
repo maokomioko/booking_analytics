@@ -1,223 +1,24 @@
 .navbar.navbar-inverse.navbar-fixed-top
-  / start: TOP NAVIGATION CONTAINER
   .container
     .navbar-header
-      / start: RESPONSIVE MENU TOGGLER
       %button.navbar-toggle{ data: { target: '.navbar-collapse', toggle: 'collapse' }, type: 'button' }
         %span.clip-list-2
-      / end: RESPONSIVE MENU TOGGLER
-      / start: LOGO
       = link_to main_app.root_path, class: 'navbar-brand' do
         HOTEL
         %i.clip-clip>
         COMMANDER
-      / end: LOGO
     .navbar-tools
-      / start: TOP NAVIGATION MENU
       %ul.nav.navbar-right
-        / start: TO-DO DROPDOWN
-        %li.dropdown
-          %a.dropdown-toggle{ data: { "close-others" => "true", hover: 'dropdown', toggle: 'dropdown' }, href: '#' }
-            %i.clip-list-5
-            %span.badge 12
-          %ul.dropdown-menu.todo
-            %li
-              %span.dropdown-menu-title You have 12 pending tasks
-            %li
-              .drop-down-wrapper.ps-container
-                %ul
-                  %li
-                    %a.todo-actions{:href => "javascript:void(0)"}
-                      %i.fa.fa-square-o
-                      %span.desc{:style => "opacity: 1; text-decoration: none;"} Staff Meeting
-                      %span.label.label-danger{:style => "opacity: 1;"} today
-                  %li
-                    %a.todo-actions{:href => "javascript:void(0)"}
-                      %i.fa.fa-square-o
-                      %span.desc{:style => "opacity: 1; text-decoration: none;"} New frontend layout
-                      %span.label.label-danger{:style => "opacity: 1;"} today
-                  %li
-                    %a.todo-actions{:href => "javascript:void(0)"}
-                      %i.fa.fa-square-o
-                      %span.desc Hire developers
-                      %span.label.label-warning tommorow
-                  %li
-                    %a.todo-actions{:href => "javascript:void(0)"}
-                      %i.fa.fa-square-o
-                      %span.desc Staff Meeting
-                      %span.label.label-warning tommorow
-                  %li
-                    %a.todo-actions{:href => "javascript:void(0)"}
-                      %i.fa.fa-square-o
-                      %span.desc New frontend layout
-                      %span.label.label-success this week
-                  %li
-                    %a.todo-actions{:href => "javascript:void(0)"}
-                      %i.fa.fa-square-o
-                      %span.desc Hire developers
-                      %span.label.label-success this week
-                  %li
-                    %a.todo-actions{:href => "javascript:void(0)"}
-                      %i.fa.fa-square-o
-                      %span.desc New frontend layout
-                      %span.label.label-info this month
-                  %li
-                    %a.todo-actions{:href => "javascript:void(0)"}
-                      %i.fa.fa-square-o
-                      %span.desc Hire developers
-                      %span.label.label-info this month
-                  %li
-                    %a.todo-actions{:href => "javascript:void(0)"}
-                      %i.fa.fa-square-o
-                      %span.desc{:style => "opacity: 1; text-decoration: none;"} Staff Meeting
-                      %span.label.label-danger{:style => "opacity: 1;"} today
-                  %li
-                    %a.todo-actions{:href => "javascript:void(0)"}
-                      %i.fa.fa-square-o
-                      %span.desc{:style => "opacity: 1; text-decoration: none;"} New frontend layout
-                      %span.label.label-danger{:style => "opacity: 1;"} today
-                  %li
-                    %a.todo-actions{:href => "javascript:void(0)"}
-                      %i.fa.fa-square-o
-                      %span.desc Hire developers
-                      %span.label.label-warning tommorow
-                .ps-scrollbar-x-rail{:style => "width: 270px; display: none; left: 0px; bottom: 3px;"}
-                  .ps-scrollbar-x{:style => "left: 0px; width: 0px;"}
-                .ps-scrollbar-y-rail{:style => "top: 0px; height: 250px; display: none; right: 3px;"}
-                  .ps-scrollbar-y{:style => "top: 0px; height: 0px;"}
-            %li.view-all
-              %a{:href => "javascript:void(0)"}
-                See all tasks
-                %i.fa.fa-arrow-circle-o-right
-        / end: TO-DO DROPDOWN
-        / start: NOTIFICATION DROPDOWN
-        %li.dropdown
-          %a.dropdown-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "#"}
-            %i.clip-notification-2
-            %span.badge 11
-          %ul.dropdown-menu.notifications
-            %li
-              %span.dropdown-menu-title You have 11 notifications
-            %li
-              .drop-down-wrapper.ps-container
-                %ul
-                  %li
-                    %a{:href => "javascript:void(0)"}
-                      %span.label.label-primary
-                        %i.fa.fa-user
-                      %span.message New user registration
-                      %span.time 1 min
-                  %li
-                    %a{:href => "javascript:void(0)"}
-                      %span.label.label-success
-                        %i.fa.fa-comment
-                      %span.message New comment
-                      %span.time 7 min
-                  %li
-                    %a{:href => "javascript:void(0)"}
-                      %span.label.label-success
-                        %i.fa.fa-comment
-                      %span.message New comment
-                      %span.time 8 min
-                  %li
-                    %a{:href => "javascript:void(0)"}
-                      %span.label.label-success
-                        %i.fa.fa-comment
-                      %span.message New comment
-                      %span.time 16 min
-                  %li
-                    %a{:href => "javascript:void(0)"}
-                      %span.label.label-primary
-                        %i.fa.fa-user
-                      %span.message New user registration
-                      %span.time 36 min
-                  %li
-                    %a{:href => "javascript:void(0)"}
-                      %span.label.label-warning
-                        %i.fa.fa-shopping-cart
-                      %span.message 2 items sold
-                      %span.time 1 hour
-                  %li.warning
-                    %a{:href => "javascript:void(0)"}
-                      %span.label.label-danger
-                        %i.fa.fa-user
-                      %span.message User deleted account
-                      %span.time 2 hour
-                  %li.warning
-                    %a{:href => "javascript:void(0)"}
-                      %span.label.label-danger
-                        %i.fa.fa-shopping-cart
-                      %span.message Transaction was canceled
-                      %span.time 6 hour
-                  %li
-                    %a{:href => "javascript:void(0)"}
-                      %span.label.label-success
-                        %i.fa.fa-comment
-                      %span.message New comment
-                      %span.time yesterday
-                  %li
-                    %a{:href => "javascript:void(0)"}
-                      %span.label.label-primary
-                        %i.fa.fa-user
-                      %span.message New user registration
-                      %span.time yesterday
-                  %li
-                    %a{:href => "javascript:void(0)"}
-                      %span.label.label-primary
-                        %i.fa.fa-user
-                      %span.message New user registration
-                      %span.time yesterday
-                  %li
-                    %a{:href => "javascript:void(0)"}
-                      %span.label.label-success
-                        %i.fa.fa-comment
-                      %span.message New comment
-                      %span.time yesterday
-                  %li
-                    %a{:href => "javascript:void(0)"}
-                      %span.label.label-success
-                        %i.fa.fa-comment
-                      %span.message New comment
-                      %span.time yesterday
-                .ps-scrollbar-x-rail{:style => "width: 270px; display: none; left: 0px; bottom: 3px;"}
-                  .ps-scrollbar-x{:style => "left: 0px; width: 0px;"}
-                .ps-scrollbar-y-rail{:style => "top: 0px; height: 250px; display: none; right: 3px;"}
-                  .ps-scrollbar-y{:style => "top: 0px; height: 0px;"}
-            %li.view-all
-              %a{:href => "javascript:void(0)"}
-                See all notifications
-                %i.fa.fa-arrow-circle-o-right
-        / end: NOTIFICATION DROPDOWN
-        / start: USER DROPDOWN
         %li.dropdown.current-user
           %a.dropdown-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "#"}
-            -#%img.circle-img{:alt => "", :src => "assets/images/avatar-1-small.jpg"}
             %span.username= current_user.nickname
             %i.clip-chevron-down
           %ul.dropdown-menu
-            %li
-              %a{:href => "pages_user_profile.html"}
-                %i.clip-user-2
-                \&nbsp;My Profile
-            %li
-              %a{:href => "pages_calendar.html"}
-                %i.clip-calendar
-                \&nbsp;My Calendar
-            %li
-              %a{:href => "pages_messages.html"}
-                %i.clip-bubble-4
-                \&nbsp;My Messages (3)
-            %li.divider
             %li
               = link_to destroy_user_session_path, method: :delete do
                 %i.clip-exit
                 \&nbsp;
                 = t('auth.buttons.logout')
-        / end: USER DROPDOWN
-        / start: PAGE SIDEBAR TOGGLE
         %li
           %a.sb-toggle{:href => "#"}
             %i.fa.fa-outdent
-  / end: PAGE SIDEBAR TOGGLE
-  / end: TOP NAVIGATION MENU
-  / end: TOP NAVIGATION CONTAINER

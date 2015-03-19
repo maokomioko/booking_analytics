@@ -9,8 +9,6 @@ class PriceMaker::AvailabilityWorker
   end
 
   def get_block_prices(hotel_ids, occupancy, arrival, departure)
-    puts "blocks processing..."
-
     blocks = BlockAvailability.for_hotels(hotel_ids).
               by_arrival(arrival).by_departure(departure).with_occupancy(occupancy).limit(60)
 

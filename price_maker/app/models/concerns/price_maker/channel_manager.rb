@@ -28,14 +28,9 @@ module PriceMaker
 
       private
 
-      def current_hotel
-        # Hotel.find(wubook_auths.first.booking_id)
-        hotel
-      end
-
       def matching_hotels
-        if current_hotel.validate_amenities.size > 0
-          current_hotel.amenities_calc
+        if hotel.validate_amenities.size > 0
+          hotel.amenities_calc
         else
           nil
         end

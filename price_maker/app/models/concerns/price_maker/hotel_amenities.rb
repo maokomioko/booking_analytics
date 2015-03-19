@@ -3,6 +3,7 @@ module PriceMaker
     extend ActiveSupport::Concern
 
     included do
+      # returns booking_id for related hotels
       def amenities_calc
         if related_ids.blank?
           hw_pool = PriceMaker::HotelWorker.pool(size: 8)
@@ -21,7 +22,7 @@ module PriceMaker
 
           hw_pool.terminate
         end
-        related_ids
+        related.map(&:booking_id)
       end
 
       def validate_amenities

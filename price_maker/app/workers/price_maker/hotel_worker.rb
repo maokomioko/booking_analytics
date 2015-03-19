@@ -16,7 +16,7 @@ class PriceMaker::HotelWorker
         next_set = options.next
         hotels = Hotel.with_stars(rating).with_score_gt(score).with_facilities(next_set)
 
-        ids << hotels.map(&:booking_id).reject(&:blank?) if hotels.size > 0
+        ids << hotels.map(&:id).reject(&:blank?) if hotels.size > 0
       end
 
       ActiveRecord::Base.connection_pool.release_connection(Thread.current.object_id)

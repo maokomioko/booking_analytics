@@ -36,9 +36,8 @@ module PriceMaker
     end
 
     def price_tiers
-
       pool = PriceMaker::AvailabilityWorker.pool(size: 8)
-      h_slices = @hotel_ids.to_a.each_slice(20)
+      h_slices = @hotel_ids.to_a.each_slice(40)
 
       # Filtered blocks for hotels
       price_blocks = h_slices.count.times.map do

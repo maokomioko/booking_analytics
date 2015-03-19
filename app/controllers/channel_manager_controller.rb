@@ -1,13 +1,13 @@
 class ChannelManagerController < ApplicationController
   def new
     unless current_user.company.wb_auth?
-      @wb = ChannelManager::WubookAuth.new
+      @wb = ChannelManager::Wubook.new
     else redirect_to calendar_index_path, notice: t('messages.cm_already_added')
     end
   end
 
   def create
-    wb = ChannelManager::WubookAuth.new(wb_params)
+    wb = ChannelManager::Wubook.new(wb_params)
     wb.company = current_user.company
     if wb.save && wubook_auth_state
       current_user.company.update_attribute(:wb_auth, true) unless current_user.company.wb_auth?
@@ -20,11 +20,11 @@ class ChannelManagerController < ApplicationController
   end
 
   def edit
-    @wb = ChannelManager::WubookAuth.find(params[:id])
+    @wb = ChannelManager::Wubook.find(params[:id])
   end
 
   def update
-    wb = ChannelManager::WubookAuth.find(params[:id])
+    wb = ChannelManager::Wubook.find(params[:id])
 
     if wb.update_attributes(wb_params)
       redirect_to calendar_index_path

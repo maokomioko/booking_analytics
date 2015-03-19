@@ -25,7 +25,7 @@
             %span.title= t('calendar.menu.analytics')
             %span.selected
       %li
-        - if current_user && current_user.wubook_auth.size > 0
+        - if current_user && current_user.channel_managers.size > 0
           = link_to edit_channel_manager_path(current_user.wubook_auth.first.id), class: active_class(edit_channel_manager_path(current_user.wubook_auth.first.id)) do
             %i.clip-settings
             %span.title= t('calendar.menu.preferences')

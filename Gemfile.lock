@@ -91,7 +91,7 @@ PATH
 PATH
   remote: price_maker
   specs:
-    price_maker (0.0.1)
+    price_maker (0.0.2)
       celluloid
       rails (~> 4.2.0)
       sidekiq

@@ -1,2 +1,4 @@
-.container
-  %h2= t('.error_text')
+= content_for(:main_content_header) do
+  .page-header
+    %h1= t('.header')
+%p.lead= t('.error_text')

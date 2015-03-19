@@ -1,0 +1,10 @@
+%h5.sidebar-title= hotel.name
+%ul.media-list
+  - hotel.rooms.each do |room|
+    %li.media
+      = link_to [main_app, :calendar, :index, room_id: room.id] do
+        .media-body
+          %h4.media-heading= room.roomtype
+          %span
+            = Room.human_attribute_name(:max_people)
+            = room.max_people

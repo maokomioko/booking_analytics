@@ -1,0 +1,7 @@
+#page-sidebar
+  %a.sidebar-toggler.sb-toggle{:href => "#"}
+    %i.fa.fa-indent
+  .sidebar-wrapper
+    .users-list
+      - Hotel.includes(:rooms).where(id: [2457, 2250]).each do |hotel|
+        = render 'hotels/room_list', hotel: hotel

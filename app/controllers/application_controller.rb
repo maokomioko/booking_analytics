@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
+  add_flash_types :warning, :success, :error
+
   def no_company
   end
 
@@ -55,14 +57,14 @@ class ApplicationController < ActionController::Base
   end
 
   def flash_message
-    [:error, :warning, :success, :notice].each do |type|
+    [:error, :alert, :warning, :success, :notice].each do |type|
       return flash[type] unless flash[type].blank?
     end
     return ''
   end
 
   def flash_type
-    [:error, :warning, :success, :notice].each do |type|
+    [:error, :alert, :warning, :success, :notice].each do |type|
       return type unless flash[type].blank?
     end
   end

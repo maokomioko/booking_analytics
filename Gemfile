@@ -24,7 +24,7 @@ gem 'encryptor'
 gem 'erb2haml'
 gem 'eu_central_bank'
 
-gem 'font-awesome-sass', '~> 4.3.0'
+gem 'font-awesome-sass', github: 'FortAwesome/font-awesome-sass'
 
 gem 'geocoder'
 gem 'globalize', github: 'globalize/globalize'

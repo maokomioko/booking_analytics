@@ -22,7 +22,7 @@
 #
 
 class Room < ActiveRecord::Base
-  include PriceMaker::Wubook
+  include PriceMaker::ChannelManager
 
   scope :with_facilities, -> (ids){
     includes(:facilities).where(room_facilities: { id: ids })

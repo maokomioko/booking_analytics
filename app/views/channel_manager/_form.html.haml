@@ -1,18 +1,32 @@
-= form_for @wb, url: { action: (action_name == 'new' ? :create : :update) }, html: { class: 'connect_form' } do |f|
+= form_for @wb, url: { action: (action_name == 'new' ? :create : :update) }, html: { class: 'form-horizontal' } do |f|
 
-  = f.label :login
-  = f.text_field :login
+  .form-group
+    = f.label :login, class: 'col-sm-2 control-label'
+    .col-sm-5
+      = f.text_field :login, class: 'form-control'
 
-  = f.label :password
-  = f.password_field :password
+  .form-group
+    = f.label :password, class: 'col-sm-2 control-label'
+    .col-sm-5
+      = f.password_field :password, class: 'form-control'
 
-  = f.label :lcode, class: 's2_wbubook'
-  = f.text_field :lcode
+  .form-group
+    = f.label :lcode, class: 'col-sm-2 control-label'
+    .col-sm-5
+      = f.text_field :lcode, class: 'form-control'
 
-  = f.label :booking_id, t('labels.booking_id')
-  = f.text_field :booking_id
+  .form-group
+    = f.label :booking_id, t('labels.booking_id'), class: 'col-sm-2 control-label'
+    .col-sm-5
+      = f.text_field :booking_id, class: 'form-control'
 
-  = f.label :hotel_name, t('labels.hotel_name')
-  = f.text_field :hotel_name
+  .form-group
+    = f.label :hotel_name, t('labels.hotel_name'), class: 'col-sm-2 control-label'
+    .col-sm-5
+      = f.text_field :hotel_name, class: 'form-control'
 
-  = f.submit t("auth.buttons.#{action_name}"), class: 'button transitioned200'
+  .form-group
+    .col-sm-5.col-sm-offset-2
+      = f.button class: 'btn btn-primary', type: :submit do
+        = t("auth.buttons.#{action_name}")
+        %i.fa.fa-arrow-circle-right

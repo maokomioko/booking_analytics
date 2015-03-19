@@ -6,7 +6,19 @@
 #= require jquery-ui
 #= require jquery.remotipart
 
-#= require_tree .
+#= require bootstrap-sprockets
+#= require bootstrap-hover-dropdown.min
+
+#= require jquery.blockUI
+
+#= require icheck
+#= require jquery.mousewheel
+#= require perfect-scrollbar
+#= require jquery.cookie
+
+#= require modules/main
+
+# require_tree .
 
 ready = ->
   $("#calendar").perfectScrollbar()
@@ -15,6 +27,8 @@ ready = ->
 
   $(document).mouseup ->
     window.isMouseDown = false
+
+  Main.init()
 
 $(document).ready(ready)
 

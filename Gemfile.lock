@@ -141,6 +141,9 @@ GEM
       rake (~> 10.4)
     ansi (1.5.0)
     arel (6.0.0)
+    autoprefixer-rails (5.1.7.1)
+      execjs
+      json
     bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -148,6 +151,9 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.3.4)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.2.19)
     browser (0.8.0)
     bson (1.12.0)
     bson_ext (1.12.0)
@@ -231,6 +237,8 @@ GEM
     ffaker (2.0.0)
     ffi (1.9.8)
     ffi2-generators (0.1.1)
+    font-awesome-sass (4.3.2)
+      sass (~> 3.2)
     formatador (0.2.5)
     fuubar (2.0.0)
       rspec (~> 3.0)
@@ -283,6 +291,10 @@ GEM
     http_parser.rb (0.6.0)
     i18n (0.7.0)
     ice_cube (0.11.1)
+    icheck-rails (1.0.2.1)
+      jquery-rails
+      rails (>= 3.1.0)
+      sass-rails
     jbuilder (2.2.11)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -397,8 +409,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-rails (0.3.3)
-      pry (>= 0.9.10)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     racc (1.4.12)
@@ -790,6 +800,7 @@ DEPENDENCIES
   awesome_print!
   better_errors
   binding_of_caller
+  bootstrap-sass
   browser
   bson_ext
   bullet
@@ -815,6 +826,7 @@ DEPENDENCIES
   eu_central_bank
   fabrication
   ffaker
+  font-awesome-sass (~> 4.3.0)
   fuubar
   geocoder
   globalize!
@@ -826,6 +838,7 @@ DEPENDENCIES
   guard-rspec
   haml-rails
   i18n (= 0.7)
+  icheck-rails
   jbuilder
   jquery-rails
   jquery-ui-rails
@@ -850,7 +863,6 @@ DEPENDENCIES
   premailer-rails
   price_maker!
   progress_bar
-  pry-rails
   quiet_assets
   racc
   rails (~> 4.2)

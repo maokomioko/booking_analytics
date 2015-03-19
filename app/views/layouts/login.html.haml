@@ -1,0 +1,41 @@
+!!! 5
+%html
+  %head
+    %title= t('meta.title')
+    / start: META
+    %meta{ charset: 'utf-8' }
+    /[if IE] <meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" />
+    %meta{ content: 'width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0', name: 'viewport' }
+    %meta{ content: 'yes', name: 'apple-mobile-web-app-capable' }
+    %meta{ content: 'black', name: 'apple-mobile-web-app-status-bar-style' }
+    %meta{ content: '', name: 'description' }
+    %meta{ content: '', name: 'author' }
+    / end: META
+
+    = stylesheet_link_tag 'application', 'data-turbolinks-track' => true
+
+    = csrf_meta_tags
+  %body{class: 'login', data: { page: body_data_page }}
+    .main-login.col-sm-4.col-sm-offset-4
+      .logo
+        HOTEL
+        %i.clip-clip>
+        COMMANDER
+      = yield
+      .copyright= render 'partials/copyright'
+    #flash_container
+      - flash.each do |key, value|
+        .alert{class: "#{key}"}
+          %strong= value
+          %a.close{href: "#"}
+      - unless flash
+        .none
+
+    #spinner_placeholder.hidden
+      = render partial: 'partials/spinner'
+      %p.loading_text= t('shared.loading')
+
+    = render partial: 'partials/javascript'
+
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = yield(:page_js)

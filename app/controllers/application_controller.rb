@@ -1,12 +1,23 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_filter :auth_user, :company_present, :ch_manager_present
+
+  before_filter :auth_user, :company_present, :ch_manager_present, unless: :devise_controller?
   after_filter :flash_to_headers
+
+  layout :layout_by_resource
 
   def no_company
   end
 
   private
+
+  def layout_by_resource
+    if devise_controller?
+      'login'
+    else
+      'application'
+    end
+  end
 
   def auth_user
     if !devise_controller? && !user_signed_in?

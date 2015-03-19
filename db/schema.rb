@@ -11,10 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224150855) do
+ActiveRecord::Schema.define(version: 20150318195536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_block_availabilities", id: false, force: :cascade do |t|
+    t.integer  "id"
+    t.string   "max_occupancy"
+    t.jsonb    "data"
+    t.integer  "booking_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "archive_block_availabilities", id: false, force: :cascade do |t|
+    t.integer  "id"
+    t.string   "max_occupancy"
+    t.jsonb    "data"
+    t.integer  "booking_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "beddings", force: :cascade do |t|
     t.integer "room_id"
@@ -26,35 +44,26 @@ ActiveRecord::Schema.define(version: 20150224150855) do
     t.integer "bedding_id"
   end
 
-  create_table "block_availabilities", force: :cascade do |t|
-    t.string   "departure_date"
-    t.string   "arrival_date"
-    t.string   "max_occupancy"
-    t.jsonb    "data"
-    t.integer  "hotel_id"
-    t.integer  "booking_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "channel_managers", force: :cascade do |t|
+    t.string  "login"
+    t.string  "password"
+    t.string  "lcode"
+    t.integer "booking_id"
+    t.string  "hotel_name"
+    t.integer "non_refundable_pid"
+    t.integer "default_pid"
+    t.integer "company_id"
+    t.string  "type",               null: false
   end
 
-  add_index "block_availabilities", ["booking_id"], name: "index_block_availabilities_on_booking_id", using: :btree
-  add_index "block_availabilities", ["hotel_id"], name: "index_block_availabilities_on_hotel_id", using: :btree
+  add_index "channel_managers", ["company_id"], name: "index_channel_managers_on_company_id", using: :btree
 
-  create_table "blocks", force: :cascade do |t|
+  create_table "checkins", force: :cascade do |t|
     t.string   "name"
-    t.string   "max_occupancy"
-    t.integer  "block_availability_id"
-    t.string   "block_id",              limit: 40
-    t.boolean  "refundable"
-    t.string   "refundable_until"
-    t.boolean  "deposit_required"
-    t.boolean  "breakfast_included"
+    t.integer  "hotel_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "blocks", ["block_availability_id"], name: "index_blocks_on_block_availability_id", using: :btree
-  add_index "blocks", ["block_id"], name: "index_blocks_on_block_id", using: :btree
 
   create_table "checkouts", force: :cascade do |t|
     t.string  "from"
@@ -71,6 +80,14 @@ ActiveRecord::Schema.define(version: 20150224150855) do
   end
 
   add_index "chekins", ["hotel_id"], name: "index_chekins_on_hotel_id", using: :btree
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "wb_auth",    default: false
+    t.integer  "owner_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "hotel_facilities", id: false, force: :cascade do |t|
     t.integer "id",                null: false
@@ -103,14 +120,7 @@ ActiveRecord::Schema.define(version: 20150224150855) do
   end
 
   add_index "hotels", ["booking_id"], name: "index_hotels_on_booking_id", using: :btree
-
-  create_table "incremental_prices", force: :cascade do |t|
-    t.string  "price_currency", default: "EUR"
-    t.integer "price_cents"
-    t.integer "block_id"
-  end
-
-  add_index "incremental_prices", ["block_id"], name: "index_incremental_prices_on_block_id", using: :btree
+  add_index "hotels", ["exact_class", "review_score"], name: "index_hotels_on_exact_class_and_review_score", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string  "latitude"
@@ -155,6 +165,8 @@ ActiveRecord::Schema.define(version: 20150224150855) do
     t.string  "default_price_currency", default: "EUR"
   end
 
+  add_index "room_prices", ["date", "room_id"], name: "index_room_prices_on_date_and_room_id", unique: true, using: :btree
+
   create_table "rooms", force: :cascade do |t|
     t.string  "roomtype"
     t.integer "max_price_cents"
@@ -198,25 +210,13 @@ ActiveRecord::Schema.define(version: 20150224150855) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.boolean  "wb_auth"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
+  add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "wubook_auths", force: :cascade do |t|
-    t.string  "login"
-    t.string  "password"
-    t.string  "lcode"
-    t.integer "booking_id"
-    t.string  "hotel_name"
-    t.integer "non_refundable_pid"
-    t.integer "default_pid"
-    t.integer "user_id"
-  end
-
-  add_index "wubook_auths", ["user_id"], name: "index_wubook_auths_on_user_id", using: :btree
 
 end

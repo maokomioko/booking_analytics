@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Graph::VERSION
   s.authors     = ["sigra"]
   s.email       = ["sigra.yandex@gmail.com"]
-  s.homepage    = "nothing"
+  s.homepage    = "https://github.com/maokomioko/booking_analytics"
   s.summary     = "Graph module for BA"
   s.description = "Graph module for BA"
   s.license     = "MIT"

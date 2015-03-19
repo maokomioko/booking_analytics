@@ -1,5 +1,5 @@
 class CalendarController < ApplicationController
-  before_filter :set_wubook
+  before_filter :set_channel_manager
 
   def index
     params[:room_id].nil? ? room_id = @wba.rooms.first.room_id : room_id = params[:room_id]
@@ -8,7 +8,7 @@ class CalendarController < ApplicationController
 
   private
 
-  def set_wubook
+  def set_channel_manager
     @wba = current_user.wubook_auth.first
 
     @wba.create_rooms unless @wba.rooms.size > 0

@@ -27,6 +27,8 @@ module BookingAnalytics
       g.helper_specs false
     end
 
+    config.railties_order = [:main_app, :all]
+
     Money.default_currency = Money::Currency.new("EUR")
   end
 end

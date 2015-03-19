@@ -16,53 +16,48 @@ module ParamSelectable
       'Restaurant'
   ]
 
+  included do
+    scope :by_property_type, -> (type_id){ where(hoteltype_id: type_id) }
+  end
+
   module ClassMethods
     def by_old_property_type(type)
-      case type
-      when 'hotel'
-        type_id = 14
-      when 'hostel'
-        type_id = 13
-      when 'motel'
-        type_id = 19
-      when 'apartment'
-        type_id = 2
-      when 'guesthouse'
-        type_id = 3
-      when 'bed_breakfast'
-        type_id = 24
-      when 'homestay'
-        type_id = 23
-      end
+      type_id = case type
+                when 'hotel' then 14
+                when 'hostel' then 13
+                when 'motel' then 19
+                when 'apartment' then 2
+                when 'guesthouse' then 3
+                when 'bed_breakfast' then 24
+                when 'homestay' then 23
+                end
 
-      property_type(type_id)
+      by_property_type(type_id)
     end
 
     def by_property_type(type)
-      case type
-      when 'hotel'
-        type_id = 204
-      when 'hostel'
-        type_id = 203
-      when 'motel'
-        type_id = 205
-      when 'apartment'
-        type_id = 201
-      when 'guesthouse'
-        type_id = 216
-      when 'bed_breakfast'
-        type_id = 208
-      when 'homestay'
-        type_id = 202
-      when 'boat'
-        type_id = 215
-      end
+      type_id = case type
+                when 'hotel' then 204
+                when 'hostel' then 203
+                when 'motel' then 205
+                when 'apartment' then 201
+                when 'guesthouse' then 216
+                when 'bed_breakfast' then 208
+                when 'homestay' then 202
+                when 'boat' then 215
+                end
 
-      property_type(type_id)
+      by_property_type(type_id)
     end
 
     def base_facilities
-      HotelFacility.where(name: BASE_FACILITIES)
+      Facility::Hotel.where(name: BASE_FACILITIES)
+    end
+
+    def base_facilities_cache
+      Rails.cache.fetch('hotel:base_facilities') do
+        self.base_facilities.load
+      end
     end
   end
 end

@@ -1,36 +1,33 @@
+# == Schema Information
+#
+# Table name: active_block_availabilities
+#
+#  id            :integer
+#  max_occupancy :string
+#  data          :jsonb
+#  booking_id    :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 class BlockAvailability < ActiveRecord::Base
-  belongs_to :hotel
-  has_many :blocks
+  self.table_name = 'active_block_availabilities'
 
-  scope :for_hotels, -> (hotel_ids){ where(hotel_id: hotel_ids) }
-  scope :with_occupancy, -> (occupancy){ includes(:blocks).where(blocks: { max_occupancy: occupancy.to_s }) }
-  scope :by_arrival, -> (date){ where(arrival_date: date) }
-  scope :by_departure, -> (date){ where(departure_date: date) }
+  scope :for_hotels, -> (hotel_ids){ where("(data->>'hotel_id')::integer IN (?)", hotel_ids).order('id DESC').limit(1) }
+  scope :with_occupancy, -> (occupancy){ where("jsonb2arr((data->'block'), 'max_occupancy') @> '{\"?\"}'::text[]", occupancy) }
 
-  class << self
+  scope :by_arrival, -> (date){ where("(data->>'arrival_date') = ?", date.to_date.strftime("%Y-%m-%d")) }
+  scope :by_departure, -> (date){ where("(data->>'departure_date') = ?", date.to_date.strftime("%Y-%m-%d")) }
 
-    def to_date(hotel_ids, occupancy, arrival, departure)
-      blocks = for_hotels(hotel_ids).with_occupancy(occupancy)
+  def block_prices(occupancy, price_position)
+    blocks = data['block'].select { |block| block['max_occupancy'] == occupancy.to_s }
 
-      if departure.nil?
-        blocks = blocks.by_arrival(arrival)
-      else
-        blocks = blocks.by_departure(departure)
-      end
-      blocks
+    arr = []
+    blocks.each do |block|
+      arr << block.fetch('incremental_price').map{|x| x['price'].to_f}.sort[price_position]
     end
 
-    def get_prices(blocks)
-      arr = []
-
-      blocks.each do |block_avail|
-        hotel_name = Hotel.find(block_avail.hotel_id).name
-        arr << block_avail.blocks.collect{|x| x.incremental_prices[0].price}
-      end
-
-      arr.sort
-    end
-
+    arr.reject(&:blank?)
   end
 
   private

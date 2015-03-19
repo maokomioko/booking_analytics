@@ -34,11 +34,6 @@ gem 'i18n', '0.7'
 
 gem 'log4r'
 
-gem 'progress_bar'
-gem 'premailer-rails'
-
-gem 'remotipart', '~> 1.2.1'
-
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder'
@@ -57,13 +52,17 @@ gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
 
 gem 'pg'
+gem 'premailer-rails'
+gem 'progress_bar'
+gem 'price_maker', path: 'price_maker'
 
 gem 'racc'
 gem 'rails', '~> 4.2'
 gem 'redis'
 gem 'redis-store'
 gem 'redis-rails'
-gem 'rubysl'
+gem 'remotipart', '~> 1.2.1'
+gem 'rubysl', platform: :rbx
 
 gem 'sass-rails', '>= 5'
 gem 'sanitize'
@@ -71,6 +70,7 @@ gem 'stringex'
 gem 'state_machine', github: 'seuros/state_machine'
 gem 'sidekiq'
 gem 'sidetiq'
+gem 'sinatra', :require => nil
 
 gem 'turbolinks', '~> 2.5.3'
 
@@ -85,11 +85,11 @@ group :development do
 end
 
 group :development, :test do
-  gem 'annotate', '>= 2.6.0'
-  gem 'capistrano', '~> 3.2.1'
+  gem 'annotate'
+  gem 'capistrano'
   gem 'capistrano-rvm'
-  gem 'capistrano-bundler', '~> 1.1.2'
-  gem 'capistrano-rails', '~> 1.1.1'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
   gem 'capistrano-sidekiq'
   gem 'quiet_assets'
   gem 'guard'
@@ -111,6 +111,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'rspec-its'
+  gem 'database_cleaner'
   gem 'ffaker'
   gem 'json_spec'
   gem 'timecop'

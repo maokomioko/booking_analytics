@@ -1,4 +1,3 @@
-lock '3.2.1'
 set :ssh_options, keepalive: true
 set :application, 'booking_analytics'
 set :repo_url, 'git@github.com:maokomioko/booking_analytics.git'

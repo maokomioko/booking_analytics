@@ -1,0 +1,106 @@
+.spinner {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  margin: 0px auto;
+  top: -13px;
+  left: 50%;
+  margin-left: -115px;
+  -webkit-animation: rotation 1.6s infinite linear;
+  -moz-animation: rotation 1.6s infinite linear;
+  -o-animation: rotation 1.6s infinite linear;
+  animation: rotation 1.6s infinite linear;
+  border: 6px solid;
+  border-color: rgba(0, 114, 198, 0.15) rgba(0, 114, 198, 0.15) rgba(0, 114, 198, 0.15) rgba(0, 114, 198, 0.8);
+  border-radius: 100%;
+  display: inline-block;
+}
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+
+@-moz-keyframes rotation {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(359deg);
+  }
+}
+
+
+@-o-keyframes rotation {
+  from {
+    -o-transform: rotate(0deg);
+  }
+  to {
+    -o-transform: rotate(359deg);
+  }
+}
+
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+#spinner_placeholder {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  p.loading_text {
+    display: block;
+    margin: 35px auto 0;
+    position: absolute;
+    z-index: 1500;
+    top: 55%;
+    left: calc(50% - 40px);
+    font-size: 1.2em;
+    text-align: center;
+    color: #fff;
+    font-weight: 100;
+  }
+}
+
+div.spinner {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  z-index: 1500;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  margin: -20px 0 0 -28px;
+  height: 40px;
+  width: 40px;
+}
+
+svg.spinner {
+  @include animation(rotation 1.8s linear infinite);
+}
+
+.spinner_circle {
+  stroke-dasharray: 187;
+  stroke-dashoffset: 0;
+  @include animation(dash 3.2s ease infinite);
+}

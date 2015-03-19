@@ -2,3 +2,12 @@ en:
   application:
     no_company:
       error_text: No company defined. Please contact with your administrator.
+  channel_manager:
+    new:
+      header: Define your connection options
+    edit:
+      header: Manage your connection options
+  devise:
+    registrations:
+      new:
+        iam_agree: I agree to the Terms of Service and Privacy Policy

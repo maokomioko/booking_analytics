@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'bootstrap-sass'
 gem 'browser'
 gem 'bullet'
 gem 'bson_ext'
@@ -23,6 +24,8 @@ gem 'encryptor'
 gem 'erb2haml'
 gem 'eu_central_bank'
 
+gem 'font-awesome-sass', '~> 4.3.0'
+
 gem 'geocoder'
 gem 'globalize', github: 'globalize/globalize'
 gem 'google-analytics-turbolinks'
@@ -31,6 +34,7 @@ gem 'graph', path: 'graph'
 gem 'haml-rails'
 
 gem 'i18n', '0.7'
+gem 'icheck-rails'
 
 gem 'log4r'
 
@@ -99,7 +103,7 @@ group :development, :test do
   gem 'rails-dev-tweaks'
   gem 'rails-erd'
   gem 'fabrication'
-  gem 'pry-rails'
+  # gem 'pry-rails'
   gem 'meta_request'
   gem 'rb-readline', '~> 0.5.1' # http://stackoverflow.com/questions/19496932/guard-causing-error-cant-modify-string-temporarily-locked
   gem 'traceroute'

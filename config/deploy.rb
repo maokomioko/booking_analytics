@@ -6,12 +6,12 @@ set :rvm_ruby_version, "rbx-2.5.2@booking"
 Rake::Task["deploy:compile_assets"].clear
 
 set :deploy_to, '/var/www/booking'
-set :branch, 'master'
+set :branch, 'alg_cleanup'
 set :pty,  false # To ensure Sidekiq starts fine
 
 set :assets_roles, [:web, :app]
 
-# set :linked_files, %w{config/mongoid.yml}
+set :linked_files, %w{config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads}
 
 set :keep_releases, 3

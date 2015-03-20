@@ -13,6 +13,10 @@
 #  company_id         :integer
 #  type               :string           not null
 #
+# Indexes
+#
+#  index_channel_managers_on_company_id  (company_id)
+#
 
 class ChannelManager < ActiveRecord::Base
   belongs_to :company

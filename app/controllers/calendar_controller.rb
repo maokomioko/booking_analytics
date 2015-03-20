@@ -9,7 +9,7 @@ class CalendarController < ApplicationController
   private
 
   def set_channel_manager
-    @wba = current_user.wubook_auth.first
+    @wba = current_user.channel_managers.first
 
     @wba.create_rooms unless @wba.rooms.size > 0
     @wba.rooms.each do |room|

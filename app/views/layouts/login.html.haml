@@ -13,6 +13,7 @@
     / end: META
 
     = stylesheet_link_tag 'application', 'data-turbolinks-track' => true
+    = yield(:page_css)
 
     = csrf_meta_tags
   %body{class: 'login', data: { page: body_data_page }}

@@ -7,6 +7,10 @@
 #  to       :string
 #  hotel_id :integer
 #
+# Indexes
+#
+#  index_checkouts_on_hotel_id  (hotel_id)
+#
 
 class Checkout < ActiveRecord::Base
   belongs_to :hotel

@@ -1,18 +1,26 @@
-= render partial: 'partials/menu'
+= content_for(:page_js){ javascript_include_tag 'graph/application', 'data-turbolinks-track' => true }
+= content_for(:page_css){ stylesheet_link_tag 'graph/application', 'data-turbolinks-track' => true }
 
-#main_container
-  %h1 Some graphics are here! Only for test!
+= content_for(:main_content_header) do
+  .page-header
+    %h1
+      Some graphics are here!
+      %small Only for test!
 
-  = form_tag [:simple, :hotels], remote: true, method: :get do
-    = label_tag :id, 'Select hotel: '
-    = select_tag :id, options_for_select([["Test hotel 1", 1], ["Test hotel 2", 2]], 1)
+= form_tag [:simple, :hotels], remote: true, method: :get, class: 'form-horizontal' do
+  .form-group
+    = label_tag :id, 'Select hotel: ', class: 'col-sm-2 control-label'
+    .col-sm-2
+      = select_tag :id, options_for_select([["Test hotel 1", 1], ["Test hotel 2", 2]], 1), class: 'form-control'
+    = label_tag :range, 'Select range in days: ', class: 'col-sm-2 control-label'
+    .col-sm-1
+      = number_field_tag :range, 5, max: 95, min: 5, step: 10
+    .col-sm-1
+      .checkbox
+        %label
+          = check_box_tag :future, "1", false, class: 'grey'
+          Future?
+    .col-sm-2
+      = submit_tag 'Show graph', class: 'btn btn-block btn-success btn-squared btn-lg'
 
-    = label_tag :range, 'Select range in days: '
-    = number_field_tag :range, 5, max: 95, min: 5, step: 10
-
-    = label_tag :future, 'Future?'
-    = check_box_tag :future, "1", false
-
-    = submit_tag 'Show graph'
-
-  #line-example
+#line-example

@@ -6,6 +6,10 @@
 #  name  :string
 #  count :integer          default(0)
 #
+# Indexes
+#
+#  index_room_facilities_on_id  (id) UNIQUE
+#
 
 class Facility::Room < ActiveRecord::Base
   include FacilityMethods

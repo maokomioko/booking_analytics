@@ -12,3 +12,9 @@ en:
     registrations:
       new:
         iam_agree: I agree to the Terms of Service and Privacy Policy
+      edit:
+        header: Edit my profile
+        account_info: Account Info
+        password_tip: "leave blank if you don't want to change it"
+        my_avatar: My avatar
+        remove_avatar: Remove avatar from system

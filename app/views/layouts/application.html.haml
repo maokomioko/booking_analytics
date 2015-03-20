@@ -13,13 +13,9 @@
     / end: META
 
     = stylesheet_link_tag 'application', 'data-turbolinks-track' => true
+    = yield(:page_css)
 
-    - %w(Graph).each do |engine|
-      - if (engine.constantize rescue nil)
-        = javascript_include_tag "#{engine.downcase}/application", 'data-turbolinks-track' => true
-        = stylesheet_link_tag "#{engine.downcase}/application", 'data-turbolinks-track' => true
-
-  = csrf_meta_tags
+    = csrf_meta_tags
   %body{class: @body_class, data: { page: body_data_page }}
     = render partial: 'partials/header'
     .main-container

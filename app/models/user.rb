@@ -16,6 +16,13 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  company_id             :integer
+#  avatar                 :string
+#
+# Indexes
+#
+#  index_users_on_company_id            (company_id)
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
 class User < ActiveRecord::Base
@@ -23,6 +30,8 @@ class User < ActiveRecord::Base
   has_many :channel_managers, through: :company
 
   belongs_to :company
+
+  mount_uploader :avatar, AvatarUploader
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

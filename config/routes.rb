@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   root to: 'calendar#index'
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
 
   get :no_company, controller: :application
 end

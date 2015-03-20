@@ -14,4 +14,4 @@ Rails.application.config.assets.precompile += %w(aero blue green grey minimal or
   arr
 end
 
-Rails.application.config.assets.precompile += %w(pages/auth_pages.js)
+Rails.application.config.assets.precompile += %w(pages/auth_pages.js pages/edit_user.js pages/edit_user.css)

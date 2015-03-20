@@ -20,6 +20,13 @@
 #  booking_id         :integer
 #  booking_hotel_id   :integer
 #
+# Indexes
+#
+#  index_rooms_on_booking_hotel_id  (booking_hotel_id)
+#  index_rooms_on_booking_id        (booking_id)
+#  index_rooms_on_hotel_id          (hotel_id)
+#  index_rooms_on_wubook_auth_id    (wubook_auth_id)
+#
 
 class Room < ActiveRecord::Base
   include PriceMaker::ChannelManager

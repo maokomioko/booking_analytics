@@ -11,13 +11,19 @@
       %ul.nav.navbar-right
         %li.dropdown.current-user
           %a.dropdown-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "#"}
+            - if current_user.avatar.present?
+              = image_tag current_user.avatar.thumb, class: 'circle-img'
             %span.username= current_user.nickname
-            %i.clip-chevron-down
+            = icon('chevron-down')
           %ul.dropdown-menu
+            %li
+              = link_to [main_app, :edit, :user, :registration] do
+                %i.clip-user
+                = t('menu.profile')
+            %li.divider
             %li
               = link_to destroy_user_session_path, method: :delete do
                 %i.clip-exit
-                \&nbsp;
                 = t('auth.buttons.logout')
         %li
           %a.sb-toggle{:href => "#"}

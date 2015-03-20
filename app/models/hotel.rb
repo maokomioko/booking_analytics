@@ -15,6 +15,11 @@
 #  zip          :string
 #  booking_id   :integer
 #
+# Indexes
+#
+#  index_hotels_on_booking_id                    (booking_id)
+#  index_hotels_on_exact_class_and_review_score  (exact_class,review_score)
+#
 
 class Hotel < ActiveRecord::Base
   include ParamSelectable

@@ -28,7 +28,9 @@ module BookingAnalytics
     end
 
     config.railties_order = [:main_app, :all]
+    config.active_record.raise_in_transactional_callbacks = true
 
+    CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
     Money.default_currency = Money::Currency.new("EUR")
   end
 end

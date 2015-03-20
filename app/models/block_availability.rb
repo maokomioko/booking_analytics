@@ -2,12 +2,15 @@
 #
 # Table name: active_block_availabilities
 #
-#  id            :integer
-#  max_occupancy :string
+#  id            :integer          not null, primary key
 #  data          :jsonb
 #  booking_id    :integer
-#  created_at    :datetime
-#  updated_at    :datetime
+#  max_occupancy :text             is an Array
+#  fetch_stamp   :integer
+#
+# Indexes
+#
+#  index_active_block_availabilities_on_booking_id  (booking_id)
 #
 
 class BlockAvailability < ActiveRecord::Base

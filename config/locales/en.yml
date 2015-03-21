@@ -1,6 +1,6 @@
 en:
   meta:
-    title: "Hotel Commander | v 0.9a"
+    title: "Hotel Commander | v 0.0.1 - preview"
   shared:
     registration: "Registration"
     reset_instructions: "Send me password reset instructions"
@@ -90,6 +90,7 @@ en:
     buttons:
       login: "Log in"
       back_login: "Back to log in"
+      skip_channel_manager: "I don't have a Channel Manager"
       logout: "Log out"
       signup: "Sign up"
       new: "Create"

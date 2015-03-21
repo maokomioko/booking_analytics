@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
   mount Graph::Engine, at: '/graph'
 
-  resources :calendar, controller: :calendar
+  resources :calendar, controller: :calendar do
+    collection do
+      get :demo
+    end
+  end
 
   resources :channel_manager, contoller: 'channel_manager' do
     collection do

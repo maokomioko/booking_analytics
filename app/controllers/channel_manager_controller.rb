@@ -1,4 +1,6 @@
 class ChannelManagerController < ApplicationController
+  load_and_authorize_resource
+
   def new
     unless current_user.company.wb_auth?
       @wb = ChannelManager::Wubook.new

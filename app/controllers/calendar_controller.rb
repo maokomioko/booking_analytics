@@ -1,19 +1,33 @@
 class CalendarController < ApplicationController
-  before_filter :set_channel_manager
+  before_filter :set_hotel_and_room
 
   def index
-    params[:room_id].nil? ? room_id = @wba.rooms.first.room_id : room_id = params[:room_id]
-    @room = @wba.rooms.find_by(room_id: room_id)
+    unless current_user.company.wb_auth?
+      redirect_to new_channel_manager_path
+    else
+      set_channel_manager
+    end
+  end
+
+  def demo
+    render 'index'
   end
 
   private
 
-  def set_channel_manager
-    @wba = current_user.channel_managers.first
+  def set_hotel_and_room
+    @hotel = Hotel.includes(:rooms).find(2650)
 
-    @wba.create_rooms unless @wba.rooms.size > 0
-    @wba.rooms.each do |room|
-      @wba.setup_room_prices(room.room_id, room.id) unless room.room_prices.size > 0
+    room_id = params[:room_id].nil? ? @hotel.rooms.first.id : params[:room_id]
+    @room = @hotel.rooms.find(room_id)
+  end
+
+  def set_channel_manager
+    @channel_manager = current_user.channel_managers.first
+
+    @channel_manager.create_rooms unless @channel_manager.rooms.size > 0
+    @channel_manager.rooms.each do |room|
+      @channel_manager.setup_room_prices(room.room_id, room.id) unless room.room_prices.size > 0
     end
   end
 end

@@ -15,9 +15,10 @@ module PriceMaker
               price = PriceMaker::Algorithm.new(hotel_ids, occupancy_fallback, date, date + 1.day).get_top_prices
               #be aware, that prices are in cents
 
-              rp = RoomPrice.find_or_initialize_by(date: date, price_cents: Money.new(price.second.first), room: self)
+              rp = RoomPrice.find_or_initialize_by(date: date, room: self)
+              rp.default_price_cents = 0 if rp.default_price_cents.nil?
+              rp.price_cents = price.second.first * 100
 
-              rp.price = Money.new(price.second.first)
               rp.save! unless rp.locked == true
             rescue
               puts "Empty result"

@@ -10,7 +10,7 @@
     .navbar-tools
       %ul.nav.navbar-right
         %li.dropdown.current-user
-          %a.dropdown-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "#"}
+          %a.dropdown-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", href: '#'}
             - if current_user.avatar.present?
               = image_tag current_user.avatar.thumb, class: 'circle-img'
             %span.username= current_user.nickname
@@ -25,6 +25,7 @@
               = link_to destroy_user_session_path, method: :delete do
                 %i.clip-exit
                 = t('auth.buttons.logout')
-        %li
-          %a.sb-toggle{:href => "#"}
-            %i.fa.fa-outdent
+        - if current_user && current_user.channel_managers.count > 0
+          %li
+            %a.sb-toggle{href: '#'}
+              %i.fa.fa-outdent

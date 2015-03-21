@@ -11,7 +11,7 @@
 #  availability       :integer
 #  occupancy          :integer
 #  children           :integer
-#  wubook_auth_id     :integer
+#  channel_manager_id :integer
 #  subroom            :integer
 #  max_people         :integer
 #  price              :float
@@ -22,10 +22,10 @@
 #
 # Indexes
 #
-#  index_rooms_on_booking_hotel_id  (booking_hotel_id)
-#  index_rooms_on_booking_id        (booking_id)
-#  index_rooms_on_hotel_id          (hotel_id)
-#  index_rooms_on_wubook_auth_id    (wubook_auth_id)
+#  index_rooms_on_booking_hotel_id    (booking_hotel_id)
+#  index_rooms_on_booking_id          (booking_id)
+#  index_rooms_on_channel_manager_id  (channel_manager_id)
+#  index_rooms_on_hotel_id            (hotel_id)
 #
 
 class Room < ActiveRecord::Base
@@ -50,5 +50,10 @@ class Room < ActiveRecord::Base
 
   def occupancy_fallback
     occupancy.to_i == 0 ? 1 : occupancy
+  end
+
+  def name
+    read_attribute(:name) ||
+    read_attribute(:roomtype) + " (#{read_attribute(:max_people)} people)"
   end
 end

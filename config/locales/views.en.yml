@@ -5,7 +5,7 @@ en:
       error_text: Please contact with your administrator.
   channel_manager:
     new:
-      header: Define your connection options
+      header: Channel manager setup
     edit:
       header: Manage your connection options
   devise:

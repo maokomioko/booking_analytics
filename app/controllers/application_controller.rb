@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   end
 
   def ch_manager_present
-    if current_user && current_user.company.present? && !current_user.company.wb_auth?
+    if current_user && !current_user.role == 'admin' && current_user.company.present? && !current_user.company.wb_auth?
       respond_to do |f|
         f.json { render json: { error: t('errors.no_ch_manager') }, status: 403 }
         f.all { redirect_to main_app.new_channel_manager_path unless controller_name == 'channel_manager' }

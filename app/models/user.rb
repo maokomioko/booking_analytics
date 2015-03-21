@@ -17,6 +17,7 @@
 #  updated_at             :datetime
 #  company_id             :integer
 #  avatar                 :string
+#  role                   :string
 #
 # Indexes
 #

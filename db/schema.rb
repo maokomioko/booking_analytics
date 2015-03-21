@@ -11,26 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320061245) do
+ActiveRecord::Schema.define(version: 20150321091008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "active_block_availabilities", force: :cascade do |t|
+    t.string  "max_occupancy"
     t.jsonb   "data"
     t.integer "booking_id"
-    t.text    "max_occupancy", array: true
-    t.integer "fetch_stamp"
+    t.string  "fetch_stamp"
   end
 
-  add_index "active_block_availabilities", ["booking_id"], name: "index_active_block_availabilities_on_booking_id", using: :btree
-
-  create_table "archive_block_availabilities", id: false, force: :cascade do |t|
-    t.integer "id"
+  create_table "archive_block_availabilities", force: :cascade do |t|
+    t.string  "max_occupancy"
     t.jsonb   "data"
     t.integer "booking_id"
-    t.text    "max_occupancy", array: true
-    t.integer "fetch_stamp"
+    t.string  "fetch_stamp"
   end
 
   create_table "beddings", force: :cascade do |t|
@@ -86,6 +83,11 @@ ActiveRecord::Schema.define(version: 20150320061245) do
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "fetch_stamp", id: false, force: :cascade do |t|
+    t.string   "last_stamp",                   null: false
+    t.datetime "created_at", default: "now()", null: false
   end
 
   create_table "hotel_facilities", id: false, force: :cascade do |t|
@@ -175,7 +177,7 @@ ActiveRecord::Schema.define(version: 20150320061245) do
     t.integer "availability"
     t.integer "occupancy"
     t.integer "children"
-    t.integer "wubook_auth_id"
+    t.integer "channel_manager_id"
     t.integer "subroom"
     t.integer "max_people"
     t.float   "price"
@@ -187,8 +189,8 @@ ActiveRecord::Schema.define(version: 20150320061245) do
 
   add_index "rooms", ["booking_hotel_id"], name: "index_rooms_on_booking_hotel_id", using: :btree
   add_index "rooms", ["booking_id"], name: "index_rooms_on_booking_id", using: :btree
+  add_index "rooms", ["channel_manager_id"], name: "index_rooms_on_channel_manager_id", using: :btree
   add_index "rooms", ["hotel_id"], name: "index_rooms_on_hotel_id", using: :btree
-  add_index "rooms", ["wubook_auth_id"], name: "index_rooms_on_wubook_auth_id", using: :btree
 
   create_table "rooms_wubook_auths", force: :cascade do |t|
     t.integer "room_id"
@@ -213,6 +215,7 @@ ActiveRecord::Schema.define(version: 20150320061245) do
     t.datetime "updated_at"
     t.integer  "company_id"
     t.string   "avatar"
+    t.string   "role"
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree

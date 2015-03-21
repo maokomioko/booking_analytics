@@ -53,7 +53,7 @@
                 = t('shared.change')
               = f.file_field :avatar
               = f.hidden_field :avatar_cache
-            %a.btn.fileupload-exists.btn-light-grey{"data-dismiss" => "fileupload", :href => "#"}
+            %a.btn.fileupload-exists.btn-light-grey{"data-dismiss" => "fileupload", href: '#'}
               = icon('times')
               = t('shared.remove')
       - if current_user.avatar.url.present?

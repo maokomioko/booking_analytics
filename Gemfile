@@ -113,19 +113,19 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec-rails'
-  gem 'rspec-its'
+  gem 'capybara', github: 'jnicklas/capybara'
   gem 'database_cleaner'
   gem 'ffaker'
-  gem 'json_spec'
-  gem 'timecop'
-  gem 'launchy'
   gem 'fuubar'
-  gem 'turn', require: false
+  gem 'json_spec'
+  gem 'launchy'
   gem 'mechanize'
-  gem 'capybara', github: 'jnicklas/capybara'
   gem 'poltergeist', github: 'teampoltergeist/poltergeist'
+  gem 'rspec-its'
+  gem 'rspec-rails'
   gem 'simplecov', github: 'colszowka/simplecov'
   gem 'shoulda-matchers', '~> 2.8.0'
   gem 'shoulda-callback-matchers', '~> 1.1.2'
+  gem 'timecop'
+  gem 'turn', require: false
 end

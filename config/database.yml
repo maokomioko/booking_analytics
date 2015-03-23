@@ -11,14 +11,17 @@ default: &default
 
 development:
   <<: *default
-#  database: booking_analytics_development
-#  username: postgres
-#  password:
-#  port: 5432
+  database: booking_analytics_development
+  username: postgres
+  password:
+  port: 5432
 
 test:
   <<: *default
   database: booking_analytics_test
+  username: postgres
+  password:
+  port: 5432
 
 production:
   <<: *default

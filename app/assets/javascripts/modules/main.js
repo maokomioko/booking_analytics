@@ -735,10 +735,9 @@ var Main = function() {
 		init: function() {
 			runWIndowResize();
 			runInit();
-			runStyleSelector();
 			runSearchInput();
 			runElementsPosition();
-			runToDoAction();
+			//runToDoAction();
 			runNavigationToggler();
 			runNavigationMenu();
 			runGoTop();
@@ -750,9 +749,9 @@ var Main = function() {
 			runShowTab();
 			runAccordionFeatures();
 			runCustomCheck();
-			runColorPalette();
-			runSaveSetting();
-			runCustomSetting();
+			//runColorPalette();
+			//runSaveSetting();
+			//runCustomSetting();
 			runClearSetting();
 			runQuickSideBar();
 		}

@@ -32,7 +32,7 @@ class Hotel < ActiveRecord::Base
   scope :with_score_lt, -> (score){ where("review_score < ?", score) }
 
   has_many :rooms
-  has_many :channel_managers
+  has_many :channel_managers, foreign_key: :booking_id
 
   has_and_belongs_to_many :related,
                           class_name: 'Hotel',

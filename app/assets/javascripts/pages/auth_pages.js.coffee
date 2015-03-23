@@ -1,4 +1,4 @@
-#= require jquery.validate.min
+#= require jquery.validate
 #= require modules/login
 
 $ ->

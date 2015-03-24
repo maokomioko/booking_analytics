@@ -6,8 +6,6 @@
 .ruby-version
 .ruby-gemset
 
-public
-
 # Ignore bundler config
 /.bundle
 
@@ -27,12 +25,8 @@ tmp
 rails_best_practices_output.html
 /coverage
 
-/db/schema.rb
 /.rspec
 /.zeus.sock
-
-/config/deploy.rb
-/config/deploy
 
 /config/database.yml
 /config/application.yml

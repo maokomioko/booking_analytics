@@ -1,5 +1,4 @@
 #= require jquery2
-# require jquery.turbolinks
 #= require turbolinks
 
 #= require jquery_ujs
@@ -15,8 +14,11 @@
 #= require jquery.mousewheel
 #= require perfect-scrollbar
 #= require jquery.cookie
+#= require select2
 
 #= require modules/main
+
+# require jquery.turbolinks
 
 # require_tree .
 
@@ -30,7 +32,12 @@ ready = ->
 
   Main.init()
 
-$(document).ready(ready)
+  if $('.search-select').length
+    $('.search-select').select2()
+
+  return
+
+$(document).on "ready page:load", ready
 
 # Turbolinks spinner and another one for displaying in photo uploading boxes
 $(document).on "page:fetch", ->

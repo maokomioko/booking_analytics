@@ -15,6 +15,9 @@
     = stylesheet_link_tag 'application', 'data-turbolinks-track' => true
     = yield(:page_css)
 
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = yield(:page_js)
+
     = csrf_meta_tags
   %body{class: 'login', data: { page: body_data_page }}
     .main-login.col-sm-4.col-sm-offset-4
@@ -33,6 +36,3 @@
       %p.loading_text= t('shared.loading')
 
     = render partial: 'partials/javascript'
-
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = yield(:page_js)

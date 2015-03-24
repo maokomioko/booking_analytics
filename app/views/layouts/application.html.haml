@@ -15,6 +15,9 @@
     = stylesheet_link_tag 'application', 'data-turbolinks-track' => true
     = yield(:page_css)
 
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = yield(:page_js)
+
     = csrf_meta_tags
   %body{class: @body_class, data: { page: body_data_page }}
     = render partial: 'partials/header'
@@ -31,8 +34,5 @@
     #spinner_placeholder.hidden
       = render partial: 'partials/spinner'
       %p.loading_text= t('shared.loading')
-
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = yield(:page_js)
 
     = render partial: 'partials/javascript'

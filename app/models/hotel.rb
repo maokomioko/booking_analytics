@@ -14,6 +14,7 @@
 #  district     :string
 #  zip          :string
 #  booking_id   :integer
+#  current_job  :string
 #
 # Indexes
 #

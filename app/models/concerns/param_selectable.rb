@@ -16,23 +16,18 @@ module ParamSelectable
       'Restaurant'
   ]
 
+  OLD_PROPERTY_TYPES = {
+      'apartment' => 2, 'guesthouse' => 3, 'hostel' => 13, 'motel' => 19, 'hotel' => 14,
+      'resort' => 21, 'homestay' => 23, 'bed_breakfast' => 24, 'ryokan' => 25
+  }
+
   included do
     scope :by_property_type, -> (type_id){ where(hoteltype_id: type_id) }
   end
 
   module ClassMethods
     def by_old_property_type(type)
-      type_id = case type
-                when 'hotel' then 14
-                when 'hostel' then 13
-                when 'motel' then 19
-                when 'apartment' then 2
-                when 'guesthouse' then 3
-                when 'bed_breakfast' then 24
-                when 'homestay' then 23
-                end
-
-      by_property_type(type_id)
+      by_property_type(OLD_PROPERTY_TYPES[type])
     end
 
     def by_property_type(type)

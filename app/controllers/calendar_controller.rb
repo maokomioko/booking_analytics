@@ -18,8 +18,11 @@ class CalendarController < ApplicationController
   def set_hotel_and_room
     @hotel = Hotel.includes(:rooms).find(2650)
 
-    room_id = params[:room_id].nil? ? @hotel.rooms.first.id : params[:room_id]
-    @room = @hotel.rooms.find(room_id)
+    @room = if params[:room_id].nil?
+              @hotel.rooms.first
+            else
+              @hotel.rooms.find(params[:room_id])
+            end
   end
 
   def set_channel_manager

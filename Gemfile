@@ -70,6 +70,7 @@ gem 'rubysl', platform: :rbx
 
 gem 'sass-rails', '>= 5'
 gem 'sanitize'
+gem 'select2-rails'
 gem 'stringex'
 gem 'state_machine', github: 'seuros/state_machine'
 gem 'sidekiq'

@@ -25,13 +25,20 @@
             %span.title= t('calendar.menu.analytics')
             %span.selected
       %li
-        - if current_user && current_user.channel_managers.size > 0
-          = link_to edit_channel_manager_path(current_user.wubook_auth.first.id), class: active_class(edit_channel_manager_path(current_user.wubook_auth.first.id)) do
-            %i.clip-settings
-            %span.title= t('calendar.menu.preferences')
-            %span.selected
-        - else
-          = link_to new_channel_manager_path, class: active_class(new_channel_manager_path) do
-            %i.clip-settings
-            %span.title= t('calendar.menu.preferences')
-            %span.selected
+        %a(href="javascript:void(0)")
+          %i.clip-settings
+          %span.title= t('calendar.menu.preferences')
+          %i.icon-arrow
+          %span.selected
+        %ul.sub-menu
+          %li
+            - if current_user && current_user.channel_managers.size > 0
+              = link_to edit_channel_manager_path(current_user.wubook_auth.first.id), class: active_class(edit_channel_manager_path(current_user.wubook_auth.first.id)) do
+                %span.title= t('menu.connection')
+            - else
+              = link_to new_channel_manager_path, class: active_class(new_channel_manager_path) do
+                %span.title= t('menu.connection')
+          - if current_user.company.present? && can?(:edit, current_user.company.setting)
+            %li
+              = link_to [:edit, :setting] do
+                %span.title= t('menu.worker')

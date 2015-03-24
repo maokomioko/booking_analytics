@@ -69,4 +69,15 @@ module ApplicationHelper
       end
     end
   end
+
+  def humanize secs
+    [[60, :seconds], [60, :minutes], [24, :hours], [1000, :days]].map{ |count, name|
+      if secs > 0
+        secs, n = secs.divmod(count)
+        if n > 0
+          "#{n.to_i} #{ I18n.t("datetime.prompts.#{name}", default: name).downcase }"
+        end
+      end
+    }.compact.reverse.join(' ')
+  end
 end

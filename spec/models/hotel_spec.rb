@@ -8,9 +8,8 @@ describe Hotel do
       it { should have_one(n) }
     end
 
-    %i(rooms block_availabilities).each do |n|
-      it { should have_many(n) }
-    end
+    it { should have_many(:rooms) }
+    it { should have_many(:channel_managers).with_foreign_key(:booking_id) }
 
     %i(related facilities).each do |n|
       it { should have_and_belong_to_many(n) }

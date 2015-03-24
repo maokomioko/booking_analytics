@@ -52,7 +52,7 @@ var Login = function () {
                     required: true
                 },
                 'user[password]': {
-                    minlength: 6,
+                    minlength: 8,
                     required: true
                 }
             },
@@ -76,7 +76,7 @@ var Login = function () {
             },
             submitHandler: function (form) {
                 errorHandler2.hide();
-                form2.submit();
+                form.submit();
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
                 errorHandler2.show();
@@ -92,12 +92,12 @@ var Login = function () {
                     required: true
                 },
                 'user[password]': {
-                    minlength: 6,
+                    minlength: 8,
                     required: true
                 },
                 'user[password_confirmation]': {
                     required: true,
-                    minlength: 5,
+                    minlength: 8,
                     equalTo: "#user_password"
                 },
                 agree: {
@@ -107,7 +107,7 @@ var Login = function () {
             },
             submitHandler: function (form) {
                 errorHandler3.hide();
-                form3.submit();
+                form.submit();
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
                 errorHandler3.show();
@@ -127,9 +127,15 @@ var Login = function () {
         //main function to initiate template pages
         init: function () {
             runSetDefaultValidation();
-            runLoginValidator();
-            runForgotValidator();
-            runRegisterValidator();
+            if ($('.form-login').length) {
+                runLoginValidator();
+            }
+            if ($('.form-forgot').length) {
+                runForgotValidator();
+            }
+            if ($('.form-register').length) {
+                runRegisterValidator();
+            }
         }
     };
 }();

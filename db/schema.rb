@@ -11,23 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321091008) do
+ActiveRecord::Schema.define(version: 20150324145927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "active_block_availabilities", force: :cascade do |t|
-    t.string  "max_occupancy"
     t.jsonb   "data"
     t.integer "booking_id"
-    t.string  "fetch_stamp"
+    t.text    "max_occupancy", array: true
+    t.integer "fetch_stamp"
   end
 
-  create_table "archive_block_availabilities", force: :cascade do |t|
-    t.string  "max_occupancy"
+  add_index "active_block_availabilities", ["booking_id"], name: "index_active_block_availabilities_on_booking_id", using: :btree
+
+  create_table "archive_block_availabilities", id: false, force: :cascade do |t|
+    t.integer "id"
     t.jsonb   "data"
     t.integer "booking_id"
-    t.string  "fetch_stamp"
+    t.text    "max_occupancy", array: true
+    t.integer "fetch_stamp"
   end
 
   create_table "beddings", force: :cascade do |t|
@@ -85,11 +88,6 @@ ActiveRecord::Schema.define(version: 20150321091008) do
     t.datetime "updated_at"
   end
 
-  create_table "fetch_stamp", id: false, force: :cascade do |t|
-    t.string   "last_stamp",                   null: false
-    t.datetime "created_at", default: "now()", null: false
-  end
-
   create_table "hotel_facilities", id: false, force: :cascade do |t|
     t.integer "id",                null: false
     t.string  "name"
@@ -118,6 +116,7 @@ ActiveRecord::Schema.define(version: 20150321091008) do
     t.string  "district"
     t.string  "zip"
     t.integer "booking_id"
+    t.string  "current_job"
   end
 
   add_index "hotels", ["booking_id"], name: "index_hotels_on_booking_id", using: :btree
@@ -199,6 +198,18 @@ ActiveRecord::Schema.define(version: 20150321091008) do
 
   add_index "rooms_wubook_auths", ["room_id", "wubook_auth_id"], name: "index_rooms_wubook_auths_on_room_id_and_wubook_auth_id", unique: true, using: :btree
   add_index "rooms_wubook_auths", ["wubook_auth_id"], name: "index_rooms_wubook_auths_on_wubook_auth_id", using: :btree
+
+  create_table "settings", force: :cascade do |t|
+    t.integer  "crawling_frequency"
+    t.text     "stars",              default: [], array: true
+    t.text     "user_ratings",       default: [], array: true
+    t.text     "property_types",     default: [], array: true
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "settings", ["company_id"], name: "index_settings_on_company_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

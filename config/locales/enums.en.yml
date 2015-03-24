@@ -1,0 +1,12 @@
+en:
+  enum:
+    property_type:
+      apartment: Apartment
+      guesthouse: Guest accommodation
+      hostel: Hostel
+      motel: Motel
+      hotel: Hotel
+      resort: Resort
+      homestay: Residence
+      bed_breakfast: Bed and Breakfast
+      ryokan: Ryokan

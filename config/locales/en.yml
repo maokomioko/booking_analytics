@@ -97,5 +97,7 @@ en:
       edit: "Update settings"
   menu:
     profile: Edit my profile
+    worker: Worker
+    connection: Connection
   flash:
     info: Info!

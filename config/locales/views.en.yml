@@ -18,3 +18,6 @@ en:
         password_tip: "leave blank if you don't want to change it"
         my_avatar: My avatar
         remove_avatar: Remove avatar from system
+  settings:
+    edit:
+      header: Preferences for price worker

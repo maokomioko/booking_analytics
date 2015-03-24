@@ -5,9 +5,9 @@ class SettingsController < ApplicationController
     @setting = current_user.company.build_setting(settings_params)
 
     if @setting.save
-      redirect_to [:edit, :setting]
+      redirect_to [:edit, :setting], success: I18n.t('messages.settings_updated')
     else
-      flash[:alert] = @settings.errors.full_messages.to_sentence
+      flash[:alert] = @setting.errors.full_messages.to_sentence
       render :edit
     end
   end
@@ -19,9 +19,9 @@ class SettingsController < ApplicationController
     @setting.attributes = settings_params
 
     if @setting.save
-      redirect_to [:edit, :setting]
+      redirect_to [:edit, :setting], success: I18n.t('messages.settings_updated')
     else
-      flash[:alert] = @settings.errors.full_messages.to_sentence
+      flash[:alert] = @setting.errors.full_messages.to_sentence
       render :edit
     end
   end
@@ -33,6 +33,13 @@ class SettingsController < ApplicationController
   end
 
   def settings_params
+    # HACK for select2 empty value
+    %i(stars user_ratings property_types).each do |field|
+      if params[:setting][field].present?
+        params[:setting][field].select!{ |v| v.present? }
+      end
+    end
+
     params.require(:setting).permit(:crawling_frequency, stars: [], user_ratings: [], property_types: [])
   end
 end

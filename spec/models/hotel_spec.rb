@@ -9,7 +9,7 @@ describe Hotel do
     end
 
     it { should have_many(:rooms) }
-    it { should have_many(:channel_managers).with_foreign_key(:booking_id) }
+    it { should have_one(:channel_manager).with_foreign_key(:booking_id) }
 
     %i(related facilities).each do |n|
       it { should have_and_belong_to_many(n) }

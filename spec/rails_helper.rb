@@ -32,7 +32,7 @@ Capybara.javascript_driver = :poltergeist
 
 options = {
     js_errors: false,
-    timeout: 60,
+    timeout: 600,
     phantomjs_logger: StringIO.new,
     logger: nil,
     # debug: true,

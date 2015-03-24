@@ -20,14 +20,12 @@
 
 class ChannelManager < ActiveRecord::Base
   belongs_to :company
-  belongs_to :hotel, foreign_key: :booking_id
-
-  has_and_belongs_to_many :rooms
+  belongs_to :hotel, foreign_key: :booking_id, primary_key: :booking_id
 
   validates :login, :password, :lcode, :booking_id, :hotel_name, :non_refundable_pid, :default_pid, presence: true
   validate :hotel_existence
 
-  before_create :setup_tarif_plans
+  # before_create :setup_tarif_plans
 
   def non_refundable_candidate
     connector.get_plans[0]['name']

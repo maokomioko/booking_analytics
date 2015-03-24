@@ -21,9 +21,9 @@ class Setting < ActiveRecord::Base
       2.hours, 3.hours, 4.hours, 5.hours, 6.hours
   ].map(&:to_i).freeze
 
-  STARS = (1..5).to_a.freeze
+  STARS = (1..5).to_a.map(&:to_s).freeze
 
-  USER_RATINGS = (0..100).to_a.map{ |n| n.to_f / 10 }.freeze
+  USER_RATINGS = (0..100).to_a.map{ |n| (n.to_f / 10).to_s }.freeze
 
   belongs_to :company
 
@@ -46,8 +46,6 @@ class Setting < ActiveRecord::Base
   private
 
   def reload_hotel_workers
-    Hotel.where(booking_id: company.channel_managers.pluck(:booking_id)).each do |hotel|
-
-    end
+    PriceMaker::ReloadWorker.perform_async(id)
   end
 end

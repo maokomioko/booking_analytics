@@ -33,7 +33,6 @@ class Hotel < ActiveRecord::Base
   scope :with_score_lt, -> (score){ where("review_score < ?", score) }
 
   has_many :rooms
-  has_many :channel_managers, foreign_key: :booking_id
 
   has_and_belongs_to_many :related,
                           class_name: 'Hotel',
@@ -45,6 +44,7 @@ class Hotel < ActiveRecord::Base
                           class_name: 'Facility::Hotel',
                           association_foreign_key: 'hotel_facility_id' # counter as PG trigger
 
+  has_one :channel_manager, foreign_key: :booking_id, primary_key: :booking_id
   has_one :location
   has_one :checkin
   has_one :checkout

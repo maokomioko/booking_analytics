@@ -33,7 +33,8 @@ ready = ->
   Main.init()
 
   if $('.search-select').length
-    $('.search-select').select2()
+    $('.search-select').select2
+      allowClear: true
 
   return
 

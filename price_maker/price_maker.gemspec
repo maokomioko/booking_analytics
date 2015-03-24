@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '~> 4.2.0'
   s.add_dependency 'celluloid'
   s.add_dependency 'sidekiq'
-  s.add_dependency 'sidetiq'
 
   s.add_development_dependency 'pg'
   s.add_development_dependency 'rspec-rails', '~> 3.0'

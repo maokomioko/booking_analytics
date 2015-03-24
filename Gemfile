@@ -74,6 +74,7 @@ gem 'select2-rails'
 gem 'stringex'
 gem 'state_machine', github: 'seuros/state_machine'
 gem 'sidekiq'
+gem 'sidekiq-status'
 gem 'sidetiq'
 gem 'sinatra', :require => nil
 
@@ -124,6 +125,7 @@ group :test do
   gem 'poltergeist', github: 'teampoltergeist/poltergeist'
   gem 'rspec-its'
   gem 'rspec-rails'
+  # gem 'rspec-sidekiq'
   gem 'simplecov', github: 'colszowka/simplecov'
   gem 'shoulda-matchers', '~> 2.8.0'
   gem 'shoulda-callback-matchers', '~> 1.1.2'

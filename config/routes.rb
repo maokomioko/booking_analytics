@@ -1,4 +1,5 @@
 require 'sidekiq/web'
+require 'sidekiq-status/web'
 
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do

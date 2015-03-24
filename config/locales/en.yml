@@ -39,6 +39,7 @@ en:
     cm_update_error: Settings update failed!
     prices_updated: "Suggested prices where applied successfully!"
     price_update_failed: "Error during prices update! Please contact technical support."
+    settings_updated: Settings updated successfully
   devise:
     waiting_confirmation: "Currently waiting confirmation for: %{user}"
     links:

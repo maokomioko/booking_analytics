@@ -30,7 +30,8 @@
             - flash.each do |type, message|
               = render 'partials/flash', type: type, message: message
           = yield
-    = render 'partials/sidebar' if current_user && current_user.channel_managers.size > 0
+
+    = render 'partials/sidebar' if controller_name == 'calendar' && current_user && current_user.channel_managers.size > 0
     #spinner_placeholder.hidden
       = render partial: 'partials/spinner'
       %p.loading_text= t('shared.loading')

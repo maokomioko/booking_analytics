@@ -97,7 +97,7 @@ en:
       edit: "Update settings"
   menu:
     profile: Edit my profile
-    worker: Worker
-    connection: Connection
+    worker: Algorithm
+    connection: Channel Manager
   flash:
     info: Info!

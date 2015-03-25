@@ -105,7 +105,7 @@ group :development, :test do
   gem 'rails-dev-tweaks'
   gem 'rails-erd'
   gem 'fabrication'
-  # gem 'pry-rails'
+  gem 'pry-rails'
   gem 'meta_request'
   gem 'rb-readline', '~> 0.5.1' # http://stackoverflow.com/questions/19496932/guard-causing-error-cant-modify-string-temporarily-locked
   gem 'traceroute'

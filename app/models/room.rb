@@ -40,7 +40,9 @@ class Room < ActiveRecord::Base
 
   has_many :room_prices, dependent: :destroy
 
-  has_and_belongs_to_many :facilities, class_name: 'RoomFacility' # counter as PG trigger
+  has_and_belongs_to_many :facilities,
+                          class_name: 'Facility::Room',
+                          association_foreign_key: 'room_facility_id' # counter as PG trigger
   has_and_belongs_to_many :wubook_auths
 
   has_one :bedding
@@ -54,6 +56,6 @@ class Room < ActiveRecord::Base
 
   def name
     read_attribute(:name) ||
-    read_attribute(:roomtype) + " (#{read_attribute(:max_people)} people)"
+    read_attribute(:roomtype).to_s + " (#{read_attribute(:max_people)} people)"
   end
 end

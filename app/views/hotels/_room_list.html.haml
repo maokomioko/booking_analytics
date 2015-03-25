@@ -2,7 +2,7 @@
 %ul.media-list
   - hotel.rooms.each do |room|
     %li.media
-      = link_to [main_app, :calendar, :index, room_id: room.id], class: "#{active_class(root_path(room_id: room.room_id))}" do
+      = link_to [main_app, :calendar, :index, room_id: room.id], class: "#{active_class(root_path(room_id: room.id))}" do
         .media-body
           %h4.media-heading= room.roomtype
           %span

@@ -28,6 +28,7 @@ class Setting < ActiveRecord::Base
   belongs_to :company
 
   after_save :reload_hotel_workers, if: -> { self.crawling_frequency_changed? }
+  after_save :clean_related_hotels
 
   validates_inclusion_of :crawling_frequency, within: CRAWLING_FREQUENCIES
   validates :stars, array: { inclusion: { in: STARS } }
@@ -47,5 +48,9 @@ class Setting < ActiveRecord::Base
 
   def reload_hotel_workers
     PriceMaker::ReloadWorker.perform_async(id)
+  end
+
+  def clean_related_hotels
+    RelatedHotelsCleanerWorker.perform_async(id)
   end
 end

@@ -6,7 +6,7 @@ class PriceMaker::HotelWorker
   def initialize
   end
 
-  def amenities_mix(hotel_id, rating, score, c_width)
+  def amenities_mix(hotel_id, rating, score, properties, c_width)
     puts "IDS Processing.."
     ids = []
     begin
@@ -14,7 +14,16 @@ class PriceMaker::HotelWorker
 
       1.upto(options.count) do
         next_set = options.next
-        hotels = Hotel.with_stars(rating).with_score_gt(score).with_facilities(next_set)
+        hotels = Hotel.with_stars(rating)
+
+        if score.is_a?(Array)
+          hotels = hotels.with_score(score)
+        else
+          hotels = hotels.with_score_gt(score)
+        end
+
+        hotels = hotels.by_property_type(properties) if properties.present?
+        hotels = hotels.with_facilities(next_set)
 
         ids << hotels.map(&:id).reject(&:blank?) if hotels.size > 0
       end

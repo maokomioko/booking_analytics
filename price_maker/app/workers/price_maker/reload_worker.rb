@@ -14,7 +14,8 @@ module PriceMaker
           Sidekiq::Status.unschedule hotel.current_job
         end
 
-        job_id = PriceMaker::PriceWorker.perform_in(company.setting.crawling_frequency, hotel.id)
+        time = company.setting.crawling_frequency rescue Setting.default_attributes[:crawling_requency]
+        job_id = PriceMaker::PriceWorker.perform_in(time, hotel.id)
         hotel.update_column(:current_job, job_id)
       end
     end

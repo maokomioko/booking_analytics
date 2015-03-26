@@ -1,3 +1,6 @@
+##
+## Concern for Hotel
+##
 module PriceMaker
   module HotelAmenities
     extend ActiveSupport::Concern

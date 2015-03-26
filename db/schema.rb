@@ -11,23 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324145927) do
+ActiveRecord::Schema.define(version: 20150326041314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "active_block_availabilities", force: :cascade do |t|
-    t.string  "max_occupancy"
     t.jsonb   "data"
     t.integer "booking_id"
-    t.string  "fetch_stamp"
+    t.text    "max_occupancy", array: true
+    t.integer "fetch_stamp"
   end
 
-  create_table "archive_block_availabilities", force: :cascade do |t|
-    t.string  "max_occupancy"
+  add_index "active_block_availabilities", ["booking_id"], name: "index_active_block_availabilities_on_booking_id", using: :btree
+
+  create_table "archive_block_availabilities", id: false, force: :cascade do |t|
+    t.integer "id"
     t.jsonb   "data"
     t.integer "booking_id"
-    t.string  "fetch_stamp"
+    t.text    "max_occupancy", array: true
+    t.integer "fetch_stamp"
   end
 
   create_table "beddings", force: :cascade do |t|
@@ -83,11 +86,6 @@ ActiveRecord::Schema.define(version: 20150324145927) do
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "fetch_stamp", id: false, force: :cascade do |t|
-    t.string   "last_stamp",                   null: false
-    t.datetime "created_at", default: "now()", null: false
   end
 
   create_table "hotel_facilities", id: false, force: :cascade do |t|
@@ -192,6 +190,7 @@ ActiveRecord::Schema.define(version: 20150324145927) do
   add_index "rooms", ["booking_id"], name: "index_rooms_on_booking_id", using: :btree
   add_index "rooms", ["channel_manager_id"], name: "index_rooms_on_channel_manager_id", using: :btree
   add_index "rooms", ["hotel_id"], name: "index_rooms_on_hotel_id", using: :btree
+  add_index "rooms", ["roomtype"], name: "index_rooms_on_roomtype", using: :btree
 
   create_table "rooms_wubook_auths", force: :cascade do |t|
     t.integer "room_id"

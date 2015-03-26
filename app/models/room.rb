@@ -26,6 +26,7 @@
 #  index_rooms_on_booking_id          (booking_id)
 #  index_rooms_on_channel_manager_id  (channel_manager_id)
 #  index_rooms_on_hotel_id            (hotel_id)
+#  index_rooms_on_roomtype            (roomtype)
 #
 
 class Room < ActiveRecord::Base
@@ -52,6 +53,10 @@ class Room < ActiveRecord::Base
 
   def occupancy_fallback
     occupancy.to_i == 0 ? 1 : occupancy
+  end
+
+  def max_people_fallback
+    max_people.to_i == 0 ? 1 : max_people
   end
 
   def name

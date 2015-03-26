@@ -12,7 +12,7 @@ module PriceMaker
       hotel = Hotel.find(hotel_id)
 
       hotel.rooms.real.each do |room|
-        room.fill_prices
+        room.fill_prices if room.roomtype?
       end
 
       time = hotel.channel_manager.company.setting.crawling_frequency rescue Setting.default_attributes[:crawling_requency]

@@ -19,7 +19,7 @@ class CalendarController < ApplicationController
     @hotel = Hotel.includes(:rooms).find(1720)
 
     @room = if params[:room_id].nil?
-              @hotel.rooms.first
+              @hotel.rooms.find(9030)
             else
               @hotel.rooms.find(params[:room_id])
             end

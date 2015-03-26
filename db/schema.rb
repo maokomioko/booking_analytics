@@ -17,20 +17,17 @@ ActiveRecord::Schema.define(version: 20150326041314) do
   enable_extension "plpgsql"
 
   create_table "active_block_availabilities", force: :cascade do |t|
+    t.string  "max_occupancy"
     t.jsonb   "data"
     t.integer "booking_id"
-    t.text    "max_occupancy", array: true
-    t.integer "fetch_stamp"
+    t.string  "fetch_stamp"
   end
 
-  add_index "active_block_availabilities", ["booking_id"], name: "index_active_block_availabilities_on_booking_id", using: :btree
-
-  create_table "archive_block_availabilities", id: false, force: :cascade do |t|
-    t.integer "id"
+  create_table "archive_block_availabilities", force: :cascade do |t|
+    t.string  "max_occupancy"
     t.jsonb   "data"
     t.integer "booking_id"
-    t.text    "max_occupancy", array: true
-    t.integer "fetch_stamp"
+    t.string  "fetch_stamp"
   end
 
   create_table "beddings", force: :cascade do |t|
@@ -86,6 +83,11 @@ ActiveRecord::Schema.define(version: 20150326041314) do
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "fetch_stamp", id: false, force: :cascade do |t|
+    t.string   "last_stamp",                   null: false
+    t.datetime "created_at", default: "now()", null: false
   end
 
   create_table "hotel_facilities", id: false, force: :cascade do |t|

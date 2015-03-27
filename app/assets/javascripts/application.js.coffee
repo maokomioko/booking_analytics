@@ -1,4 +1,4 @@
-#= require jquery2
+#= require jquery
 #= require turbolinks
 
 #= require jquery_ujs

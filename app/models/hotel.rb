@@ -25,13 +25,13 @@
 class Hotel < ActiveRecord::Base
   include HotelProperties
 
-  scope :contains_facilities, -> (ids){ includes(:facilities).where(hotel_facilities: { id: ids }) }
-  scope :with_facilities, -> (ids){ contains_facilities(ids).select{|h| (ids - h.facilities.map(&:id)).size.zero? } }
+  scope :contains_facilities, -> (ids) { includes(:facilities).where(hotel_facilities: { id: ids }) }
+  scope :with_facilities, -> (ids) { contains_facilities(ids).select { |h| (ids - h.facilities.map(&:id)).size.zero? } }
 
-  scope :with_stars, -> (rate){ where(exact_class: rate) }
-  scope :with_score, -> (score){ where(review_score: score) }
-  scope :with_score_gt, -> (score){ where("review_score > ?", score) }
-  scope :with_score_lt, -> (score){ where("review_score < ?", score) }
+  scope :with_stars, -> (rate) { where(exact_class: rate) }
+  scope :with_score, -> (score) { where(review_score: score) }
+  scope :with_score_gt, -> (score) { where('review_score > ?', score) }
+  scope :with_score_lt, -> (score) { where('review_score < ?', score) }
 
   has_many :rooms
 

@@ -1,7 +1,7 @@
 include Warden::Test::Helpers
 Warden.test_mode!
 
-feature "Sign in", js: true do
+feature 'Sign in', js: true do
   before do
     visit new_user_session_path
     @user = Fabricate.create(:user)
@@ -19,7 +19,7 @@ feature "Sign in", js: true do
     expect(page).to have_css('.form-group.has-error #user_password + .help-block')
   end
 
-  scenario "User enters correct data" do
+  scenario 'User enters correct data' do
     fill_in :user_email, with: @user.email
     fill_in :user_password, with: @user.password
 
@@ -29,7 +29,7 @@ feature "Sign in", js: true do
   end
 end
 
-feature "Request password reset", js: true do
+feature 'Request password reset', js: true do
   before do
     visit new_user_password_path
     @user = Fabricate.create(:user)
@@ -40,14 +40,14 @@ feature "Request password reset", js: true do
     expect(page).to have_selector('.form-forgot .errorHandler', visible: true)
   end
 
-  scenario "User enters wrong email" do
+  scenario 'User enters wrong email' do
     fill_in :user_email, with: 'abcd@example.org'
     click_on 'Submit'
 
     expect(page).to have_content('Email not found')
   end
 
-  scenario "User enters right email" do
+  scenario 'User enters right email' do
     fill_in :user_email, with: @user.email
     click_on 'Submit'
 

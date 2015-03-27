@@ -24,6 +24,20 @@
             %i.clip-bars
             %span.title= t('calendar.menu.analytics')
             %span.selected
+      - if current_user.company.present? && can?(:edit, current_user.company)
+        %li
+          %a(href="javascript:void(0)")
+            %i.clip-home-3
+            %span.title= t('calendar.menu.my_company')
+            %i.icon-arrow
+            %span.selected
+          %ul.sub-menu
+            %li
+              = link_to [:edit, :company] do
+                %span.title= t('menu.company')
+            %li
+              = link_to [:new, :user, :invitation] do
+                %span.title= t('menu.invite')
       %li
         %a(href="javascript:void(0)")
           %i.clip-settings

@@ -9,13 +9,12 @@ class ApplicationController < ActionController::Base
 
   add_flash_types :warning, :success, :error
 
-  def no_company
-  end
-
   private
 
   def layout_by_resource
-    if devise_controller? && !(controller_name == 'registrations' && action_name == 'edit')
+    if devise_controller? &&
+       !(controller_name == 'registrations' && action_name == 'edit') &&
+       !(controller_name == 'invitations' && %w(new create).include?(action_name))
       'login'
     else
       'application'
@@ -23,8 +22,10 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation,
-                                                                   :avatar, :avatar_cache, :remove_avatar) }
+    devise_parameter_sanitizer.for(:account_update) do |u|
+      u.permit(:email, :password, :password_confirmation,
+               :avatar, :avatar_cache, :remove_avatar)
+    end
   end
 
   def auth_user
@@ -40,7 +41,7 @@ class ApplicationController < ActionController::Base
     if current_user && !current_user.company.present?
       respond_to do |f|
         f.json { render json: { error: t('errors.no_company') }, status: 403 }
-        f.all { redirect_to [main_app, :no_company] unless action_name == 'no_company' }
+        f.all { redirect_to [main_app, :new, :company] }
       end
     end
   end
@@ -57,7 +58,7 @@ class ApplicationController < ActionController::Base
   def flash_to_headers
     return unless request.xhr?
     response.headers['X-Message'] = flash_message
-    response.headers["X-Message-Type"] = flash_type.to_s
+    response.headers['X-Message-Type'] = flash_type.to_s
 
     flash.discard
   end
@@ -66,7 +67,7 @@ class ApplicationController < ActionController::Base
     [:error, :alert, :warning, :success, :notice].each do |type|
       return flash[type] unless flash[type].blank?
     end
-    return ''
+    ''
   end
 
   def flash_type

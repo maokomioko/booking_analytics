@@ -11,8 +11,8 @@ shared_examples_for HotelProperties do
 
   context 'scopes' do
     describe 'by_property_type' do
-      let!(:scoped_hotel){ Fabricate.create(:hotel, hoteltype_id: 1) }
-      let!(:other_hotel){ Fabricate.create(:hotel, hoteltype_id: 2) }
+      let!(:scoped_hotel) { Fabricate.create(:hotel, hoteltype_id: 1) }
+      let!(:other_hotel) { Fabricate.create(:hotel, hoteltype_id: 2) }
 
       it 'includes object only with desired property' do
         scoped = described_class.by_property_type(1)
@@ -26,7 +26,7 @@ shared_examples_for HotelProperties do
   context 'class methods' do
     before(:all) do
       described_class::BASE_FACILITIES.each_with_index do |name, i|
-        Fabricate.create(:facility_hotel, name: name, id: i+1)
+        Fabricate.create(:facility_hotel, name: name, id: i + 1)
       end
     end
 

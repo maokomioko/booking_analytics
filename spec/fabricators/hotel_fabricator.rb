@@ -8,5 +8,5 @@ Fabricator(:hotel) do
   url { FFaker::Internet.http_url }
   exact_class { rand(0..50) / 10 }
   review_score { rand(0..100) / 10 }
-  booking_id { rand(1000000..2000000) }
+  booking_id { rand(1_000_000..2_000_000) }
 end

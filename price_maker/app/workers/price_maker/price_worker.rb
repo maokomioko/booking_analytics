@@ -5,7 +5,7 @@ module PriceMaker
     sidekiq_options retry: false, unique: true, queue: 'alg'
 
     def expiration
-      @expiration ||= 60*60*24*5 # 5 days
+      @expiration ||= 60 * 60 * 24 * 5 # 5 days
     end
 
     def perform(hotel_id, manual = false)

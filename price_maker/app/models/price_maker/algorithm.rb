@@ -8,8 +8,8 @@ module PriceMaker
       @hotel_room_ids = hotel_room_ids
       @occupancy      = occupancy
 
-      @arrival = arrival.strftime("%Y-%m-%d")
-      @departure = departure.strftime("%Y-%m-%d")
+      @arrival = arrival.strftime('%Y-%m-%d')
+      @departure = departure.strftime('%Y-%m-%d')
 
       @price_blocks = []
       @chunks = []

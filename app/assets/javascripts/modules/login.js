@@ -114,6 +114,30 @@ var Login = function () {
             }
         });
     };
+    var runInviteValidator = function () {
+        var form = $('.form-invite');
+        var errorHandler = $('.errorHandler', form);
+        form.validate({
+            rules: {
+                'user[password]': {
+                    minlength: 8,
+                    required: true
+                },
+                'user[password_confirmation]': {
+                    required: true,
+                    minlength: 8,
+                    equalTo: "#user_password"
+                }
+            },
+            submitHandler: function (form) {
+                errorHandler.hide();
+                form.submit();
+            },
+            invalidHandler: function (event, validator) { //display error alert on form submit
+                errorHandler.show();
+            }
+        });
+    };
     
     //function to return the querystring parameter with a given name.
 	var getParameterByName = function(name) {
@@ -135,6 +159,9 @@ var Login = function () {
             }
             if ($('.form-register').length) {
                 runRegisterValidator();
+            }
+            if ($('.form-invite').length) {
+                runInviteValidator();
             }
         }
     };

@@ -19,6 +19,7 @@ gem 'draper', '~> 1.4'
 gem 'devise', github: 'plataformatec/devise'
 gem 'devise-encryptable'
 gem 'devise-async'
+gem 'devise_invitable'
 
 gem 'encryptor'
 gem 'erb2haml'
@@ -49,7 +50,7 @@ gem 'money'
 gem 'money-rails'
 
 gem 'nokogiri'
-gem "nokogiri_truncate_html", github: 'sebastien-madru/nokogiri_truncate_html'
+gem 'nokogiri_truncate_html', github: 'sebastien-madru/nokogiri_truncate_html'
 
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -76,7 +77,7 @@ gem 'state_machine', github: 'seuros/state_machine'
 gem 'sidekiq'
 gem 'sidekiq-status'
 gem 'sidetiq'
-gem 'sinatra', :require => nil
+gem 'sinatra', require: nil
 
 gem 'turbolinks', '~> 2.5.3'
 
@@ -87,7 +88,7 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development do
   gem 'awesome_print', github: 'eoinkelly/awesome_print'
-  gem "thin"
+  gem 'thin'
 end
 
 group :development, :test do

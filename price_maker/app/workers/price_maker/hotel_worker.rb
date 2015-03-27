@@ -7,7 +7,7 @@ class PriceMaker::HotelWorker
   end
 
   def amenities_mix(hotel_id, rating, score, properties, c_width)
-    puts "IDS Processing.."
+    puts 'IDS Processing..'
     ids = []
     begin
       options = Hotel.find(hotel_id).validate_amenities.combination(c_width)

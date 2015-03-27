@@ -24,7 +24,7 @@ module PriceMaker
     end
 
     initializer 'price_maker.load_workers' do
-      Dir["#{self.root}/app/workers/**/*.rb"].each { |file| require file }
+      Dir["#{root}/app/workers/**/*.rb"].each { |file| require file }
     end
   end
 end

@@ -1,13 +1,22 @@
 en:
-  application:
-    no_company:
-      header: No company defined
-      error_text: Please contact with your administrator.
   channel_manager:
     new:
       header: Channel manager setup
     edit:
       header: Manage your connection options
+  companies:
+    new:
+      header: Fill your company information
+      alert:
+        header: You should fill fields to continue
+        text: "Some text that tells why user should do this... See <strong>config/locales/views.yml</strong> file to edit this message"
+    edit:
+      header: Edit company information
+    form:
+      main_info: Main information
+      company_logo: Company logotype
+      remove_logo: Remove logotype from system
+      bank_info: Banking requisites
   devise:
     registrations:
       new:

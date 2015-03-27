@@ -34,8 +34,8 @@ class Room < ActiveRecord::Base
   include PriceMaker::RoomAmenities
   include PriceMaker::ChannelManager
 
-  scope :contains_facilities, -> (ids){ includes(:facilities).where(room_facilities: { id: ids }) }
-  scope :with_facilities, -> (ids){ contains_facilities(ids).select{|h| (ids - h.facilities.map(&:id)).size.zero? } }
+  scope :contains_facilities, -> (ids) { includes(:facilities).where(room_facilities: { id: ids }) }
+  scope :with_facilities, -> (ids) { contains_facilities(ids).select { |h| (ids - h.facilities.map(&:id)).size.zero? } }
 
   belongs_to :hotel
 
@@ -60,7 +60,7 @@ class Room < ActiveRecord::Base
   end
 
   def name
-    read_attribute(:name) ||
-    read_attribute(:roomtype).to_s + " (#{read_attribute(:max_people)} people)"
+    self[:name] ||
+      self[:roomtype].to_s + " (#{self[:max_people]} people)"
   end
 end

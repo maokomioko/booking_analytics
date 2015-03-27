@@ -5,21 +5,21 @@
   %p= t('auth.new_account.subtitle')
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-register' }) do |f|
     .errorHandler.alert.alert-danger.no-display
-      %i.fa.fa-remove-sign
+      = icon('remove-sign')
       = t('shared.please_check_errors')
     %fieldset
       .form-group
         %span.input-icon
           = f.email_field :email, autofocus: true, placeholder: t('auth.fields.email'), class: 'form-control'
-          %i.fa.fa-envelope
+          = icon('envelope')
       .form-group
         %span.input-icon
           = f.password_field :password, autocomplete: "off", placeholder: t('auth.fields.password'), class: 'form-control'
-          %i.fa.fa-lock
+          = icon('lock')
       .form-group
         %span.input-icon
           = f.password_field :password_confirmation, autocomplete: "off", placeholder: t('auth.fields.password_confirmation'), class: 'form-control'
-          %i.fa.fa-lock
+          = icon('lock')
       .form-group
         %div
           %label.checkbox-inline{:for => "agree"}
@@ -27,9 +27,9 @@
             = t('.iam_agree')
       .form-actions
         = link_to new_session_path(resource_name), class: 'btn btn-light-grey go-back' do
-          %i.fa.fa-circle-arrow-left
+          = icon('circle-arrow-left')
           = t('auth.buttons.back_login')
         = f.button class: 'btn btn-bricky pull-right', type: :submit do
           = t('shared.submit')
-          %i.fa.fa-arrow-circle-right
+          = icon('arrow-circle-right')
 

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   mount Graph::Engine, at: '/graph'
 
-  authenticate :user, lambda { |u| u.role == 'admin' } do
+  authenticate :user, ->(u) { u.role == 'admin' } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
@@ -31,10 +31,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :company, except: [:destroy]
+
   resource :setting, except: [:show, :new, :destroy]
 
   root to: 'calendar#index'
-  devise_for :users, controllers: { registrations: 'registrations', passwords: 'passwords' }
-
-  get :no_company, controller: :application
+  devise_for :users, controllers: {
+    registrations: 'registrations',
+    passwords: 'passwords',
+    invitations: 'invitations'
+  }
 end

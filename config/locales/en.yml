@@ -40,6 +40,8 @@ en:
     prices_updated: "Suggested prices where applied successfully!"
     price_update_failed: "Error during prices update! Please contact technical support."
     settings_updated: Settings updated successfully
+    company_created: Your company created successfully! Now you can invite new users to your company
+    company_updated: Company updated successfully!
   devise:
     waiting_confirmation: "Currently waiting confirmation for: %{user}"
     links:
@@ -57,6 +59,7 @@ en:
       cal: "Calendar"
       forecast: "Forecast"
       analytics: "Analytics"
+      my_company: My company
       preferences: "Preferences"
     days:
       mon: "Monday"
@@ -101,5 +104,8 @@ en:
     profile: Edit my profile
     worker: Algorithm
     connection: Channel Manager
+    company: Company setting
+    invite: Invite new users
   flash:
     info: Info!
+    warning: Warning!

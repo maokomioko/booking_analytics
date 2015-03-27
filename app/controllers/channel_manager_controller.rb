@@ -40,16 +40,16 @@ class ChannelManagerController < ApplicationController
   def update_prices
     unless params[:dates].blank?
       dates = params[:dates]
-      dates.delete("")
+      dates.delete('')
 
       wba = wubook_for_company(params[:room_id])
       unless wba.nil?
         if wba.apply_room_prices(params[:room_id], dates, params[:price])
           flash[:success] = t('messages.prices_updated')
-          render json: {status: :ok}
+          render json: { status: :ok }
         else
           flash[:error] = t('messages.price_update_failed')
-          render json: {status: :unprocessable_entity}
+          render json: { status: :unprocessable_entity }
         end
       end
     end
@@ -63,12 +63,10 @@ class ChannelManagerController < ApplicationController
   end
 
   def wubook_for_company(room_id)
-    begin
-      room = Room.find(room_id)
-      room.wubook_auths.where(company: current_user.company).first
-    rescue
-      nil
-    end
+    room = Room.find(room_id)
+    room.wubook_auths.where(company: current_user.company).first
+  rescue
+    nil
   end
 
   def wb_params

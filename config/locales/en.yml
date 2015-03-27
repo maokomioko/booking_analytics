@@ -96,6 +96,7 @@ en:
       signup: "Sign up"
       new: "Create"
       edit: "Update settings"
+      update: "Update settings"
   menu:
     profile: Edit my profile
     worker: Algorithm

@@ -1,4 +1,4 @@
-module ParamSelectable
+module HotelProperties
   extend ActiveSupport::Concern
 
   BASE_FACILITIES = [
@@ -50,7 +50,7 @@ module ParamSelectable
     end
 
     def base_facilities_cache
-      Rails.cache.fetch('hotel:base_facilities') do
+      Rails.cache.fetch(Facility::Hotel::BASE_FACILITY_CACHE_KEY) do
         self.base_facilities.load
       end
     end

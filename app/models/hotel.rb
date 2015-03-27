@@ -23,7 +23,7 @@
 #
 
 class Hotel < ActiveRecord::Base
-  include ParamSelectable
+  include HotelProperties
 
   scope :contains_facilities, -> (ids){ includes(:facilities).where(hotel_facilities: { id: ids }) }
   scope :with_facilities, -> (ids){ contains_facilities(ids).select{|h| (ids - h.facilities.map(&:id)).size.zero? } }

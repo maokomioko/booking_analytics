@@ -46,10 +46,11 @@ module PriceMaker
       def matching_hotels
         if hotel.validate_amenities.size > 0
           booking_ids = hotel.amenities_calc
+          room_ids    = amenities_calc
           Hotel
               .includes(:rooms)
               .where(booking_id: booking_ids)
-              .where(rooms: { roomtype: roomtype, max_people: max_people })
+              .where(rooms: { roomtype: roomtype, max_people: max_people, id: room_ids })
               .pluck('hotels.booking_id', 'rooms.booking_id')
               .inject({}) do |hash, value|
                 # 0 - hotel, 1 - room

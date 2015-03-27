@@ -30,12 +30,12 @@
 #
 
 class Room < ActiveRecord::Base
+  include RoomProperties
+  include PriceMaker::RoomAmenities
   include PriceMaker::ChannelManager
 
-  scope :with_facilities, -> (ids){
-    includes(:facilities).where(room_facilities: { id: ids })
-        .select{|h| (ids - h.facilities.map(&:id)).size.zero? }
-  }
+  scope :contains_facilities, -> (ids){ includes(:facilities).where(room_facilities: { id: ids }) }
+  scope :with_facilities, -> (ids){ contains_facilities(ids).select{|h| (ids - h.facilities.map(&:id)).size.zero? } }
 
   belongs_to :hotel
 

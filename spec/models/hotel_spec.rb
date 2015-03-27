@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Hotel do
-  it_behaves_like ParamSelectable
+  it_behaves_like HotelProperties
 
   context 'association' do
     %i(location checkin checkout).each do |n|

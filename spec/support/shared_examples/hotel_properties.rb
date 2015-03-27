@@ -1,4 +1,4 @@
-shared_examples_for ParamSelectable do
+shared_examples_for HotelProperties do
   context 'with an instance' do
     before(:each) do
       # described_class points on the class, if you need an instance of it:

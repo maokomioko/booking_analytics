@@ -41,13 +41,7 @@ module PriceMaker
       end
 
       def validate_amenities
-        base_facilities = Hotel.base_facilities_cache.ids
-
-        [].tap do |arr|
-          facilities.ids.each do |fid|
-            arr << fid if base_facilities.include? fid
-          end
-        end
+        Hotel.base_facilities_cache.map(&:id) & facility_ids
       end
     end
   end

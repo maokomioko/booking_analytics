@@ -31,13 +31,13 @@ Capybara.default_driver = :poltergeist
 Capybara.javascript_driver = :poltergeist
 
 options = {
-    js_errors: false,
-    timeout: 600,
-    phantomjs_logger: StringIO.new,
-    logger: nil,
-    # debug: true,
-    # inspector: true,
-    phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes']
+  js_errors: false,
+  timeout: 600,
+  phantomjs_logger: StringIO.new,
+  logger: nil,
+  # debug: true,
+  # inspector: true,
+  phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes']
 }
 Capybara.register_driver(:poltergeist) do |app|
   Capybara::Poltergeist::Driver.new app, options

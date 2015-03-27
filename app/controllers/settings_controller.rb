@@ -36,7 +36,7 @@ class SettingsController < ApplicationController
     # HACK for select2 empty value
     %i(stars user_ratings property_types).each do |field|
       if params[:setting][field].present?
-        params[:setting][field].select!{ |v| v.present? }
+        params[:setting][field].select!(&:present?)
       end
     end
 

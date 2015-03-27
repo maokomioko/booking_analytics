@@ -8,15 +8,13 @@ module CalendarHelper
 
     klasses << 'with_auto_price' if price_block.enabled && !price_block.locked
 
-    return klasses.join(' ').html_safe
+    klasses.join(' ').html_safe
   end
 
   def set_price(price)
-    begin
-      price = price.modulo(1) > 0 ? price : price.to_i
-      price.to_s + ' €'
-    rescue
-      t('errors.price_value_missing')
-    end
+    price = price.modulo(1) > 0 ? price : price.to_i
+    price.to_s + ' €'
+  rescue
+    t('errors.price_value_missing')
   end
 end

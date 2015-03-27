@@ -20,6 +20,6 @@
 
 class ChannelManager::Wubook < ChannelManager
   def connector
-    WubookConnector.new({login: login, password: password, lcode: lcode})
+    WubookConnector.new(login: login, password: password, lcode: lcode)
   end
 end

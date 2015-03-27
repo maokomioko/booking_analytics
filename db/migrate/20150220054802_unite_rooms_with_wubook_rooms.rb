@@ -9,7 +9,7 @@ class UniteRoomsWithWubookRooms < ActiveRecord::Migration
     add_column :rooms, :max_people, :integer
     add_column :rooms, :price, :float
     remove_column :rooms, :max_persons
-    
+
     add_index :rooms, :wubook_auth_id
 
     drop_table :wubook_rooms

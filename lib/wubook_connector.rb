@@ -1,7 +1,7 @@
 class WubookConnector
   require 'uri'
   require 'net/http'
-  require "xmlrpc/client"
+  require 'xmlrpc/client'
 
   CONNECTION_PARAMS = {
     host: 'wubook.net',
@@ -65,7 +65,7 @@ class WubookConnector
   private
 
   def flatten_params(wb_params)
-    wb_f = wb_params.map{ |key, val| val }
+    wb_f = wb_params.map { |_key, val| val }
     @login = wb_f[0]
     @password = wb_f[1]
     @lcode = wb_f[2]

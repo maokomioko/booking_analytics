@@ -16,7 +16,7 @@ module PriceMaker
           dates.each do |date|
             begin
               price = PriceMaker::Algorithm.new(hotel_room_ids, max_people_fallback, date, date + 1.day).best_price
-              #be aware, that prices are in cents
+              # be aware, that prices are in cents
 
               rp = RoomPrice.find_or_initialize_by(date: date, room: self)
               rp.default_price_cents = 0 if rp.default_price_cents.nil?
@@ -33,7 +33,7 @@ module PriceMaker
 
               rp.save! unless rp.locked == true
             rescue
-              puts "Empty result"
+              puts 'Empty result'
             end
           end
         end
@@ -48,23 +48,23 @@ module PriceMaker
           booking_ids = hotel.amenities_calc
           room_ids    = amenities_calc
           Hotel
-              .includes(:rooms)
-              .where(booking_id: booking_ids)
-              .where(rooms: { roomtype: roomtype, max_people: max_people, id: room_ids })
-              .pluck('hotels.booking_id', 'rooms.booking_id')
-              .inject({}) do |hash, value|
-                # 0 - hotel, 1 - room
-                hash[value[0]] ||= []
-                hash[value[0]] << value[1]
-                hash
-              end.to_a
+            .includes(:rooms)
+            .where(booking_id: booking_ids)
+            .where(rooms: { roomtype: roomtype, max_people: max_people, id: room_ids })
+            .pluck('hotels.booking_id', 'rooms.booking_id')
+            .inject({}) do |hash, value|
+            # 0 - hotel, 1 - room
+            hash[value[0]] ||= []
+            hash[value[0]] << value[1]
+            hash
+          end.to_a
         else
           nil
         end
       end
 
       def format_date(date)
-        date.strftime("%Y-%m-%d")
+        date.strftime('%Y-%m-%d')
       end
     end
   end

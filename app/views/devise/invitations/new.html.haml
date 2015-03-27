@@ -1,0 +1,20 @@
+= content_for(:page_js){ javascript_include_tag 'pages/invitation_new', 'data-turbolinks-track' => true }
+= content_for(:page_css){ stylesheet_link_tag 'pages/invitation_new', 'data-turbolinks-track' => true }
+
+= content_for :main_content_header do
+  .row
+    .col-sm-12
+      .page-header
+        %h1= t 'devise.invitations.new.header'
+
+.row
+  .col-sm-5
+    = form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post } do |f|
+      .form-group
+        = f.label :email, t('devise.invitations.new.label'), class: 'control-label'
+        = f.text_field :email
+      .form-group
+        .form-group
+        = f.button class: 'btn btn-bricky pull-right' do
+          = t('devise.invitations.new.submit_button')
+          = icon('arrow-circle-right')

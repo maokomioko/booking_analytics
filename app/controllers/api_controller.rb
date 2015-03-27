@@ -20,7 +20,7 @@ class ApiController < ApplicationController
     view_window = params[:view_window]
     region = params[:region]
 
-    @api_prefix = "/v1/" + action_name.match(/[^\/v1][a-z_]+/)[0] + base_scope(target_date, view_window, region)
+    @api_prefix = '/v1/' + action_name.match(/[^\/v1][a-z_]+/)[0] + base_scope(target_date, view_window, region)
   end
 
   def set_destination

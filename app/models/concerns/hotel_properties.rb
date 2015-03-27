@@ -2,27 +2,27 @@ module HotelProperties
   extend ActiveSupport::Concern
 
   BASE_FACILITIES = [
-      'Wi-Fi',
-      'Parking',
-      'Airport Shuttle (surcharge)', 'Airport Shuttle (free)',
-      'Fitness Center',
-      'Non-smoking Rooms',
-      'Indoor Pool',
-      'Spa',
-      'Family Rooms',
-      'Outdoor Pool',
-      'Pet Friendly',
-      'Facilities for Disabled Guests',
-      'Restaurant'
+    'Wi-Fi',
+    'Parking',
+    'Airport Shuttle (surcharge)', 'Airport Shuttle (free)',
+    'Fitness Center',
+    'Non-smoking Rooms',
+    'Indoor Pool',
+    'Spa',
+    'Family Rooms',
+    'Outdoor Pool',
+    'Pet Friendly',
+    'Facilities for Disabled Guests',
+    'Restaurant'
   ]
 
   OLD_PROPERTY_TYPES = {
-      'apartment' => 2, 'guesthouse' => 3, 'hostel' => 13, 'motel' => 19, 'hotel' => 14,
-      'resort' => 21, 'homestay' => 23, 'bed_breakfast' => 24, 'ryokan' => 25
+    'apartment' => 2, 'guesthouse' => 3, 'hostel' => 13, 'motel' => 19, 'hotel' => 14,
+    'resort' => 21, 'homestay' => 23, 'bed_breakfast' => 24, 'ryokan' => 25
   }
 
   included do
-    scope :by_property_type, -> (type_id){ where(hoteltype_id: type_id) }
+    scope :by_property_type, -> (type_id) { where(hoteltype_id: type_id) }
   end
 
   module ClassMethods
@@ -51,7 +51,7 @@ module HotelProperties
 
     def base_facilities_cache
       Rails.cache.fetch(Facility::Hotel::BASE_FACILITY_CACHE_KEY) do
-        self.base_facilities.load
+        base_facilities.load
       end
     end
   end

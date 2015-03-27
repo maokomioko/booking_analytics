@@ -1,5 +1,5 @@
 module Graph
   class ApplicationController < ActionController::Base
-    layout "application"
+    layout 'application'
   end
 end

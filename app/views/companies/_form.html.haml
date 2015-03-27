@@ -1,0 +1,68 @@
+= content_for(:page_js) do
+  = javascript_include_tag 'pages/fileuploader', 'data-turbolinks-track' => true
+  = javascript_include_tag 'pages/company', 'data-turbolinks-track' => true
+= content_for(:page_css){ stylesheet_link_tag 'pages/fileuploader', 'data-turbolinks-track' => true }
+
+= form_for(@company, url: company_path, html: { multipart: true, class: 'form-company' }) do |f|
+  .errorHandler.alert.alert-danger.no-display
+    = icon('remove-sign')
+    = t('shared.please_check_errors')
+  .row
+    .col-md-12
+      %h3= t('.main_info')
+      %hr
+    .col-md-6
+      .form-group
+        = f.label :name, class: 'control-label'
+        = f.text_field :name, class: 'form-control'
+      .form-group
+        = f.label :reg_number, class: 'control-label'
+        = f.text_field :reg_number, class: 'form-control'
+      .form-group
+        = f.label :reg_address, class: 'control-label'
+        = f.text_field :reg_address, class: 'form-control'
+    .col-md-6
+      .form-group
+        %label= t('.company_logo')
+        .fileupload.fileupload-new{"data-provides" => "fileupload"}
+          .fileupload-new.thumbnail{:style => "width: 150px; height: 150px;"}
+            - if @company.logo.url.present?
+              = image_tag(@company.logo.big.url)
+          .fileupload-preview.fileupload-exists.thumbnail{:style => "max-width: 150px; max-height: 150px; line-height: 20px;"}
+          .user-edit-image-buttons
+            %span.btn.btn-light-grey.btn-file
+              %span.fileupload-new
+                = icon('picture')
+                = t('shared.select_image')
+              %span.fileupload-exists
+                = icon('picture')
+                = t('shared.change')
+              = f.file_field :logo
+              = f.hidden_field :logo_cache
+            %a.btn.fileupload-exists.btn-light-grey{"data-dismiss" => "fileupload", href: '#'}
+              = icon('times')
+              = t('shared.remove')
+      - if @company.logo.url.present?
+        .checkbox
+          = label_tag do
+            = f.check_box :remove_logo, class: 'grey'
+            = t('.remove_logo')
+    .col-md-12
+      %h3= t('.bank_info')
+      %hr
+    .col-md-6
+      .form-group
+        = f.label :bank_name, class: 'control-label'
+        = f.text_field :bank_name, class: 'form-control'
+      .form-group
+        = f.label :bank_code, class: 'control-label'
+        = f.text_field :bank_code, class: 'form-control'
+      .form-group
+        = f.label :bank_account, class: 'control-label'
+        = f.text_field :bank_account, class: 'form-control'
+    .col-md-12
+      %hr
+      .form-group
+        = f.button class: 'btn btn-bricky' do
+          = t('shared.submit')
+          = icon('arrow-circle-right')

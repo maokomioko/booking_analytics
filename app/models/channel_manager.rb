@@ -55,7 +55,7 @@ class ChannelManager < ActiveRecord::Base
   end
 
   def setup_room_prices(room_id, room_obj_id)
-    price_array = connector.get_plan_prices(non_refundable_pid, [room_id]).map{|key, value| value}[0]
+    price_array = connector.get_plan_prices(non_refundable_pid, [room_id]).map { |_key, value| value }[0]
     price_array.each_with_index do |price, i|
       RoomPrice.create(
         room_id: room_obj_id,

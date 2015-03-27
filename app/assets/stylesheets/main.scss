@@ -2876,7 +2876,10 @@ body.login .logo {
   padding: 20px;
   text-align: center;
 }
-body.login .box-login, body.login .box-forgot, body.login .box-register {
+body.login .box-login,
+body.login .box-forgot,
+body.login .box-register,
+body.login .box-invite {
   background: #FFFFFF;
   border-radius: 5px;
   box-shadow: -30px 30px 50px rgba(0, 0, 0, 0.32);

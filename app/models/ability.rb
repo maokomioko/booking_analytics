@@ -23,12 +23,12 @@ class Ability
 
   def manager_abilities
     can :manage, Company, owner_id: user.id
+    can :manage, ChannelManager, company_id: user.company_id
     can :manage, Setting do |setting|
       setting.company_id == user.company_id && user.company.owner_id == user.id
     end
+    can :invite, User
   end
 
-  def user
-    @user
-  end
+  attr_reader :user
 end

@@ -8,9 +8,9 @@ module PriceMaker
       company = Company.find(company_id)
 
       Hotel.where(booking_id: company.channel_managers.pluck(:booking_id)).each do |hotel|
-        next if hotel.current_job? && Sidekiq::Status::working?(hotel.current_job)
+        next if hotel.current_job? && Sidekiq::Status.working?(hotel.current_job)
 
-        if Sidekiq::Status::queued?(hotel.current_job)
+        if Sidekiq::Status.queued?(hotel.current_job)
           Sidekiq::Status.unschedule hotel.current_job
         end
 

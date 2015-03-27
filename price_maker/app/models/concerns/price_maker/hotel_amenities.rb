@@ -17,7 +17,7 @@ module PriceMaker
           if settings.present?
             args << settings.stars
             args << settings.user_ratings
-            args << settings.property_types.map{ |type| Hotel::OLD_PROPERTY_TYPES[type] }
+            args << settings.property_types.map { |type| Hotel::OLD_PROPERTY_TYPES[type] }
           else
             args << class_fallback
             args << review_score.to_i

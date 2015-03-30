@@ -28,6 +28,9 @@ class Ability
       setting.company_id == user.company_id && user.company.owner_id == user.id
     end
     can :invite, User
+    can :destroy, User do |other_user|
+      other_user.invited_by_id == user.id || other_user.company_id == user.company_id
+    end
   end
 
   attr_reader :user

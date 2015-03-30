@@ -9,9 +9,8 @@ module PriceMaker
       # returns booking_id for related hotels
       def amenities_calc
         if related_ids.blank?
-          settings = channel_manager.company.setting
-          hw_pool = PriceMaker::HotelWorker.pool(size: 8)
-          n = 2**validate_amenities.size - 1
+          settings  = channel_manager.company.setting
+          amenities = validate_amenities
 
           args = [id]
           if settings.present?
@@ -24,18 +23,25 @@ module PriceMaker
             args << hoteltype_id
           end
 
-          results = n.times.map do |i|
-            begin
-              hw_pool.future.amenities_mix(*args, i + 1)
-            rescue Celluloid::DeadActorError
+          amenities.size.downto(1).map do |i|
+            combinations = amenities.combination(i)
+            hw_pool = PriceMaker::HotelWorker.pool(size: 8)
+
+            results = combinations.each.map do |facility_ids|
+              begin
+                hw_pool.future.amenities_mix(*args, facility_ids)
+              rescue Celluloid::DeadActorError
+              end
             end
-          end
 
-          unless results.blank? && !results[0].nil?
-            self.related_ids = results.map(&:value).flatten.uniq.compact
-          end
+            unless results.blank? && !results[0].nil?
+              self.related_ids = results.map(&:value).flatten.uniq.compact
+              hw_pool.terminate
+              break
+            end
 
-          hw_pool.terminate
+            hw_pool.terminate
+          end
         end
         related.map(&:booking_id)
       end

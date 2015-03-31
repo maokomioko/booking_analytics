@@ -53,6 +53,12 @@ class User < ActiveRecord::Base
   before_create :set_default_role
   after_invitation_accepted :set_company!
 
+  scope :related_to, Proc.new{ |owner|
+    where("\"invited_by_id\" = :owner_id OR \"company_id\" = :owner_company_id",
+          owner_id: owner.id,
+          owner_company_id: owner.company_id)
+  }
+
   def self.serialize_into_session(record)
     [record.id.to_s, record.authenticatable_salt]
   end

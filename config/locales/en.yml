@@ -19,6 +19,8 @@ en:
     select_image: Select image
     change: Change
     remove: Remove
+    invited: Invited
+    are_you_sure: Are you sure?
   errors:
     booking_id: "Hotel doesn't exist"
     hotel_name: "Hotel name can't be blank"
@@ -42,6 +44,7 @@ en:
     settings_updated: Settings updated successfully
     company_created: Your company created successfully! Now you can invite new users to your company
     company_updated: Company updated successfully!
+    user_deleted: "User '%{email}' successfully deleted from system"
   devise:
     waiting_confirmation: "Currently waiting confirmation for: %{user}"
     links:
@@ -105,6 +108,7 @@ en:
     worker: Algorithm
     connection: Channel Manager
     company: Company setting
+    company_users: Company users
     invite: Invite new users
   flash:
     info: Info!

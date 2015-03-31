@@ -36,6 +36,9 @@
               = link_to [:edit, :company] do
                 %span.title= t('menu.company')
             %li
+              = link_to [:company, :users] do
+                %span.title= t('menu.company_users')
+            %li
               = link_to [:new, :user, :invitation] do
                 %span.title= t('menu.invite')
       %li

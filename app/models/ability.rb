@@ -28,8 +28,9 @@ class Ability
       setting.company_id == user.company_id && user.company.owner_id == user.id
     end
     can :invite, User
-    can :destroy, User do |other_user|
-      other_user.invited_by_id == user.id || other_user.company_id == user.company_id
+    can [:index, :destroy], User, User.related_to(user) do |other|
+      other.id != user.id && (other.company_id == user.company_id ||
+          other.invited_by_id == user.id)
     end
   end
 

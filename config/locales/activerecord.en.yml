@@ -6,3 +6,5 @@ en:
         reg_number: Registration number
         reg_address: Registration address
         logo: Logotype
+      user:
+        invitation_accepted_at: Join Date

@@ -30,3 +30,7 @@ en:
   settings:
     edit:
       header: Preferences for price worker
+  users:
+    index:
+      header: Company users
+      subheader: and invitations list

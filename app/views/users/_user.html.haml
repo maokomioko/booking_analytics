@@ -1,0 +1,17 @@
+%tr
+  %td.center
+    - if user.avatar.present?
+      = image_tag user.avatar.thumb, alt: user.nickname
+  %td= user.email
+  %td.hidden-xs= user.role
+  %td.hidden-xs
+    - if user.invitation_accepted_at
+      = user.invitation_accepted_at.strftime('%d.%m.%Y %H:%m')
+    - else
+      %span.label.label-sm.label-warning= t('shared.invited')
+  %td.center
+    - if can?(:destroy, user)
+      = link_to [:company, user], method: :delete,
+          class: 'btn btn-xs btn-bricky tooltips',
+          data: { "original-title" => t('shared.remove'), confirm: t('shared.are_you_sure') } do
+        = icon('times white')

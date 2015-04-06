@@ -6,6 +6,7 @@
   - [critical, 7]
   - [default,  5]
   - [single,   5]
+  - [alg,      4]
   - [mailer,   3]
   - [low,      1]
 

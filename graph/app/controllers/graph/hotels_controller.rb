@@ -1,7 +1,6 @@
 module Graph
   class HotelsController < Graph.parent_controller.constantize
     def index
-
     end
 
     def simple

@@ -1,37 +1,53 @@
+##
+## Concern for Hotel
+##
 module PriceMaker
   module HotelAmenities
     extend ActiveSupport::Concern
 
     included do
+      # returns booking_id for related hotels
       def amenities_calc
         if related_ids.blank?
-          hw_pool = PriceMaker::HotelWorker.pool(size: 8)
-          n = 2**validate_amenities.size - 1
+          settings  = channel_manager.company.setting
+          amenities = validate_amenities
 
-          results = n.times.map do |i|
-            begin
-              hw_pool.future.amenities_mix(id, class_fallback, review_score.to_i, i + 1)
-            rescue Celluloid::DeadActorError
+          args = [id]
+          if settings.present?
+            args << settings.stars
+            args << settings.user_ratings
+            args << settings.property_types.map { |type| Hotel::OLD_PROPERTY_TYPES[type] }
+          else
+            args << class_fallback
+            args << review_score.to_i
+            args << hoteltype_id
+          end
+
+          amenities.size.downto(1).map do |i|
+            combinations = amenities.combination(i)
+            hw_pool = PriceMaker::HotelWorker.pool(size: 8)
+
+            results = combinations.each.map do |facility_ids|
+              begin
+                hw_pool.future.amenities_mix(*args, facility_ids)
+              rescue Celluloid::DeadActorError
+              end
             end
-          end
 
-          unless results.blank? && !results[0].nil?
-            self.related_ids = results.map(&:value).flatten.uniq.compact
-          end
+            unless results.blank? && !results[0].nil?
+              self.related_ids = results.map(&:value).flatten.uniq.compact
+              hw_pool.terminate
+              break
+            end
 
-          hw_pool.terminate
+            hw_pool.terminate
+          end
         end
-        related_ids
+        related.map(&:booking_id)
       end
 
       def validate_amenities
-        base_facilities = Hotel.base_facilities_cache.ids
-
-        [].tap do |arr|
-          facilities.ids.each do |fid|
-            arr << fid if base_facilities.include? fid
-          end
-        end
+        Hotel.base_facilities_cache.map(&:id) & facility_ids
       end
     end
   end

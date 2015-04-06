@@ -1,9 +1,10 @@
 en:
   meta:
-    title: "Hotel Commander | v 0.9a"
+    title: "Hotel Commander | v 0.0.1 - preview"
   shared:
     registration: "Registration"
     reset_instructions: "Send me password reset instructions"
+    dont_have_account: "Don't have an account yet?"
     current_price: "current"
     apply_custom_price: "Click to apply price"
     date_locked: "Date locked"
@@ -13,6 +14,13 @@ en:
     custom_applied: "Custom price in use"
     sold: "Sold"
     loading: "Loading..."
+    please_check_errors: "You have some form errors. Please check below."
+    submit: Submit
+    select_image: Select image
+    change: Change
+    remove: Remove
+    invited: Invited
+    are_you_sure: Are you sure?
   errors:
     booking_id: "Hotel doesn't exist"
     hotel_name: "Hotel name can't be blank"
@@ -33,7 +41,12 @@ en:
     cm_update_error: Settings update failed!
     prices_updated: "Suggested prices where applied successfully!"
     price_update_failed: "Error during prices update! Please contact technical support."
+    settings_updated: Settings updated successfully
+    company_created: Your company created successfully! Now you can invite new users to your company
+    company_updated: Company updated successfully!
+    user_deleted: "User '%{email}' successfully deleted from system"
   devise:
+    waiting_confirmation: "Currently waiting confirmation for: %{user}"
     links:
       login: "Log in with your account"
       signup: "Create a new account"
@@ -49,6 +62,7 @@ en:
       cal: "Calendar"
       forecast: "Forecast"
       analytics: "Analytics"
+      my_company: My company
       preferences: "Preferences"
     days:
       mon: "Monday"
@@ -64,6 +78,7 @@ en:
       subtitle: "Enter your email and password below."
       form_title: "Sign in here!"
       connect_via: "Add %{provider} connection"
+      keep_signed_in: Keep me signed in
     edit:
       edit_connection: "Edit your %{provider} connection"
     new_account:
@@ -81,7 +96,20 @@ en:
       lcode: "Lcode"
     buttons:
       login: "Log in"
+      back_login: "Back to log in"
+      skip_channel_manager: "I don't have a Channel Manager"
       logout: "Log out"
       signup: "Sign up"
       new: "Create"
       edit: "Update settings"
+      update: "Update settings"
+  menu:
+    profile: Edit my profile
+    worker: Algorithm
+    connection: Channel Manager
+    company: Company setting
+    company_users: Company users
+    invite: Invite new users
+  flash:
+    info: Info!
+    warning: Warning!

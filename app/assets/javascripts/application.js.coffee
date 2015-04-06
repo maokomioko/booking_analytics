@@ -1,12 +1,26 @@
-#= require jquery2
-# require jquery.turbolinks
+#= require jquery
 #= require turbolinks
 
 #= require jquery_ujs
 #= require jquery-ui
 #= require jquery.remotipart
 
-#= require_tree .
+#= require bootstrap-sprockets
+#= require bootstrap-hover-dropdown.min
+
+#= require jquery.blockUI
+
+#= require icheck
+#= require jquery.mousewheel
+#= require perfect-scrollbar
+#= require jquery.cookie
+#= require select2
+
+#= require modules/main
+
+# require jquery.turbolinks
+
+# require_tree .
 
 ready = ->
   $("#calendar").perfectScrollbar()
@@ -16,7 +30,15 @@ ready = ->
   $(document).mouseup ->
     window.isMouseDown = false
 
-$(document).ready(ready)
+  Main.init()
+
+  if $('.search-select').length
+    $('.search-select').select2
+      allowClear: true
+
+  return
+
+$(document).on "ready page:load", ready
 
 # Turbolinks spinner and another one for displaying in photo uploading boxes
 $(document).on "page:fetch", ->

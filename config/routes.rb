@@ -1,3 +1,6 @@
+require 'sidekiq/web'
+require 'sidekiq-status/web'
+
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :views_data do
@@ -12,7 +15,15 @@ Rails.application.routes.draw do
 
   mount Graph::Engine, at: '/graph'
 
-  resources :calendar, controller: :calendar
+  authenticate :user, ->(u) { u.role == 'admin' } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
+  resources :calendar, controller: :calendar do
+    collection do
+      get :demo
+    end
+  end
 
   resources :channel_manager, contoller: 'channel_manager' do
     collection do
@@ -20,8 +31,16 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: 'calendar#index'
-  devise_for :users
+  resource :company, except: [:destroy] do
+    resources :users, only: [:index, :destroy]
+  end
 
-  get :no_company, controller: :application
+  resource :setting, except: [:show, :new, :destroy]
+
+  root to: 'calendar#index'
+  devise_for :users, controllers: {
+    registrations: 'registrations',
+    passwords: 'passwords',
+    invitations: 'invitations'
+  }
 end

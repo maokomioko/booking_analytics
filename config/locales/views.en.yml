@@ -1,4 +1,36 @@
 en:
-  application:
-    no_company:
-      error_text: No company defined. Please contact with your administrator.
+  channel_manager:
+    new:
+      header: Channel manager setup
+    edit:
+      header: Manage your connection options
+  companies:
+    new:
+      header: Fill your company information
+      alert:
+        header: You should fill fields to continue
+        text: "Some text that tells why user should do this... See <strong>config/locales/views.yml</strong> file to edit this message"
+    edit:
+      header: Edit company information
+    form:
+      main_info: Main information
+      company_logo: Company logotype
+      remove_logo: Remove logotype from system
+      bank_info: Banking requisites
+  devise:
+    registrations:
+      new:
+        iam_agree: I agree to the Terms of Service and Privacy Policy
+      edit:
+        header: Edit my profile
+        account_info: Account Info
+        password_tip: "leave blank if you don't want to change it"
+        my_avatar: My avatar
+        remove_avatar: Remove avatar from system
+  settings:
+    edit:
+      header: Preferences for price worker
+  users:
+    index:
+      header: Company users
+      subheader: and invitations list

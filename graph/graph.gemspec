@@ -1,21 +1,21 @@
-$:.push File.expand_path("../lib", __FILE__)
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 
 # Maintain your gem's version:
-require "graph/version"
+require 'graph/version'
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "graph"
+  s.name        = 'graph'
   s.version     = Graph::VERSION
-  s.authors     = ["sigra"]
-  s.email       = ["sigra.yandex@gmail.com"]
-  s.homepage    = "https://github.com/maokomioko/booking_analytics"
-  s.summary     = "Graph module for BA"
-  s.description = "Graph module for BA"
-  s.license     = "MIT"
+  s.authors     = ['sigra']
+  s.email       = ['sigra.yandex@gmail.com']
+  s.homepage    = 'https://github.com/maokomioko/booking_analytics'
+  s.summary     = 'Graph module for BA'
+  s.description = 'Graph module for BA'
+  s.license     = 'MIT'
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["spec/**/*"]
+  s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
+  s.test_files = Dir['spec/**/*']
   s.require_paths = ['lib']
 
   s.add_dependency 'coffee-rails', '~> 4.1.0'

@@ -1,13 +1,15 @@
 class ChannelManagerController < ApplicationController
+  load_and_authorize_resource
+
   def new
     unless current_user.company.wb_auth?
-      @wb = ChannelManager::WubookAuth.new
+      @wb = ChannelManager::Wubook.new
     else redirect_to calendar_index_path, notice: t('messages.cm_already_added')
     end
   end
 
   def create
-    wb = ChannelManager::WubookAuth.new(wb_params)
+    wb = ChannelManager::Wubook.new(wb_params)
     wb.company = current_user.company
     if wb.save && wubook_auth_state
       current_user.company.update_attribute(:wb_auth, true) unless current_user.company.wb_auth?
@@ -20,11 +22,11 @@ class ChannelManagerController < ApplicationController
   end
 
   def edit
-    @wb = ChannelManager::WubookAuth.find(params[:id])
+    @wb = ChannelManager::Wubook.find(params[:id])
   end
 
   def update
-    wb = ChannelManager::WubookAuth.find(params[:id])
+    wb = ChannelManager::Wubook.find(params[:id])
 
     if wb.update_attributes(wb_params)
       redirect_to calendar_index_path
@@ -38,16 +40,16 @@ class ChannelManagerController < ApplicationController
   def update_prices
     unless params[:dates].blank?
       dates = params[:dates]
-      dates.delete("")
+      dates.delete('')
 
       wba = wubook_for_company(params[:room_id])
       unless wba.nil?
         if wba.apply_room_prices(params[:room_id], dates, params[:price])
           flash[:success] = t('messages.prices_updated')
-          render json: {status: :ok}
+          render json: { status: :ok }
         else
           flash[:error] = t('messages.price_update_failed')
-          render json: {status: :unprocessable_entity}
+          render json: { status: :unprocessable_entity }
         end
       end
     end
@@ -61,15 +63,13 @@ class ChannelManagerController < ApplicationController
   end
 
   def wubook_for_company(room_id)
-    begin
-      room = Room.find(room_id)
-      room.wubook_auths.where(company: current_user.company).first
-    rescue
-      nil
-    end
+    room = Room.find(room_id)
+    room.wubook_auths.where(company: current_user.company).first
+  rescue
+    nil
   end
 
   def wb_params
-    params.require(:wubook_auth).permit(:login, :password, :lcode, :booking_id, :hotel_name)
+    params.require(:channel_manager_wubook).permit(:login, :password, :lcode, :booking_id, :hotel_name)
   end
 end

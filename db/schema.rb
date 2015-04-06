@@ -11,27 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318195536) do
+ActiveRecord::Schema.define(version: 20150327111021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "active_block_availabilities", id: false, force: :cascade do |t|
-    t.integer  "id"
-    t.string   "max_occupancy"
-    t.jsonb    "data"
-    t.integer  "booking_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "active_block_availabilities", force: :cascade do |t|
+    t.jsonb   "data"
+    t.integer "booking_id"
+    t.text    "max_occupancy", array: true
+    t.integer "fetch_stamp"
   end
 
+  add_index "active_block_availabilities", ["booking_id"], name: "index_active_block_availabilities_on_booking_id", using: :btree
+
   create_table "archive_block_availabilities", id: false, force: :cascade do |t|
-    t.integer  "id"
-    t.string   "max_occupancy"
-    t.jsonb    "data"
-    t.integer  "booking_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "id"
+    t.jsonb   "data"
+    t.integer "booking_id"
+    t.text    "max_occupancy", array: true
+    t.integer "fetch_stamp"
   end
 
   create_table "beddings", force: :cascade do |t|
@@ -83,10 +82,16 @@ ActiveRecord::Schema.define(version: 20150318195536) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "wb_auth",    default: false
+    t.boolean  "wb_auth",      default: false
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "logo"
+    t.string   "reg_number"
+    t.string   "reg_address"
+    t.string   "bank_name"
+    t.string   "bank_code"
+    t.string   "bank_account"
   end
 
   create_table "hotel_facilities", id: false, force: :cascade do |t|
@@ -117,6 +122,7 @@ ActiveRecord::Schema.define(version: 20150318195536) do
     t.string  "district"
     t.string  "zip"
     t.integer "booking_id"
+    t.string  "current_job"
   end
 
   add_index "hotels", ["booking_id"], name: "index_hotels_on_booking_id", using: :btree
@@ -176,7 +182,7 @@ ActiveRecord::Schema.define(version: 20150318195536) do
     t.integer "availability"
     t.integer "occupancy"
     t.integer "children"
-    t.integer "wubook_auth_id"
+    t.integer "channel_manager_id"
     t.integer "subroom"
     t.integer "max_people"
     t.float   "price"
@@ -188,8 +194,9 @@ ActiveRecord::Schema.define(version: 20150318195536) do
 
   add_index "rooms", ["booking_hotel_id"], name: "index_rooms_on_booking_hotel_id", using: :btree
   add_index "rooms", ["booking_id"], name: "index_rooms_on_booking_id", using: :btree
+  add_index "rooms", ["channel_manager_id"], name: "index_rooms_on_channel_manager_id", using: :btree
   add_index "rooms", ["hotel_id"], name: "index_rooms_on_hotel_id", using: :btree
-  add_index "rooms", ["wubook_auth_id"], name: "index_rooms_on_wubook_auth_id", using: :btree
+  add_index "rooms", ["roomtype"], name: "index_rooms_on_roomtype", using: :btree
 
   create_table "rooms_wubook_auths", force: :cascade do |t|
     t.integer "room_id"
@@ -199,9 +206,21 @@ ActiveRecord::Schema.define(version: 20150318195536) do
   add_index "rooms_wubook_auths", ["room_id", "wubook_auth_id"], name: "index_rooms_wubook_auths_on_room_id_and_wubook_auth_id", unique: true, using: :btree
   add_index "rooms_wubook_auths", ["wubook_auth_id"], name: "index_rooms_wubook_auths_on_wubook_auth_id", using: :btree
 
+  create_table "settings", force: :cascade do |t|
+    t.integer  "crawling_frequency"
+    t.text     "stars",              default: [], array: true
+    t.text     "user_ratings",       default: [], array: true
+    t.text     "property_types",     default: [], array: true
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "settings", ["company_id"], name: "index_settings_on_company_id", unique: true, using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -213,10 +232,23 @@ ActiveRecord::Schema.define(version: 20150318195536) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "avatar"
+    t.string   "role"
+    t.string   "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
+    t.integer  "invitations_count",      default: 0
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
+  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
+  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

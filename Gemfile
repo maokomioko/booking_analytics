@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'bootstrap-sass'
 gem 'browser'
 gem 'bullet'
 gem 'bson_ext'
@@ -18,10 +19,13 @@ gem 'draper', '~> 1.4'
 gem 'devise', github: 'plataformatec/devise'
 gem 'devise-encryptable'
 gem 'devise-async'
+gem 'devise_invitable'
 
 gem 'encryptor'
 gem 'erb2haml'
 gem 'eu_central_bank'
+
+gem 'font-awesome-sass', github: 'FortAwesome/font-awesome-sass'
 
 gem 'geocoder'
 gem 'globalize', github: 'globalize/globalize'
@@ -31,6 +35,7 @@ gem 'graph', path: 'graph'
 gem 'haml-rails'
 
 gem 'i18n', '0.7'
+gem 'icheck-rails'
 
 gem 'log4r'
 
@@ -45,7 +50,7 @@ gem 'money'
 gem 'money-rails'
 
 gem 'nokogiri'
-gem "nokogiri_truncate_html", github: 'sebastien-madru/nokogiri_truncate_html'
+gem 'nokogiri_truncate_html', github: 'sebastien-madru/nokogiri_truncate_html'
 
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -66,11 +71,13 @@ gem 'rubysl', platform: :rbx
 
 gem 'sass-rails', '>= 5'
 gem 'sanitize'
+gem 'select2-rails'
 gem 'stringex'
 gem 'state_machine', github: 'seuros/state_machine'
 gem 'sidekiq'
+gem 'sidekiq-status'
 gem 'sidetiq'
-gem 'sinatra', :require => nil
+gem 'sinatra', require: nil
 
 gem 'turbolinks', '~> 2.5.3'
 
@@ -81,7 +88,7 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development do
   gem 'awesome_print', github: 'eoinkelly/awesome_print'
-  gem "thin"
+  gem 'thin'
 end
 
 group :development, :test do
@@ -109,19 +116,20 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec-rails'
-  gem 'rspec-its'
+  gem 'capybara', github: 'jnicklas/capybara'
   gem 'database_cleaner'
   gem 'ffaker'
-  gem 'json_spec'
-  gem 'timecop'
-  gem 'launchy'
   gem 'fuubar'
-  gem 'turn', require: false
+  gem 'json_spec'
+  gem 'launchy'
   gem 'mechanize'
-  gem 'capybara', github: 'jnicklas/capybara'
   gem 'poltergeist', github: 'teampoltergeist/poltergeist'
+  gem 'rspec-its'
+  gem 'rspec-rails'
+  # gem 'rspec-sidekiq'
   gem 'simplecov', github: 'colszowka/simplecov'
   gem 'shoulda-matchers', '~> 2.8.0'
   gem 'shoulda-callback-matchers', '~> 1.1.2'
+  gem 'timecop'
+  gem 'turn', require: false
 end

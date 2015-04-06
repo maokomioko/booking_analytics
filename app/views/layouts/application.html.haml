@@ -1,32 +1,39 @@
 !!! 5
 %html
   %head
-  %title= t('meta.title')
-  %meta{content: "initial-scale = 1.0, maximum-scale = 1.0", charset: 'utf-8', name: "viewport"}
-  = javascript_include_tag "application", 'data-turbolinks-track' => true
-  = stylesheet_link_tag "application", 'data-turbolinks-track' => true
+    %title= t('meta.title')
+    / start: META
+    %meta{ charset: 'utf-8' }
+    /[if IE] <meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" />
+    %meta{ content: 'width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0', name: 'viewport' }
+    %meta{ content: 'yes', name: 'apple-mobile-web-app-capable' }
+    %meta{ content: 'black', name: 'apple-mobile-web-app-status-bar-style' }
+    %meta{ content: '', name: 'description' }
+    %meta{ content: '', name: 'author' }
+    / end: META
 
-  - %w(Graph).each do |engine|
-    - if (engine.constantize rescue nil)
-      = javascript_include_tag "#{engine.downcase}/application", 'data-turbolinks-track' => true
-      = stylesheet_link_tag "#{engine.downcase}/application", 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', 'data-turbolinks-track' => true
+    = yield(:page_css)
 
-  = csrf_meta_tags
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = yield(:page_js)
+
+    = csrf_meta_tags
   %body{class: @body_class, data: { page: body_data_page }}
     = render partial: 'partials/header'
-    #main_frame
-      #flash_container
-        - flash.each do |key, value|
-          .alert{class: "#{key}"}
-            %strong= value
-            %a.close{href: "#"}
-        - unless flash
-          .none
+    .main-container
+      = render 'partials/menu'
+      .main-content
+        .container
+          = yield(:main_content_header)
+          - unless flash.empty?
+            - flash.each do |type, message|
+              = render 'partials/flash', type: type, message: message
+          = yield
 
-      #spinner_placeholder.hidden
-        = render partial: 'partials/spinner'
-        %p.loading_text= t('shared.loading')
+    = render 'partials/sidebar' if controller_name == 'calendar' && current_user && current_user.channel_managers.size > 0
+    #spinner_placeholder.hidden
+      = render partial: 'partials/spinner'
+      %p.loading_text= t('shared.loading')
 
-      = yield
-
-      = render partial: 'partials/javascript'
+    = render partial: 'partials/javascript'

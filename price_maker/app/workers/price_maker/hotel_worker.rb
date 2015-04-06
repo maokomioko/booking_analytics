@@ -6,18 +6,22 @@ class PriceMaker::HotelWorker
   def initialize
   end
 
-  def amenities_mix(hotel_id, rating, score, c_width)
-    puts "IDS Processing.."
+  def amenities_mix(hotel_id, rating, score, properties, facility_ids)
+    puts 'IDS Processing..'
     ids = []
     begin
-      options = Hotel.find(hotel_id).validate_amenities.combination(c_width)
+      hotels = Hotel.with_stars(rating)
 
-      1.upto(options.count) do
-        next_set = options.next
-        hotels = Hotel.with_stars(rating).with_score_gt(score).with_facilities(next_set)
-
-        ids << hotels.map(&:booking_id).reject(&:blank?) if hotels.size > 0
+      if score.is_a?(Array)
+        hotels = hotels.with_score(score)
+      else
+        hotels = hotels.with_score_gt(score)
       end
+
+      hotels = hotels.by_property_type(properties) if properties.present?
+      hotels = hotels.with_facilities(facility_ids)
+
+      ids << hotels.map(&:id).reject(&:blank?) if hotels.size > 0
 
       ActiveRecord::Base.connection_pool.release_connection(Thread.current.object_id)
     rescue ActiveRecord::ConnectionTimeoutError

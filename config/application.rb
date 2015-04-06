@@ -18,6 +18,7 @@ module BookingAnalytics
 
     config.allow_concurrency = true
     config.i18n.default_locale = :en
+    config.i18n.fallbacks = true
 
     config.generators do |g|
       g.test_framework :rspec, fixture_replacement: :fabrication
@@ -28,7 +29,9 @@ module BookingAnalytics
     end
 
     config.railties_order = [:main_app, :all]
+    config.active_record.raise_in_transactional_callbacks = true
 
-    Money.default_currency = Money::Currency.new("EUR")
+    CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
+    Money.default_currency = Money::Currency.new('EUR')
   end
 end

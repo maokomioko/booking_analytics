@@ -13,9 +13,13 @@
 #  company_id         :integer
 #  type               :string           not null
 #
+# Indexes
+#
+#  index_channel_managers_on_company_id  (company_id)
+#
 
 class ChannelManager::Wubook < ChannelManager
   def connector
-    WubookConnector.new({login: login, password: password, lcode: lcode})
+    WubookConnector.new(login: login, password: password, lcode: lcode)
   end
 end

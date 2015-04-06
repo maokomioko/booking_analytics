@@ -26,7 +26,7 @@ class CreateFacilities < ActiveRecord::Migration
     add_index :room_facilities_rooms, [:room_facility_id, :room_id]
     add_index :room_facilities_rooms, :room_id
 
-    execute %q{
+    execute "
       create or replace function trigger_update_facilities_count() returns trigger as $$
         declare
           ref_table varchar;
@@ -46,7 +46,7 @@ class CreateFacilities < ActiveRecord::Migration
             return OLD;
           end if;
         end;
-      $$ language plpgsql; }
+      $$ language plpgsql; "
 
     execute %q{
             create trigger "update_hotel_facilities_count"

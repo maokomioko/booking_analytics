@@ -5,7 +5,7 @@ require 'sass-rails'
 
 module Graph
   mattr_accessor :parent_controller
-  @@parent_controller = "ApplicationController"
+  @@parent_controller = 'ApplicationController'
 
   def self.setup
     yield self

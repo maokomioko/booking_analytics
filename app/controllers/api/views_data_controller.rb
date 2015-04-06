@@ -35,7 +35,7 @@ class Api::ViewsDataController < ApiController
     end
   end
 
-  def select_provider(provider)
+  def select_provider(_provider)
     case 'provider'
     when 'alexa'
       api_provider = 'alexa'
@@ -49,7 +49,7 @@ class Api::ViewsDataController < ApiController
   def external_post(params)
     uri = URI.parse('http://google.com')
     response = Net::HTTP.get(uri.host, params)
-    raise response
+    fail response
   end
 end
 

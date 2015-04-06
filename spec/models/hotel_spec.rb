@@ -1,16 +1,15 @@
 require 'rails_helper'
 
 describe Hotel do
-  it_behaves_like ParamSelectable
+  it_behaves_like HotelProperties
 
   context 'association' do
     %i(location checkin checkout).each do |n|
       it { should have_one(n) }
     end
 
-    %i(rooms block_availabilities).each do |n|
-      it { should have_many(n) }
-    end
+    it { should have_many(:rooms) }
+    it { should have_one(:channel_manager).with_foreign_key(:booking_id) }
 
     %i(related facilities).each do |n|
       it { should have_and_belong_to_many(n) }
@@ -30,8 +29,8 @@ describe Hotel do
       end
 
       it 'includes contains facilities' do
-        expect(described_class.contains_facilities(@facilities.map(&:id))).
-            to include(*[@hotel_with_all_facilities, @hotel_with_one_facility])
+        expect(described_class.contains_facilities(@facilities.map(&:id)))
+          .to include(*[@hotel_with_all_facilities, @hotel_with_one_facility])
       end
 
       it 'includes strict with facilities' do
@@ -44,7 +43,7 @@ describe Hotel do
     describe 'with_stars' do
       before(:all) do
         @scoped = Fabricate.times(2, :hotel, exact_class: 3.1)
-        @unscoped = Fabricate.times(2, :hotel, exact_class: rand(0..30)/10)
+        @unscoped = Fabricate.times(2, :hotel, exact_class: rand(0..30) / 10)
 
         @collection = described_class.with_stars(3.1).map(&:id)
       end
@@ -60,21 +59,21 @@ describe Hotel do
 
     describe 'with_score' do
       before(:all) do
-        Fabricate.times(2, :hotel, review_score: rand(10..50)/10)
-        Fabricate.times(2, :hotel, review_score: rand(51..100)/10)
+        Fabricate.times(2, :hotel, review_score: rand(10..50) / 10)
+        Fabricate.times(2, :hotel, review_score: rand(51..100) / 10)
       end
 
       describe 'gt' do
         it 'includes with greater score' do
           scores = described_class.with_score_gt(5.0).map(&:review_score)
-          expect(scores.reject{ |x| x > 5.0 }).to be_empty
+          expect(scores.reject { |x| x > 5.0 }).to be_empty
         end
       end
 
       describe 'lt' do
         it 'includes with lighter score' do
           scores = described_class.with_score_lt(5.1).map(&:review_score)
-          expect(scores.reject{ |x| x < 5.1 }).to be_empty
+          expect(scores.reject { |x| x < 5.1 }).to be_empty
         end
       end
     end

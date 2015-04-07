@@ -1,0 +1,9 @@
+en:
+  graph:
+    hotels:
+      index:
+        header: Analytics
+        settings_header: Setup options for graphics
+        date_range: Date range
+        hotel: Your hotel
+        show_graph: Show graph

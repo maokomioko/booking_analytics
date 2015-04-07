@@ -363,6 +363,10 @@ a.bricky:hover {
   font-size: 25px;
   min-width: 210px;
 }
+.logo {
+  padding: 0;
+  img { height: 50px; }
+}
 .navbar > .container .navbar-brand i, .logo i {
   font-size: 20px;
 }

@@ -1,5 +1,5 @@
 #= require jquery
-#= require turbolinks
+# require turbolinks
 
 #= require jquery_ujs
 #= require jquery-ui
@@ -35,6 +35,13 @@ ready = ->
   if $('.search-select').length
     $('.search-select').select2
       allowClear: true
+
+  page = $('body').data('page')
+  menu = $('li[data-menu~="' + page + '"]')
+
+  if menu.length
+    menu.addClass('active')
+    menu.parents('li').addClass('open active')
 
   return
 

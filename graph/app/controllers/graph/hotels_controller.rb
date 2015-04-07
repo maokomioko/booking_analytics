@@ -1,10 +1,28 @@
 module Graph
   class HotelsController < Graph.parent_controller.constantize
+    helper Graph::FormHelper
+
     def index
+      hotel = current_user.hotels.first
+
+      unless hotel.present?
+        flash[:alert] = I18n.t('graph.messages.no_hotels')
+        redirect_to main_app.root_path
+      end
+
+      @form = Graph::Form.new(
+        booking_id: hotel.booking_id,
+        room_id: hotel.rooms.pluck(:id)
+      )
     end
 
     def simple
-      @data = generate_dummy
+      room_ids = Graph.room.where(id: graph_params[:room_id])
+                  .where(booking_hotel_id: graph_params[:booking_id])
+                  .pluck(:id)
+
+      period = graph_params[:date_from].to_date..graph_params[:date_to].to_date
+      @data = Data::Room.new(room_ids, period)
     end
 
     def competitors
@@ -18,23 +36,21 @@ module Graph
     private
 
     def generate_dummy
-      range      = params[:range].present? ? params[:range].to_i : 7
-      future     = params[:future].present? && params[:future].to_i == 1
-      graph_type = action_name
+      dates = graph_params[:date_from].to_date..graph_params[:date_to].to_date
 
-      dates = if future
-                Date.today...(Date.today + range.days)
-              else
-                (Date.today - range.days)...Date.today
-              end
+      dates.map{ |day| { day: day.strftime('%d.%m.%Y'), price: rand(80..120) } }
+    end
 
-      data = []
-
-      dates.each do |day|
-        data << { day: day.strftime('%d.%m.%Y'), price: rand(80..120) }
+    def graph_params
+      # HACK for select2 empty value
+      %i(room_id).each do |field|
+        if params[:form][field].present?
+          params[:form][field].select!(&:present?)
+        end
       end
 
-      data
+      params.require(:form).permit(:date_from, :date_to, :booking_id,
+                                     room_id: [], related_booking_id: [])
     end
   end
 end

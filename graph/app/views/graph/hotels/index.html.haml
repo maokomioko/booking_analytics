@@ -3,24 +3,38 @@
 
 = content_for(:main_content_header) do
   .page-header
-    %h1
-      Some graphics are here!
-      %small Only for test!
+    %h1= t('.header')
 
-= form_tag [:simple, :hotels], remote: true, method: :get, class: 'form-horizontal' do
-  .form-group
-    = label_tag :id, 'Select hotel: ', class: 'col-sm-2 control-label'
-    .col-sm-2
-      = select_tag :id, options_for_select([["Test hotel 1", 1], ["Test hotel 2", 2]], 1), class: 'form-control'
-    = label_tag :range, 'Select range in days: ', class: 'col-sm-2 control-label'
-    .col-sm-1
-      = number_field_tag :range, 7, max: 91, min: 7, step: 7
-    .col-sm-1
-      .checkbox
-        %label
-          = check_box_tag :future, "1", false, class: 'grey'
-          Future?
-    .col-sm-2
-      = submit_tag 'Show graph', class: 'btn btn-block btn-success btn-squared btn-lg'
+.row
+  .col-sm-8.col-sm-offset-2
+    .panel.panel-default
+      .panel-heading
+        %i.clip-stats
+        = t('.settings_header')
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses
+      .panel-body
+        = form_for @form, url: [:simple, :hotels], remote: true, method: :get, html: { class: 'form-horizontal graph-options' } do |f|
+          .form-group
+          .form-group
+            = f.label :id, t('.date_range'), class: 'col-sm-2 control-label'
+            .col-sm-10
+              %p
+              #date-range-slider.slider-purple
+            = f.hidden_field :date_from
+            = f.hidden_field :date_to
+          .form-group
+            = f.label :booking_id, t('.hotel'), class: 'col-sm-2 control-label'
+            .col-sm-10
+              = f.select :booking_id, options_for_hotels, {}, class: 'form-control search-select'
+          - if @form.booking_id
+            = render 'room_fields', f: f, booking_id: @form.booking_id
+          .form-group
+            = f.label :related_booking_id, t('.related'), class: 'col-sm-2 control-label'
+            .col-sm-10
+              -#= f.select :related_booking_id, options_for_related
+          .form-group
+            .col-sm-2.col-sm-offset-2
+              = submit_tag t('.show_graph'), class: 'btn btn-success btn-squared'
 
 #line-example

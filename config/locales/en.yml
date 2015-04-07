@@ -1,6 +1,6 @@
 en:
   meta:
-    title: "Hotel Commander | v 0.0.1 - preview"
+    title: "Hotel Commander | v 0.0.2 - preview"
   shared:
     registration: "Registration"
     reset_instructions: "Send me password reset instructions"
@@ -107,8 +107,8 @@ en:
     profile: Edit my profile
     worker: Algorithm
     connection: Channel Manager
-    company: Company setting
-    company_users: Company users
+    company: Company profile
+    company_users: Edit existing users
     invite: Invite new users
   flash:
     info: Info!

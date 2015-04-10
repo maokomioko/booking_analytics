@@ -21,7 +21,7 @@
       - price_block = @room.room_prices.find_by(date: date)
 
       - unless date < Date.today || price_block.nil?
-        .container{ class: set_day_class(price_block) }
+        .date_placeholder{ class: set_day_class(price_block) }
           .day
             - unless date.day == 1
               = date.day

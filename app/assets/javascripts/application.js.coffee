@@ -23,8 +23,6 @@
 # require_tree .
 
 ready = ->
-  $("#calendar").perfectScrollbar()
-
   window.isMouseDown = false
 
   $(document).mouseup ->

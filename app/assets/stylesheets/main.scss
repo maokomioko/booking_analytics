@@ -8,6 +8,7 @@ body {
   font-size: 13px;
   padding: 0px !important;
   margin: 0px !important;
+  postilion: relative;
   background: #ffffff;
 }
 
@@ -20,7 +21,7 @@ h1, h2, h3 {
 }
 
 // Forms
- 
+
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
   background-color: #FFFFFF;
   border: 1px solid #D5D5D5;
@@ -254,7 +255,7 @@ textarea.autosize {
 }
 
 //	Generic Classes
- 
+
 .no-padding {
   padding: 0 !important;
 }
@@ -341,7 +342,7 @@ a.bricky:hover {
 }
 
 //  Navbar and navbar elements
- 
+
 .navbar {
   margin: 0 !important;
   padding: 0 !important;
@@ -2159,7 +2160,7 @@ ul.main-navigation-menu > li > ul.sub-menu > li > ul.sub-menu > li > ul.sub-menu
 }
 
 //	Accordion
- 
+
 .accordion-custom .panel {
   background-color: #FFFFFF;
   border: none;
@@ -2221,7 +2222,7 @@ ul.main-navigation-menu > li > ul.sub-menu > li > ul.sub-menu > li > ul.sub-menu
 }
 
 //	Social Icons
- 
+
 .social-icons li a, a.social-icon {
   background-position: 0 0;
   background-repeat: no-repeat;
@@ -2232,7 +2233,7 @@ ul.main-navigation-menu > li > ul.sub-menu > li > ul.sub-menu > li > ul.sub-menu
 }
 
 //	Sliders
- 
+
 
 [class^="slider-"] .ui-rangeSlider-bar {
   height: 18px !important;
@@ -2408,7 +2409,7 @@ ul.main-navigation-menu > li > ul.sub-menu > li > ul.sub-menu > li > ul.sub-menu
 }
 
 //	Nestable List
- 
+
 .dd {
   position: relative;
   display: block;
@@ -2638,7 +2639,7 @@ ul.main-navigation-menu > li > ul.sub-menu > li > ul.sub-menu > li > ul.sub-menu
 }
 
 //	Icons
- 
+
 .icons > section {
   margin-top: 20px;
 }
@@ -2653,7 +2654,7 @@ ul.main-navigation-menu > li > ul.sub-menu > li > ul.sub-menu > li > ul.sub-menu
 }
 
 //	Backdrop
- 
+
 .full-white-backdrop {
   background-color: #FFFFFF;
   display: none;
@@ -2666,7 +2667,7 @@ ul.main-navigation-menu > li > ul.sub-menu > li > ul.sub-menu > li > ul.sub-menu
 }
 
 //	Table and table elements
- 
+
 th.center, td.center {
   text-align: center;
 }
@@ -2693,7 +2694,7 @@ td.center .dropdown-menu {
 }
 
 //	Timepicker
- 
+
 .bootstrap-timepicker-widget table td input {
   width: 32px !important;
 }
@@ -2703,7 +2704,7 @@ td.center .dropdown-menu {
 }
 
 //	FileUpload
- 
+
 .fileupload .uneditable-input {
   white-space: nowrap;
 }
@@ -2714,7 +2715,7 @@ td.center .dropdown-menu {
 }
 
 //	WYSIWYG
- 
+
 .wysiwyg {
   padding: 5px 0;
 }
@@ -2749,7 +2750,7 @@ td.center .dropdown-menu {
 }
 
 //	Form Wizard
- 
+
 .swMain > ul {
   display: table;
   list-style: none;
@@ -2865,13 +2866,10 @@ td.center .dropdown-menu {
 }
 
 //	Login
- 
+
 body.login {
-  color: #7F7F7F;
-}
-body.login {
-  background-image: image-url('bg_2.png');
-  background-color: rgba(255, 255, 255, 0);
+  color: #333;
+  background: #f5f5f5;
 }
 body.login .main-login {
   margin-top: 60px;
@@ -2885,10 +2883,10 @@ body.login .box-forgot,
 body.login .box-register,
 body.login .box-invite {
   background: #FFFFFF;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  box-shadow: -30px 30px 50px rgba(0, 0, 0, 0.32);
   overflow: hidden;
-  padding: 15px;
+  padding: 20px;
 }
 body.login .form fieldset {
   border: none;
@@ -3570,7 +3568,7 @@ div.timeline_element.purple div.timeline_title {
 }
 
 //	Pricing Tables
- 
+
 #pricing_table_example1 .pricing-table {
   background: none repeat scroll 0 0 #FFFFFF;
   border: 1px solid #DDDDDD;
@@ -3772,7 +3770,7 @@ ul#countdown li p.timeRefDays, ul#countdown li p.timeRefHours, ul#countdown li p
 }
 
 //	Flot Chart
- 
+
 .flot-container {
   box-sizing: border-box;
   position: relative;
@@ -3806,7 +3804,7 @@ ul#countdown li p.timeRefDays, ul#countdown li p.timeRefHours, ul#countdown li p
 }
 
 //	Maps
- 
+
 .map {
   display: block;
   height: 350px;
@@ -3817,7 +3815,7 @@ ul#countdown li p.timeRefDays, ul#countdown li p.timeRefHours, ul#countdown li p
 }
 
 //	Overlay
- 
+
 .overlay {
   display: block;
   text-align: center;
@@ -3853,7 +3851,7 @@ ul#countdown li p.timeRefDays, ul#countdown li p.timeRefHours, ul#countdown li p
 }
 
 //	Calendar
- 
+
 #calendar {
   position: relative;
 }
@@ -3946,7 +3944,7 @@ ul#countdown li p.timeRefDays, ul#countdown li p.timeRefHours, ul#countdown li p
 }
 
 //	Lock Screen
- 
+
 .main-ls {
   height: 250px;
   left: 50%;
@@ -3996,7 +3994,7 @@ body.lock-screen .user-info > span em {
 }
 
 //	daterangepicker
- 
+
 .daterangepicker {
   margin-top: 51px !important;
 }
@@ -4005,7 +4003,7 @@ body.header-default .daterangepicker {
 }
 
 //	Style Selector
- 
+
 #style_selector {
   background: none repeat scroll 0 0 #FFFFFF;
   position: fixed;
@@ -4166,7 +4164,7 @@ body.header-default .daterangepicker {
 }
 
 //	Home elements
- 
+
 .circle-icon {
   background-color: #333333;
   border-radius: 75px 75px 75px 75px;
@@ -4367,7 +4365,7 @@ body.header-default .daterangepicker {
 }
 
 //	Easy Pie Chart
- 
+
 .easy-pie-chart {
   position: relative;
   text-align: center;
@@ -4409,7 +4407,7 @@ body.header-default .daterangepicker {
 }
 
 //	User profile
- 
+
 
 .user-left {
   border-right: 1px solid #DDDDDD;
@@ -4445,7 +4443,7 @@ body.header-default .daterangepicker {
 }
 
 //	Gallery
- 
+
 .gallery-img {
   margin-bottom: 20px;
 }

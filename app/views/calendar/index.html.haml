@@ -6,14 +6,10 @@
         = @hotel.name + ' | '
         = truncate(@room.name, length: 100)
 
-    .weekdays
-      %span= t('calendar.days.mon')
-      %span= t('calendar.days.tue')
-      %span= t('calendar.days.wed')
-      %span= t('calendar.days.thu')
-      %span= t('calendar.days.fri')
-      %span= t('calendar.days.sat')
-      %span= t('calendar.days.sun')
+    %table.weekdays
+      %tr
+        - %w(mon tue wed thu fri sat sun).each do |day|
+          %td= t("calendar.days.#{day}")
 
 #calendar
   %table.calendar

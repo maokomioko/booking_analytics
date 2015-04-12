@@ -1,13 +1,18 @@
 [data-page='calendar:demo'], [data-page='calendar:index'] {
   .page-header {
-    margin: 20px 0 0;
+    position: fixed;
+    margin: 0;
+    padding: 20px;
+    left: 225px;
+    right: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9);
   }
 }
 
 #calendar {
   position: relative;
-  overflow: hidden;
-  height: calc(100vh - 60px);
+  margin-top: 122px;
 }
 
 #calendar_days_cont {
@@ -16,13 +21,13 @@
 }
 
 .weekdays {
-  background: #e1f2fa;
+  margin-top: 20px;
+  width: 100%;
   font-size: 13px;
   text-transform: uppercase;
-  span {
-    width: 238px;
-    display: table-cell;
-    padding: 5px 10px;
+  td {
+    width: 14.28%;
+    text-align: center;
   }
 }
 
@@ -34,7 +39,7 @@
     border: 1px solid #e0e0e0;
     &.today {
       .date_placeholder {
-        background: #f1f1f1;
+        background: #F5F5F5;
       }
     }
     &.selected {
@@ -95,19 +100,22 @@
         margin-right: 10px;
         &.ccp_price {
           color: rgb(218, 128, 25);
-          font-size: 16px;
+          font-size: 14px;
           margin-right: 0px;
         }
       }
     }
     .bar {
       position: relative;
-      margin-bottom: 15px;
-      padding-left: 10px;
-      background: #cde6f7;
-      color: #000;
+      margin: 7px auto;
+      padding: 2px 0;
+      border-radius: 3px;
+      width: 95%;
+      text-align: center;
+      background: #3A87AD;
+      color: #fff;
       > span {
-        font-size: 14px;
+        font-size: 13px;
       }
       &.manual {
         background: #FFF1B3;

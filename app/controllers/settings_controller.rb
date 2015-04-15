@@ -34,12 +34,13 @@ class SettingsController < ApplicationController
 
   def settings_params
     # HACK for select2 empty value
-    %i(stars user_ratings property_types).each do |field|
+    %i(stars user_ratings property_types districts).each do |field|
       if params[:setting][field].present?
         params[:setting][field].select!(&:present?)
       end
     end
 
-    params.require(:setting).permit(:crawling_frequency, stars: [], user_ratings: [], property_types: [])
+    params.require(:setting).permit(:crawling_frequency, stars: [],
+      user_ratings: [], property_types: [], districts: [])
   end
 end

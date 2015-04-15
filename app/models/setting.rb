@@ -10,10 +10,13 @@
 #  company_id         :integer
 #  created_at         :datetime
 #  updated_at         :datetime
+#  districts          :text             default([]), is an Array
+#  hotel_id           :integer
 #
 # Indexes
 #
 #  index_settings_on_company_id  (company_id) UNIQUE
+#  index_settings_on_hotel_id    (hotel_id)
 #
 
 class Setting < ActiveRecord::Base
@@ -26,6 +29,7 @@ class Setting < ActiveRecord::Base
   USER_RATINGS = (0..100).to_a.map { |n| (n.to_f / 10).to_s }.freeze
 
   belongs_to :company
+  belongs_to :hotel
 
   after_save :reload_hotel_workers, if: -> { self.crawling_frequency_changed? }
   after_save :clean_related_hotels
@@ -35,12 +39,13 @@ class Setting < ActiveRecord::Base
   validates :user_ratings, array: { inclusion: { in: USER_RATINGS } }
   validates :property_types, array: { inclusion: { in: Hotel::OLD_PROPERTY_TYPES.keys } }
 
-  def self.default_attributes
+  def self.default_attributes(hotel = nil)
     {
       crawling_frequency: CRAWLING_FREQUENCIES.max,
       stars: [3, 4],
       user_ratings: (60..70).to_a.map { |n| n.to_f / 10 },
-      property_types: Hotel::OLD_PROPERTY_TYPES.keys.first(3)
+      property_types: Hotel::OLD_PROPERTY_TYPES.keys.first(3),
+      districts: hotel.present? ? hotel.district : []
     }
   end
 

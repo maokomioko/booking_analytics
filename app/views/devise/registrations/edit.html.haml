@@ -51,7 +51,7 @@
               %span.fileupload-exists
                 = icon('picture')
                 = t('shared.change')
-              = f.file_field :avatar
+              = f.file_field :avatar, accept: 'image/*;capture=camera'
               = f.hidden_field :avatar_cache
             %a.btn.fileupload-exists.btn-light-grey{"data-dismiss" => "fileupload", href: '#'}
               = icon('times')

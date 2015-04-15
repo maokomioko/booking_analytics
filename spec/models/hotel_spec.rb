@@ -77,5 +77,62 @@ describe Hotel do
         end
       end
     end
+
+    describe 'with_district' do
+      it 'includes any of searched district' do
+        Fabricate.create(:hotel_without_address, district: ['d_1', 'd_2'])
+        Fabricate.create(:hotel_without_address, district: ['d_1', 'd_3'])
+
+        results = described_class.with_district('d_1').map do |hotel|
+          hotel.district.include? 'd_1'
+        end
+
+        expect(results.reject{ |x| x }).to be_empty
+      end
+    end
+  end
+
+  describe '.city_districts' do
+    before(:all) do
+      Fabricate.create(:hotel_without_address,
+                       city: 'Prague',
+                       district: ['cd 1', 'cd 2']
+      )
+
+      Fabricate.create(:hotel_without_address,
+                       city: 'Prague',
+                       district: ['cd 1', 'cd 11']
+      )
+
+      Fabricate.create(:hotel_without_address,
+                       city: 'Berlin',
+                       district: 'cd fake'
+      )
+
+      @districts = described_class.city_districts('Prague')
+    end
+
+    it 'return uniq districts' do
+      expect(@districts.uniq.length).to eq @districts.length
+    end
+
+    it 'return in naturally sort' do
+      expect(@districts.index('cd 2')).to be < @districts.index('cd 11')
+    end
+
+    it 'return districts for searched town' do
+      expect(@districts).to_not include('cd fake')
+    end
+  end
+
+  describe '#full_address' do
+    it 'return string' do
+      expect(Fabricate.build(:hotel).full_address).to be_a_kind_of(String)
+    end
+
+    it 'rejects blank options' do
+      hotel = Fabricate.build(:hotel_without_address, city: 'Test city')
+      expect(hotel.full_address).to eq('Test city')
+    end
   end
 end

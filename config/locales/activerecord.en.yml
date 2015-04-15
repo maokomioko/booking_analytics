@@ -6,5 +6,7 @@ en:
         reg_number: Registration number
         reg_address: Registration address
         logo: Logotype
+      setting:
+        districts: City districts
       user:
         invitation_accepted_at: Join Date

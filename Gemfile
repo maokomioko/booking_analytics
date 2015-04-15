@@ -49,6 +49,7 @@ gem 'mail-logger'
 gem 'money'
 gem 'money-rails'
 
+gem 'naturally', github: 'zedalaye/naturally'
 gem 'nokogiri'
 gem 'nokogiri_truncate_html', github: 'sebastien-madru/nokogiri_truncate_html'
 

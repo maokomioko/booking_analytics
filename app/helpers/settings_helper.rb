@@ -32,4 +32,11 @@ module SettingsHelper
 
     options_for_select(options, default)
   end
+
+  def options_for_districts(default = nil, hotel = nil)
+    city = hotel.present? ? hotel.city : 'Prague'
+    default ||= Setting.default_attributes(hotel) if hotel.present?
+
+    options_for_select(Hotel.city_districts(city), default)
+  end
 end

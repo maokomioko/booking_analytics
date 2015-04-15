@@ -6,11 +6,14 @@ class PriceMaker::HotelWorker
   def initialize
   end
 
-  def amenities_mix(hotel_id, rating, score, properties, facility_ids)
+  def amenities_mix(hotel_id, rating, score, properties, districts, facility_ids)
     puts 'IDS Processing..'
     ids = []
     begin
       hotels = Hotel.with_stars(rating)
+
+      # exclude self hotel
+      hotels = hotels.where.not(id: hotel_id)
 
       if score.is_a?(Array)
         hotels = hotels.with_score(score)
@@ -19,6 +22,7 @@ class PriceMaker::HotelWorker
       end
 
       hotels = hotels.by_property_type(properties) if properties.present?
+      hotels = hotels.with_district(districts) if districts.present?
       hotels = hotels.with_facilities(facility_ids)
 
       ids << hotels.map(&:id).reject(&:blank?) if hotels.size > 0

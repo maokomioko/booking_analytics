@@ -3,22 +3,46 @@
   .form-group
     = f.label :crawling_frequency, class: 'col-sm-2 control-label'
     .col-sm-5
-      = f.select :crawling_frequency, options_for_crawling_frequencies(@setting.crawling_frequency), {}, class: 'form-control'
+      = f.select :crawling_frequency,
+      options_for_crawling_frequencies(@setting.crawling_frequency),
+      {},
+      class: 'form-control'
 
   .form-group
     = f.label :stars, class: 'col-sm-2 control-label'
     .col-sm-5
-      = f.select :stars, options_for_stars(@setting.stars), { include_blank: false }, multiple: true, class: 'form-control search-select'
+      = f.select :stars,
+      options_for_stars(@setting.stars),
+      { include_blank: false },
+      multiple: true,
+      class: 'form-control search-select'
 
   .form-group
     = f.label :user_ratings, class: 'col-sm-2 control-label'
     .col-sm-5
-      = f.select :user_ratings, options_for_rating(@setting.user_ratings), { include_blank: false }, multiple: true, class: 'form-control search-select'
+      = f.select :user_ratings,
+      options_for_rating(@setting.user_ratings),
+      { include_blank: false },
+      multiple: true,
+      class: 'form-control search-select'
 
   .form-group
     = f.label :property_types, class: 'col-sm-2 control-label'
     .col-sm-5
-      = f.select :property_types, options_for_properties(@setting.property_types), { include_blank: false }, multiple: true, class: 'form-control search-select'
+      = f.select :property_types,
+      options_for_properties(@setting.property_types),
+      { include_blank: false },
+      multiple: true,
+      class: 'form-control search-select'
+
+  .form-group
+    = f.label :districts, class: 'col-sm-2 control-label'
+    .col-sm-5
+      = f.select :districts,
+      options_for_districts(@setting.districts, @setting.hotel.try(:city)),
+      { include_blank: false },
+      multiple: true,
+      class: 'form-control search-select'
 
   .form-group
     .col-sm-5.col-sm-offset-2

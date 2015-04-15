@@ -1,14 +1,11 @@
 class SettingsController < ApplicationController
-  before_filter :load_company_settings
+  load_and_authorize_resource
 
-  def create
-    @setting = current_user.company.build_setting(settings_params)
+  def index
+    @hotels = current_user.company.hotels
 
-    if @setting.save
-      redirect_to [:edit, :setting], success: I18n.t('messages.settings_updated')
-    else
-      flash[:alert] = @setting.errors.full_messages.to_sentence
-      render :edit
+    if @hotels.size == 1
+      redirect_to [:edit, @hotels[0].setting]
     end
   end
 
@@ -19,7 +16,7 @@ class SettingsController < ApplicationController
     @setting.attributes = settings_params
 
     if @setting.save
-      redirect_to [:edit, :setting], success: I18n.t('messages.settings_updated')
+      redirect_to [:settings], success: I18n.t('messages.settings_updated')
     else
       flash[:alert] = @setting.errors.full_messages.to_sentence
       render :edit
@@ -27,10 +24,6 @@ class SettingsController < ApplicationController
   end
 
   protected
-
-  def load_company_settings
-    @setting = current_user.company.setting || current_user.company.build_setting(Setting.default_attributes)
-  end
 
   def settings_params
     # HACK for select2 empty value

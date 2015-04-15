@@ -1,0 +1,28 @@
+= content_for :main_content_header do
+  .page-header
+    %h1= t('.header')
+
+%table.table.table-hover.table-condensed
+  %thead
+    %tr
+      %th= Hotel.human_attribute_name(:name)
+      %th= Hotel.human_attribute_name(:address)
+      %th= Setting.human_attribute_name(:crawling_frequency)
+      %th= Setting.human_attribute_name(:stars)
+      %th= Setting.human_attribute_name(:user_ratings)
+      %th= Setting.human_attribute_name(:property_types)
+      %th= Setting.human_attribute_name(:districts)
+      %th
+  - @hotels.each do |hotel|
+    %tbody
+      %tr
+        %td= hotel.name
+        %td= hotel.full_address
+        %td= humanize hotel.setting_fallback.crawling_frequency
+        %td= hotel.setting_fallback.stars.map(&:to_i).to_sentence
+        %td= hotel.setting_fallback.user_ratings.to_sentence
+        %td= hotel.setting_fallback.property_types.map{|p| t("enum.property_type.#{p}")}.to_sentence
+        %td= hotel.setting_fallback.districts.to_sentence
+        %td
+          = link_to [:edit, hotel.setting_fallback], class: 'btn btn-xs btn-teal tooltips', data: {'original-title' => t('shared.edit')} do
+            = icon(:edit)

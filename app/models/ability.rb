@@ -25,13 +25,15 @@ class Ability
     can :manage, Company, owner_id: user.id
     can :manage, ChannelManager, company_id: user.company_id
     can :manage, Setting do |setting|
-      setting.company_id == user.company_id && user.company.owner_id == user.id
+      user.hotels.pluck(:id).include?(setting.hotel_id) &&
+        user.company.owner_id == user.id
     end
     can :invite, User
     can [:index, :destroy], User, User.related_to(user) do |other|
       other.id != user.id && (other.company_id == user.company_id ||
-          other.invited_by_id == user.id)
+        other.invited_by_id == user.id)
     end
+    can :index, Hotel, id: user.hotels.pluck(:id)
   end
 
   attr_reader :user

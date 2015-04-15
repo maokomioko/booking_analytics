@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :destroy]
   end
 
-  resource :setting, except: [:show, :new, :destroy]
+  resources :settings, only: [:index, :edit, :update]
 
   root to: 'calendar#index'
   devise_for :users, controllers: {

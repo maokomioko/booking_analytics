@@ -9,7 +9,7 @@ module PriceMaker
       # returns booking_id for related hotels
       def amenities_calc
         if related_ids.blank?
-          settings  = channel_manager.company.setting
+          settings  = setting_fallback
           amenities = validate_amenities
 
           args = [id]

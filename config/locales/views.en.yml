@@ -30,6 +30,8 @@ en:
   settings:
     edit:
       header: Preferences for price worker
+    index:
+      header: Setup algorithm options for each hotel
   users:
     index:
       header: Company users

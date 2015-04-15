@@ -23,6 +23,10 @@ module HotelProperties
 
   included do
     scope :by_property_type, -> (type_id) { where(hoteltype_id: type_id) }
+
+    def hoteltype
+      OLD_PROPERTY_TYPES.invert[hoteltype_id.to_i]
+    end
   end
 
   module ClassMethods

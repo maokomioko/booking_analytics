@@ -57,6 +57,7 @@ class Hotel < ActiveRecord::Base
   has_one :location
   has_one :checkin
   has_one :checkout
+  has_one :setting
 
   after_validation :geocode, if: -> { address.present? }
 
@@ -83,5 +84,14 @@ class Hotel < ActiveRecord::Base
 
   def full_address
     [city, address].reject(&:blank?).join(', ')
+  end
+
+  def setting_fallback
+    if setting.present?
+      setting
+    else
+      create_setting!(DefaultSetting.for_hotel(self))
+      setting
+    end
   end
 end

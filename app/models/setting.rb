@@ -39,16 +39,6 @@ class Setting < ActiveRecord::Base
   validates :user_ratings, array: { inclusion: { in: USER_RATINGS } }
   validates :property_types, array: { inclusion: { in: Hotel::OLD_PROPERTY_TYPES.keys } }
 
-  def self.default_attributes(hotel = nil)
-    {
-      crawling_frequency: CRAWLING_FREQUENCIES.max,
-      stars: [3, 4],
-      user_ratings: (60..70).to_a.map { |n| n.to_f / 10 },
-      property_types: Hotel::OLD_PROPERTY_TYPES.keys.first(3),
-      districts: hotel.present? ? hotel.district : []
-    }
-  end
-
   private
 
   def reload_hotel_workers

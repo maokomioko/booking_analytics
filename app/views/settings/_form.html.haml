@@ -39,7 +39,7 @@
     = f.label :districts, class: 'col-sm-2 control-label'
     .col-sm-5
       = f.select :districts,
-      options_for_districts(@setting.districts, @setting.hotel.try(:city)),
+      options_for_districts(@setting.districts, @setting.hotel),
       { include_blank: false },
       multiple: true,
       class: 'form-control search-select'

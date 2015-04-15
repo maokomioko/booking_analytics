@@ -20,6 +20,7 @@ en:
     change: Change
     remove: Remove
     invited: Invited
+    edit: Edit
     are_you_sure: Are you sure?
   errors:
     booking_id: "Hotel doesn't exist"

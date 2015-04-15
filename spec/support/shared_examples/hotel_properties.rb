@@ -1,11 +1,12 @@
 shared_examples_for HotelProperties do
   context 'with an instance' do
-    before(:each) do
-      # described_class points on the class, if you need an instance of it:
-      @obj = described_class.new
+    context '#hoteltype' do
+      it 'return string value for hoteltype_id' do
+        hoteltype, id = described_class::OLD_PROPERTY_TYPES.to_a.sample
+        hotel = Fabricate.build(:hotel, hoteltype_id: id)
 
-      # or you can use a parameter see below Animal test
-      @obj = obj if obj.present?
+        expect(hotel.hoteltype).to eq hoteltype
+      end
     end
   end
 

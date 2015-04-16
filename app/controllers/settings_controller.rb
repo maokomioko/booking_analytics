@@ -5,7 +5,7 @@ class SettingsController < ApplicationController
     @hotels = current_user.company.hotels
 
     if @hotels.size == 1
-      redirect_to [:edit, @hotels[0].setting]
+      redirect_to [:edit, @hotels[0].setting_fallback]
     end
   end
 

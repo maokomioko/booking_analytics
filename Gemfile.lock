@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/celluloid/celluloid.git
-  revision: 114f229b47a91889ef71de96c8f5eba3d5cf5f8a
+  revision: 64c7c77ca7f3b278b0f2f75f8b51d974ebacda28
   specs:
     celluloid (0.16.0)
       timers (~> 4.0.0)
@@ -29,7 +29,7 @@ GIT
 
 GIT
   remote: git://github.com/globalize/globalize.git
-  revision: 50862bd8978cf32ad53aafb1fccd05ae823b9eb3
+  revision: 49578e59c1d59938e925cc6ce761798f649a3e68
   specs:
     globalize (5.1.0)
       activemodel (>= 4.2.0, < 4.3)
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: c789ffb08908b043a06017cc8debccc80ebd553e
+  revision: 80bdab5bf775cae7539547be8cbe7f751f2e9867
   specs:
     capybara (2.5.0.dev)
       mime-types (>= 1.16)
@@ -76,7 +76,7 @@ GIT
 
 GIT
   remote: git://github.com/teampoltergeist/poltergeist.git
-  revision: 2ef5f90b6685ff84f35ea11dc545dc51e95742eb
+  revision: c67fd56f62cc39c49542af399962f70d3a9f0981
   specs:
     poltergeist (1.6.0)
       capybara (~> 2.1)
@@ -154,7 +154,7 @@ GEM
       rake (~> 10.4)
     ansi (1.5.0)
     arel (6.0.0)
-    autoprefixer-rails (5.1.8)
+    autoprefixer-rails (5.1.9)
       execjs
       json
     bcrypt (3.1.10)
@@ -205,12 +205,12 @@ GEM
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
+    coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1)
+    coffee-script-source (1.9.1.1)
     colorize (0.7.5)
-    connection_pool (2.1.3)
+    connection_pool (2.2.0)
     crass (1.0.1)
     css_parser (1.3.6)
       addressable
@@ -228,7 +228,7 @@ GEM
       devise (>= 3.2.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
-    domain_name (0.5.23)
+    domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     draper (1.4.0)
       actionpack (>= 3.0)
@@ -246,8 +246,8 @@ GEM
       money (~> 6.5.0)
       nokogiri (~> 1.6.3)
     eventmachine (1.0.7)
-    execjs (2.4.0)
-    fabrication (2.12.2)
+    execjs (2.5.2)
+    fabrication (2.13.1)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     ffaker (2.0.0)
@@ -258,7 +258,7 @@ GEM
       rspec (~> 3.0)
       ruby-progressbar (~> 1.4)
     geocoder (1.2.8)
-    globalid (0.3.3)
+    globalid (0.3.5)
       activesupport (>= 4.1.0)
     google-analytics-turbolinks (0.0.4)
     guard (2.12.5)
@@ -292,7 +292,6 @@ GEM
       railties (>= 4.0.1)
     hashie (3.4.1)
     highline (1.6.21)
-    hike (1.2.3)
     hitimes (1.2.2)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
@@ -309,7 +308,7 @@ GEM
       jquery-rails
       rails (>= 3.1.0)
       sass-rails
-    jbuilder (2.2.12)
+    jbuilder (2.2.13)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.3)
@@ -354,9 +353,9 @@ GEM
       railties (>= 3.0.0, < 5.0.0)
     method_source (0.8.2)
     mime-types (2.4.3)
-    mini_magick (4.2.0)
+    mini_magick (4.2.3)
     mini_portile (0.6.2)
-    minitest (5.5.1)
+    minitest (5.6.0)
     momentjs-rails (2.9.0)
       railties (>= 3.1)
     monetize (1.1.0)
@@ -502,9 +501,9 @@ GEM
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
       rspec-mocks (~> 3.2.0)
-    rspec-core (3.2.2)
+    rspec-core (3.2.3)
       rspec-support (~> 3.2.0)
-    rspec-expectations (3.2.0)
+    rspec-expectations (3.2.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
     rspec-its (1.2.0)
@@ -524,7 +523,7 @@ GEM
     rspec-support (3.2.2)
     ruby-graphviz (1.0.9)
     ruby-progressbar (1.7.5)
-    ruby_parser (3.6.5)
+    ruby_parser (3.6.6)
       sexp_processor (~> 4.1)
     rubysl (2.1.0)
       rubysl-abbrev (~> 2.0)
@@ -762,11 +761,8 @@ GEM
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
     slop (3.6.0)
-    sprockets (2.12.3)
-      hike (~> 1.2)
-      multi_json (~> 1.0)
+    sprockets (3.0.1)
       rack (~> 1.0)
-      tilt (~> 1.1, != 1.3.0)
     sprockets-rails (2.2.4)
       actionpack (>= 3.0)
       activesupport (>= 3.0)

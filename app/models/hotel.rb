@@ -63,9 +63,22 @@ class Hotel < ActiveRecord::Base
 
   geocoded_by :full_address do |obj, result|
     if geo = result.first
-      obj.district  = geo.districts
       obj.latitude  = geo.latitude
       obj.longitude = geo.longitude
+
+      obj.district = if obj.zip.present?
+        begin
+          here = HerePlaces::Discover.new.search({
+           q: [obj.city, obj.zip].join(', '),
+           at: [geo.latitude.to_f, geo.longitude.to_f].join(',')
+          })
+          [here["search"]["context"]["location"]["address"]["district"]]
+        rescue Exception
+          geo.districts
+        end
+      else
+        geo.districts
+      end
     end
   end
 

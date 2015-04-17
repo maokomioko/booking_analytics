@@ -1,6 +1,6 @@
 Geocoder.configure(
   # geocoding options
-  # :timeout      => 3,           # geocoding service timeout (secs)
+  :timeout      => 10,           # geocoding service timeout (secs)
   :lookup       => :google,     # name of geocoding service (symbol)
   # :language     => :en,         # ISO-639 language code
   :use_https    => true,       # use HTTPS for lookup requests? (if supported)
@@ -31,3 +31,5 @@ module Geocoder::Result
     add_result_attribute('districts')
   end
 end
+
+HerePlaces.set_keys('NYCjlZLWWbGkq6ULMQph', 'W6GLAbTaAOGBkgqL-8Wg-A')

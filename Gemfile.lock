@@ -75,6 +75,13 @@ GIT
     state_machine (1.2.0)
 
 GIT
+  remote: git://github.com/sigra/here_places.git
+  revision: 64489836f6d1136beb5f9c09328ae5d086bf6a96
+  specs:
+    here_places (0.0.2)
+      faraday (~> 0.9.1)
+
+GIT
   remote: git://github.com/teampoltergeist/poltergeist.git
   revision: c67fd56f62cc39c49542af399962f70d3a9f0981
   specs:
@@ -856,6 +863,7 @@ DEPENDENCIES
   guard-rails
   guard-rspec
   haml-rails
+  here_places!
   i18n (= 0.7)
   icheck-rails
   jbuilder

@@ -13,6 +13,7 @@
  *= require jquery-ui
  *= require select2
  *= require select2-bootstrap
+ *= require_tree ../../../vendor/assets/stylesheets/
  *= require_self
  */
 
@@ -26,9 +27,6 @@
 
 @import "main";
 @import "main-responsive";
-
-@import "icheck/minimal/_all";
-@import "perfect-scrollbar";
 
 @import "theme_light";
 @import "calendar";

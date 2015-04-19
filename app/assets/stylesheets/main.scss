@@ -327,19 +327,6 @@ a.bricky:hover {
 .center {
   text-align: center;
 }
-.go-top {
-  cursor: pointer;
-  display: block;
-  width: 30px;
-  height: 30px;
-  font-size: 16px;
-  margin-bottom: 0;
-  margin-right: 0;
-  margin-top: -2px;
-  text-decoration: none;
-  line-height: 30px;
-  text-align: center;
-}
 
 //  Navbar and navbar elements
 
@@ -399,17 +386,6 @@ a.bricky:hover {
   text-shadow: none;
   top: 100%;
   z-index: 1000;
-}
-.navbar-tools .drop-down-wrapper {
-  height: 250px;
-  width: 270px;
-  overflow: hidden;
-  position: relative;
-}
-.navbar-tools .drop-down-wrapper ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
 }
 ul.notifications li, ul.todo li, ul.posts li {
   min-width: 260px;
@@ -954,14 +930,6 @@ li.dropdown.current-user .dropdown-menu li a {
   top: 0;
   width: 100%;
   z-index: 9998;
-}
-.panel-scroll {
-  position: relative;
-  margin: 10px;
-  padding: 0px;
-  width: auto;
-  height: 400px;
-  overflow: hidden;
 }
 
 // Pagination

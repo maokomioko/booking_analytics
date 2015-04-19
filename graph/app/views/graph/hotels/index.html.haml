@@ -11,8 +11,6 @@
       .panel-heading
         %i.clip-stats
         = t('.settings_header')
-        .panel-tools
-          %a.btn.btn-xs.btn-link.panel-collapse.collapses
       .panel-body
         = form_for @form, url: [:simple, :hotels], remote: true, method: :get, html: { class: 'form-horizontal graph-options' } do |f|
           .form-group

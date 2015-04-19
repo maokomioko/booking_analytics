@@ -1787,6 +1787,20 @@ ul {
   }
 }
 
+.panel-heading {
+  background-color: $color_whisper_approx;
+  background-image: linear-gradient(to bottom, $color_whisper_approx 0, $color_athens_gray_approx 100%);
+  background-repeat: repeat-x;
+  border-bottom: 1px solid $color_celeste_approx;
+  //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+  border-radius: 6px 6px 0 0;
+  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: 0 1px 0 $white inset;
+  height: 36px;
+  padding-left: 40px;
+  position: relative;
+}
+
 .panel-tabs {
   .nav-tabs {
     float: right;

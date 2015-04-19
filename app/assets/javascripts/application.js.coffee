@@ -3,7 +3,6 @@
 
 #= require jquery_ujs
 #= require jquery-ui
-
 #= require jquery.remotipart
 
 #= require bootstrap-sprockets
@@ -26,13 +25,18 @@
 ready = ->
   window.isMouseDown = false
 
-  $('.bootstrap-tagsinput input').tagsinput
+  $('.tags').tagsinput
     trimValue: true,
     confirmKeys: [13,44,32,188,186] #  Enter, unknown, Space, Comma, CommaDot
 
-  $('.bootstrap-tagsinput input').on 'beforeItemAdd', (event) ->
+  $('.tags').on 'beforeItemAdd', (event) ->
     email_rule = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
     event.cancel = !email_rule.test(event.item)
+
+  $('.panel-scroll').perfectScrollbar
+    wheelSpeed: 50
+    minScrollbarLength: 20
+    suppressScrollX: true
 
   $(document).mouseup ->
     window.isMouseDown = false
@@ -52,13 +56,7 @@ ready = ->
 $(document).on "ready page:load", ready
 
 # Turbolinks spinner and another one for displaying in photo uploading boxes
-$(document).on "page:fetch", ->
-  triggerSpinner()
-
-$(document).on "page:receive", ->
-  triggerSpinner()
-
-$(document).on "eventFormSent", ->
+$(document).on "page:fetch page:receive eventFormSent", ->
   triggerSpinner()
 
 window.triggerSpinner = ->

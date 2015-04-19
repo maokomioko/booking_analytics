@@ -1,40 +1,7 @@
 /* ---------------------------------------------------------------------- */
-/*  From Medium Devices Up To Larger Devices
- /* ---------------------------------------------------------------------- */
-@media (min-width: 980px) and (max-width: 1199px) {
-  .layout-boxed > .navbar, .layout-boxed .main-container, .layout-boxed > .footer {
-    max-width: 940px !important;
-  }
-  .layout-boxed > .navbar, .layout-boxed > .footer {
-    left: 50% !important;
-    margin-left: -470px !important;
-  }
-}
-
-/* ---------------------------------------------------------------------- */
-/*  Only larger Devices
- /* ---------------------------------------------------------------------- */
-@media (min-width: 1200px) {
-  .layout-boxed > .navbar, .layout-boxed .main-container, .layout-boxed > .footer {
-    max-width: 1000px !important;
-  }
-  .layout-boxed > .navbar, .layout-boxed > .footer {
-    left: 50% !important;
-    margin-left: -500px !important;
-  }
-}
-
-/* ---------------------------------------------------------------------- */
 /*  From Small Devices Up To Medium Devices
  /* ---------------------------------------------------------------------- */
 @media (min-width: 768px) and (max-width: 979px) {
-  .layout-boxed > .navbar, .layout-boxed .main-container, .layout-boxed > .footer {
-    max-width: 750px !important;
-  }
-  .layout-boxed > .navbar, .layout-boxed > .footer {
-    left: 50% !important;
-    margin-left: -375px !important;
-  }
   .main-content {
     margin-left: 35px !important;
   }
@@ -130,9 +97,6 @@
     height: 41px;
     padding: 11px;
   }
-  .sidebar-search {
-    top: 9px;
-  }
 }
 
 /* ---------------------------------------------------------------------- */
@@ -141,9 +105,6 @@
 @media (max-width: 767px) {
   .main-navigation {
     max-height: 340px !important;
-  }
-  .layout-boxed > .navbar, .layout-boxed .main-container, .layout-boxed > .footer {
-    max-width: none !important;
   }
   .header-default .navbar {
     position: relative !important;
@@ -242,15 +203,6 @@
   .main-content > .container {
     /*padding:0;*/
   }
-  .sidebar-search input {
-    display: none;
-    width: 0;
-  }
-  .sidebar-search input.editable {
-    display: block;
-    width: 200px;
-    opacity: 1;
-  }
   body.login .main-login {
     margin-top: 0;
   }
@@ -266,23 +218,6 @@
   }
   div.timeline_element {
     margin: 20px auto !important;
-  }
-  /*Messages*/
-  .messages-list {
-    display: block;
-    float: none !important;
-    width: auto !important;
-    border: none !important;
-    height: auto !important;
-  }
-  .messages-content {
-    margin-left: 0 !important;
-  }
-  .message-time {
-    position: relative !important;
-    text-align: right;
-    right: 0 !important;
-    top: 0 !important;
   }
   /* Tabs Left*/
   .tabs-left .nav-tabs li.active a, .tabs-left .nav-tabs li.active a:hover, .tabs-left .nav-tabs li.active a:focus {
@@ -333,13 +268,6 @@
   .user-left {
     border-right: none;
   }
-  /*sparklines*/
-  .mini-stats li {
-    border-right: none;
-    border-left: none;
-    border-bottom: 1px solid #DDDDDD;
-    padding-top: 16px;
-  }
   /***
    Footer
    ***/
@@ -362,9 +290,6 @@
   header .nav > li.dropdown .dropdown-toggle {
     margin-top: 7px !important;
   }
-  .nav li.dropdown .dropdown-toggle .badge {
-    top: 15px;
-  }
   .nav > li.current-user > .dropdown-menu {
     margin-right: 0px;
   }
@@ -373,9 +298,6 @@
   }
   .header .nav > li.dropdown .dropdown-toggle {
     margin-top: 3px !important;
-  }
-  .header .nav li.dropdown .dropdown-toggle .badge {
-    top: 11px;
   }
   .current-user .username {
     display: none;

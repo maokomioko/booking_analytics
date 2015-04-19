@@ -36,7 +36,6 @@ gem 'haml-rails'
 gem 'here_places', github: 'sigra/here_places'
 
 gem 'i18n', '0.7'
-gem 'icheck-rails'
 
 gem 'log4r'
 
@@ -51,8 +50,6 @@ gem 'money'
 gem 'money-rails'
 
 gem 'naturally', github: 'zedalaye/naturally'
-gem 'nokogiri'
-gem 'nokogiri_truncate_html', github: 'sebastien-madru/nokogiri_truncate_html'
 
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -72,7 +69,6 @@ gem 'remotipart', '~> 1.2.1'
 gem 'rubysl', platform: :rbx
 
 gem 'sass-rails', '>= 5'
-gem 'sanitize'
 gem 'select2-rails'
 gem 'stringex'
 gem 'state_machine', github: 'seuros/state_machine'
@@ -81,7 +77,7 @@ gem 'sidekiq-status'
 gem 'sidetiq'
 gem 'sinatra', require: nil
 
-gem 'turbolinks', '~> 2.5.3'
+gem 'turbolinks', github: 'rails/turbolinks'
 
 gem 'wicked_pdf'
 gem 'whenever'
@@ -101,10 +97,6 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-sidekiq'
   gem 'quiet_assets'
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-livereload'
-  gem 'guard-rails'
   gem 'rails-dev-tweaks'
   gem 'rails-erd'
   gem 'fabrication'
@@ -113,7 +105,6 @@ group :development, :test do
   gem 'rb-readline', '~> 0.5.1' # http://stackoverflow.com/questions/19496932/guard-causing-error-cant-modify-string-temporarily-locked
   gem 'traceroute'
   gem 'better_errors'
-  gem 'binding_of_caller' # need for better_errors
   gem 'letter_opener'
 end
 

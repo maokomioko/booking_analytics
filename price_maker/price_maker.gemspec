@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'Rakefile']
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'rails', '~> 4.2.0'
+  s.add_dependency 'rails', '~> 4.2'
   s.add_dependency 'celluloid'
   s.add_dependency 'sidekiq'
 

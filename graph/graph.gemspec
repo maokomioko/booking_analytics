@@ -23,10 +23,10 @@ Gem::Specification.new do |s|
   s.test_files = Dir['spec/**/*']
   s.require_paths = ['lib', 'app']
 
-  s.add_dependency 'coffee-rails', '~> 4.1.0'
+  s.add_dependency 'coffee-rails', '~> 4.1'
   s.add_dependency 'haml-rails'
   s.add_dependency 'morrisjs-rails'
-  s.add_dependency 'rails', '~> 4.2.1'
+  s.add_dependency 'rails', '~> 4.2'
   s.add_dependency 'raphael-rails'
   s.add_dependency 'momentjs-rails'
   s.add_dependency 'sass-rails', '>= 5'

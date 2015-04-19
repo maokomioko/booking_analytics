@@ -1,6 +1,8 @@
 en:
   meta:
-    title: "Hotel Commander | v 0.0.2 - preview"
+    title: "Hotel Commander | v 0.0.3 - preview"
+    description: "Hotel revenue management software"
+    author: "Hotel Commander"
   shared:
     registration: "Registration"
     reset_instructions: "Send me password reset instructions"
@@ -61,9 +63,8 @@ en:
       set_prices: "Manual override"
       manual_input: "<strong>Enter</strong> new price"
       cal: "Calendar"
-      forecast: "Forecast"
       analytics: "Analytics"
-      my_company: My company
+      my_company: "My company"
       preferences: "Preferences"
     days:
       mon: "Monday"
@@ -105,12 +106,14 @@ en:
       edit: "Update settings"
       update: "Update settings"
   menu:
-    profile: Edit my profile
-    worker: Algorithm
-    connection: Channel Manager
-    company: Company profile
-    company_users: Edit existing users
-    invite: Invite new users
+    profile: "Edit my profile"
+    worker: "Algorithm"
+    connection: "Channel Manager"
+    company:
+      title: "Company profile"
+      users: "Manage users"
+      existing_users: "Existing users"
+      invite_new: "Invite new users"
   flash:
-    info: Info!
-    warning: Warning!
+    info: "Info!"
+    warning: "Warning!"

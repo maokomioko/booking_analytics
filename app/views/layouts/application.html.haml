@@ -1,24 +1,8 @@
 !!! 5
 %html
   %head
-    %title= t('meta.title')
-    / start: META
-    %meta{ charset: 'utf-8' }
-    /[if IE] <meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" />
-    %meta{ content: 'width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0', name: 'viewport' }
-    %meta{ content: 'yes', name: 'apple-mobile-web-app-capable' }
-    %meta{ content: 'black', name: 'apple-mobile-web-app-status-bar-style' }
-    %meta{ content: '', name: 'description' }
-    %meta{ content: '', name: 'author' }
-    / end: META
+    = render 'layouts/head'
 
-    = stylesheet_link_tag 'application', 'data-turbolinks-track' => true
-    = yield(:page_css)
-
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = yield(:page_js)
-
-    = csrf_meta_tags
   %body{class: @body_class, data: { page: body_data_page }}
     = render partial: 'partials/header'
     .main-container

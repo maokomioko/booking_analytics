@@ -17,7 +17,7 @@ class @FlashMessage
       $("#flash_container").slideUp 'slow'
 
     $(document).ready ->
-      hideContainer() if $('#flash_container').html().length > 0
+      hideContainer() if $('#flash_container').length && $('#flash_container').html().length
 
   show_ajax_message = (value, key) ->
     $("#flash_container").html "

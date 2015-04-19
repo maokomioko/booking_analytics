@@ -1,34 +1,41 @@
-#= require jquery
-# require turbolinks
+#= require jquery2
+#= require turbolinks
 
 #= require jquery_ujs
 #= require jquery-ui
+
 #= require jquery.remotipart
 
 #= require bootstrap-sprockets
 #= require bootstrap-hover-dropdown.min
+#= require bootstrap-tagsinput
+#= require bootstrap-fileupload.min
 
 #= require jquery.blockUI
 
-#= require icheck
 #= require jquery.mousewheel
-#= require perfect-scrollbar
 #= require jquery.cookie
 #= require select2
 
-#= require modules/main
+#= require jquery.validate
 
-# require jquery.turbolinks
-
-# require_tree .
+#= require_tree ../../../vendor/assets/javascripts/
+#= require_tree .
+#= require_self
 
 ready = ->
   window.isMouseDown = false
 
+  $('.bootstrap-tagsinput input').tagsinput
+    trimValue: true,
+    confirmKeys: [13,44,32,188,186] #  Enter, unknown, Space, Comma, CommaDot
+
+  $('.bootstrap-tagsinput input').on 'beforeItemAdd', (event) ->
+    email_rule = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+    event.cancel = !email_rule.test(event.item)
+
   $(document).mouseup ->
     window.isMouseDown = false
-
-  Main.init()
 
   if $('.search-select').length
     $('.search-select').select2
@@ -41,7 +48,6 @@ ready = ->
     menu.addClass('active')
     menu.parents('li').addClass('open active')
 
-  return
 
 $(document).on "ready page:load", ready
 

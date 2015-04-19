@@ -5,6 +5,7 @@ class Dispatcher
 
   initGlobalScripts: ->
     new FlashMessage()
+    new Validation()
 
   initPageScripts: ->
     page = $('body').attr('data-page')
@@ -21,4 +22,4 @@ class Dispatcher
 ready = ->
   new Dispatcher()
 
-$(document).ready(ready)
+$(document).on 'page:change', ready

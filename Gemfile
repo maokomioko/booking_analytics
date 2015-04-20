@@ -4,6 +4,7 @@ gem 'bootstrap-sass'
 gem 'browser'
 gem 'bullet'
 gem 'bson_ext'
+#gem 'binding_of_caller'
 
 gem 'cancancan'
 gem 'carrierwave'

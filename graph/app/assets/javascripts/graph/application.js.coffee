@@ -4,7 +4,10 @@
 #= require moment/en-gb
 #= require jQAllRangeSliders-min
 
-$ ->
+graphReady = ->
+  # strict
+  return unless $('body').data('page').match(/graph:hotels/)
+
   $dateSlider = $('#date-range-slider')
 
   if $dateSlider.length
@@ -38,4 +41,4 @@ $ ->
     e.preventDefault()
     $('.graph-options').trigger('submit.rails')
 
-  return
+$(document).on "ready page:load", graphReady

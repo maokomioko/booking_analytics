@@ -12,7 +12,7 @@ module Graph
 
       @form = Graph::Form.new(
         booking_id: hotel.booking_id,
-        room_id: hotel.rooms.pluck(:id)
+        room_id: hotel.rooms.limit(4).pluck(:id)
       )
     end
 

@@ -34,4 +34,8 @@ $ ->
       $('#form_date_from').val(moment(data.values.min).format('DD.MM.YYYY'))
       $('#form_date_to').val(moment(data.values.max).format('DD.MM.YYYY'))
 
+  $('.graph-options-submit').on 'click', (e) ->
+    e.preventDefault()
+    $('.graph-options').trigger('submit.rails')
+
   return

@@ -30,13 +30,25 @@ en:
   settings:
     edit:
       header: Algorithm fine-tuning
+      related_hotels: "%{count} hotels matching your location criteria"
+      hotel_settings: "Hotel-wide configuration"
+      room_settings: "Per room configuration"
     form:
       settings_header_1: Pricing strategy
       settings_header_2: Market segment criteria
       settings_header_3: City districts
+      algorithm_strategy:
+        title: Your revenue strategy
+        max_revenue: Maximized revenue
+        balanced: Balanced
+        max_occupancy: Maximized occupancy
     index:
       header: Algorithm | Hotel selection
       settings_header: Select a hotel to edit individual settings
+    shared:
+      hotel_amenities: Hotel amenities
+      room_amenities: Room amenities
+      provider_listing_count: "Your average position at %{provider}"
   users:
     index:
       header: Company users

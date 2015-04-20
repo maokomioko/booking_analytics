@@ -43,9 +43,8 @@ ready = ->
   $(document).mouseup ->
     window.isMouseDown = false
 
-  if $('.search-select').length
-    $('.search-select').select2
-      allowClear: true
+  $('.search-select').select2
+    allowClear: true
 
   page = $('body').data('page')
   menu = $('li[data-menu~="' + page + '"]')

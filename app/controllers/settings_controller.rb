@@ -10,6 +10,8 @@ class SettingsController < ApplicationController
   end
 
   def edit
+    @hotel = @setting.hotel
+    @related_hotels = @hotel.related
   end
 
   def update
@@ -33,7 +35,7 @@ class SettingsController < ApplicationController
       end
     end
 
-    params.require(:setting).permit(:crawling_frequency, stars: [],
+    params.require(:setting).permit(:crawling_frequency, :strategy, stars: [],
       user_ratings: [], property_types: [], districts: [])
   end
 end

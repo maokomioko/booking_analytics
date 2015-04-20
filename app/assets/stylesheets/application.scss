@@ -11,8 +11,12 @@
  * file per style scope.
  *
  *= require jquery-ui
+
  *= require select2
  *= require select2-bootstrap
+
+ *= require graph/application
+
  *= require_tree ../../../vendor/assets/stylesheets/
  *= require_self
  */

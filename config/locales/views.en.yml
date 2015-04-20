@@ -29,9 +29,14 @@ en:
         remove_avatar: Remove avatar from system
   settings:
     edit:
-      header: Preferences for price worker
+      header: Algorithm fine-tuning
+    form:
+      settings_header_1: Pricing strategy
+      settings_header_2: Market segment criteria
+      settings_header_3: City districts
     index:
-      header: Setup algorithm options for each hotel
+      header: Algorithm | Hotel selection
+      settings_header: Select a hotel to edit individual settings
   users:
     index:
       header: Company users

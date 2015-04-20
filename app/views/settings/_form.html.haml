@@ -1,51 +1,69 @@
 = form_for @setting, url: { action: (@setting.persisted? ? :update : :create) }, html: { class: 'form-horizontal' } do |f|
 
-  .form-group
-    = f.label :crawling_frequency, class: 'col-sm-2 control-label'
-    .col-sm-5
-      = f.select :crawling_frequency,
-      options_for_crawling_frequencies(@setting.crawling_frequency),
-      {},
-      class: 'form-control'
+  .row
+    .col-sm-6.col-sm-offset-2
+      .panel.panel-default
+        .panel-heading
+          %i.clip-cog-2
+          = t('.settings_header_1')
+        .panel-body
+          .form-group
+            = f.label :crawling_frequency, class: 'col-sm-2 control-label'
+            .col-sm-3
+              = f.select :crawling_frequency,
+              options_for_crawling_frequencies(@setting.crawling_frequency),
+              {},
+              class: 'form-control'
 
-  .form-group
-    = f.label :stars, class: 'col-sm-2 control-label'
-    .col-sm-5
-      = f.select :stars,
-      options_for_stars(@setting.stars),
-      { include_blank: false },
-      multiple: true,
-      class: 'form-control search-select'
+      .panel.panel-default
+        .panel-heading
+          %i.fa.fa-building
+          = t('.settings_header_2')
+        .panel-body
+          .form-group
+            = f.label :stars, class: 'col-sm-2 control-label'
+            .col-sm-9
+              = f.select :stars,
+              options_for_stars(@setting.stars),
+              { include_blank: false },
+              multiple: true,
+              class: 'form-control search-select'
 
-  .form-group
-    = f.label :user_ratings, class: 'col-sm-2 control-label'
-    .col-sm-5
-      = f.select :user_ratings,
-      options_for_rating(@setting.user_ratings),
-      { include_blank: false },
-      multiple: true,
-      class: 'form-control search-select'
+          .form-group
+            = f.label :user_ratings, class: 'col-sm-2 control-label'
+            .col-sm-9
+              = f.select :user_ratings,
+              options_for_rating(@setting.user_ratings),
+              { include_blank: false },
+              multiple: true,
+              class: 'form-control search-select'
 
-  .form-group
-    = f.label :property_types, class: 'col-sm-2 control-label'
-    .col-sm-5
-      = f.select :property_types,
-      options_for_properties(@setting.property_types),
-      { include_blank: false },
-      multiple: true,
-      class: 'form-control search-select'
+          .form-group
+            = f.label :property_types, class: 'col-sm-2 control-label'
+            .col-sm-9
+              = f.select :property_types,
+              options_for_properties(@setting.property_types),
+              { include_blank: false },
+              multiple: true,
+              class: 'form-control search-select'
 
-  .form-group
-    = f.label :districts, class: 'col-sm-2 control-label'
-    .col-sm-5
-      = f.select :districts,
-      options_for_districts(@setting.districts, @setting.hotel),
-      { include_blank: false },
-      multiple: true,
-      class: 'form-control search-select'
 
-  .form-group
-    .col-sm-5.col-sm-offset-2
-      = f.button class: 'btn btn-primary', type: :submit do
-        = t("auth.buttons.#{@setting.persisted? ? :update : :create}")
-        = icon('arrow-circle-right')
+      .panel.panel-default
+        .panel-heading
+          %i.fa.fa-map-marker
+          = t('.settings_header_3')
+        .panel-body
+          .form-group
+            = f.label :districts, class: 'col-sm-2 control-label'
+            .col-sm-9
+              = f.select :districts,
+              options_for_districts(@setting.districts, @setting.hotel),
+              { include_blank: false },
+              multiple: true,
+              class: 'form-control search-select'
+
+      .form-group
+        .col-sm-5.col-sm-offset-2
+          = f.button class: 'btn btn-primary btn-green', type: :submit do
+            = t("auth.buttons.#{@setting.persisted? ? :update : :create}")
+            = icon('arrow-circle-right')

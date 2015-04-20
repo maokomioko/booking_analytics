@@ -1,7 +1,4 @@
-= content_for(:page_js){ javascript_include_tag 'graph/application', 'data-turbolinks-track' => true }
-= content_for(:page_css){ stylesheet_link_tag 'graph/application', 'data-turbolinks-track' => true }
-
-= content_for(:main_content_header) do
+= content_for :main_content_header do
   .page-header
     %h1= t('.header')
 

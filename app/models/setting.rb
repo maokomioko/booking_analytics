@@ -12,7 +12,7 @@
 #  updated_at         :datetime
 #  districts          :text             default([]), is an Array
 #  hotel_id           :integer
-#  strategy           :string           default("max_occupancy")
+#  strategy           :string
 #
 # Indexes
 #

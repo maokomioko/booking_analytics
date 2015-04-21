@@ -168,6 +168,8 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
@@ -222,6 +224,7 @@ GEM
     database_cleaner (1.4.1)
     date_validator (0.7.1)
       activemodel
+    debug_inspector (0.0.2)
     devise-async (0.9.0)
       devise (~> 3.2)
     devise-encryptable (0.2.0)
@@ -789,6 +792,7 @@ DEPENDENCIES
   annotate
   awesome_print!
   better_errors
+  binding_of_caller
   bootstrap-sass
   browser
   bson_ext

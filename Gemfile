@@ -76,7 +76,7 @@ gem 'state_machine', github: 'seuros/state_machine'
 gem 'sidekiq'
 gem 'sidekiq-status'
 gem 'sidetiq'
-gem 'sinatra', require: nil
+gem 'sinatra', require: false
 
 gem 'turbolinks', github: 'rails/turbolinks'
 
@@ -93,10 +93,10 @@ end
 group :development, :test do
   gem 'annotate'
   gem 'capistrano'
-  gem 'capistrano-rvm'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-  gem 'capistrano-sidekiq'
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-sidekiq', require: false
   gem 'quiet_assets'
   gem 'rails-dev-tweaks'
   gem 'rails-erd'
@@ -106,6 +106,7 @@ group :development, :test do
   gem 'rb-readline', '~> 0.5.1' # http://stackoverflow.com/questions/19496932/guard-causing-error-cant-modify-string-temporarily-locked
   gem 'traceroute'
   gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'letter_opener'
 end
 

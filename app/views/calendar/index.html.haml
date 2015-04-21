@@ -14,7 +14,7 @@
 #calendar
   %table.calendar
     = calendar do |date|
-      - price_block = @room.room_prices.find_by(date: date)
+      - price_block = @prices[date].try(:first)
 
       - unless date < Date.today || price_block.nil?
         .date_placeholder{ class: set_day_class(price_block) }

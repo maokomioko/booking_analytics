@@ -4,7 +4,7 @@ body {
   font-size: 13px;
   padding: 0 !important;
   margin: 0 !important;
-  postilion: relative;
+  position: relative;
   background: $white;
   &.login {
     .main-login {
@@ -1016,6 +1016,7 @@ ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    padding-top: 15px;
     li {
       a {
         .icon-arrow {

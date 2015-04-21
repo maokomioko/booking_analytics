@@ -23,6 +23,10 @@ class CalendarController < ApplicationController
             else
               @hotel.rooms.find(params[:room_id])
             end
+
+    @prices = @room.room_prices
+                  .within_dates(Date.today..2.month.from_now.to_date)
+                  .date_groupped
   end
 
   def set_channel_manager

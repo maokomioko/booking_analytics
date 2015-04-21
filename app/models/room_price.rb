@@ -23,7 +23,14 @@ class RoomPrice < ActiveRecord::Base
   monetize :default_price_cents
   monetize :price_cents
 
-  scope :within_dates, -> (dates) { where(date: dates) }
+  scope :within_dates, -> (dates) { where(date: dates) } do
+    def date_groupped
+      each_with_object({}) do |rp, hash|
+        hash[rp.date] ||= []
+        hash[rp.date] << rp
+      end
+    end
+  end
 
   before_save :set_default_price
 

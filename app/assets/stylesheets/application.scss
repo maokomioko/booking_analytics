@@ -10,22 +10,12 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require jquery-ui
-
- *= require select2
- *= require select2-bootstrap
-
- *= require graph/application
-
- *= require_tree ../../../vendor/assets/stylesheets/
+ *= require vendor
  *= require_self
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
-@import "font-awesome-sprockets";
-@import "font-awesome";
 
 @import "clip-font";
 

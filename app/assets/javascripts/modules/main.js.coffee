@@ -47,7 +47,9 @@ window.Main = do ->
       mainContainer.css 'min-height', $pageArea
     if $windowWidth < 768
       mainNavigation.css 'min-height', $windowHeight - $('body > .navbar').outerHeight()
-    $('#page-sidebar .sidebar-wrapper').css('height', $windowHeight - $('body > .navbar').outerHeight()).scrollTop(0).perfectScrollbar 'update'
+    setTimeout ->
+      $('#page-sidebar .sidebar-wrapper').css('height', $windowHeight - $('body > .navbar').outerHeight()).scrollTop(0).perfectScrollbar 'update'
+    , 0
     return
 
   #function to activate the Tooltips, if present
@@ -169,6 +171,6 @@ window.Main = do ->
     runPopovers()
     runShowTab()
     runQuickSideBar()
- }
+  }
 
 Main.init()

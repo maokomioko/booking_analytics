@@ -1,11 +1,29 @@
 #= require jquery2
-#= require turbolinks
 
 #= require jquery_ujs
-#= require jquery-ui
+
+# require jquery-ui/core
+# require jquery-ui/widget
+#= require jquery-ui/mouse
+# require jquery-ui/position
+# require jquery-ui/draggable
+# require jquery-ui/resizable
+
 #= require jquery.remotipart
 
-#= require bootstrap-sprockets
+# require bootstrap/affix
+#= require bootstrap/alert
+# require bootstrap/button
+# require bootstrap/carousel
+#= require bootstrap/collapse
+#= require bootstrap/dropdown
+#= require bootstrap/modal
+# require bootstrap/popover
+# require bootstrap/scrollspy
+#= require bootstrap/tab
+#= require bootstrap/tooltip
+#= require bootstrap/transition
+
 #= require bootstrap-hover-dropdown.min
 #= require bootstrap-tagsinput
 #= require bootstrap-fileupload.min
@@ -23,6 +41,8 @@
 #= require_tree ../../../vendor/assets/javascripts/
 #= require_tree .
 #= require_self
+
+#= require turbolinks
 
 ready = ->
   window.isMouseDown = false

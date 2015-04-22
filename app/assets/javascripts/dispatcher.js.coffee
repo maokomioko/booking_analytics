@@ -19,6 +19,8 @@ class Dispatcher
     switch page
       when 'calendar:index'
         new Calendar()
+      when 'users:index'
+        new Users()
 
 ready = ->
   new Dispatcher()

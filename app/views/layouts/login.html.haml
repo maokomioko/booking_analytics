@@ -9,9 +9,7 @@
         HOTEL
         %i.clip-clip>
         COMMANDER
-      - unless flash.empty?
-        - flash.each do |type, message|
-          = render 'partials/flash', type: type, message: message
+      #flash-container= render_flash
       = yield
       .copyright= render 'partials/copyright'
 

@@ -51,7 +51,7 @@ ready = ->
     trimValue: true,
     confirmKeys: [13,44,32,188,186] #  Enter, unknown, Space, Comma, CommaDot
 
-  $('.tags').on 'beforeItemAdd', (event) ->
+  $('.tags-email').on 'beforeItemAdd', (event) ->
     email_rule = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
     event.cancel = !email_rule.test(event.item)
 

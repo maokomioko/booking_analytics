@@ -10,9 +10,7 @@
       .main-content
         .container
           = yield(:main_content_header)
-          - unless flash.empty?
-            - flash.each do |type, message|
-              = render 'partials/flash', type: type, message: message
+          #flash-container= render_flash
           = yield
 
     = render 'partials/sidebar' if controller_name == 'calendar' && current_user && current_user.channel_managers.size > 0

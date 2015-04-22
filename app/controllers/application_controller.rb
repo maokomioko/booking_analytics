@@ -59,6 +59,7 @@ class ApplicationController < ActionController::Base
     return unless request.xhr?
     response.headers['X-Message'] = flash_message
     response.headers['X-Message-Type'] = flash_type.to_s
+    response.headers['X-Message-Html'] = view_context.render_flash.squish
 
     flash.discard
   end

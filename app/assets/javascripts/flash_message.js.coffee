@@ -1,25 +1,26 @@
 class @FlashMessage
+
   constructor: () ->
+    @container = $('#flash-container')
     @getAjaxResponse()
     @hidePersistent()
 
   getAjaxResponse: ->
-    $(document).ajaxComplete (event, request) ->
-      value = request.getResponseHeader("X-Message")
+    $(document).ajaxComplete (event, request) =>
+      value = request.getResponseHeader("X-Message-Html")
       key = request.getResponseHeader("X-Message-Type")
-      if key? && key.split(',').length == 1
-        show_ajax_message(value, key)
-        hideContainer()
+      @container.html(value)
+      @hideContainer()
 
   hidePersistent: ->
-    $(document).on 'click', "#flash_container .close", (e) ->
+    $(document).on 'click', "#flash-container .close", (e) ->
       e.preventDefault()
-      $("#flash_container").slideUp 'slow'
+      @hideContainer(0)
 
-    $(document).ready ->
-      hideContainer() if $('#flash_container').length && $('#flash_container').html().length
+    $(document).ready =>
+      @hideContainer() if @container.length && @container.html().length
 
-  show_ajax_message = (value, key) ->
+  show_ajax_message: (value, key) ->
     $("#flash_container").html "
       <div class='alert #{key}'>
         <strgon>#{value}</strong>
@@ -28,5 +29,6 @@ class @FlashMessage
     "
     return
 
-  hideContainer = ->
-    $("#flash_container").delay(5000).slideUp 'slow'
+  hideContainer: (delay = 5000) ->
+    @container.delay(delay).slideUp 'slow', ->
+      $(@).empty().show()

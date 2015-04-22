@@ -1,0 +1,10 @@
+$('[data-user-id="<%= @user.id %>"')
+    .children('td, th')
+    .animate({
+        padding: 0
+    })
+    .wrapInner('<div />')
+    .children()
+    .slideUp(function () {
+        $(this).closest('tr').remove();
+    });

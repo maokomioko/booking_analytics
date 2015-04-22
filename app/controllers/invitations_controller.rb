@@ -25,17 +25,22 @@ class InvitationsController < Devise::InvitationsController
     yield resource if block_given?
 
     if resource_invited
-      if is_flashing_format? && self.resource.invitation_sent_at
+      if self.resource.invitation_sent_at
         set_flash_message :notice, :send_instructions, email: success.to_sentence
       end
-      respond_with resource, :location => after_invite_path_for(current_inviter)
+
+      unless request.xhr?
+        respond_with resource, :location => after_invite_path_for(current_inviter)
+      end
     else
       set_flash_message :error, :error_send_instructions, email: errors.to_sentence
       set_flash_message :norice, :send_instructions, email: success.to_sentence if success.length > 0
 
       resource.email = errors.join(',')
 
-      respond_with_navigational(resource) { render :new }
+      unless request.xhr?
+        respond_with_navigational(resource) { render :new }
+      end
     end
   end
 

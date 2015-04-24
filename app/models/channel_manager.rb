@@ -29,42 +29,24 @@ class ChannelManager < ActiveRecord::Base
 
   # before_create :setup_tarif_plans
 
+  # stub
   def non_refundable_candidate
-    connector.get_plans[0]['name']
   end
 
+  # stub
   def standart_rate_candidate
-    connector.get_plans[1]['name']
+  end
+
+  # stub
+  def create_rooms
+  end
+
+  # stub
+  def setup_room_prices(room_id, room_obj_id)
   end
 
   def setup_tarif_plans
     update_attributes(non_refundable_pid: non_refundable_candidate, default_pid: standart_rate_candidate)
-  end
-
-  def create_rooms
-    rooms_data = connector.get_rooms
-    rooms_data.each do |rd|
-      if [0, nil, ''].include? rd['subroom']
-        room = rooms.new
-
-        %w(id name price max_people subroom children occupancy availability).each do |field|
-          room.send(field + '=', rd[field])
-        end
-
-        room.save
-      end
-    end
-  end
-
-  def setup_room_prices(room_id, room_obj_id)
-    price_array = connector.get_plan_prices(non_refundable_pid, [room_id]).map { |_key, value| value }[0]
-    price_array.each_with_index do |price, i|
-      RoomPrice.create(
-        room_id: room_obj_id,
-        date: Date.today + i.days,
-        default_price: price
-      )
-    end
   end
 
   def apply_room_prices(room_id, dates, custom_price = nil)

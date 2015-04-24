@@ -13,15 +13,6 @@ GIT
       timers (~> 4.0.0)
 
 GIT
-  remote: git://github.com/colszowka/simplecov.git
-  revision: 739cf4d70f79d454c608d029e8651cc8321234ff
-  specs:
-    simplecov (0.10.0)
-      docile (~> 1.1.0)
-      json (~> 1.8)
-      simplecov-html (~> 0.10.0)
-
-GIT
   remote: git://github.com/eoinkelly/awesome_print.git
   revision: 3277c23567de124a02b5b1bdd8a1ec211625a662
   specs:
@@ -218,6 +209,8 @@ GEM
     coffee-script-source (1.9.1.1)
     colorize (0.7.7)
     connection_pool (2.2.0)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     css_parser (1.3.6)
       addressable
     daemons (1.2.2)
@@ -286,6 +279,9 @@ GEM
     htmlentities (4.3.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     httpclient (2.6.0.1)
     i18n (0.7.0)
     ice_cube (0.11.1)
@@ -708,6 +704,7 @@ GEM
     rubysl-xmlrpc (2.0.0)
     rubysl-yaml (2.1.0)
     rubysl-zlib (2.0.1)
+    safe_yaml (1.0.4)
     sass (3.4.13)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -734,6 +731,10 @@ GEM
       celluloid (>= 0.14.1)
       ice_cube (= 0.11.1)
       sidekiq (>= 3.0.0)
+    simplecov (0.10.0)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
     sinatra (1.4.6)
       rack (~> 1.4)
@@ -778,8 +779,12 @@ GEM
     unf (0.1.4-java)
     unf_ext (0.0.7.1)
     uniform_notifier (1.9.0)
+    vcr (2.9.3)
     warden (1.2.3)
       rack (>= 1.0)
+    webmock (1.21.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
     webrobots (0.1.1)
     websocket-driver (0.5.4)
       websocket-extensions (>= 0.1.0)
@@ -838,6 +843,7 @@ DEPENDENCIES
   graph!
   haml-rails
   here_places!
+  httparty
   i18n (= 0.7)
   impressionist
   jbuilder
@@ -885,7 +891,7 @@ DEPENDENCIES
   sidekiq
   sidekiq-status
   sidetiq
-  simplecov!
+  simplecov (>= 0.9)
   sinatra
   state_machine!
   stringex
@@ -895,5 +901,7 @@ DEPENDENCIES
   turbolinks!
   turn
   uglifier (>= 1.3.0)
+  vcr
+  webmock
   whenever
   wicked_pdf

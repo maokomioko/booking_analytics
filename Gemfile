@@ -36,6 +36,7 @@ gem 'graph', path: 'graph'
 
 gem 'haml-rails'
 gem 'here_places', github: 'sigra/here_places'
+gem 'httparty'
 
 gem 'i18n', '0.7'
 gem 'impressionist'
@@ -126,9 +127,11 @@ group :test do
   gem 'rspec-its'
   gem 'rspec-rails'
   # gem 'rspec-sidekiq'
-  gem 'simplecov', github: 'colszowka/simplecov'
+  gem 'simplecov', '>= 0.9', require: false
   gem 'shoulda-matchers', '~> 2.8.0'
   gem 'shoulda-callback-matchers', '~> 1.1.2'
   gem 'timecop'
   gem 'turn', require: false
+  gem 'vcr'
+  gem 'webmock'
 end

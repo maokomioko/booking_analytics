@@ -36,9 +36,9 @@ class Ability
       other.id != user.id && (other.company_id == user.company_id ||
         other.invited_by_id == user.id)
     end
-    can :show, User, User.related_to(user) do |other|
-      other.company_id == user.company_id || other.invited_by_id == user.id
-    end
+    # can :show, User, User.related_to(user) do |other|
+    #   other.company_id == user.company_id || other.invited_by_id == user.id
+    # end
   end
 
   attr_reader :user

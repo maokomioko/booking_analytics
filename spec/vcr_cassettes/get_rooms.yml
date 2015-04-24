@@ -1,0 +1,89 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.previo.cz/x1/hotel/getRoomKinds
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <request>
+          <login>%LOGIN%</login>
+          <password>%PASSWORD%</password>
+          <hotId>666</hotId>
+        </request>
+    headers:
+      Accept:
+      - text/xml
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 28 Apr 2015 07:35:03 GMT
+      Server:
+      - Apache/2.4.6 (CentOS) OpenSSL/1.0.1e-fips PHP/5.5.22
+      X-Powered-By:
+      - PHP/5.5.22
+      Content-Length:
+      - '1421'
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <roomKinds>
+            <objectKind>
+                <obkId>500794</obkId>
+                <obtId>1</obtId>
+                <name>Standart Solo</name>
+                <order>0</order>
+                <description>&lt;p&gt;fashion room&lt;/p&gt;</description>
+                <numOfBeds>1</numOfBeds>
+                <numOfExtraBeds>1</numOfExtraBeds>
+                <objects>
+                    <object>
+                        <objId>743182</objId>
+                        <name>Room 666</name>
+                        <order>0</order>
+                    </object>
+                </objects>
+                <properties>
+                    <proId>4</proId>
+                    <proId>6</proId>
+                    <proId>9</proId>
+                    <proId>13</proId>
+                    <proId>14</proId>
+                    <proId>16</proId>
+                    <proId>18</proId>
+                    <proId>19</proId>
+                    <proId>21</proId>
+                    <proId>26</proId>
+                </properties>
+            </objectKind>
+            <objectKind>
+                <obkId>499788</obkId>
+                <obtId>1</obtId>
+                <name>Standard Double</name>
+                <order>0</order>
+                <description>Standard Double</description>
+                <numOfBeds>2</numOfBeds>
+                <numOfExtraBeds>4</numOfExtraBeds>
+                <singleUse>false</singleUse>
+                <objects>
+                    <object>
+                        <objId>739820</objId>
+                        <name>Standard DBL 001</name>
+                        <order>1</order>
+                    </object>
+                </objects>
+                <properties/>
+            </objectKind>
+        </roomKinds>
+    http_version: 
+  recorded_at: Tue, 28 Apr 2015 07:35:03 GMT
+recorded_with: VCR 2.9.3

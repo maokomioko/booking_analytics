@@ -33,5 +33,8 @@ module BookingAnalytics
 
     CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
     Money.default_currency = Money::Currency.new('EUR')
+
+    # mapping custom errors
+    config.action_dispatch.rescue_responses.merge! 'CanCan::AccessDenied' => :forbidden
   end
 end

@@ -28,6 +28,7 @@ gem 'eu_central_bank'
 
 gem 'font-awesome-sass', github: 'FortAwesome/font-awesome-sass'
 
+gem 'gaffe' # handling error pages
 gem 'geocoder'
 gem 'globalize', github: 'globalize/globalize'
 gem 'google-analytics-turbolinks'

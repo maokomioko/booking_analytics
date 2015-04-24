@@ -58,7 +58,6 @@ module PriceMaker
       end
 
       @price_blocks = price_blocks.map(&:value).flatten.uniq.sort
-      puts "GENERATED BLOCKS #{@price_blocks}"
       pool.terminate
     end
   end

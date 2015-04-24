@@ -1,1 +1,19 @@
-$('.invitation-form .tags').tagsinput('removeAll');
+(function(){
+    $('.invitation-form .tags').tagsinput('removeAll');
+
+    <% if @users.present? %>
+        var $tbody = $('#users_tab').find('table tbody');
+        <% @users.each do |user| %>
+            (function(){
+                $tbody.prepend("<%= j render(partial: 'users/user', locals: { user: user }) %>");
+                var $row = $tbody.find('tr:first');
+                $row.addClass('success');
+
+                setTimeout( function(){
+                    $row.removeClass('success');
+                }, 10000);
+            })();
+
+        <% end %>
+    <% end %>
+})();

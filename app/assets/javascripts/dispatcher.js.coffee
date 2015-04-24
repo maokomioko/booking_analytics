@@ -21,6 +21,8 @@ class Dispatcher
         new Calendar()
       when 'settings:edit'
         new Settings()
+      when 'users:index'
+        new Users()
 
 ready = ->
   new Dispatcher()

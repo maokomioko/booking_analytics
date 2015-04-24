@@ -9,12 +9,14 @@ class InvitationsController < Devise::InvitationsController
     emails = invite_params[:email].split(',')
     errors  = []
     success = []
+    @users = []
     resource_invited = !emails.length.zero?
 
     emails.each do |email|
       self.resource = invite_resource(email)
 
       if resource.errors.empty?
+        @users << resource
         success << email
       else
         resource_invited = false

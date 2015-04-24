@@ -66,6 +66,11 @@ ready = ->
   $('.search-select').select2
     allowClear: true
 
+  # turbolinks and ajax form hack
+  $('form[data-remote="true"] [type="submit"]').on 'click', (e) ->
+    e.preventDefault()
+    $(@).parents('form').trigger('submit.rails')
+
   page = $('body').data('page')
   menu = $('li[data-menu~="' + page + '"]')
 
@@ -84,3 +89,13 @@ window.triggerSpinner = ->
   $("#spinner_placeholder").toggleClass "hidden"
   $("html").toggleClass "no-scroll"
   return
+
+window.blockElemet = (el) ->
+  el.block
+    overlayCSS:
+      backgroundColor: '#fff'
+    message: $('#locker').html()
+    css:
+      border: 'none'
+      color: '#333'
+      background: 'none'

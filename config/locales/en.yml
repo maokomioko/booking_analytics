@@ -16,10 +16,13 @@ en:
     custom_applied: "Custom price in use"
     sold: "Sold"
     loading: "Loading..."
+    just_moment: "Just a moment..."
     please_check_errors: "You have some form errors. Please check below."
     submit: Submit
     select_image: Select image
     change: Change
+    update: Update
+    save: Save
     remove: Remove
     invited: Invited
     edit: Edit
@@ -48,6 +51,7 @@ en:
     company_created: Your company created successfully! Now you can invite new users to your company
     company_updated: Company updated successfully!
     user_deleted: "User '%{email}' successfully deleted from system"
+    room_updated: "Succesfully saved"
   devise:
     waiting_confirmation: "Currently waiting confirmation for: %{user}"
     links:

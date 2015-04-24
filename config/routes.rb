@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :destroy]
   end
 
+  resources :rooms, only: [:update]
+
   resources :settings, only: [:index, :edit, :update]
 
   root to: 'calendar#index'

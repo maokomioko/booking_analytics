@@ -18,10 +18,16 @@ class SettingsController < ApplicationController
     @setting.attributes = settings_params
 
     if @setting.save
-      redirect_to [:settings], success: I18n.t('messages.settings_updated')
+      flash[:success] = I18n.t('messages.settings_updated')
+      redirect_to [:settings] unless request.xhr?
     else
       flash[:alert] = @setting.errors.full_messages.to_sentence
-      render :edit
+
+      if request.xhr?
+        render none: true
+      else
+        render :edit
+      end
     end
   end
 

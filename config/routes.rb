@@ -19,6 +19,11 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  namespace :actions do
+    get '/', action: :index
+    get '/:user_id', action: :show, as: :show
+  end
+
   resources :calendar, controller: :calendar do
     collection do
       get :demo
@@ -43,6 +48,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'registrations',
     passwords: 'passwords',
-    invitations: 'invitations'
+    invitations: 'invitations',
+    sessions: 'sessions'
   }
 end

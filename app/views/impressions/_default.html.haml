@@ -1,0 +1,8 @@
+.timeline_element
+  .timeline_title
+    %span.timeline_label &nbsp;
+    %span.timeline_date= l impression.created_at, format: :short
+  .content
+    = impression.user.nickname
+    has visited
+    = "#{ impression.controller_name }##{ impression.action_name }"

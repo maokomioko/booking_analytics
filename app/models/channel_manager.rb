@@ -22,6 +22,8 @@ class ChannelManager < ActiveRecord::Base
   belongs_to :company
   belongs_to :hotel, foreign_key: :booking_id, primary_key: :booking_id
 
+  is_impressionable
+
   validates :login, :password, :lcode, :booking_id, :hotel_name, :non_refundable_pid, :default_pid, presence: true
   validate :hotel_existence
 

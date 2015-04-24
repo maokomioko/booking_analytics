@@ -29,6 +29,8 @@ class Setting < ActiveRecord::Base
 
   USER_RATINGS = (0..100).to_a.map { |n| (n.to_f / 10).to_s }.freeze
 
+  is_impressionable
+
   belongs_to :company
   belongs_to :hotel
 

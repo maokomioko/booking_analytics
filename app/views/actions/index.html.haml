@@ -1,0 +1,21 @@
+= content_for(:main_content_header) do
+  .page-header
+    %h1
+      = t('.header')
+
+.row
+  .col-sm-12
+    %table.table
+      %thead
+        %tr
+          %th= User.human_attribute_name(:email)
+          %th= User.human_attribute_name(:company)
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= link_to user.email, [:actions, :show, user_id: user.id]
+            %td
+              - if user.company.present?
+                = user.company.name
+              - else
+                %span.label.label-sm.label-warning= t('shared.no_company')

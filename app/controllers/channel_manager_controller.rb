@@ -29,6 +29,7 @@ class ChannelManagerController < ApplicationController
     wb = ChannelManager::Wubook.find(params[:id])
 
     if wb.update_attributes(wb_params)
+      impressionist(wb)
       redirect_to calendar_index_path
       flash[:success] = t('messages.cm_update_failure')
     else

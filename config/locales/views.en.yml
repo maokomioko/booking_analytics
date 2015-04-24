@@ -1,4 +1,9 @@
 en:
+  actions:
+    index:
+      header: User actions log
+    show:
+      header: User timeline
   channel_manager:
     new:
       header: Channel manager setup

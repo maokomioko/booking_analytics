@@ -38,6 +38,9 @@ gem 'haml-rails'
 gem 'here_places', github: 'sigra/here_places'
 
 gem 'i18n', '0.7'
+gem 'impressionist'
+
+gem 'kaminari'
 
 gem 'log4r'
 

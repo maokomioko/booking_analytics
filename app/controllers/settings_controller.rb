@@ -19,6 +19,7 @@ class SettingsController < ApplicationController
 
     if @setting.save
       flash[:success] = I18n.t('messages.settings_updated')
+      impressionist(@setting)
       redirect_to [:settings] unless request.xhr?
     else
       flash[:alert] = @setting.errors.full_messages.to_sentence

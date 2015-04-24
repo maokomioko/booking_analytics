@@ -22,6 +22,7 @@ class Ability
   end
 
   def manager_abilities
+    # can [:index, :show], Action
     can :manage, Company, owner_id: user.id
     can :manage, ChannelManager, company_id: user.company_id
     can :index, Hotel, id: user.hotels.pluck(:id)
@@ -34,6 +35,9 @@ class Ability
     can [:index, :destroy], User, User.related_to(user) do |other|
       other.id != user.id && (other.company_id == user.company_id ||
         other.invited_by_id == user.id)
+    end
+    can :show, User, User.related_to(user) do |other|
+      other.company_id == user.company_id || other.invited_by_id == user.id
     end
   end
 

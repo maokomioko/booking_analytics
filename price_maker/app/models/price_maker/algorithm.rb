@@ -24,7 +24,7 @@ module PriceMaker
 
     def get_top_prices
       prices = []
-      @chunks.first(3).each do |x|
+      @chunks.each do |x|
         prices << x[0..2]
       end
 
@@ -33,11 +33,7 @@ module PriceMaker
 
     def best_price
       prices = get_top_prices
-      if prices.length > 1
-        prices.second.first
-      else
-        prices.first.last
-      end
+      prices.length > 1 ? prices.second.first : prices.first.last
     end
 
     def split_chunks

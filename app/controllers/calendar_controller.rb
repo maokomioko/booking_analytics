@@ -24,8 +24,11 @@ class CalendarController < ApplicationController
               @hotel.rooms.find(params[:room_id])
             end
 
+    # @dates = 2.month.ago.to_date..Date.today
+    @dates = Date.today..2.month.from_now.to_date
+
     @prices = @room.room_prices
-                  .within_dates(Date.today..2.month.from_now.to_date)
+                  .within_dates(@dates)
                   .date_groupped
   end
 

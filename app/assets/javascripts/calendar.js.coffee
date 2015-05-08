@@ -1,6 +1,8 @@
 class @Calendar
   constructor: ->
+    @priceControl = $('#price_control')
     @roomsList()
+    @removeSelectableFromEmptyCells()
     @selectDates()
     @togglePriceControls()
     @setPrices()
@@ -10,6 +12,9 @@ class @Calendar
     $('#room_title').click (e) ->
       e.preventDefault()
       $('#rooms_list').toggleClass('visible')
+
+  removeSelectableFromEmptyCells: ->
+    $('#calendar td.selectable:empty').removeClass('selectable')
 
   selectDates: ->
     $('tbody td.selectable').mousedown(->
@@ -31,19 +36,21 @@ class @Calendar
       return
 
   togglePriceControls: ->
+    $panel = @priceControl.find('[data-role="panel"]')
+
     $(document).click ->
       if $('td.selected').length
-        $('#left_menu ul:first-of-type li:first-of-type').removeClass 'hidden'
+        $panel.removeClass 'hidden'
       else
-        $('#left_menu ul:first-of-type li:first-of-type').addClass 'hidden'
+        $panel.addClass 'hidden'
         $(document).trigger('manualPriceInputHide')
 
   setPrices: ->
-    $('#apply_suggested').click (e) ->
+    $('#apply_suggested').click (e) =>
       e.preventDefault()
       triggerSpinner()
       submitDates()
-      $('#left_menu ul:first-of-type li:first-of-type').addClass 'hidden'
+      @priceControl.find('[data-role="panel"]').addClass 'hidden'
 
     $('#set_manually').click (e) ->
       e.preventDefault()
@@ -51,11 +58,13 @@ class @Calendar
       manualPriceApply()
 
   toggleManualPriceInput: ->
+    $manual = @priceControl.find('[data-role="manual"]')
+
     $(document).on 'manualPriceInputCalled', ->
-      $('#left_menu ul:first-of-type li:last-of-type').toggleClass 'hidden'
+      $manual.toggleClass 'hidden'
 
     $(document).on 'manualPriceInputHide', ->
-      $('#left_menu ul:first-of-type li:last-of-type').addClass 'hidden'
+      $manual.addClass 'hidden'
 
     $(document).on 'manualPriceInputCalled', 'manualPriceInputHide', ->
       $('#custom_price').val(0)
@@ -70,7 +79,7 @@ class @Calendar
         $(document).trigger('manualPriceInputCalled')
 
   submitDates = ->
-    room_id = $('#room_title').attr('room_id')
+    room_id = $('.calendar').data('roomId')
     arr = []
     custom_price = $('#custom_price').val()
 

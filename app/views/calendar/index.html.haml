@@ -1,7 +1,7 @@
 = content_for(:main_content_header) do
   .page-header
     %h1
-      = DateTime.now.strftime("%B %Y") + ' - ' + (DateTime.now + 2.month).strftime("%B %Y")
+      = @dates.min.strftime('%B %Y') + ' - ' + @dates.max.strftime('%B %Y')
       %small
         = @hotel.name + ' | '
         = truncate(@room.name, length: 100)
@@ -11,12 +11,15 @@
         - %w(mon tue wed thu fri sat sun).each do |day|
           %td= t("calendar.days.#{day}")
 
+= content_for(:left_menu_header) do
+  = render 'price_control'
+
 #calendar
-  %table.calendar
-    = calendar do |date|
+  %table.calendar(data-room-id="#{ @room.id }")
+    = calendar(@dates.min) do |date|
       - price_block = @prices[date].try(:first)
 
-      - unless date < Date.today || price_block.nil?
+      - unless date < @dates.min || price_block.nil?
         .date_placeholder{ class: set_day_class(price_block) }
           .day
             - unless date.day == 1

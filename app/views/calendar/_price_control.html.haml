@@ -1,0 +1,20 @@
+#price_control.row
+  .col-sm-12
+    .hidden(data-role='panel')
+      %h4= t('calendar.menu.all_dates').html_safe
+
+      = link_to '#', id: 'apply_suggested', class: 'btn btn-green btn-block' do
+        = icon('check')
+        = t('calendar.menu.apply_prices')
+
+      = link_to '#', id: 'set_manually', class: 'btn btn-blue btn-block' do
+        = icon('pencil-square-o')
+        = t('calendar.menu.set_prices')
+
+    .hidden(data-role='manual')
+      %form
+        .form-group
+          %label(for="custom_price")= t('calendar.menu.manual_input').html_safe
+          = number_field_tag :custom_price, nil, min: 0, placeholder: t('placeholders.zero_euro'), class: 'form-control'
+        .form-group
+          = link_to t('shared.apply_custom_price'), '#', id: 'apply_custom_price', class: 'btn btn-primary btn-block'

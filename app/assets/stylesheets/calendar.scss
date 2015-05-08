@@ -127,3 +127,9 @@
     }
   }
 }
+
+#price_control {
+  [data-role='panel'], [data-role='manual'] {
+    padding: 10px 15px;
+  }
+}

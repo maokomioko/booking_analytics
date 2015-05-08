@@ -6,7 +6,10 @@
   %body{class: @body_class, data: { page: body_data_page }}
     = render partial: 'partials/header'
     .main-container
-      = render 'partials/menu'
+      .navbar-content
+        .main-navigation.navbar-collapse.collapse
+          = yield(:left_menu_header)
+          = render 'partials/menu'
       .main-content
         .container
           = yield(:main_content_header)

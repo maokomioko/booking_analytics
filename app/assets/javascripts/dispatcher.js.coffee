@@ -17,7 +17,7 @@ class Dispatcher
     path = page.split(':')
 
     switch page
-      when 'calendar:index'
+      when 'calendar:index', 'calendar:demo'
         new Calendar()
       when 'settings:edit'
         new Settings()

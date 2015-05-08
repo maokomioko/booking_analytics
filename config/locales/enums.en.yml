@@ -10,3 +10,6 @@ en:
       homestay: Residence
       bed_breakfast: Bed and Breakfast
       ryokan: Ryokan
+    channel_manager_type:
+      wubook: WuBook
+      previo: Previo

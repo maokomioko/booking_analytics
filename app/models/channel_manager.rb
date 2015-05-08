@@ -19,15 +19,22 @@
 #
 
 class ChannelManager < ActiveRecord::Base
+  TYPES = %w(wubook previo).freeze
+
   belongs_to :company
   belongs_to :hotel, foreign_key: :booking_id, primary_key: :booking_id
 
   is_impressionable
 
-  validates :login, :password, :lcode, :booking_id, :hotel_name, :non_refundable_pid, :default_pid, presence: true
-  validate :hotel_existence
+  attr_accessor :connector_type
 
-  # before_create :setup_tarif_plans
+  validates :login, :password, :lcode, :booking_id, :hotel_name,
+            :non_refundable_pid, :default_pid, presence: true
+  validate :hotel_existence
+  validates_inclusion_of :connector_type, in: TYPES, allow_blank: true
+
+  before_create :define_type, if: -> { type.nil? }
+  before_create :setup_tarif_plans
 
   # stub
   def non_refundable_candidate
@@ -79,5 +86,23 @@ class ChannelManager < ActiveRecord::Base
     unless Hotel.find_by_booking_id(booking_id).present?
       errors.add(:booking_id, I18n.t('errors.booking_id'))
     end
+  end
+
+  def connector_type
+    if type.nil?
+      @connector_type
+    else
+      @connector_type || self.class.name.split('::').last.downcase
+    end
+  end
+
+  private
+
+  def define_type
+    self.type = if connector_type.present?
+                  'ChannelManager::' + connector_type.classify
+                else
+                  self.class.name
+                end
   end
 end

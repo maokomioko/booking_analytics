@@ -3,13 +3,13 @@ class ChannelManagerController < ApplicationController
 
   def new
     unless current_user.company.wb_auth?
-      @wb = ChannelManager::Wubook.new
+      @wb = ChannelManager.new
     else redirect_to calendar_index_path, notice: t('messages.cm_already_added')
     end
   end
 
   def create
-    wb = ChannelManager::Wubook.new(wb_params)
+    wb = ChannelManager.new(channel_manager_params)
     wb.company = current_user.company
     if wb.save && wubook_auth_state
       current_user.company.update_attribute(:wb_auth, true) unless current_user.company.wb_auth?
@@ -22,13 +22,13 @@ class ChannelManagerController < ApplicationController
   end
 
   def edit
-    @wb = ChannelManager::Wubook.find(params[:id])
+    @wb = ChannelManager.find(params[:id])
   end
 
   def update
-    wb = ChannelManager::Wubook.find(params[:id])
+    wb = ChannelManager.find(params[:id])
 
-    if wb.update_attributes(wb_params)
+    if wb.update_attributes(channel_manager_params)
       impressionist(wb)
       redirect_to calendar_index_path
       flash[:success] = t('messages.cm_update_failure')
@@ -59,7 +59,7 @@ class ChannelManagerController < ApplicationController
   private
 
   def wubook_auth_state
-    connector = WubookConnector.new(wb_params)
+    connector = WubookConnector.new(channel_manager_params)
     connector.get_token.nil? ? false : true
   end
 
@@ -70,7 +70,7 @@ class ChannelManagerController < ApplicationController
     nil
   end
 
-  def wb_params
-    params.require(:channel_manager_wubook).permit(:login, :password, :lcode, :booking_id, :hotel_name)
+  def channel_manager_params
+    params.require(:channel_manager).permit(:login, :password, :lcode, :booking_id, :hotel_name, :connector_type)
   end
 end

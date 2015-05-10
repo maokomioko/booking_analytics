@@ -7,6 +7,7 @@ require 'previo_connector/previo'
 
 class PrevioConnector
   attr_accessor :ar, :bc, :br, :previo
+  attr_accessor :hotel_id
 
   def initialize(params = {})
     @login    = params.delete(:login) || ''
@@ -18,29 +19,39 @@ class PrevioConnector
   end
 
   def get_rooms
-    @previo.post('Hotel.getRoomKinds', 'hotId' => @hotel_id)
+    resp = @previo.post('Hotel.getRoomKinds', 'hotId' => @hotel_id)
+    rooms = resp['roomKinds']['objectKind']
+
+    # we should always return array
+    if rooms.is_a?(Hash)
+      resp['roomKinds']['objectKind'] = [rooms]
+    end
+
+    resp
   end
 
   def get_plans
     plans = @previo.get_rates({ 'hotId' => @hotel_id })
-
-    plans.select! do |plan|
-      range = plan['from'].to_date..plan['to'].to_date
-      range.include?(Date.today)
-    end
+    plans = filter_actual_plans(plans)
 
     raise PrevioError, 'No pricing plans for today' if plans.blank?
 
     plans
   end
 
-  def get_plan_prices(plan_id, room_ids)
-    params = {
-      'hotId' => @hotel_id,
-      'prlIds' => plan_id,
-      'obkIds' => room_ids
-    }
-    @previo.get_rates(params)
+  def get_plan_prices(plan_id = nil, room_ids = nil)
+    params = {}.tap do |hash|
+      hash['hotId'] = @hotel_id
+      hash['prlIds'] = plan_id if plan_id.present?
+      hash['obkIds'] = room_ids if room_ids.present?
+    end
+
+    plans = @previo.get_rates(params)
+    plans = filter_actual_plans(plans)
+
+    raise PrevioError, 'No pricing plans for today' if plans.blank?
+
+    plans
   end
 
   def set_plan_prices(plan_id, room_id, from_date, prices)
@@ -53,5 +64,12 @@ class PrevioConnector
     @bc = BC.new(@login, @password)
     @br = BR.new(@login, @password)
     @previo = Previo.new(@login, @password)
+  end
+
+  def filter_actual_plans(plans)
+    plans.select do |plan|
+      range = plan['from'].to_date..plan['to'].to_date
+      range.include?(Date.today)
+    end
   end
 end

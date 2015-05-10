@@ -28,13 +28,12 @@ class ChannelManager < ActiveRecord::Base
 
   attr_accessor :connector_type
 
-  validates :login, :password, :lcode, :booking_id, :hotel_name,
-            :non_refundable_pid, :default_pid, presence: true
+  validates :login, :password, :lcode, :booking_id, :hotel_name, presence: true
+  validates :non_refundable_pid, :default_pid, presence: true, on: :update
   validate :hotel_existence
   validates_inclusion_of :connector_type, in: TYPES, allow_blank: true
 
-  before_create :define_type, if: -> { type.nil? }
-  before_create :setup_tarif_plans
+  before_save :setup_tarif_plans
 
   # stub
   def non_refundable_candidate
@@ -52,8 +51,13 @@ class ChannelManager < ActiveRecord::Base
   def setup_room_prices(room_id, room_obj_id)
   end
 
+  def connector_room_id_key
+    'booking_id'
+  end
+
   def setup_tarif_plans
-    update_attributes(non_refundable_pid: non_refundable_candidate, default_pid: standart_rate_candidate)
+    self.non_refundable_pid = non_refundable_candidate
+    self.default_pid = standart_rate_candidate
   end
 
   def apply_room_prices(room_id, dates, custom_price = nil)
@@ -68,15 +72,15 @@ class ChannelManager < ActiveRecord::Base
     if ['', nil].include? custom_price
       new_prices = price_blocks.map(&:price)
       price_blocks.each do |block|
-        block.update_attribute(:default_price, block.price)
+        block.update_attribute(:default_price, block.price) if block.price.present?
       end
     else
       new_prices = [custom_price]
-      price_blocks.update_all(default_price: custom_price, locked: true)
+      price_blocks.update_all(default_price_cents: custom_price.to_money('EUR').cents, locked: true)
     end
 
     price_blocks.map(&:date).each do |date|
-      connector.set_plan_prices(non_refundable_pid, room_id, date, new_prices)
+      # connector.set_plan_prices(non_refundable_pid, room_id, date, new_prices)
     end
 
     price_blocks.update_all(enabled: true)
@@ -96,13 +100,11 @@ class ChannelManager < ActiveRecord::Base
     end
   end
 
-  private
-
-  def define_type
-    self.type = if connector_type.present?
-                  'ChannelManager::' + connector_type.classify
-                else
-                  self.class.name
-                end
+  def self.define_type(connector_type)
+    if connector_type.present?
+      'ChannelManager::' + connector_type.classify
+    else
+      self.name
+    end
   end
 end

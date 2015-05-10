@@ -35,7 +35,7 @@ class ChannelManager::Wubook < ChannelManager
     rooms_data = connector.get_rooms
     rooms_data.each do |rd|
       if [0, nil, ''].include? rd['subroom']
-        room = rooms.new
+        room = hotel.rooms.new
 
         %w(id name price max_people subroom children occupancy availability).each do |field|
           room.send(field + '=', rd[field])

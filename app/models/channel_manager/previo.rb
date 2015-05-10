@@ -19,12 +19,16 @@
 #
 
 class ChannelManager::Previo < ChannelManager
+  def connector_room_id_key
+    'previo_id'
+  end
+
   def connector
     PrevioConnector.new(login: login, password: password, hotel_id: lcode)
   end
 
   def non_refundable_candidate
-    ''
+    connector.get_plans[0]['priId']
   end
 
   def standart_rate_candidate
@@ -36,14 +40,40 @@ class ChannelManager::Previo < ChannelManager
     return unless rooms_data['roomKinds'].present?
 
     rooms_data['roomKinds']['objectKind'].each do |rd|
-      room = rooms.new
+      room = hotel.rooms.new
 
       room.name = rd['name']
       room.max_people = [rd['numOfBeds'], rd['numOfExtraBeds']].map(&:to_i).sum
       room.hotel_id = hotel.id
       room.booking_hotel_id = booking_id
+      room.previo_id = rd['obkId']
+
+      # TODO I don't know is this correct stub
+      room.min_price = 0
+      room.max_price = 0
 
       room.save
+    end
+  end
+
+  def setup_room_prices(room_id, room_obj_id)
+    plans = connector.get_plan_prices(nil, [room_id])
+
+    plans.each do |plan|
+      rates = plan['ratePlan']['objectKind']['rate']
+      rates = [rates] unless rates.is_a?(Array)
+
+      default_price = rates.first['nrrPrice'] || rates.first['price']
+
+      (plan['from'].to_date..plan['to'].to_date).to_a.each do |date|
+        next if date > 3.month.from_now.to_date
+
+        RoomPrice.create(
+          room_id: room_obj_id,
+          date: date,
+          default_price: default_price
+        )
+      end
     end
   end
 end

@@ -1,8 +1,8 @@
-= form_for @wb, url: { action: (action_name == 'new' ? :create : :update) }, html: { class: 'form-horizontal' } do |f|
+= form_for @channel_manager, as: :channel_manager, url: { action: (@channel_manager.new_record? ? :create : :update) }, html: { class: 'form-horizontal' } do |f|
   .form-group
     = f.label :connector_type, class: 'col-sm-2 control-label'
     .col-sm-5
-      = f.select :connector_type, options_for_cm_types(@wb.connector_type), {}, class: 'form-control'
+      = f.select :connector_type, options_for_cm_types(@channel_manager.connector_type), {}, class: 'form-control'
 
   .form-group
     = f.label :login, class: 'col-sm-2 control-label'

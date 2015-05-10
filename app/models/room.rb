@@ -19,6 +19,7 @@
 #  max_price_currency :string           default("EUR")
 #  booking_id         :integer
 #  booking_hotel_id   :integer
+#  previo_id          :integer
 #
 # Indexes
 #
@@ -26,6 +27,7 @@
 #  index_rooms_on_booking_id          (booking_id)
 #  index_rooms_on_channel_manager_id  (channel_manager_id)
 #  index_rooms_on_hotel_id            (hotel_id)
+#  index_rooms_on_previo_id           (previo_id)
 #  index_rooms_on_roomtype            (roomtype)
 #
 
@@ -44,7 +46,7 @@ class Room < ActiveRecord::Base
   has_and_belongs_to_many :facilities,
                           class_name: 'Facility::Room',
                           association_foreign_key: 'room_facility_id' # counter as PG trigger
-  has_and_belongs_to_many :wubook_auths
+  # has_and_belongs_to_many :wubook_auths
 
   has_one :bedding
 

@@ -3,37 +3,39 @@ class ChannelManagerController < ApplicationController
 
   def new
     unless current_user.company.wb_auth?
-      @wb = ChannelManager.new
+      @channel_manager = ChannelManager.new
     else redirect_to calendar_index_path, notice: t('messages.cm_already_added')
     end
   end
 
   def create
-    wb = ChannelManager.new(channel_manager_params)
-    wb.company = current_user.company
-    if wb.save && wubook_auth_state
+    @channel_manager = ChannelManager.new(channel_manager_params)
+    @channel_manager.company = current_user.company
+
+    if @channel_manager.save && wubook_auth_state
       current_user.company.update_attribute(:wb_auth, true) unless current_user.company.wb_auth?
       redirect_to calendar_index_path
       flash[:success] = t('messages.cm_verified')
     else
-      redirect_to new_channel_manager_path
       flash[:error] = t('messages.cm_verification_error')
+      flash[:warning] = @channel_manager.errors.full_messages.to_sentence
+      render :new
     end
   end
 
   def edit
-    @wb = ChannelManager.find(params[:id])
+    @channel_manager = ChannelManager.find(params[:id])
   end
 
   def update
-    wb = ChannelManager.find(params[:id])
+    @channel_manager = ChannelManager.find(params[:id])
 
-    if wb.update_attributes(channel_manager_params)
-      impressionist(wb)
+    if @channel_manager.update_attributes(channel_manager_params)
+      impressionist(@channel_manager)
       redirect_to calendar_index_path
       flash[:success] = t('messages.cm_update_failure')
     else
-      redirect_to edit_channel_manager_path(wb.id)
+      redirect_to edit_channel_manager_path(@channel_manager.id)
       flash[:error] = t('messages.cm_update_error')
     end
   end
@@ -61,18 +63,23 @@ class ChannelManagerController < ApplicationController
   private
 
   def wubook_auth_state
-    connector = WubookConnector.new(channel_manager_params)
-    connector.get_token.nil? ? false : true
+    if channel_manager_params[:type] == 'ChannelManager::Wubook'
+      connector = WubookConnector.new(channel_manager_params)
+      connector.get_token.nil? ? false : true
+    else
+      true
+    end
   end
 
   def wubook_for_company(room_id)
-    room = Room.find(room_id)
-    room.wubook_auths.where(company: current_user.company).first
+    Room.find(room_id).hotel.channel_manager
   rescue
     nil
   end
 
   def channel_manager_params
-    params.require(:channel_manager).permit(:login, :password, :lcode, :booking_id, :hotel_name, :connector_type)
+    params.require(:channel_manager).permit(:login, :password, :lcode, :booking_id, :hotel_name, :connector_type).tap do |whitelisted|
+      whitelisted[:type] = ChannelManager.define_type(params[:channel_manager][:connector_type])
+    end
   end
 end

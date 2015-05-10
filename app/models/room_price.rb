@@ -20,8 +20,8 @@
 class RoomPrice < ActiveRecord::Base
   belongs_to :room
 
-  monetize :default_price_cents
-  monetize :price_cents
+  monetize :default_price_cents, allow_nil: true
+  monetize :price_cents, allow_nil: true
 
   scope :within_dates, -> (dates) { where(date: dates) } do
     def date_groupped

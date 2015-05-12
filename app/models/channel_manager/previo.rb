@@ -40,7 +40,7 @@ class ChannelManager::Previo < ChannelManager
     return unless rooms_data['roomKinds'].present?
 
     rooms_data['roomKinds']['objectKind'].each do |rd|
-      room = hotel.rooms.new
+      room = Room.find_by_previo_id(rd['obkId']) || hotel.rooms.new
 
       room.name = rd['name']
       room.max_people = [rd['numOfBeds'], rd['numOfExtraBeds']].map(&:to_i).sum

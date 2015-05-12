@@ -82,7 +82,7 @@ class ChannelManager < ActiveRecord::Base
     end
 
     price_blocks.map(&:date).each do |date|
-      # connector.set_plan_prices(non_refundable_pid, room_id, date, new_prices)
+      connector.set_plan_prices(non_refundable_pid, room_id, date, new_prices)
     end
 
     price_blocks.update_all(enabled: true)

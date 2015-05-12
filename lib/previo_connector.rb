@@ -54,7 +54,12 @@ class PrevioConnector
     plans
   end
 
-  def set_plan_prices(plan_id, room_id, from_date, prices)
+  def set_plan_prices(plan_id = nil, room_id, from_date, prices)
+    plan_id ||= 1
+
+    raise PrevioError, 'Undefined room' if room_id.nil?
+
+    @ar.update_rates(@hotel_id, room_id, from_date, prices.first)
   end
 
   private

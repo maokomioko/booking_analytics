@@ -24,7 +24,7 @@ class @Calendar
       $(@).parent().toggleClass 'with_selection'
       false
 
-    ).mouseover ->
+    ).mouseenter (e) ->
       if window.isMouseDown
         $(@).toggleClass 'selected'
         $(@).parent().toggleClass 'with_selection'
@@ -91,9 +91,5 @@ class @Calendar
       url: window.dates_update_path,
       data: {price: custom_price, dates: arr, room_id: room_id},
       success: ->
-          $('td.selected .container').addClass('with_auto_price').removeClass('selected')
-          if custom_price > 0
-            $('td.selected .container .manual').removeClass 'hidden'
-
-          window.isPriceUpdLocked = true
-          triggerSpinner()
+        triggerSpinner()
+        Turbolinks.visit location.toString()

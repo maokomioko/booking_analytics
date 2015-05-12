@@ -2,18 +2,19 @@
 #
 # Table name: companies
 #
-#  id           :integer          not null, primary key
-#  name         :string
-#  wb_auth      :boolean          default(FALSE)
-#  owner_id     :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#  logo         :string
-#  reg_number   :string
-#  reg_address  :string
-#  bank_name    :string
-#  bank_code    :string
-#  bank_account :string
+#  id            :integer          not null, primary key
+#  name          :string
+#  wb_auth       :boolean          default(FALSE)
+#  owner_id      :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#  logo          :string
+#  reg_number    :string
+#  reg_address   :string
+#  bank_name     :string
+#  bank_code     :string
+#  bank_account  :string
+#  last_activity :datetime
 #
 
 class Company < ActiveRecord::Base

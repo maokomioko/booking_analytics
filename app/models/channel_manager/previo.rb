@@ -57,6 +57,8 @@ class ChannelManager::Previo < ChannelManager
   end
 
   def setup_room_prices(room_id, room_obj_id)
+    return unless room_id.present?
+
     plans = connector.get_plan_prices(nil, [room_id])
 
     plans.each do |plan|
@@ -65,14 +67,22 @@ class ChannelManager::Previo < ChannelManager
 
       default_price = rates.first['nrrPrice'] || rates.first['price']
 
+      room_prices = RoomPrice
+                        .where(room_id: room_obj_id)
+                        .within_dates(Date.today..3.month.from_now.to_date)
+                        .date_groupped
+
       (plan['from'].to_date..plan['to'].to_date).to_a.each do |date|
         next if date > 3.month.from_now.to_date
 
-        RoomPrice.create(
-          room_id: room_obj_id,
-          date: date,
-          default_price: default_price
-        )
+        rp = if room_prices[date].present?
+               room_prices[date].last
+             else
+               RoomPrice.new(room_id: room_obj_id, date: date)
+             end
+
+        rp.default_price = default_price unless rp.enabled?
+        rp.save
       end
     end
   end

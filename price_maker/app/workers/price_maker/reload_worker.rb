@@ -2,7 +2,7 @@ module PriceMaker
   class ReloadWorker
     include Sidekiq::Worker
 
-    sidekiq_options retry: false, unique: true
+    sidekiq_options retry: false
 
     def perform(company_id)
       company = Company.find(company_id)

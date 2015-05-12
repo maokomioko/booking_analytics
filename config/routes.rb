@@ -24,11 +24,7 @@ Rails.application.routes.draw do
     get '/:user_id', action: :show, as: :show
   end
 
-  resources :calendar, controller: :calendar do
-    collection do
-      get :demo
-    end
-  end
+  resources :calendar, controller: :calendar
 
   resources :channel_manager, contoller: 'channel_manager' do
     collection do

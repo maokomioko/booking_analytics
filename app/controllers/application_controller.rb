@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  before_filter :auth_user, :company_present, :ch_manager_present, unless: :devise_controller?
+  before_filter :auth_user, :company_present, :update_last_activity, :ch_manager_present, unless: :devise_controller?
   after_filter :flash_to_headers
 
   layout :layout_by_resource
@@ -43,6 +43,12 @@ class ApplicationController < ActionController::Base
         f.json { render json: { error: t('errors.no_company') }, status: 403 }
         f.all { redirect_to [main_app, :new, :company] }
       end
+    end
+  end
+
+  def update_last_activity
+    if current_user && current_user.company.present?
+      current_user.company.update_column(:last_activity, Time.now.utc)
     end
   end
 

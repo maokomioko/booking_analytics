@@ -79,6 +79,7 @@ gem 'select2-rails'
 gem 'stringex'
 gem 'state_machine', github: 'seuros/state_machine'
 gem 'sidekiq'
+gem 'sidekiq-middleware'
 gem 'sidekiq-status'
 gem 'sidetiq'
 gem 'sinatra', require: false

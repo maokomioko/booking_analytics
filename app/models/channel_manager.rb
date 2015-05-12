@@ -35,6 +35,8 @@ class ChannelManager < ActiveRecord::Base
 
   before_save :setup_tarif_plans
 
+  after_create :sync_rooms
+
   # stub
   def non_refundable_candidate
   end
@@ -97,6 +99,15 @@ class ChannelManager < ActiveRecord::Base
       @connector_type
     else
       @connector_type || self.class.name.split('::').last.downcase
+    end
+  end
+
+  # create rooms and get start prices for them
+  def sync_rooms
+    create_rooms if hotel.rooms.size.zero?
+    hotel.rooms.each do |room|
+      room_id = room.send(connector_room_id_key)
+      setup_room_prices(room_id, room.id)
     end
   end
 

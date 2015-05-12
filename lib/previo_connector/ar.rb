@@ -10,14 +10,12 @@ class PrevioConnector
 
       body = default_body do |xml|
         xml.send(:'Hotel', id: hotel_id)
-        xml.send(:'AvailRateUpdate') {
-          xml.send(:'DateRange', from: date, to: date)
-          xml.send(:'RoomType', id: room_id, closed: false) {
-            xml.send(:'Inventory', 'flexibleAllocation' => allocation)
-            xml.send(:'RatePlan', id: '1', closed: false) {
-              xml.send(:'Rate', currency: 'EUR') {
-                xml.send(:'PerDay', rate: price)
-              }
+        xml.send(:'DateRange', from: date, to: date)
+        xml.send(:'RoomType', id: room_id) {
+          # xml.send(:'Inventory', 'flexibleAllocation' => allocation)
+          xml.send(:'RatePlan', id: '1', closed: false) {
+            xml.send(:'Rate', currency: 'EUR') {
+              xml.send(:'PerOccupancy', rate: price, occupancy: 1)
             }
           }
         }
@@ -33,7 +31,7 @@ class PrevioConnector
     end
 
     def xml_schema
-      'http://www.expediaconnect.com/EQC/AR/2011/06'
+      'http://www.expediaconnect.com/EQC/AR/2007/02'
     end
 
     def default_body(&block)

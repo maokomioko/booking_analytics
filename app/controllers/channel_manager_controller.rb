@@ -30,6 +30,9 @@ class ChannelManagerController < ApplicationController
   def update
     @channel_manager = ChannelManager.find(params[:id])
 
+    # STI fix
+    @channel_manager = @channel_manager.becomes!(channel_manager_params[:type].constantize)
+
     if @channel_manager.update_attributes(channel_manager_params)
       impressionist(@channel_manager)
       redirect_to calendar_index_path

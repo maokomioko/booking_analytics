@@ -72,9 +72,10 @@ class PrevioConnector
   end
 
   def filter_actual_plans(plans)
+    date_range = (Date.today..3.months.from_now.to_date).to_a
     plans.select do |plan|
-      range = plan['from'].to_date..plan['to'].to_date
-      range.include?(Date.today)
+      range = (plan['from'].to_date..plan['to'].to_date).to_a
+      (date_range & range).length > 0
     end
   end
 end

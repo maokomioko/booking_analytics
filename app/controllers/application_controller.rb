@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  before_filter :auth_user, :company_present, :ch_manager_present, unless: :devise_controller?
+  before_filter :auth_user, :company_present, :update_last_activity, :ch_manager_present, unless: :devise_controller?
   after_filter :flash_to_headers
 
   layout :layout_by_resource
@@ -46,6 +46,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def update_last_activity
+    if current_user && current_user.company.present?
+      current_user.company.update_column(:last_activity, Time.now.utc)
+    end
+  end
+
   def ch_manager_present
     if current_user && !current_user.role == 'admin' && current_user.company.present? && !current_user.company.wb_auth?
       respond_to do |f|
@@ -59,6 +65,7 @@ class ApplicationController < ActionController::Base
     return unless request.xhr?
     response.headers['X-Message'] = flash_message
     response.headers['X-Message-Type'] = flash_type.to_s
+    response.headers['X-Message-Html'] = view_context.render_flash.squish
 
     flash.discard
   end

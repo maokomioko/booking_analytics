@@ -1,0 +1,10 @@
+<% @rooms.each do |room| %>
+( function() {
+    var $roomRow = $('tr[data-room-id="<%= room.id %>"]');
+    $roomRow.addClass('success');
+
+    setTimeout( function(){
+        $roomRow.removeClass('success');
+    }, 3000)
+})();
+<% end %>

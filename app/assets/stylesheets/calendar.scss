@@ -1,7 +1,18 @@
+[data-page='calendar:demo'], [data-page='calendar:index'] {
+  .page-header {
+    position: fixed;
+    margin: 0;
+    padding: 20px;
+    left: 225px;
+    right: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9);
+  }
+}
+
 #calendar {
   position: relative;
-  overflow: hidden;
-  height: calc(100vh - 60px);
+  margin-top: 122px;
 }
 
 #calendar_days_cont {
@@ -10,13 +21,13 @@
 }
 
 .weekdays {
-  background: #e1f2fa;
+  margin-top: 20px;
+  width: 100%;
   font-size: 13px;
   text-transform: uppercase;
-  span {
-    width: 238px;
-    display: table-cell;
-    padding: 5px 10px;
+  td {
+    width: 14.28%;
+    text-align: center;
   }
 }
 
@@ -26,14 +37,13 @@
   table-layout: fixed;
   td {
     border: 1px solid #e0e0e0;
-    font-weight: 600;
     &.today {
-      .container {
-        background: #f1f1f1;
+      .date_placeholder {
+        background: #F5F5F5;
       }
     }
     &.selected {
-      .container {
+      .date_placeholder {
         background: #0072c6;
         color: #fff;
         .current_price {
@@ -44,7 +54,7 @@
         }
       }
     }
-    .container {
+    .date_placeholder {
       position: relative;
       padding: 10px 5px;
       height: 200px;
@@ -78,45 +88,34 @@
     }
     .day {
       margin-bottom: 12px;
-      font-weight: 600;
     }
     .current_price {
       position: absolute;
       top: 10px;
       right: 5px;
-      font-weight: 600;
       color: rgb(218, 128, 25);
       span {
         color: #000;
-        font-weight: 500;
         font-size: 12px;
         margin-right: 10px;
         &.ccp_price {
           color: rgb(218, 128, 25);
-          font-weight: 600;
-          font-size: 16px;
+          font-size: 14px;
           margin-right: 0px;
         }
       }
     }
     .bar {
       position: relative;
-      margin-bottom: 15px;
-      padding-left: 10px;
-      background: #cde6f7;
-      color: #000;
-      line-height: 35px;
-      &:before {
-        content: "";
-        position: absolute;
-        top: 1px;
-        left: 1px;
-        height: calc(100% - 2px);
-        width: 3px;
-        background: #fff;
-      }
+      margin: 7px auto;
+      padding: 2px 0;
+      border-radius: 3px;
+      width: 95%;
+      text-align: center;
+      background: #3A87AD;
+      color: #fff;
       > span {
-        font-size: 14px;
+        font-size: 13px;
       }
       &.manual {
         background: #FFF1B3;
@@ -126,5 +125,11 @@
         background: #C1FED9;
       }
     }
+  }
+}
+
+#price_control {
+  [data-role='panel'], [data-role='manual'] {
+    padding: 10px 15px;
   }
 }

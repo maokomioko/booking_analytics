@@ -13,7 +13,7 @@ class PriceMaker::AvailabilityWorker
     hotel_room_hash = Hash[hotel_room_ids] # { hotel_id: [room_id, room_id] }
 
     blocks = BlockAvailability.for_hotels(hotel_room_hash.keys)
-             .by_arrival(arrival).by_departure(departure) # .with_occupancy(occupancy).limit(60)
+             .by_arrival(arrival).by_departure(departure)
 
     arr = []
     blocks.each do |block|

@@ -4,6 +4,7 @@ gem 'bootstrap-sass'
 gem 'browser'
 gem 'bullet'
 gem 'bson_ext'
+#gem 'binding_of_caller'
 
 gem 'cancancan'
 gem 'carrierwave'
@@ -27,15 +28,20 @@ gem 'eu_central_bank'
 
 gem 'font-awesome-sass', github: 'FortAwesome/font-awesome-sass'
 
+gem 'gaffe' # handling error pages
 gem 'geocoder'
 gem 'globalize', github: 'globalize/globalize'
 gem 'google-analytics-turbolinks'
 gem 'graph', path: 'graph'
 
 gem 'haml-rails'
+gem 'here_places', github: 'sigra/here_places'
+gem 'httparty'
 
 gem 'i18n', '0.7'
-gem 'icheck-rails'
+gem 'impressionist'
+
+gem 'kaminari'
 
 gem 'log4r'
 
@@ -49,8 +55,7 @@ gem 'mail-logger'
 gem 'money'
 gem 'money-rails'
 
-gem 'nokogiri'
-gem 'nokogiri_truncate_html', github: 'sebastien-madru/nokogiri_truncate_html'
+gem 'naturally', github: 'zedalaye/naturally'
 
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -62,7 +67,7 @@ gem 'progress_bar'
 gem 'price_maker', path: 'price_maker'
 
 gem 'racc'
-gem 'rails', '~> 4.2'
+gem 'rails', '>= 4.2'
 gem 'redis'
 gem 'redis-store'
 gem 'redis-rails'
@@ -70,16 +75,16 @@ gem 'remotipart', '~> 1.2.1'
 gem 'rubysl', platform: :rbx
 
 gem 'sass-rails', '>= 5'
-gem 'sanitize'
 gem 'select2-rails'
 gem 'stringex'
 gem 'state_machine', github: 'seuros/state_machine'
 gem 'sidekiq'
+gem 'sidekiq-middleware'
 gem 'sidekiq-status'
 gem 'sidetiq'
-gem 'sinatra', require: nil
+gem 'sinatra', require: false
 
-gem 'turbolinks', '~> 2.5.3'
+gem 'turbolinks', github: 'rails/turbolinks'
 
 gem 'wicked_pdf'
 gem 'whenever'
@@ -94,15 +99,11 @@ end
 group :development, :test do
   gem 'annotate'
   gem 'capistrano'
-  gem 'capistrano-rvm'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-  gem 'capistrano-sidekiq'
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-sidekiq', require: false
   gem 'quiet_assets'
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-livereload'
-  gem 'guard-rails'
   gem 'rails-dev-tweaks'
   gem 'rails-erd'
   gem 'fabrication'
@@ -111,7 +112,7 @@ group :development, :test do
   gem 'rb-readline', '~> 0.5.1' # http://stackoverflow.com/questions/19496932/guard-causing-error-cant-modify-string-temporarily-locked
   gem 'traceroute'
   gem 'better_errors'
-  gem 'binding_of_caller' # need for better_errors
+  gem 'binding_of_caller'
   gem 'letter_opener'
 end
 
@@ -127,9 +128,11 @@ group :test do
   gem 'rspec-its'
   gem 'rspec-rails'
   # gem 'rspec-sidekiq'
-  gem 'simplecov', github: 'colszowka/simplecov'
+  gem 'simplecov', '>= 0.9', require: false
   gem 'shoulda-matchers', '~> 2.8.0'
   gem 'shoulda-callback-matchers', '~> 1.1.2'
   gem 'timecop'
   gem 'turn', require: false
+  gem 'vcr'
+  gem 'webmock'
 end

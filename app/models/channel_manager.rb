@@ -19,50 +19,47 @@
 #
 
 class ChannelManager < ActiveRecord::Base
+  TYPES = %w(wubook previo).freeze
+
   belongs_to :company
   belongs_to :hotel, foreign_key: :booking_id, primary_key: :booking_id
 
-  validates :login, :password, :lcode, :booking_id, :hotel_name, :non_refundable_pid, :default_pid, presence: true
+  is_impressionable
+
+  attr_accessor :connector_type
+
+  validates :login, :password, :lcode, :booking_id, :hotel_name, presence: true
+  validates :non_refundable_pid, :default_pid, presence: true, on: :update
   validate :hotel_existence
+  validates_inclusion_of :connector_type, in: TYPES, allow_blank: true
 
-  # before_create :setup_tarif_plans
+  before_save :setup_tarif_plans
 
+  after_create :sync_rooms
+
+  # stub
   def non_refundable_candidate
-    connector.get_plans[0]['name']
   end
 
+  # stub
   def standart_rate_candidate
-    connector.get_plans[1]['name']
+  end
+
+  # stub
+  def create_rooms
+  end
+
+  # stub
+  def setup_room_prices(room_id, room_obj_id)
+  end
+
+  def connector_room_id_key
+    'booking_id'
   end
 
   def setup_tarif_plans
-    update_attributes(non_refundable_pid: non_refundable_candidate, default_pid: standart_rate_candidate)
-  end
-
-  def create_rooms
-    rooms_data = connector.get_rooms
-    rooms_data.each do |rd|
-      if [0, nil, ''].include? rd['subroom']
-        room = rooms.new
-
-        %w(id name price max_people subroom children occupancy availability).each do |field|
-          room.send(field + '=', rd[field])
-        end
-
-        room.save
-      end
-    end
-  end
-
-  def setup_room_prices(room_id, room_obj_id)
-    price_array = connector.get_plan_prices(non_refundable_pid, [room_id]).map { |_key, value| value }[0]
-    price_array.each_with_index do |price, i|
-      RoomPrice.create(
-        room_id: room_obj_id,
-        date: Date.today + i.days,
-        default_price: price
-      )
-    end
+    self.non_refundable_pid = non_refundable_candidate
+    self.default_pid = standart_rate_candidate
   end
 
   def apply_room_prices(room_id, dates, custom_price = nil)
@@ -77,15 +74,15 @@ class ChannelManager < ActiveRecord::Base
     if ['', nil].include? custom_price
       new_prices = price_blocks.map(&:price)
       price_blocks.each do |block|
-        block.update_attribute(:default_price, block.price)
+        block.update_attribute(:default_price, block.price) if block.price.present?
       end
     else
       new_prices = [custom_price]
-      price_blocks.update_all(default_price: custom_price, locked: true)
+      price_blocks.update_all(default_price_cents: custom_price.to_money('EUR').cents, locked: true)
     end
 
     price_blocks.map(&:date).each do |date|
-      connector.set_plan_prices(non_refundable_pid, room_id, date, new_prices)
+      connector.set_plan_prices(non_refundable_pid, room.send(connector_room_id_key), date, new_prices)
     end
 
     price_blocks.update_all(enabled: true)
@@ -94,6 +91,31 @@ class ChannelManager < ActiveRecord::Base
   def hotel_existence
     unless Hotel.find_by_booking_id(booking_id).present?
       errors.add(:booking_id, I18n.t('errors.booking_id'))
+    end
+  end
+
+  def connector_type
+    if type.nil?
+      @connector_type
+    else
+      @connector_type || self.class.name.split('::').last.downcase
+    end
+  end
+
+  # create rooms and get start prices for them
+  def sync_rooms
+    create_rooms if hotel.rooms.size.zero?
+    hotel.rooms.each do |room|
+      room_id = room.send(connector_room_id_key)
+      setup_room_prices(room_id, room.id)
+    end
+  end
+
+  def self.define_type(connector_type)
+    if connector_type.present?
+      'ChannelManager::' + connector_type.classify
+    else
+      self.name
     end
   end
 end

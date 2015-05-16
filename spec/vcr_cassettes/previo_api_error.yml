@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.previo.cz/x1/some/undefinedMethod
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <request>
+          <login>login</login>
+          <password>password</password>
+        </request>
+    headers:
+      Accept:
+      - text/xml
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 30 Apr 2015 07:53:18 GMT
+      Server:
+      - Apache/2.4.6 (CentOS) OpenSSL/1.0.1e-fips PHP/5.5.22
+      X-Powered-By:
+      - PHP/5.5.22
+      Content-Length:
+      - '125'
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <error>
+            <code>2000</code>
+            <message>Invalid service 'some'.</message>
+        </error>
+    http_version: 
+  recorded_at: Fri, 01 Jan 2010 00:00:00 GMT
+recorded_with: VCR 2.9.3

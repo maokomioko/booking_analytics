@@ -6,5 +6,18 @@ en:
         reg_number: Registration number
         reg_address: Registration address
         logo: Logotype
+      room:
+        min_price_cents: Minimum price
+        max_price_cents: Maximum price
+      setting:
+        districts: City districts
       user:
         invitation_accepted_at: Join Date
+    errors:
+      models:
+        room:
+          attributes:
+            min_price_cents:
+              greater_than_or_equal_to: "must be greater than or equal to <em>&euro; %{count}</em>"
+            max_price_cents:
+              greater_than_or_equal_to: "must be greater than or equal to <em>&euro; %{count}</em>"

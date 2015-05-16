@@ -1,61 +1,44 @@
-.navbar-content
-  / start: SIDEBAR
-  .main-navigation.navbar-collapse.collapse
-    / start: MAIN MENU TOGGLER BUTTON
-    .navigation-toggler
-      %i.clip-chevron-left
-      %i.clip-chevron-right
-    / end: MAIN MENU TOGGLER BUTTON
-    / start: MAIN NAVIGATION MENU
-    %ul.main-navigation-menu
-      %li
-        = link_to calendar_index_path do
-          %i.clip-calendar-3
-          %span.title= t('calendar.menu.cal')
-          %span.selected
-      %li
-        = link_to '#' do
-          %i.clip-cursor
-          %span.title= t('calendar.menu.forecast')
-          %span.selected
-      - if defined?(Graph::Engine)
-        %li
-          = link_to graph.root_url do
-            %i.clip-bars
-            %span.title= t('calendar.menu.analytics')
-            %span.selected
-      - if current_user.company.present? && can?(:edit, current_user.company)
-        %li
-          %a(href="javascript:void(0)")
-            %i.clip-home-3
-            %span.title= t('calendar.menu.my_company')
-            %i.icon-arrow
-            %span.selected
-          %ul.sub-menu
-            %li
-              = link_to [:edit, :company] do
-                %span.title= t('menu.company')
-            %li
-              = link_to [:company, :users] do
-                %span.title= t('menu.company_users')
-            %li
-              = link_to [:new, :user, :invitation] do
-                %span.title= t('menu.invite')
-      %li
-        %a(href="javascript:void(0)")
-          %i.clip-settings
-          %span.title= t('calendar.menu.preferences')
-          %i.icon-arrow
-          %span.selected
-        %ul.sub-menu
-          %li
-            - if current_user && current_user.channel_managers.size > 0
-              = link_to edit_channel_manager_path(current_user.channel_managers.first.id), class: active_class(edit_channel_manager_path(current_user.channel_managers.first.id)) do
-                %span.title= t('menu.connection')
-            - else
-              = link_to new_channel_manager_path, class: active_class(new_channel_manager_path) do
-                %span.title= t('menu.connection')
-          - if current_user.company.present? && can?(:edit, current_user.company.setting)
-            %li
-              = link_to [:edit, :setting] do
-                %span.title= t('menu.worker')
+%ul.main-navigation-menu
+  %li{ data: { menu: 'calendar:index calendar:demo' } }
+    = link_to calendar_index_path do
+      %i.clip-calendar-3
+      %span.title= t('calendar.menu.cal')
+      %span.selected
+  - if defined?(Graph::Engine)
+    %li{ data: { menu: 'graph:hotels:index' } }
+      = link_to graph.root_url do
+        %i.clip-bars
+        %span.title= t('calendar.menu.analytics')
+        %span.selected
+  - if current_user.company.present? && can?(:edit, current_user.company)
+    %li
+      %a(href="javascript:void(0)")
+        %i.clip-home-3
+        %span.title= t('calendar.menu.my_company')
+        %i.icon-arrow
+        %span.selected
+      %ul.sub-menu
+        %li{ data: { menu: 'companies:edit' } }
+          = link_to [:edit, :company] do
+            %span.title= t('menu.company.title')
+        %li{ data: { menu: 'users:index' } }
+          = link_to [:company, :users] do
+            %span.title= t('menu.company.users')
+  %li
+    %a(href="javascript:void(0)")
+      %i.clip-settings
+      %span.title= t('calendar.menu.preferences')
+      %i.icon-arrow
+      %span.selected
+    %ul.sub-menu
+      %li{ data: { menu: 'channel_manager:edit channel_manager:new' } }
+        - if current_user && current_user.channel_managers.size > 0
+          = link_to edit_channel_manager_path(current_user.channel_managers.first.id), class: active_class(edit_channel_manager_path(current_user.channel_managers.first.id)) do
+            %span.title= t('menu.connection')
+        - else
+          = link_to new_channel_manager_path, class: active_class(new_channel_manager_path) do
+            %span.title= t('menu.connection')
+      - if current_user.hotels.present?
+        %li{ data: { menu: 'settings:edit settings:new settings:index' } }
+          = link_to [:settings] do
+            %span.title= t('menu.worker')

@@ -1,0 +1,19 @@
+= form_for room, html: { class: 'form-horizontal', 'data-room-id' => room.id }, remote: true do |f|
+  .form-group
+    = f.label :min_price, class: 'col-sm-3 control-label'
+    .col-sm-3
+      .input-group
+        = f.text_field :min_price, class: 'form-control'
+        .input-group-addon
+          = room.min_price_currency
+  .form-group
+    = f.label :max_price, class: 'col-sm-3 control-label'
+    .col-sm-3
+      .input-group
+        = f.text_field :max_price, class: 'form-control'
+        .input-group-addon
+          = room.max_price_currency
+  .form-group
+    .col-sm-2.col-sm-offset-3
+      = f.submit t('shared.save'), class: 'btn btn-default'
+    %span.help-inline.col-sm-3

@@ -4,7 +4,9 @@ class Dispatcher
     @initPageScripts()
 
   initGlobalScripts: ->
+    window.Main.init()
     new FlashMessage()
+    new Validation()
 
   initPageScripts: ->
     page = $('body').attr('data-page')
@@ -15,10 +17,14 @@ class Dispatcher
     path = page.split(':')
 
     switch page
-      when 'calendar:index'
+      when 'calendar:index', 'calendar:demo'
         new Calendar()
+      when 'settings:edit'
+        new Settings()
+      when 'users:index'
+        new Users()
 
 ready = ->
   new Dispatcher()
 
-$(document).ready(ready)
+$(document).on 'page:change', ready

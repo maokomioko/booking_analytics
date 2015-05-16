@@ -1,4 +1,4 @@
-%tr
+%tr(data-user-id="#{ user.id }")
   %td.center
     - if user.avatar.present?
       = image_tag user.avatar.thumb, alt: user.nickname
@@ -11,7 +11,7 @@
       %span.label.label-sm.label-warning= t('shared.invited')
   %td.center
     - if can?(:destroy, user)
-      = link_to [:company, user], method: :delete,
+      = link_to [:company, user], method: :delete, remote: true,
           class: 'btn btn-xs btn-bricky tooltips',
           data: { "original-title" => t('shared.remove'), confirm: t('shared.are_you_sure') } do
         = icon('times white')

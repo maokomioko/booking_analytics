@@ -1,0 +1,718 @@
+//colors
+$black: #000000;
+$white: #ffffff;
+$color_quill_gray_approx: #d5d5d5;
+$color_gunsmoke_approx: #858585;
+$color_nobel_approx: #b5b5b5;
+$color_picton_blue_80_approx: rgba(82, 168, 236, 0.8);
+$color_picton_blue_60_approx: rgba(82, 168, 236, 0.6);
+$color_mountain_mist_approx: #909090;
+$color_kashmir_blue_approx: #557799;
+$color_viking_approx: #65bcda;
+$color_celeste_approx: #cccccc;
+$color_fuscous_gray_approx: #555555;
+$color_tapa_approx: #737373;
+$color_chestnut_approx: #b94a48;
+$color_burnt_sienna_approx: #e6674a;
+$color_hippie_green_approx: #468847;
+$color_mine_shaft_approx: #333;
+$color_horizon_approx: #569099;
+$color_smalt_blue_approx: #4d8189;
+$color_flame_pea_approx: #e35434;
+$color_persian_red_approx: #c83a2a;
+$color_tall_poppy_approx: #b33426;
+$color_ghost_approx: #c7cbd5;
+$color_black_haze_approx: #f4f6f9;
+$color_storm_dust_22_approx: rgba(100, 100, 100, 0.22);
+$color_blue_ribbon_approx: #0362fd;
+$color_faded_jade_approx: #447178;
+$color_pine_glade_approx: #cc9;
+$color_gimblet_approx: #bbbb77;
+$color_green_smoke_approx: #afaa6d;
+$color_teak_approx: #a6a05d;
+$color_barley_corn_approx: #979152;
+$color_punch_approx: #de421f;
+$color_comet_approx: #57517b;
+$color_gun_powder_approx: #413d5c;
+$color_mulled_wine_approx: #4c476c;
+$color_shark_approx: #262626;
+$color_rangoon_green_approx: #1a1a1a;
+$color_storm_dust_approx: #666;
+$color_chicago_approx: #595959;
+$color_emperor_approx: #4d4d4d;
+$color_stack_approx: #8c8c8c;
+$gray: #808080;
+$color_roof_terracotta_approx: #9e2e21;
+$color_la_palma_approx: #3d9400;
+$color_bilbao_approx: #327b00;
+$color_green_house_approx: #286100;
+$color_san_juan_approx: #364f6a;
+$color_pickled_bluewood_approx: #2d4259;
+$color_nile_blue_approx: #253648;
+$color_yellow_orange_approx: #ffb848;
+$color_sea_buckthorn_approx: #ffae2f;
+$color_sun_approx: #ffa415;
+$color_alizarin_crimson_approx: #e02222;
+$color_thunderbird_approx: #cc1d1d;
+$gallery: #efefef;
+$color_alto_approx: #dddddd;
+$white_80: rgba(255, 255, 255, 0.8);
+$color_shady_lady_approx: #a5a5a5;
+$black_25: rgba(0, 0, 0, 0.25);
+$color_tundora_approx: #444444;
+$color_lochmara_approx: #0480be;
+$color_bahama_blue_approx: #036392;
+$color_fruit_salad_approx: #57a957;
+$color_fern_green_approx: #417e41;
+$color_flush_mahogany_approx: #c43c35;
+$color_prairie_sand_approx: #972e28;
+$color_whisper_approx: #f5f4f9;
+$color_athens_gray_approx: #eceaf3;
+$alabaster: #fafafa;
+$black_10: rgba(0, 0, 0, 0.1);
+$color_log_cabin_approx: #222222;
+$color_silver_chalice_approx: #aaaaaa;
+$color_black_squeeze_approx: #f3f8f8;
+$color_geyser_approx: #d8e4e7;
+$color_feta_approx: #effbec;
+$color_tea_green_approx: #cef3c5;
+$color_vista_white_approx: #fdf8f7;
+$color_bridesmaid_approx: #fbeeec;
+$color_mystic_approx: #e4e6eb;
+$color_wild_sand_approx: #f5f5f5;
+$color_azure_radiance_approx: #007aff;
+$color_chenin_approx: #e3cf7a;
+$color_fern_approx: #5cb85c;
+$color_apple_approx: #449d44;
+$color_casablanca_approx: #f0ad4e;
+$color_carrot_orange_approx: #ec971f;
+$color_scooter_approx: #31b0d5;
+$color_chestnut_rose_approx: #d9534f;
+$color_steel_blue_approx: #4c8fbd;
+$color_alabaster_approx: #f9f9f9;
+$color_shakespeare_approx: #4f99c6;
+$black_15: rgba(0, 0, 0, 0.15);
+$black_40: rgba(0, 0, 0, 0.4);
+$color_neptune_approx: #7dafb7;
+$color_wedgewood_approx: #4f80a0;
+$color_glacier_approx: #7db4d8;
+$color_roman_approx: #dc6456;
+$color_sushi_approx: #71b145;
+$color_waterloo__approx: #84809f;
+$color_slate_gray_approx: #6c7f92;
+$color_suva_gray_approx: #888888;
+$color_horizon_60_approx: rgba(86, 144, 153, 0.6);
+$color_horizon_80_approx: rgba(86, 144, 153, 0.8);
+$color_persian_red_60_approx: rgba(200, 58, 42, 0.6);
+$color_persian_red_80_approx: rgba(200, 58, 42, 0.8);
+$color_comet_60_approx: rgba(87, 81, 123, 0.6);
+$color_comet_80_approx: rgba(87, 81, 123, 0.8);
+$color_la_palma_60_approx: rgba(61, 148, 0, 0.6);
+$color_la_palma_80_approx: rgba(61, 148, 0, 0.8);
+$color_sea_buckthorn_60_approx: rgba(255, 167, 34, 0.6);
+$color_sea_buckthorn_80_approx: rgba(255, 167, 34, 0.8);
+$color_bracken_approx: #482c00;
+$color_san_juan_60_approx: rgba(54, 79, 106, 0.6);
+$color_san_juan_80_approx: rgba(54, 79, 106, 0.8);
+$color_gallery_approx: #eee;
+$color_picton_blue_approx: #2ea8e5;
+$color_alice_blue_approx: #f2fbff;
+$color_french_gray_approx: #b6bcbf;
+$color_pink_swan_approx: #bbb;
+$mercury: #e5e5e5;
+$color_dove_gray_approx: #707070;
+$color_cadet_blue_approx: #adb3be;
+$color_mischka_approx: #ced1d6;
+$color_danube_approx: #5293c4;
+$color_pewter_approx: #949ea7;
+$color_gray_approx: #7f7f7f;
+$color_cerulean_approx: #05b2d2;
+$black_20: rgba(0, 0, 0, 0.2);
+$red: red;
+$color_mantis_approx: #72ce3f;
+$white_50: rgba(255, 255, 255, 0.5);
+$black_70: rgba(0, 0, 0, 0.7);
+$black_30: rgba(0, 0, 0, 0.3);
+$color_silver_approx: #bcbec0;
+$color_curious_blue_approx: #2a9ccc;
+$color_san_marino_approx: #4477aa;
+$color_azure_approx: #336699;
+$color_boston_blue_approx: #3a87ad;
+$black_32: rgba(0, 0, 0, 0.32);
+$color_vulcan_15_approx: rgba(23, 24, 26, 0.15);
+$black_14: rgba(0, 0, 0, 0.14);
+$color_mercury_approx: #e5e5ea;
+$black_55: rgba(0, 0, 0, 0.55);
+$color_botticelli_approx: #c9e2ea;
+$wild_sand: #f4f4f4;
+
+//fonts
+$font_2: Raleway;
+$font_3: FontAwesome;
+$font_5: clip-font;
+$font_12: Arial;
+
+//urls
+$url_0: url(bg.png);
+$url_1: url(timer-piece.png);
+
+//@extend-elements
+//original selectors
+//// Forms textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]
+%extend_1 {
+  background-color: $white;
+  border: 1px solid $color_quill_gray_approx;
+  //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+  border-radius: 0 0 0 0 !important;
+  color: $color_gunsmoke_approx;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.2;
+  padding: 5px 4px;
+  //Instead of the line below you could use @includetransition-duration($duration-1, $duration-2, $duration-3, $duration-4, $duration-5, $duration-6, $duration-7, $duration-8, $duration-9, $duration-10)
+  transition-duration: 0.1s;
+  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: none;
+}
+
+//original selectors
+//textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus
+%extend_2 {
+  border-color: $color_picton_blue_80_approx;
+  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: 0 0 8px $color_picton_blue_60_approx;
+  outline: 0 none;
+}
+
+//original selectors
+//.input-icon > [class*="fa-"], .input-icon > [class*="clip-"]
+%extend_3 {
+  bottom: 0;
+  color: $color_mountain_mist_approx;
+  display: inline-block;
+  font-size: 14px;
+  left: 5px;
+  line-height: 35px;
+  padding: 0 3px;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+}
+
+//original selectors
+//.radio-inline, .radio-inline + .radio-inline, .checkbox-inline, .checkbox-inline + .checkbox-inline
+%extend_4 {
+  margin-right: 10px !important;
+  margin-top: 5px !important;
+  margin-left: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+//original selectors
+//.navbar > .container .navbar-brand, .logo
+%extend_5 {
+  padding: 14px 10px 12px;
+  margin-left: 0;
+  font-size: 25px;
+  min-width: 210px;
+}
+
+//original selectors
+//.navbar-tools .dropdown-menu > li > a:hover, .navbar-tools .dropdown-menu > li > a:focus, .navbar-tools .dropdown-submenu:hover > a, .navbar-tools .dropdown-submenu:focus > a, .navbar-tools .drop-down-wrapper li a:hover, .navbar-tools .drop-down-wrapper li a:focus
+%extend_6 {
+  background-color: $color_black_haze_approx !important;
+  background-image: none;
+  filter: none;
+  color: $black;
+  text-decoration: none;
+}
+
+//original selectors
+//.navbar-tools .dropdown-menu li p, .navbar-tools .dropdown-menu li a, .navbar-tools .drop-down-wrapper li p, .navbar-tools .drop-down-wrapper li a
+%extend_7 {
+  color: $color_mine_shaft_approx;
+  font-size: 12px;
+  font-weight: 300;
+  margin: 0;
+  padding: 8px 8px 6px;
+  border-bottom: 1px solid $color_storm_dust_22_approx;
+  white-space: normal !important;
+  display: block;
+}
+
+//original selectors
+//.btn-teal:hover, .btn-teal:focus, .btn-teal:active, .btn-teal.active
+%extend_8 {
+  background-color: $color_smalt_blue_approx;
+  border-color: $color_faded_jade_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-teal.disabled:hover, .btn-teal.disabled:focus, .btn-teal.disabled:active, .btn-teal.disabled.active, .btn-teal[disabled]:hover, .btn-teal[disabled]:focus, .btn-teal[disabled]:active, .btn-teal[disabled].active, fieldset[disabled] .btn-teal:hover, fieldset[disabled] .btn-teal:focus, fieldset[disabled] .btn-teal:active, fieldset[disabled] .btn-teal.active
+%extend_9 {
+  background-color: $color_horizon_approx;
+  border-color: $color_horizon_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-beige:hover, .btn-beige:focus, .btn-beige:active, .btn-beige.active
+%extend_10 {
+  background-color: $color_pine_glade_approx;
+  border-color: $color_gimblet_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-beige.disabled:hover, .btn-beige.disabled:focus, .btn-beige.disabled:active, .btn-beige.disabled.active, .btn-beige[disabled]:hover, .btn-beige[disabled]:focus, .btn-beige[disabled]:active, .btn-beige[disabled].active, fieldset[disabled] .btn-beige:hover, fieldset[disabled] .btn-beige:focus, fieldset[disabled] .btn-beige:active, fieldset[disabled] .btn-beige.active
+%extend_11 {
+  background-color: $color_pine_glade_approx;
+  border-color: $color_pine_glade_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-dark-beige:hover, .btn-dark-beige:focus, .btn-dark-beige:active, .btn-dark-beige.active
+%extend_12 {
+  background-color: $color_teak_approx;
+  border-color: $color_barley_corn_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-dark-beige.disabled:hover, .btn-dark-beige.disabled:focus, .btn-dark-beige.disabled:active, .btn-dark-beige.disabled.active, .btn-dark-beige[disabled]:hover, .btn-dark-beige[disabled]:focus, .btn-dark-beige[disabled]:active, .btn-dark-beige[disabled].active, fieldset[disabled] .btn-dark-beige:hover, fieldset[disabled] .btn-dark-beige:focus, fieldset[disabled] .btn-dark-beige:active, fieldset[disabled] .btn-dark-beige.active
+%extend_13 {
+  background-color: $color_green_smoke_approx;
+  border-color: $color_green_smoke_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-orange:hover, .btn-orange:focus, .btn-orange:active, .btn-orange.active
+%extend_14 {
+  background-color: $color_flame_pea_approx;
+  border-color: $color_punch_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-orange.disabled:hover, .btn-orange.disabled:focus, .btn-orange.disabled:active, .btn-orange.disabled.active, .btn-orange[disabled]:hover, .btn-orange[disabled]:focus, .btn-orange[disabled]:active, .btn-orange[disabled].active, fieldset[disabled] .btn-orange:hover, fieldset[disabled] .btn-orange:focus, fieldset[disabled] .btn-orange:active, fieldset[disabled] .btn-orange.active
+%extend_15 {
+  background-color: $color_burnt_sienna_approx;
+  border-color: $color_burnt_sienna_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-purple:hover, .btn-purple:focus, .btn-purple:active, .btn-purple.active
+%extend_16 {
+  background-color: $color_mulled_wine_approx;
+  border-color: $color_gun_powder_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-purple.disabled:hover, .btn-purple.disabled:focus, .btn-purple.disabled:active, .btn-purple.disabled.active, .btn-purple[disabled]:hover, .btn-purple[disabled]:focus, .btn-purple[disabled]:active, .btn-purple[disabled].active, fieldset[disabled] .btn-purple:hover, fieldset[disabled] .btn-purple:focus, fieldset[disabled] .btn-purple:active, fieldset[disabled] .btn-purple.active
+%extend_17 {
+  background-color: $color_comet_approx;
+  border-color: $color_mine_shaft_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-dark-grey:hover, .btn-dark-grey:focus, .btn-dark-grey:active, .btn-dark-grey.active
+%extend_18 {
+  background-color: $color_shark_approx;
+  border-color: $color_rangoon_green_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-dark-grey.disabled:hover, .btn-dark-grey.disabled:focus, .btn-dark-grey.disabled:active, .btn-dark-grey.disabled.active, .btn-dark-grey[disabled]:hover, .btn-dark-grey[disabled]:focus, .btn-dark-grey[disabled]:active, .btn-dark-grey[disabled].active, fieldset[disabled] .btn-dark-grey:hover, fieldset[disabled] .btn-dark-grey:focus, fieldset[disabled] .btn-dark-grey:active, fieldset[disabled] .btn-dark-grey.active
+%extend_19 {
+  background-color: $color_mine_shaft_approx;
+  border-color: $color_mine_shaft_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-med-grey:hover, .btn-med-grey:focus, .btn-med-grey:active, .btn-med-grey.active
+%extend_20 {
+  background-color: $color_chicago_approx;
+  border-color: $color_emperor_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-med-grey.disabled:hover, .btn-med-grey.disabled:focus, .btn-med-grey.disabled:active, .btn-med-grey.disabled.active, .btn-med-grey[disabled]:hover, .btn-med-grey[disabled]:focus, .btn-med-grey[disabled]:active, .btn-med-grey[disabled].active, fieldset[disabled] .btn-med-grey:hover, fieldset[disabled] .btn-med-grey:focus, fieldset[disabled] .btn-med-grey:active, fieldset[disabled] .btn-med-grey.active
+%extend_21 {
+  background-color: $color_storm_dust_approx;
+  border-color: $color_storm_dust_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-light-grey:hover, .btn-light-grey:focus, .btn-light-grey:active, .btn-light-grey.active
+%extend_22 {
+  background-color: $color_stack_approx;
+  border-color: $gray;
+  color: $white;
+}
+
+//original selectors
+//.btn-light-grey.disabled:hover, .btn-light-grey.disabled:focus, .btn-light-grey.disabled:active, .btn-light-grey.disabled.active, .btn-light-grey[disabled]:hover, .btn-light-grey[disabled]:focus, .btn-light-grey[disabled]:active, .btn-light-grey[disabled].active, fieldset[disabled] .btn-light-grey:hover, fieldset[disabled] .btn-light-grey:focus, fieldset[disabled] .btn-light-grey:active, fieldset[disabled] .btn-light-grey.active
+%extend_23 {
+  background-color: $color_mountain_mist_approx;
+  border-color: $color_mountain_mist_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-bricky:hover, .btn-bricky:focus, .btn-bricky:active, .btn-bricky.active
+%extend_24 {
+  background-color: $color_tall_poppy_approx;
+  border-color: $color_roof_terracotta_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-bricky.disabled:hover, .btn-bricky.disabled:focus, .btn-bricky.disabled:active, .btn-bricky.disabled.active, .btn-bricky[disabled]:hover, .btn-bricky[disabled]:focus, .btn-bricky[disabled]:active, .btn-bricky[disabled].active, fieldset[disabled] .btn-bricky:hover, fieldset[disabled] .btn-bricky:focus, fieldset[disabled] .btn-bricky:active, fieldset[disabled] .btn-bricky.active
+%extend_25 {
+  background-color: $color_persian_red_approx;
+  border-color: $color_persian_red_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-green:hover, .btn-green:focus, .btn-green:active, .btn-green.active
+%extend_26 {
+  background-color: $color_bilbao_approx;
+  border-color: $color_green_house_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-green.disabled:hover, .btn-green.disabled:focus, .btn-green.disabled:active, .btn-green.disabled.active, .btn-green[disabled]:hover, .btn-green[disabled]:focus, .btn-green[disabled]:active, .btn-green[disabled].active, fieldset[disabled] .btn-green:hover, fieldset[disabled] .btn-green:focus, fieldset[disabled] .btn-green:active, fieldset[disabled] .btn-green.active
+%extend_27 {
+  background-color: $color_la_palma_approx;
+  border-color: $color_la_palma_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-blue:hover, .btn-blue:focus, .btn-blue:active, .btn-blue.active
+%extend_28 {
+  background-color: $color_pickled_bluewood_approx;
+  border-color: $color_nile_blue_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-blue.disabled:hover, .btn-blue.disabled:focus, .btn-blue.disabled:active, .btn-blue.disabled.active, .btn-blue[disabled]:hover, .btn-blue[disabled]:focus, .btn-blue[disabled]:active, .btn-blue[disabled].active, fieldset[disabled] .btn-blue:hover, fieldset[disabled] .btn-blue:focus, fieldset[disabled] .btn-blue:active, fieldset[disabled] .btn-blue.active
+%extend_29 {
+  background-color: $color_san_juan_approx;
+  border-color: $color_san_juan_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-yellow:hover, .btn-yellow:focus, .btn-yellow:active, .btn-yellow.active
+%extend_30 {
+  background-color: $color_sea_buckthorn_approx;
+  border-color: $color_sun_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-yellow.disabled:hover, .btn-yellow.disabled:focus, .btn-yellow.disabled:active, .btn-yellow.disabled.active, .btn-yellow[disabled]:hover, .btn-yellow[disabled]:focus, .btn-yellow[disabled]:active, .btn-yellow[disabled].active, fieldset[disabled] .btn-yellow:hover, fieldset[disabled] .btn-yellow:focus, fieldset[disabled] .btn-yellow:active, fieldset[disabled] .btn-yellow.active
+%extend_31 {
+  background-color: $color_yellow_orange_approx;
+  border-color: $color_yellow_orange_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-red:hover, .btn-red:focus, .btn-red:active, .btn-red.active
+%extend_32 {
+  background-color: $color_thunderbird_approx;
+  border-color: $color_thunderbird_approx;
+  color: $white;
+}
+
+//original selectors
+//.btn-red.disabled:hover, .btn-red.disabled:focus, .btn-red.disabled:active, .btn-red.disabled.active, .btn-red[disabled]:hover, .btn-red[disabled]:focus, .btn-red[disabled]:active, .btn-red[disabled].active, fieldset[disabled] .btn-red:hover, fieldset[disabled] .btn-red:focus, fieldset[disabled] .btn-red:active, fieldset[disabled] .btn-red.active
+%extend_33 {
+  background-color: $color_alizarin_crimson_approx;
+  border-color: $color_alizarin_crimson_approx;
+  color: $white;
+}
+
+//original selectors
+//.panel-heading > [class^="fa-"], .panel-heading > [class*=" fa-"], .panel-heading > [class^="icon-"], .panel-heading > [class*=" icon-"], .panel-heading > [class^="clip-"], .panel-heading > [class*=" clip-"]
+%extend_34 {
+  border-right: 1px solid $color_celeste_approx;
+  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: 1px 0 0 0 $white;
+  opacity: 0.7;
+  padding: 12px 10px 8px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 36px;
+}
+
+//original selectors
+//.pagination.squared li:first-child a, .pagination.squared li:first-child > span
+%extend_36 {
+  //Instead of the line below you could use @includeborder-bottom-left-radius($radius)
+  border-bottom-left-radius: 0 !important;
+  border-left-width: 1px;
+  //Instead of the line below you could use @includeborder-top-left-radius($radius)
+  border-top-left-radius: 0 !important;
+}
+
+//original selectors
+//.pagination.pagination-purple li a, .pagination-purple .pagination li a
+%extend_37 {
+  background: $color_whisper_approx;
+  border: none !important;
+  color: $color_mine_shaft_approx;
+  display: inline-block;
+  margin-right: 1px;
+}
+
+//original selectors
+//.pagination.pagination-purple li a:hover, .pagination-purple .pagination li a a:hover
+%extend_38 {
+  background: $color_athens_gray_approx;
+  color: $color_log_cabin_approx;
+  cursor: pointer;
+}
+
+//original selectors
+//.pagination.pagination-purple li.active a, .pagination-purple .pagination li.active a
+%extend_39 {
+  background: $color_comet_approx !important;
+  border: none !important;
+  color: $white !important;
+  cursor: default !important;
+  opacity: 1;
+}
+
+//original selectors
+//.pagination.pagination-teal li a, .pagination-teal .pagination li a
+%extend_40 {
+  background: $color_black_squeeze_approx;
+  border: none !important;
+  color: $color_mine_shaft_approx;
+  display: inline-block;
+  margin-right: 1px;
+}
+
+//original selectors
+//.pagination.pagination-teal li a:hover, .pagination-teal .pagination li a a:hover
+%extend_41 {
+  background: $color_geyser_approx;
+  color: $color_log_cabin_approx;
+  cursor: pointer;
+}
+
+//original selectors
+//.pagination.pagination-teal li.active a, .pagination-teal .pagination li.active a
+%extend_42 {
+  background: $color_horizon_approx !important;
+  border: none !important;
+  color: $white !important;
+  cursor: default !important;
+  opacity: 1;
+}
+
+//original selectors
+//.pagination.pagination-green li a, .pagination-green .pagination li a
+%extend_43 {
+  background: $color_feta_approx;
+  border: none !important;
+  color: $color_mine_shaft_approx;
+  display: inline-block;
+  margin-right: 1px;
+}
+
+//original selectors
+//.pagination.pagination-green li a:hover, .pagination-green .pagination li a a:hover
+%extend_44 {
+  background: $color_tea_green_approx;
+  color: $color_log_cabin_approx;
+  cursor: pointer;
+}
+
+//original selectors
+//.pagination.pagination-green li.active a, .pagination-green .pagination li.active a
+%extend_45 {
+  background: $color_la_palma_approx !important;
+  border: none !important;
+  color: $white !important;
+  cursor: default !important;
+  opacity: 1;
+}
+
+//original selectors
+//.horizontal-menu ul.nav li.current .selected, .horizontal-menu ul.nav li.active .selected
+%extend_46 {
+  border-left: 6px solid rgba(0, 0, 0, 0);
+  border-right: 6px solid rgba(0, 0, 0, 0);
+  border-top: 6px solid $color_azure_radiance_approx;
+  bottom: 0;
+  display: inline-block;
+  height: 0;
+  left: 50%;
+  margin: 0 0 -6px -7px;
+  position: absolute;
+  width: 0;
+}
+
+//original selectors
+//.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus
+%extend_49 {
+  background-color: $white;
+  border-color: $color_alto_approx $color_alto_approx transparent;
+  border-top: 2px solid $color_alto_approx;
+  color: $color_mine_shaft_approx;
+  line-height: 16px;
+  margin-top: -1px;
+  z-index: 12;
+}
+
+//original selectors
+//.nav-tabs > li > a, .nav-tabs > li > a:focus
+%extend_50 {
+  background-color: $color_alabaster_approx;
+  border-color: $color_alto_approx;
+  //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+  border-radius: 0 0 0 0 !important;
+  color: $color_mountain_mist_approx;
+  line-height: 16px;
+  margin-right: -1px;
+  position: relative;
+}
+
+//original selectors
+//.tabs-left > .nav-tabs > li.active > a, .tabs-left > .nav-tabs > li.active > a:focus, .tabs-left > .nav-tabs > li.active > a:hover
+%extend_52 {
+  border-color: $color_alto_approx;
+  border-right: none;
+  border-left: 2px solid $color_alto_approx;
+  border-top-width: 1px;
+  margin: 0 -1px;
+}
+
+//original selectors
+//.nav-tabs li [class*=" fa-"], .nav-tabs li [class^="fa-"]
+%extend_54 {
+  display: inline-block;
+  text-align: center;
+  width: 1.25em;
+}
+
+//original selectors
+//.tab-blue > li.dropdown.open.active > a:hover, .tab-blue > li.dropdown.open.active > a:focus
+%extend_66 {
+  background-color: $color_san_juan_approx;
+  border-color: $color_san_juan_approx;
+  color: $white;
+}
+
+//original selectors
+//.tab-padding.tab-blue > li.active > a, .tab-padding.tab-blue > li.active > a:focus, .tab-padding.tab-blue > li.active > a:hover
+%extend_67 {
+  background-color: $white;
+  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: none;
+  color: $color_mine_shaft_approx;
+}
+
+//original selectors
+//.panel-tabs .nav-tabs > li.active > a, .panel-tabs .nav-tabs > li.active > a:hover, .panel-tabs .nav-tabs > li.active > a:focus
+%extend_68 {
+  background-color: $white;
+  background-image: none;
+  border-color: $color_steel_blue_approx $color_alto_approx transparent;
+  border-top: none;
+  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: none;
+  color: $color_mine_shaft_approx;
+  line-height: 16px;
+  margin-top: 0;
+}
+
+//original selectors
+//.dd-item, .dd-empty, .dd-placeholder
+%extend_70 {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  min-height: 20px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+//original selectors
+//.dd-placeholder, .dd-empty
+%extend_71 {
+  margin: 5px 0;
+  padding: 0;
+  min-height: 30px;
+  background: $color_alice_blue_approx;
+  border: 1px dashed $color_french_gray_approx;
+  //Instead of the line below you could use @includebox-sizing($bs)
+  box-sizing: border-box;
+}
+
+//original selectors
+//body.login .box-login, body.login .box-forgot, body.login .box-register, body.login .box-invite
+%extend_75 {
+  background: $white;
+  border: 1px solid $color_alto_approx;
+  //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 20px;
+}
+
+//original selectors
+//body.login .form-actions:before, body.login .form-actions:after
+%extend_76 {
+  content: "";
+  display: table;
+  line-height: 0;
+}
+
+//original selectors
+//.fc-state-down, .fc-state-active
+%extend_81 {
+  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: none !important;
+  outline: 0 none;
+  background-color: $color_horizon_approx !important;
+  border-color: $color_smalt_blue_approx !important;
+  color: $white !important;
+}
+
+//original selectors
+//// Compatibility with font-awesome 3 [class^="icon-"], [class*=" icon-"]
+%extend_85 {
+  font-family: $font_3;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  *margin-right: .3em;
+}
+
+//original selectors
+//[class^="icon-"]:before, [class*=" icon-"]:before
+%extend_86 {
+  text-decoration: inherit;
+  display: inline-block;
+  speak: none;
+}

@@ -1,4 +1,9 @@
 en:
+  actions:
+    index:
+      header: User actions log
+    show:
+      header: User timeline
   channel_manager:
     new:
       header: Channel manager setup
@@ -14,8 +19,8 @@ en:
       header: Edit company information
     form:
       main_info: Main information
-      company_logo: Company logotype
-      remove_logo: Remove logotype from system
+      company_logo: Company logo
+      remove_logo: Delete logo
       bank_info: Banking requisites
   devise:
     registrations:
@@ -29,7 +34,26 @@ en:
         remove_avatar: Remove avatar from system
   settings:
     edit:
-      header: Preferences for price worker
+      header: Algorithm fine-tuning
+      related_hotels: "%{count} hotels matching your location criteria"
+      hotel_settings: "Hotel-wide configuration"
+      room_settings: "Per room configuration"
+    form:
+      settings_header_1: Pricing strategy
+      settings_header_2: Market segment criteria
+      settings_header_3: City districts
+      algorithm_strategy:
+        title: Your revenue strategy
+        max_revenue: Maximized revenue
+        balanced: Balanced
+        max_occupancy: Maximized occupancy
+    index:
+      header: Algorithm | Hotel selection
+      settings_header: Select a hotel to edit individual settings
+    shared:
+      hotel_amenities: Hotel amenities
+      room_amenities: Room amenities
+      provider_listing_count: "Your average position at %{provider}"
   users:
     index:
       header: Company users

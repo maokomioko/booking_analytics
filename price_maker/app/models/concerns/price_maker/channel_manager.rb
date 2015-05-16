@@ -53,11 +53,11 @@ module PriceMaker
             .where(rooms: { roomtype: roomtype, max_people: max_people, id: room_ids })
             .pluck('hotels.booking_id', 'rooms.booking_id')
             .inject({}) do |hash, value|
-            # 0 - hotel, 1 - room
-            hash[value[0]] ||= []
-            hash[value[0]] << value[1]
-            hash
-          end.to_a
+              # 0 - hotel, 1 - room
+              hash[value[0]] ||= []
+              hash[value[0]] << value[1]
+              hash
+            end.to_a
         else
           nil
         end

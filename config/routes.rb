@@ -19,11 +19,12 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  resources :calendar, controller: :calendar do
-    collection do
-      get :demo
-    end
+  namespace :actions do
+    get '/', action: :index
+    get '/:user_id', action: :show, as: :show
   end
+
+  resources :calendar, controller: :calendar
 
   resources :channel_manager, contoller: 'channel_manager' do
     collection do
@@ -35,12 +36,17 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :destroy]
   end
 
-  resource :setting, except: [:show, :new, :destroy]
+  resources :rooms, only: [:update] do
+    put :bulk_update, on: :collection
+  end
+
+  resources :settings, only: [:index, :edit, :update]
 
   root to: 'calendar#index'
   devise_for :users, controllers: {
     registrations: 'registrations',
     passwords: 'passwords',
-    invitations: 'invitations'
+    invitations: 'invitations',
+    sessions: 'sessions'
   }
 end

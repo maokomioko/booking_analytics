@@ -8,13 +8,41 @@
 
 .row
   .col-sm-12
-    %table.table.table-striped.table-bordered.table-hover
-      %thead
-        %tr
-          %th.center= User.human_attribute_name(:avatar)
-          %th= User.human_attribute_name(:email)
-          %th.hidden-xs= User.human_attribute_name(:role)
-          %th.hidden-xs= User.human_attribute_name(:invitation_accepted_at)
-          %th
-      %tbody
-        = render partial: 'user', collection: @users
+    .tabbable
+      %ul.nav.nav-tabs.tab-blue
+        %li.active
+          %a{"data-toggle" => "tab", href: "#users_tab"}
+            %i.green.fa.fa-home
+            = t('menu.company.existing_users')
+        %li
+          %a{"data-toggle" => "tab", href: "#invitation_tab"}
+            = t('menu.company.invite_new')
+
+      .tab-content
+        #users_tab.tab-pane.active
+          %table.table.table-striped.table-bordered.table-hover
+            %thead
+              %tr
+                %th.center= User.human_attribute_name(:avatar)
+                %th= User.human_attribute_name(:email)
+                %th.hidden-xs= User.human_attribute_name(:role)
+                %th.hidden-xs= User.human_attribute_name(:invitation_accepted_at)
+                %th
+            %tbody
+              = render partial: 'user', collection: @users
+
+        #invitation_tab.tab-pane
+          = form_for User.new, as: 'user', url: user_invitation_path, html: { method: :post, class: 'invitation-form' }, remote: true do |f|
+            .form-group
+              .col-sm-4
+                = f.label :email, t('devise.invitations.new.label'), class: 'control-label'
+              .clearfix
+            .form-group
+              .col-sm-4
+                = f.text_field :email, class: 'tags tags-email'
+              .clearfix
+              .col-sm-4
+                = f.button class: 'btn btn-green pull-right' do
+                  = t('devise.invitations.new.submit_button')
+                  = icon('arrow-circle-right')
+            .clearfix

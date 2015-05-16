@@ -1,0 +1,4 @@
+.form-group
+  = f.label :room_id, 'Rooms', class: 'col-sm-2 control-label'
+  .col-sm-10
+    = f.select :room_id, options_for_rooms(booking_id), {}, multiple: true, class: 'form-control search-select'

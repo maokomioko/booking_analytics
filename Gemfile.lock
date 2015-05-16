@@ -7,19 +7,10 @@ GIT
 
 GIT
   remote: git://github.com/celluloid/celluloid.git
-  revision: 4df69f71486930cabbb9c586dd3af0b6290ad591
+  revision: 64c7c77ca7f3b278b0f2f75f8b51d974ebacda28
   specs:
     celluloid (0.16.0)
       timers (~> 4.0.0)
-
-GIT
-  remote: git://github.com/colszowka/simplecov.git
-  revision: 8ec8168d17a4e41999faf1b2ba5d7bcef2e3e2a8
-  specs:
-    simplecov (0.9.2)
-      docile (~> 1.1.0)
-      multi_json (~> 1.0)
-      simplecov-html (~> 0.9.0)
 
 GIT
   remote: git://github.com/eoinkelly/awesome_print.git
@@ -29,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/globalize/globalize.git
-  revision: f1d7b06d53a5820a9e6421ae6f4357906d98292b
+  revision: 49578e59c1d59938e925cc6ce761798f649a3e68
   specs:
     globalize (5.1.0)
       activemodel (>= 4.2.0, < 4.3)
@@ -38,7 +29,7 @@ GIT
 
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: c789ffb08908b043a06017cc8debccc80ebd553e
+  revision: ba5ba340e8847105312de16705a80dfb5ee92475
   specs:
     capybara (2.5.0.dev)
       mime-types (>= 1.16)
@@ -49,7 +40,7 @@ GIT
 
 GIT
   remote: git://github.com/plataformatec/devise.git
-  revision: 79c6f47ad3471e4ec652801fae2ecd91998e400c
+  revision: 2f0002a449a8b9616d51127dc6247bfd8414523d
   specs:
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -60,13 +51,11 @@ GIT
       warden (~> 1.2.3)
 
 GIT
-  remote: git://github.com/sebastien-madru/nokogiri_truncate_html.git
-  revision: 3888f9a95a33cdfbcea802ffd4083c74e093b181
+  remote: git://github.com/rails/turbolinks.git
+  revision: 8815c7561cda8aca014fe44082f43ef5187a020c
   specs:
-    nokogiri_truncate_html (0.0.3)
-      activesupport (>= 3.2.13)
-      htmlentities (>= 4.3.1)
-      nokogiri (>= 1.5.8)
+    turbolinks (3.0.0)
+      coffee-rails
 
 GIT
   remote: git://github.com/seuros/state_machine.git
@@ -75,8 +64,15 @@ GIT
     state_machine (1.2.0)
 
 GIT
+  remote: git://github.com/sigra/here_places.git
+  revision: 64489836f6d1136beb5f9c09328ae5d086bf6a96
+  specs:
+    here_places (0.0.2)
+      faraday (~> 0.9.1)
+
+GIT
   remote: git://github.com/teampoltergeist/poltergeist.git
-  revision: 15b84ca31b3fbfc7c864236e601a277c8142297f
+  revision: e3fc25919afb07960698785985f1051b9ea7f7ec
   specs:
     poltergeist (1.6.0)
       capybara (~> 2.1)
@@ -84,14 +80,21 @@ GIT
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
 
+GIT
+  remote: git://github.com/zedalaye/naturally.git
+  revision: 3e313138ca3ff7aba603f792fd0d660394a6aa53
+  specs:
+    naturally (1.3.2)
+
 PATH
   remote: graph
   specs:
     graph (0.0.1)
-      coffee-rails (~> 4.1.0)
+      coffee-rails (~> 4.1)
       haml-rails
+      momentjs-rails
       morrisjs-rails
-      rails (~> 4.2.0)
+      rails (~> 4.2)
       raphael-rails
       sass-rails (>= 5)
 
@@ -100,7 +103,7 @@ PATH
   specs:
     price_maker (0.0.2)
       celluloid
-      rails (~> 4.2.0)
+      rails (~> 4.2)
       sidekiq
 
 GEM
@@ -141,16 +144,17 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.3.7)
+    addressable (2.3.8)
     annotate (2.6.8)
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
     ansi (1.5.0)
     arel (6.0.0)
-    autoprefixer-rails (5.1.7.1)
+    autoprefixer-rails (5.1.10)
       execjs
       json
     bcrypt (3.1.10)
+    bcrypt (3.1.10-java)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -161,13 +165,14 @@ GEM
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     browser (0.8.0)
-    bson (1.12.0)
-    bson_ext (1.12.0)
-      bson (~> 1.12.0)
+    bson (1.12.1)
+    bson (1.12.1-java)
+    bson_ext (1.12.1)
+      bson (~> 1.12.1)
     builder (3.2.2)
-    bullet (4.14.4)
+    bullet (4.14.5)
       activesupport (>= 3.0.0)
-      uniform_notifier (>= 1.6.0)
+      uniform_notifier (~> 1.9.0)
     callsite (0.0.11)
     cancancan (1.10.1)
     capistrano (3.4.0)
@@ -177,7 +182,7 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-rails (1.1.2)
+    capistrano-rails (1.1.3)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     capistrano-rvm (0.1.2)
@@ -198,13 +203,14 @@ GEM
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
+    coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1)
-    colorize (0.7.5)
-    connection_pool (2.1.3)
-    crass (1.0.1)
+    coffee-script-source (1.9.1.1)
+    colorize (0.7.7)
+    connection_pool (2.2.0)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     css_parser (1.3.6)
       addressable
     daemons (1.2.2)
@@ -221,16 +227,13 @@ GEM
       devise (>= 3.2.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
-    domain_name (0.5.23)
+    domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     draper (1.4.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0)
-    em-websocket (0.5.1)
-      eventmachine (>= 0.12.9)
-      http_parser.rb (~> 0.6.0)
     encryptor (1.3.0)
     erb2haml (0.1.5)
       html2haml
@@ -239,42 +242,23 @@ GEM
       money (~> 6.5.0)
       nokogiri (~> 1.6.3)
     eventmachine (1.0.7)
-    execjs (2.4.0)
-    fabrication (2.12.2)
+    eventmachine (1.0.7-java)
+    execjs (2.5.2)
+    fabrication (2.13.1)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     ffaker (2.0.0)
-    ffi (1.9.8)
+    ffi (1.9.8-java)
     ffi2-generators (0.1.1)
-    formatador (0.2.5)
     fuubar (2.0.0)
       rspec (~> 3.0)
       ruby-progressbar (~> 1.4)
+    gaffe (1.0.2)
+      rails (>= 3.2.0)
     geocoder (1.2.8)
-    globalid (0.3.3)
+    globalid (0.3.5)
       activesupport (>= 4.1.0)
     google-analytics-turbolinks (0.0.4)
-    guard (2.12.5)
-      formatador (>= 0.2.4)
-      listen (~> 2.7)
-      lumberjack (~> 1.0)
-      nenv (~> 0.1)
-      notiffany (~> 0.0)
-      pry (>= 0.9.12)
-      shellany (~> 0.0)
-      thor (>= 0.18.1)
-    guard-compat (1.2.1)
-    guard-livereload (2.4.0)
-      em-websocket (~> 0.5)
-      guard (~> 2.8)
-      multi_json (~> 1.8)
-    guard-rails (0.7.1)
-      guard (~> 2.11)
-      guard-compat (~> 1.0)
-    guard-rspec (4.5.0)
-      guard (~> 2.1)
-      guard-compat (~> 1.1)
-      rspec (>= 2.99.0, < 4.0)
     haml (4.0.6)
       tilt
     haml-rails (0.9.0)
@@ -283,10 +267,10 @@ GEM
       haml (>= 4.0.6, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
-    hashie (3.4.0)
+    hashie (3.4.1)
     highline (1.6.21)
-    hike (1.2.3)
     hitimes (1.2.2)
+    hitimes (1.2.2-java)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -295,14 +279,16 @@ GEM
     htmlentities (4.3.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
-    http_parser.rb (0.6.0)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    httpclient (2.6.0.1)
     i18n (0.7.0)
     ice_cube (0.11.1)
-    icheck-rails (1.0.2.1)
-      jquery-rails
-      rails (>= 3.1.0)
-      sass-rails
-    jbuilder (2.2.12)
+    impressionist (1.5.1)
+      httpclient (~> 2.2)
+      nokogiri (~> 1.5)
+    jbuilder (2.2.13)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.3)
@@ -312,22 +298,24 @@ GEM
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
     json (1.8.2)
+    json (1.8.2-java)
     json_spec (1.1.4)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
     jwt (1.4.1)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
+    launchy (2.4.3-java)
+      addressable (~> 2.3)
+      spoon (~> 0.0.1)
     letter_opener (1.3.0)
       launchy (~> 2.2)
-    listen (2.9.0)
-      celluloid (>= 0.15.2)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
     log4r (1.1.10)
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
-    lumberjack (1.0.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mail-logger (0.0.4)
@@ -347,9 +335,11 @@ GEM
       railties (>= 3.0.0, < 5.0.0)
     method_source (0.8.2)
     mime-types (2.4.3)
-    mini_magick (4.2.0)
+    mini_magick (4.2.3)
     mini_portile (0.6.2)
-    minitest (5.5.1)
+    minitest (5.6.0)
+    momentjs-rails (2.9.0)
+      railties (>= 3.1)
     monetize (1.1.0)
       money (~> 6.5.0)
     money (6.5.1)
@@ -364,7 +354,6 @@ GEM
     multi_json (1.11.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    nenv (0.2.0)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
     net-scp (1.2.1)
@@ -372,11 +361,7 @@ GEM
     net-ssh (2.9.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    nokogumbo (1.2.0)
-      nokogiri
-    notiffany (0.0.6)
-      nenv (~> 0.1)
-      shellany (~> 0.0)
+    nokogiri (1.6.6.2-java)
     ntlm-http (0.1.1)
     oauth (0.4.7)
     oauth2 (1.0.0)
@@ -416,11 +401,17 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-rails (0.3.3)
+    pry (0.10.1-java)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+      spoon (~> 0.0)
+    pry-rails (0.3.4)
       pry (>= 0.9.10)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     racc (1.4.12)
+    racc (1.4.12-java)
     rack (1.6.0)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
@@ -462,9 +453,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     raphael-rails (2.1.2)
-    rb-fsevent (0.9.4)
-    rb-inotify (0.9.5)
-      ffi (>= 0.5.0)
     rb-readline (0.5.2)
     redis (3.2.1)
     redis-actionpack (4.0.0)
@@ -474,7 +462,7 @@ GEM
     redis-activesupport (4.0.0)
       activesupport (~> 4)
       redis-store (~> 1.1.0)
-    redis-namespace (1.5.1)
+    redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
     redis-rack (1.5.0)
       rack (~> 1.5)
@@ -493,9 +481,9 @@ GEM
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
       rspec-mocks (~> 3.2.0)
-    rspec-core (3.2.2)
+    rspec-core (3.2.3)
       rspec-support (~> 3.2.0)
-    rspec-expectations (3.2.0)
+    rspec-expectations (3.2.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
     rspec-its (1.2.0)
@@ -514,8 +502,8 @@ GEM
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
     ruby-graphviz (1.0.9)
-    ruby-progressbar (1.7.1)
-    ruby_parser (3.6.5)
+    ruby-progressbar (1.7.5)
+    ruby_parser (3.6.6)
       sexp_processor (~> 4.1)
     rubysl (2.1.0)
       rubysl-abbrev (~> 2.0)
@@ -716,12 +704,9 @@ GEM
     rubysl-xmlrpc (2.0.0)
     rubysl-yaml (2.1.0)
     rubysl-zlib (2.0.1)
-    sanitize (3.1.2)
-      crass (~> 1.0.1)
-      nokogiri (>= 1.4.4)
-      nokogumbo (= 1.2.0)
+    safe_yaml (1.0.4)
     sass (3.4.13)
-    sass-rails (5.0.1)
+    sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
@@ -730,8 +715,7 @@ GEM
     select2-rails (3.5.9.3)
       thor (~> 0.14)
     sexp_processor (4.5.0)
-    shellany (0.0.1)
-    shoulda-callback-matchers (1.1.2)
+    shoulda-callback-matchers (1.1.3)
       activesupport (>= 3)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
@@ -741,23 +725,28 @@ GEM
       json
       redis (>= 3.0.6)
       redis-namespace (>= 1.3.1)
+    sidekiq-middleware (0.3.0)
+      sidekiq (>= 2.12.4)
     sidekiq-status (0.5.2)
       sidekiq (>= 2.7, < 3.4)
     sidetiq (0.6.3)
       celluloid (>= 0.14.1)
       ice_cube (= 0.11.1)
       sidekiq (>= 3.0.0)
-    simplecov-html (0.9.0)
+    simplecov (0.10.0)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
     slop (3.6.0)
-    sprockets (2.12.3)
-      hike (~> 1.2)
-      multi_json (~> 1.0)
+    spoon (0.0.4)
+      ffi
+    sprockets (3.0.1)
       rack (~> 1.0)
-      tilt (~> 1.1, != 1.3.0)
     sprockets-rails (2.2.4)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -773,14 +762,13 @@ GEM
       rack (~> 1.0)
     thor (0.19.1)
     thread_safe (0.3.5)
+    thread_safe (0.3.5-java)
     tilt (1.4.1)
     timecop (0.7.3)
     timers (4.0.1)
       hitimes
-    traceroute (0.4.0)
+    traceroute (0.5.0)
       rails (>= 3.0.0)
-    turbolinks (2.5.3)
-      coffee-rails
     turn (0.9.6)
       ansi
     tzinfo (1.2.2)
@@ -790,12 +778,19 @@ GEM
       json (>= 1.8.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.6)
-    uniform_notifier (1.8.0)
+    unf (0.1.4-java)
+    unf_ext (0.0.7.1)
+    uniform_notifier (1.9.0)
+    vcr (2.9.3)
     warden (1.2.3)
       rack (>= 1.0)
+    webmock (1.21.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
     webrobots (0.1.1)
-    websocket-driver (0.5.3)
+    websocket-driver (0.5.4)
+      websocket-extensions (>= 0.1.0)
+    websocket-driver (0.5.4-java)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     whenever (0.9.4)
@@ -806,6 +801,7 @@ GEM
       nokogiri (~> 1.3)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
@@ -842,21 +838,21 @@ DEPENDENCIES
   ffaker
   font-awesome-sass!
   fuubar
+  gaffe
   geocoder
   globalize!
   google-analytics-turbolinks
   graph!
-  guard
-  guard-livereload
-  guard-rails
-  guard-rspec
   haml-rails
+  here_places!
+  httparty
   i18n (= 0.7)
-  icheck-rails
+  impressionist
   jbuilder
   jquery-rails
   jquery-ui-rails
   json_spec
+  kaminari
   launchy
   letter_opener
   log4r
@@ -867,8 +863,7 @@ DEPENDENCIES
   mini_magick
   money
   money-rails
-  nokogiri
-  nokogiri_truncate_html!
+  naturally!
   omniauth
   omniauth-facebook
   omniauth-linkedin
@@ -880,7 +875,7 @@ DEPENDENCIES
   pry-rails
   quiet_assets
   racc
-  rails (~> 4.2)
+  rails (>= 4.2)
   rails-dev-tweaks
   rails-erd
   rb-readline (~> 0.5.1)
@@ -891,23 +886,25 @@ DEPENDENCIES
   rspec-its
   rspec-rails
   rubysl
-  sanitize
   sass-rails (>= 5)
   select2-rails
   shoulda-callback-matchers (~> 1.1.2)
   shoulda-matchers (~> 2.8.0)
   sidekiq
+  sidekiq-middleware
   sidekiq-status
   sidetiq
-  simplecov!
+  simplecov (>= 0.9)
   sinatra
   state_machine!
   stringex
   thin
   timecop
   traceroute
-  turbolinks (~> 2.5.3)
+  turbolinks!
   turn
   uglifier (>= 1.3.0)
+  vcr
+  webmock
   whenever
   wicked_pdf

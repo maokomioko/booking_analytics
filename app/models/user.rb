@@ -40,10 +40,13 @@
 class User < ActiveRecord::Base
   has_many :hotels, through: :channel_managers
   has_many :channel_managers, through: :company
+  has_many :actions
 
   belongs_to :company
 
   mount_uploader :avatar, AvatarUploader
+
+  is_impressionable
 
   devise :invitable, :async, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

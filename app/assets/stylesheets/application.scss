@@ -10,27 +10,33 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require jquery-ui
- *= require select2
- *= require select2-bootstrap
+ *= require vendor
  *= require_self
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-@import "font-awesome-sprockets";
-@import "font-awesome";
-
 @import "clip-font";
 
+@import "mixins";
 @import "main";
 @import "main-responsive";
-
-@import "icheck/minimal/_all";
-@import "perfect-scrollbar";
+@import "timeline";
 
 @import "theme_light";
+@import "ui_elements";
+
+@import "customizations";
 @import "calendar";
 
 @import "spinner";
+
+#helpers {
+  display: none;
+}
+
+#flash-container {
+  z-index: 9999;
+  position: relative;
+}

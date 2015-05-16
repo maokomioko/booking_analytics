@@ -9,7 +9,7 @@ module PriceMaker
       # returns booking_id for related hotels
       def amenities_calc
         if related_ids.blank?
-          settings  = channel_manager.company.setting
+          settings  = setting_fallback
           amenities = validate_amenities
 
           args = [id]
@@ -17,10 +17,12 @@ module PriceMaker
             args << settings.stars
             args << settings.user_ratings
             args << settings.property_types.map { |type| Hotel::OLD_PROPERTY_TYPES[type] }
+            args << settings.districts
           else
             args << class_fallback
             args << review_score.to_i
             args << hoteltype_id
+            args << districts
           end
 
           amenities.size.downto(1).map do |i|

@@ -1,0 +1,17 @@
+%tr(data-room-id="#{ f.object.id }")
+  %td= f.object.name
+  %td.edit-price
+    .input-group
+      = f.text_field :min_price, class: 'form-control'
+      .input-group-addon
+        = currency_symbol
+  %td.edit-price
+    .input-group
+      = f.text_field :max_price, class: 'form-control'
+      .input-group-addon
+        = currency_symbol
+  - if can?(:update_connector_credentials, Room)
+    %td.edit-cm
+      = f.text_field :booking_id, class: 'form-control'
+    %td.edit-cm
+      = f.text_field :previo_id, class: 'form-control'

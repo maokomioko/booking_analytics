@@ -1,9 +1,6 @@
-= content_for(:page_js) do
-  = javascript_include_tag 'pages/auth_pages', 'data-turbolinks-track' => true
-
 .box-invite
-  %h3= t 'devise.invitations.edit.header'
-  %p= t 'devise.invitations.edit.subheader'
+  %h3= t('devise.invitations.edit.header')
+  %p= t('devise.invitations.edit.subheader')
 
   = form_for resource, :as => resource_name, :url => invitation_path(resource_name), html: { method: :put, class: 'form-invite' } do |f|
     .errorHandler.alert.alert-danger.no-display
@@ -14,11 +11,11 @@
     %fieldset
       .form-group
         %span.input-icon
-          = f.password_field :password, autocomplete: "off", placeholder: t('auth.fields.password'), class: 'form-control'
+          = f.password_field :password, autocomplete: "off", placeholder: t('auth.fields.password'), class: 'form-control password_validation password_origin'
           = icon('lock')
       .form-group
         %span.input-icon
-          = f.password_field :password_confirmation, autocomplete: "off", placeholder: t('auth.fields.password_confirmation'), class: 'form-control'
+          = f.password_field :password_confirmation, autocomplete: "off", placeholder: t('auth.fields.password_confirmation'), class: 'form-control password_confirmation_validation'
           = icon('lock')
       .form-actions
         = link_to new_session_path(resource_name), class: 'btn btn-light-grey go-back' do

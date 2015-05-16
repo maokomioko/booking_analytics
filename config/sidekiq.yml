@@ -4,6 +4,7 @@
 
 :queues:
   - [critical, 7]
+  - [active,   6]
   - [default,  5]
   - [single,   5]
   - [alg,      4]

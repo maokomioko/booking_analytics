@@ -11,6 +11,6 @@ class UsersController < ApplicationController
       flash[:alert] = @user.errors.full_messages.to_sentence
     end
 
-    redirect_to [:company, :users]
+    redirect_to [:company, :users] unless request.xhr?
   end
 end

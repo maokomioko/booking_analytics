@@ -1,0 +1,23 @@
+= content_for(:main_content_header) do
+  .page-header
+    %h1
+      = t('.header')
+      %small= @user.email
+
+.row
+  .col-sm-12
+    #timeline
+      .timeline
+        .spine
+        - @actions.group_by{ |a| a.created_at.to_date }.sort{ |x,y| y <=> x }.each do |day, actions|
+          .date_separator
+            %span= l(day, format: :long).upcase
+          %ul.columns
+            - actions.each do |action|
+              %li
+                = render_impression action
+
+.row
+  .col-sm-12
+    .text-center
+      = paginate(@actions)

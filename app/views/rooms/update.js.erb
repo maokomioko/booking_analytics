@@ -1,0 +1,9 @@
+(function(){
+    var inline = $('[data-room-id="<%= @room.id %>"] input[type="submit"]').parents('.form-group').find('.help-inline');
+
+    inline.html("<%= j I18n.t('messages.room_updated') %>");
+
+    setTimeout(function(){
+        inline.html('')
+    }, 2000);
+})();

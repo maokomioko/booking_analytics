@@ -4,4 +4,53 @@
 
 .row
   .col-sm-12
-    = render 'form'
+    .tabbable
+      %ul.nav.nav-tabs.tab-blue
+        %li.active
+          %a{"data-toggle" => "tab", href: "#hotel_settings_tab"}
+            %i.clip-tree
+            = t('.hotel_settings')
+        %li
+          %a{"data-toggle" => "tab", href: "#room_settings_tab"}
+            %i.clip-circle-small
+            = t('.room_settings')
+
+    .tab-content
+      #hotel_settings_tab.tab-pane.active
+        .col-sm-6
+          = render 'form'
+        .col-sm-6
+          .panel.panel-default
+            .panel-heading
+              %i.clip-globe
+              = t('.related_hotels', count: @related_hotels.size)
+            .panel-body
+              - Hotel.city_districts(@hotel.city).each do |district|
+                - hotels_within_district = @related_hotels.with_district(district)
+
+                - if hotels_within_district.size > 0
+                  .form-group
+                    .col-sm-3.control-label
+                      = district
+                    .col-sm-9
+                      = hotels_within_district.collect{|x| link_to(x.name, x.url, target: '_blank')}.join(', ').html_safe
+        .clearfix
+
+      #room_settings_tab.tab-pane
+        .col-sm-12
+          = form_tag bulk_update_rooms_path, method: :put, html: { class: 'form-horizontal' }, remote: true do
+            %table.table.rooms-table
+              %thead
+                %tr
+                  %th= Room.human_attribute_name(:name)
+                  %th= Room.human_attribute_name(:min_price)
+                  %th= Room.human_attribute_name(:max_price)
+                  - if can?(:update_connector_credentials, Room)
+                    %th Booking ID
+                    %th Expedia ID
+              %tbody
+                - @hotel.rooms.each do |room|
+                  = fields_for 'rooms[]', room do |f|
+                    = render 'rooms/row_form', f: f
+            = submit_tag 'Submit', class: 'btn btn-teal'
+        .clearfix

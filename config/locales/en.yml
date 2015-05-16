@@ -1,6 +1,8 @@
 en:
   meta:
-    title: "Hotel Commander | v 0.0.1 - preview"
+    title: "Hotel Commander | v 0.0.4 - preview"
+    description: "Hotel revenue management software"
+    author: "Hotel Commander"
   shared:
     registration: "Registration"
     reset_instructions: "Send me password reset instructions"
@@ -9,18 +11,23 @@ en:
     apply_custom_price: "Click to apply price"
     date_locked: "Date locked"
     no_price: "No price suggestion"
-    recommended_price: "Recommended %{price}"
-    recommended_applied: "Recommended price applied"
+    recommended_price: "Suggested %{price}"
+    recommended_applied: "Suggested price applied"
     custom_applied: "Custom price in use"
     sold: "Sold"
     loading: "Loading..."
+    just_moment: "Just a moment..."
     please_check_errors: "You have some form errors. Please check below."
     submit: Submit
     select_image: Select image
     change: Change
+    update: Update
+    save: Save
     remove: Remove
     invited: Invited
+    edit: Edit
     are_you_sure: Are you sure?
+    no_company: No company
   errors:
     booking_id: "Hotel doesn't exist"
     hotel_name: "Hotel name can't be blank"
@@ -45,6 +52,7 @@ en:
     company_created: Your company created successfully! Now you can invite new users to your company
     company_updated: Company updated successfully!
     user_deleted: "User '%{email}' successfully deleted from system"
+    room_updated: "Succesfully saved"
   devise:
     waiting_confirmation: "Currently waiting confirmation for: %{user}"
     links:
@@ -60,9 +68,8 @@ en:
       set_prices: "Manual override"
       manual_input: "<strong>Enter</strong> new price"
       cal: "Calendar"
-      forecast: "Forecast"
       analytics: "Analytics"
-      my_company: My company
+      my_company: "My company"
       preferences: "Preferences"
     days:
       mon: "Monday"
@@ -104,12 +111,14 @@ en:
       edit: "Update settings"
       update: "Update settings"
   menu:
-    profile: Edit my profile
-    worker: Algorithm
-    connection: Channel Manager
-    company: Company setting
-    company_users: Company users
-    invite: Invite new users
+    profile: "Edit my profile"
+    worker: "Algorithm"
+    connection: "Channel Manager"
+    company:
+      title: "Company profile"
+      users: "Manage users"
+      existing_users: "Existing users"
+      invite_new: "Invite new users"
   flash:
-    info: Info!
-    warning: Warning!
+    info: "Info!"
+    warning: "Warning!"

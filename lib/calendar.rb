@@ -11,7 +11,7 @@ class Calendar < Struct.new(:view, :date, :month_offset, :callback)
 
   def week_rows
     weeks.map do |week|
-      unless week.count { |day| day < Date.today } == 7
+      if week.count { |day| day < date } < 7
         content_tag :tr do
           week.map { |day| day_cell(day) }.join.html_safe
         end
@@ -20,7 +20,7 @@ class Calendar < Struct.new(:view, :date, :month_offset, :callback)
   end
 
   def day_cell(day)
-    content_tag :td, view.capture(day, &callback), date: day, class: [day_classes(day), ('selectable' if Date.today < day)]
+    content_tag :td, view.capture(day, &callback), date: day, class: [day_classes(day), ('selectable' if date < day)]
   end
 
   def day_classes(day)

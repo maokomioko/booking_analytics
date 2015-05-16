@@ -875,7 +875,7 @@ DEPENDENCIES
   pry-rails
   quiet_assets
   racc
-  rails (~> 4.2)
+  rails (>= 4.2)
   rails-dev-tweaks
   rails-erd
   rb-readline (~> 0.5.1)

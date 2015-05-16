@@ -3,8 +3,6 @@ module Graph
     self.table_name = Graph.source_table
 
     scope :for_hotels, -> (hotel_ids) { where(booking_id: hotel_ids) }
-    scope :with_occupancy, -> (occupancy) { where("jsonb2arr((data->'block'), 'max_occupancy') @> '{\"?\"}'::text[]", occupancy) }
-
     scope :by_arrival, Proc.new { |date|
       date = [date] unless date.is_a?(Array) || date.is_a?(Range)
       dates = date.map{ |d| d.to_date.strftime('%Y-%m-%d') }

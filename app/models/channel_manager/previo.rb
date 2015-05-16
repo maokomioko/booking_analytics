@@ -48,7 +48,7 @@ class ChannelManager::Previo < ChannelManager
       room.booking_hotel_id = booking_id
       room.previo_id = rd['obkId']
 
-      # TODO I don't know is this correct stub
+      # TODO I don't know if this is correct a stub
       room.min_price = 0
       room.max_price = 0
 

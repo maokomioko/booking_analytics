@@ -67,7 +67,7 @@ gem 'progress_bar'
 gem 'price_maker', path: 'price_maker'
 
 gem 'racc'
-gem 'rails', '~> 4.2'
+gem 'rails', '>= 4.2'
 gem 'redis'
 gem 'redis-store'
 gem 'redis-rails'

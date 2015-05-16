@@ -36,7 +36,9 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :destroy]
   end
 
-  resources :rooms, only: [:update]
+  resources :rooms, only: [:update] do
+    put :bulk_update, on: :collection
+  end
 
   resources :settings, only: [:index, :edit, :update]
 

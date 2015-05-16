@@ -37,12 +37,20 @@
         .clearfix
 
       #room_settings_tab.tab-pane
-        .col-sm-6
-          - @hotel.rooms.each do |room|
-            .panel.panel-default
-              .panel-heading
-                %i.clip-globe
-                = room.name
-              .panel-body
-                = render 'rooms/form', room: room
+        .col-sm-12
+          = form_tag bulk_update_rooms_path, method: :put, html: { class: 'form-horizontal' }, remote: true do
+            %table.table.rooms-table
+              %thead
+                %tr
+                  %th= Room.human_attribute_name(:name)
+                  %th= Room.human_attribute_name(:min_price)
+                  %th= Room.human_attribute_name(:max_price)
+                  - if can?(:update_connector_credentials, Room)
+                    %th Booking ID
+                    %th Expedia ID
+              %tbody
+                - @hotel.rooms.each do |room|
+                  = fields_for 'rooms[]', room do |f|
+                    = render 'rooms/row_form', f: f
+            = submit_tag 'Submit', class: 'btn btn-teal'
         .clearfix

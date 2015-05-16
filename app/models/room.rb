@@ -53,6 +53,9 @@ class Room < ActiveRecord::Base
   monetize :min_price_cents
   monetize :max_price_cents
 
+  validates_numericality_of :min_price_cents, greater_than_or_equal_to: 0
+  validate :validate_max_price
+
   def occupancy_fallback
     occupancy.to_i == 0 ? 1 : occupancy
   end
@@ -64,5 +67,13 @@ class Room < ActiveRecord::Base
   def name
     self[:name] ||
       self[:roomtype].to_s + " (#{self[:max_people]} people)"
+  end
+
+  private
+
+  def validate_max_price
+    if max_price < min_price
+      errors.add(:max_price_cents, :greater_than_or_equal_to, count: min_price.to_s)
+    end
   end
 end

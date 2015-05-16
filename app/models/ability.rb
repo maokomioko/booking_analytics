@@ -27,6 +27,7 @@ class Ability
     can :manage, ChannelManager, company_id: user.company_id
     can :index, Hotel, id: user.hotels.pluck(:id)
     can :update, Room, hotel_id: user.hotels.pluck(:id)
+    can :update_connector_credentials, Room
     can :manage, Setting do |setting|
       user.hotels.pluck(:id).include?(setting.hotel_id) &&
         user.company.owner_id == user.id

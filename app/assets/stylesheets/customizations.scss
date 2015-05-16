@@ -5,3 +5,27 @@
     }
   }
 }
+
+[data-page='settings:edit'] {
+  .edit-price {
+    .input-group {
+      width: 110px;
+    }
+
+    input {
+      width: 100px;
+    }
+  }
+
+  .edit-cm {
+    input {
+      width: 100px;
+    }
+  }
+
+  .rooms-table {
+    td {
+      @include transition(background-color 0.4s ease);
+    }
+  }
+}

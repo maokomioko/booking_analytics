@@ -38,7 +38,8 @@
 
       #room_settings_tab.tab-pane
         .col-sm-12
-          = form_tag bulk_update_rooms_path, method: :put, html: { class: 'form-horizontal' }, remote: true do
+          = form_tag bulk_update_rooms_path, method: :put, class: 'form-horizontal rooms-form', remote: true do
+            = hidden_field_tag :manual, true
             %table.table.rooms-table
               %thead
                 %tr
@@ -47,10 +48,12 @@
                   %th= Room.human_attribute_name(:max_price)
                   - if can?(:update_connector_credentials, Room)
                     %th Booking ID
-                    %th Expedia ID
+                    - if @hotel.channel_manager.connector_type == 'previo'
+                      %th Expedia ID
+                  %th
               %tbody
                 - @hotel.rooms.each do |room|
                   = fields_for 'rooms[]', room do |f|
                     = render 'rooms/row_form', f: f
-            = submit_tag 'Submit', class: 'btn btn-teal'
+            = submit_tag t('shared.save'), class: 'btn btn-teal'
         .clearfix

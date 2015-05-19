@@ -1,0 +1,8 @@
+en:
+  overbooking:
+    related_hotels:
+      index:
+        header: Select your hotel
+        subheader: to edit related
+      edit:
+        header: Manage related hotels

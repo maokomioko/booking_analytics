@@ -60,6 +60,7 @@ gem 'naturally', github: 'zedalaye/naturally'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
+gem 'overbooking', path: 'overbooking'
 
 gem 'pg'
 gem 'premailer-rails'

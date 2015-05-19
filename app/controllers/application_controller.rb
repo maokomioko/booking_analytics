@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :auth_user, :company_present, :update_last_activity, :ch_manager_present, unless: :devise_controller?
-  after_filter :flash_to_headers
+  after_action :flash_to_headers
 
   layout :layout_by_resource
 

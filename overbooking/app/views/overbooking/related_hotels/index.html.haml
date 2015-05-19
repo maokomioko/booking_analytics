@@ -1,0 +1,35 @@
+= content_for(:main_content_header) do
+  .row
+    .col-sm-12
+      .page-header
+        %h1
+          = t('.header')
+          %small= t('.subheader')
+
+.row
+  .col-sm-12
+    %table.table.table-hover
+      %thead
+        %tr
+          %th= Overbooking::Hotel.human_attribute_name(:booking_id)
+          %th= Overbooking::Hotel.human_attribute_name(:name)
+          %th= Overbooking::Hotel.human_attribute_name(:address)
+          %th= Overbooking::Hotel.human_attribute_name(:district)
+          %th
+      %tbody
+        - @hotels.each do |hotel|
+          %tr
+            %td= hotel.booking_id
+            %td= hotel.name
+            %td= [hotel.zip, hotel.city, hotel.address].compact.join(', ')
+            %td= hotel.district.to_sentence
+            %td.center
+              .visible-md.visible-lg.hidden-sm.hidden-xs
+                = link_to [:edit, :related_hotel, id: hotel.booking_id],
+                class: 'btn btn-xs btn-teal tooltips',
+                data: { 'original-title' => t('overbooking.shared.edit') } do
+                  = icon('edit')
+              .visible-sm.visible-xs.hidden-md.hidden-lg
+                = link_to [:edit, :related_hotel, id: hotel.booking_id],
+                class: 'btn btn-xs btn-teal tooltips' do
+                  = icon('edit')

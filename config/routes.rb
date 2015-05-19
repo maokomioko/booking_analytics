@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   mount Graph::Engine, at: '/graph'
+  mount Overbooking::Engine, at: '/overbooking'
 
   authenticate :user, ->(u) { u.role == 'admin' } do
     mount Sidekiq::Web => '/sidekiq'

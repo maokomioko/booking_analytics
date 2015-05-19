@@ -69,6 +69,7 @@ en:
       manual_input: "<strong>Enter</strong> new price"
       cal: "Calendar"
       analytics: "Analytics"
+      overbooking: "Overbooking"
       my_company: "My company"
       preferences: "Preferences"
     days:
@@ -119,6 +120,8 @@ en:
       users: "Manage users"
       existing_users: "Existing users"
       invite_new: "Invite new users"
+    overbooking:
+      related: "Manage related hotels"
   flash:
     info: "Info!"
     warning: "Warning!"

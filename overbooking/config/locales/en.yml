@@ -1,0 +1,10 @@
+en:
+  overbooking:
+    shared:
+      edit: Edit
+      remove: Remove
+      view_in_web: View in Web
+    messages:
+      success_remove_related: "Successfull remove: <strong>%{list}</strong>"
+      select_hotels_first: "Select hotels first"
+      confirm_related_bulk_delete: "Please confirm your action"

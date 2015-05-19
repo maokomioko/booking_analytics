@@ -12,6 +12,18 @@
         = currency_symbol
   - if can?(:update_connector_credentials, Room)
     %td.edit-cm
-      = f.text_field :booking_id, class: 'form-control'
-    %td.edit-cm
-      = f.text_field :previo_id, class: 'form-control'
+      = f.select :booking_id, options_for_booking_id(f.object.booking_id, f.object.hotel_id),
+          { include_blank: true },
+          class: 'form-control booking-select'
+    - if f.object.hotel.channel_manager.connector_type == 'previo'
+      %td.edit-cm
+        = f.text_field :previo_id, class: 'form-control'
+  %td.action
+    .success
+      %span.text-success
+        = icon('check')
+        = t('shared.updated')
+    .failure
+      %span.text-danger
+        = icon('exclamation-circle')
+        = t('shared.error')

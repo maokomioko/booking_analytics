@@ -39,4 +39,11 @@ module SettingsHelper
 
     options_for_select(Hotel.city_districts(city), default)
   end
+
+  def options_for_booking_id(default, hotel_id)
+    hotel = Hotel.find(hotel_id)
+    room_ids = BlockAvailabilityExtractor.new(BlockAvailability.for_hotels(hotel.booking_id)).room_ids
+
+    options_for_select(room_ids, default)
+  end
 end

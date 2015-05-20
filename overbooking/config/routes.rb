@@ -2,6 +2,10 @@ Overbooking::Engine.routes.draw do
   root 'welcome#index'
 
   resources :related_hotels do
-    post :drop_related, on: :member
+    member do
+      post :drop_related
+      post :add_related
+      get :search
+    end
   end
 end

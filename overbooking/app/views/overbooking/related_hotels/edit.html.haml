@@ -10,7 +10,15 @@
   .hidden
     %span(data-message="select_hotels_first")= t('overbooking.messages.select_hotels_first')
     %span(data-message="confirm_related_bulk_delete")= t('overbooking.messages.confirm_related_bulk_delete')
+    %span(data-message="related_search_prompt")= t('overbooking.messages.related_search_prompt')
   .col-sm-12
+    .well
+      = form_tag add_related_related_hotel_path(id: @hotel.booking_id), method: :post, remote: true, class: 'add-related-form' do
+        .form-group
+          = hidden_field_tag :ids, nil, id: 'add_related_select2', data: { url: search_related_hotel_path }
+        .form-group
+          = submit_tag t('.add_related'), class: 'btn btn-purple'
+
     = link_to 'Bulk delete selected hotels', [:drop_related, :related_hotel], class: 'btn btn-teal bulk-delete-related'
     %table.table.table-hover.table-condensed
       %thead

@@ -1,11 +1,15 @@
 class @OverbookingRelated
   constructor: ->
     @deleteRelated()
+    @addRelated()
     @bulkDeleteRelated()
+    @initSelect2RelatedSearch()
 
   deleteRelated: ->
-    $('.remove-related').on 'click', ->
-      triggerSpinner()
+    $('.remove-related').on 'click', -> triggerSpinner()
+
+  addRelated: ->
+    $('.add-related-form').on 'submit.rails', -> triggerSpinner()
 
   bulkDeleteRelated: ->
     $('.bulk-delete-related').on 'click', (e) ->
@@ -23,3 +27,21 @@ class @OverbookingRelated
           data: params
           method: 'POST'
           beforeSend: -> triggerSpinner()
+
+  initSelect2RelatedSearch: ->
+    $select = $('#add_related_select2')
+
+    $select.select2
+      placeholder: $('[data-message="related_search_prompt"]').text()
+      multiple: true
+      containerCss:
+        width: '50%'
+      ajax:
+        url: $select.data('url')
+        dataType: 'json'
+        quietMillis: 250
+        data: (term, page) -> { q: term }
+        results: (data, page) ->
+          { results: data }
+
+    return

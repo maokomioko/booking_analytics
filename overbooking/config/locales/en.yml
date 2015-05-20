@@ -6,5 +6,7 @@ en:
       view_in_web: View in Web
     messages:
       success_remove_related: "Successfull remove: <strong>%{list}</strong>"
+      success_add_related: "Successfull add: <strong>%{list}</strong>"
       select_hotels_first: "Select hotels first"
       confirm_related_bulk_delete: "Please confirm your action"
+      related_search_prompt: Search for related hotels by hotel name, address or booking id

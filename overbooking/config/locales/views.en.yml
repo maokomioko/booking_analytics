@@ -6,3 +6,4 @@ en:
         subheader: to edit related
       edit:
         header: Manage related hotels
+        add_related: Add related hotels

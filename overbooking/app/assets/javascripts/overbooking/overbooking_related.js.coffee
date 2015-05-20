@@ -35,7 +35,7 @@ class @OverbookingRelated
       placeholder: $('[data-message="related_search_prompt"]').text()
       multiple: true
       containerCss:
-        width: '50%'
+        width: '100%'
       ajax:
         url: $select.data('url')
         dataType: 'json'

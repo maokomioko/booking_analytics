@@ -4,6 +4,7 @@ en:
       edit: Edit
       remove: Remove
       view_in_web: View in Web
+      partner: Partner
     messages:
       success_remove_related: "Successfull remove: <strong>%{list}</strong>"
       success_add_related: "Successfull add: <strong>%{list}</strong>"

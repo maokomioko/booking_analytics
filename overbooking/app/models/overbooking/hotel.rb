@@ -2,11 +2,10 @@ module Overbooking
   class Hotel < ActiveRecord::Base
     self.table_name = :hotels
 
-    has_and_belongs_to_many :related,
-                            class_name: 'Overbooking::Hotel',
-                            join_table: 'related_hotels',
-                            foreign_key: 'hotel_id',
-                            association_foreign_key: 'related_id'
+    has_many :related_hotels
+    has_many :related,
+             through: :related_hotels,
+             class_name: 'Overbooking::Hotel'
 
     scope :full_text_search, -> (query) {
       return none if query.empty? || query.length < 3

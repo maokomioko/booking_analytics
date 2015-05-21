@@ -7,3 +7,7 @@ en:
       edit:
         header: Manage related hotels
         add_related: Add related hotels
+        overbooking_partner: Overbooking partner
+        action_with_selected: Action with selected
+        become_partner: Become overbooking partner
+        remove_partner: Disable partnership

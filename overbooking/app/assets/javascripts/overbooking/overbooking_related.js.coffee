@@ -2,7 +2,9 @@ class @OverbookingRelated
   constructor: ->
     @deleteRelated()
     @addRelated()
+    @initBulkActionButton()
     @bulkDeleteRelated()
+    @bulkOverbooking()
     @initSelect2RelatedSearch()
 
   deleteRelated: ->
@@ -11,14 +13,25 @@ class @OverbookingRelated
   addRelated: ->
     $('.add-related-form').on 'submit.rails', -> triggerSpinner()
 
+  initBulkActionButton: ->
+    $button = $('.bulk-action-button')
+
+    toggler = ->
+      if $('[name="ids[]"]:checked').length
+        $button.attr("disabled", false)
+      else
+        $button.attr("disabled", true)
+
+    toggler()
+
+    $('[name="ids[]"]').on 'ifChanged', ->
+      toggler()
+      $button.parent().removeClass('open') # hack. manual close bootstrap dropdown
+
   bulkDeleteRelated: ->
     $('.bulk-delete-related').on 'click', (e) ->
       e.preventDefault()
       params = $('[name="ids[]"]:checked').serialize()
-
-      unless params.length
-        message = $('[data-message="select_hotels_first"]').text()
-        return alert(message)
 
       message = $('[data-message="confirm_related_bulk_delete"]').text()
       if confirm(message)
@@ -27,6 +40,18 @@ class @OverbookingRelated
           data: params
           method: 'POST'
           beforeSend: -> triggerSpinner()
+
+  bulkOverbooking: ->
+    $('.bulk-overbooking').on 'click', (e) ->
+      e.preventDefault()
+
+      params = $('[name="ids[]"]:checked').serialize()
+
+      $.ajax
+        url: @href
+        data: params
+        method: 'POST'
+        beforeSend: -> triggerSpinner()
 
   initSelect2RelatedSearch: ->
     $select = $('#add_related_select2')

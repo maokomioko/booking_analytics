@@ -18,7 +18,11 @@ module Overbooking
     end
 
     def edit
-      @related = @hotel.related.page params[:page]
+      @related = @hotel
+                     .related_hotels
+                     .includes(:related)
+                     .order('id DESC')
+                     .page params[:page]
     end
 
     def drop_related
@@ -29,6 +33,16 @@ module Overbooking
     def add_related
       @related = Overbooking::Hotel.where(booking_id: params[:ids].split(','))
       @hotel.related << @related
+    end
+
+    def enable_overbooking
+      hotel_ids = Hotel.where(booking_id: params[:ids]).pluck(:id)
+      @hotel.related_hotels.where(related_id: hotel_ids).update_all(is_overbooking: true)
+    end
+
+    def disable_overbooking
+      hotel_ids = Hotel.where(booking_id: params[:ids]).pluck(:id)
+      @hotel.related_hotels.where(related_id: hotel_ids).update_all(is_overbooking: false)
     end
 
     def search

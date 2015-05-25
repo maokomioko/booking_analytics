@@ -3,8 +3,12 @@ PATH
   specs:
     overbooking (0.0.1)
       cancancan (>= 1.10.1)
+      gmaps4rails (>= 2.1.2)
+      google_directions
+      haml-rails (>= 0.9.0)
       kaminari (>= 0.16.3)
       rails (~> 4.2.1)
+      underscore-rails (>= 1.8.2)
 
 GEM
   remote: https://rubygems.org/
@@ -60,6 +64,22 @@ GEM
     ffaker (2.0.0)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    gmaps4rails (2.1.2)
+    google_directions (0.1.6.2)
+      nokogiri (>= 1.4.1)
+    haml (4.0.6)
+      tilt
+    haml-rails (0.9.0)
+      actionpack (>= 4.0.1)
+      activesupport (>= 4.0.1)
+      haml (>= 4.0.6, < 5.0)
+      html2haml (>= 1.0.1)
+      railties (>= 4.0.1)
+    html2haml (2.0.0)
+      erubis (~> 2.7.0)
+      haml (~> 4.0.0)
+      nokogiri (~> 1.6.0)
+      ruby_parser (~> 3.5)
     i18n (0.7.0)
     json (1.8.2)
     kaminari (0.16.3)
@@ -120,6 +140,9 @@ GEM
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
+    ruby_parser (3.6.6)
+      sexp_processor (~> 4.1)
+    sexp_processor (4.5.1)
     sprockets (3.1.0)
       rack (~> 1.0)
     sprockets-rails (2.3.1)
@@ -128,8 +151,10 @@ GEM
       sprockets (>= 2.8, < 4.0)
     thor (0.19.1)
     thread_safe (0.3.5)
+    tilt (2.0.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    underscore-rails (1.8.2)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 

@@ -1,0 +1,28 @@
+.hotel-info-map
+  .col-sm-12
+    .page-header
+      %h4
+        = hotel.name
+        - if related.is_overbooking
+          %small
+            %span.label.label-success= t('overbooking.shared.partner')
+      %em= hotel.address
+
+  - if hotel.exact_class?
+    .col-sm-6
+      %span.text-warning
+        - hotel.exact_class.to_i.times do
+          = icon('star')
+  - if hotel.review_score?
+    .col-sm-6
+      %span= hotel.class.human_attribute_name(:review_score)
+      = hotel.review_score
+
+  .space12
+
+  .col-sm-4
+    %span= t('.trace_route')
+  .col-sm-8
+    .btn-group.btn-group-sm.routes{ data: { lat: hotel.latitude.to_f, lng: hotel.longitude.to_f } }
+      - %w(driving walking transit).each do |travel_mode|
+        %a.btn.btn-default(href="#" data-travel-mode="#{ travel_mode.upcase }")= t(".#{ travel_mode }")

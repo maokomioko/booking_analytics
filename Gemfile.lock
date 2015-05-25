@@ -103,9 +103,12 @@ PATH
   specs:
     overbooking (0.0.1)
       cancancan (>= 1.10.1)
+      gmaps4rails (>= 2.1.2)
+      google_directions (>= 0.1.6)
       haml-rails (>= 0.9.0)
       kaminari (>= 0.16.3)
       rails (~> 4.2.1)
+      underscore-rails (>= 1.8.2)
 
 PATH
   remote: price_maker
@@ -267,7 +270,10 @@ GEM
     geocoder (1.2.8)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    gmaps4rails (2.1.2)
     google-analytics-turbolinks (0.0.4)
+    google_directions (0.1.6.2)
+      nokogiri (>= 1.4.1)
     haml (4.0.6)
       tilt
     haml-rails (0.9.0)
@@ -785,6 +791,7 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    underscore-rails (1.8.2)
     unf (0.1.4)
       unf_ext
     unf (0.1.4-java)

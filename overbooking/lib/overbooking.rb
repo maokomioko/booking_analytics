@@ -1,6 +1,9 @@
 require 'cancancan'
 require 'kaminari'
 require 'haml-rails'
+require 'underscore-rails'
+require 'gmaps4rails'
+require 'google_directions'
 
 require "overbooking/engine"
 

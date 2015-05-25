@@ -122,6 +122,7 @@ en:
       invite_new: "Invite new users"
     overbooking:
       related: "Manage related hotels"
+      directions: "Directions"
   flash:
     info: "Info!"
     warning: "Warning!"

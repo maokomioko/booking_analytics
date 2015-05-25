@@ -1,5 +1,13 @@
 en:
   overbooking:
+    directions:
+      infowindow:
+        trace_route: Trace route to this hotel
+        driving: Driving
+        walking: Walking
+        transit: Public transit
+      show:
+        header: Build your routes between hotels
     related_hotels:
       index:
         header: Select your hotel

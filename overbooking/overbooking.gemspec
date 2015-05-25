@@ -25,8 +25,11 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '~> 4.2.1'
   s.add_dependency 'cancancan', '>= 1.10.1'
+  s.add_dependency 'gmaps4rails', '>= 2.1.2'
+  s.add_dependency 'google_directions', '>= 0.1.6'
   s.add_dependency 'haml-rails', '>= 0.9.0'
   s.add_dependency 'kaminari', '>= 0.16.3'
+  s.add_dependency 'underscore-rails', '>= 1.8.2'
 
   s.add_development_dependency 'pg'
   s.add_development_dependency 'rspec-rails', '~> 3.0'

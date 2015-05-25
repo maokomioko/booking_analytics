@@ -10,20 +10,20 @@
         %i.clip-bars
         %span.title= t('calendar.menu.analytics')
         %span.selected
-  - if defined?(Overbooking::Engine)
-    %li
-      %a(href="javascript:void(0)")
-        %i.clip-cube
-        %span.title= t('calendar.menu.overbooking')
-        %i.icon-arrow
-        %span.selected
-      %ul.sub-menu
-        %li{ data: { menu: 'overbooking:related_hotels:index overbooking:related_hotels:edit' } }
-          = link_to [overbooking, :related_hotels] do
-            %span.title= t('menu.overbooking.related')
-        %li{ data: { menu: 'overbooking:directions:index overbooking:directions:show' } }
-          = link_to [overbooking, :directions] do
-            %span.title= t('menu.overbooking.directions')
+  -# - if defined?(Overbooking::Engine)
+  -#   %li
+  -#     %a(href="javascript:void(0)")
+  -#       %i.clip-cube
+  -#       %span.title= t('calendar.menu.overbooking')
+  -#       %i.icon-arrow
+  -#       %span.selected
+  -#     %ul.sub-menu
+  -#       %li{ data: { menu: 'overbooking:related_hotels:index overbooking:related_hotels:edit' } }
+  -#         = link_to [overbooking, :related_hotels] do
+  -#           %span.title= t('menu.overbooking.related')
+  -#       %li{ data: { menu: 'overbooking:directions:index overbooking:directions:show' } }
+  -#         = link_to [overbooking, :directions] do
+  -#           %span.title= t('menu.overbooking.directions')
   - if current_user.company.present? && can?(:edit, current_user.company)
     %li
       %a(href="javascript:void(0)")

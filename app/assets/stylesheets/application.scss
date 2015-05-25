@@ -40,5 +40,6 @@
 
 #flash-container {
   z-index: 9999;
-  position: relative;
+  position: absolute;
+  width: calc(100% - 255px);
 }

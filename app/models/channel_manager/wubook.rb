@@ -19,16 +19,12 @@
 #
 
 class ChannelManager::Wubook < ChannelManager
+  def connector_room_id_key
+    'wubook_id'
+  end
+
   def connector
     WubookConnector.new(login: login, password: password, lcode: lcode)
-  end
-
-  def non_refundable_candidate
-    connector.get_plans[0]['name']
-  end
-
-  def standart_rate_candidate
-    connector.get_plans[1]['name']
   end
 
   def create_rooms

@@ -27,14 +27,6 @@ class ChannelManager::Previo < ChannelManager
     PrevioConnector.new(login: login, password: password, hotel_id: lcode)
   end
 
-  def non_refundable_candidate
-    connector.get_plans[0]['priId']
-  end
-
-  def standart_rate_candidate
-    connector.get_plans[0]['priId']
-  end
-
   def create_rooms
     rooms_data = connector.get_rooms
     return unless rooms_data['roomKinds'].present?

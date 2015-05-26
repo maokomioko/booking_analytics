@@ -1,0 +1,24 @@
+en:
+  overbooking:
+    directions:
+      infowindow:
+        trace_route: Trace route to this hotel
+        driving: Driving
+        walking: Walking
+        transit: Public transit
+        room_name: Room type
+        room_max_occupancy: Max people
+        room_price: Price
+      show:
+        header: Build your routes between hotels
+    related_hotels:
+      index:
+        header: Select your hotel
+        subheader: to edit related
+      edit:
+        header: Manage related hotels
+        add_related: Add related hotels
+        overbooking_partner: Overbooking partner
+        action_with_selected: Action with selected
+        become_partner: Become overbooking partner
+        remove_partner: Disable partnership

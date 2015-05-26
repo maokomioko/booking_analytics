@@ -30,20 +30,9 @@ class ChannelManager < ActiveRecord::Base
 
   validates :login, :password, :lcode, :booking_id, :hotel_name, presence: true
   validates :non_refundable_pid, :default_pid, presence: true, on: :update
+
   validate :hotel_existence
   validates_inclusion_of :connector_type, in: TYPES, allow_blank: true
-
-  before_save :setup_tarif_plans
-
-  after_create :sync_rooms
-
-  # stub
-  def non_refundable_candidate
-  end
-
-  # stub
-  def standart_rate_candidate
-  end
 
   # stub
   def create_rooms
@@ -53,13 +42,17 @@ class ChannelManager < ActiveRecord::Base
   def setup_room_prices(room_id, room_obj_id)
   end
 
-  def connector_room_id_key
-    'booking_id'
+  def list_plans
+    plans = connector.get_plans.each
+    if connector_type.include?('wubook')
+      plans.collect{|x| [x['name'], x['id']]}
+    else
+      plans.collect{|x| [x['name'], x['priId']]}
+    end
   end
 
-  def setup_tarif_plans
-    self.non_refundable_pid = non_refundable_candidate
-    self.default_pid = standart_rate_candidate
+  def connector_room_id_key
+    'booking_id'
   end
 
   def apply_room_prices(room_id, dates, custom_price = nil)
@@ -102,7 +95,7 @@ class ChannelManager < ActiveRecord::Base
     end
   end
 
-  # create rooms and get start prices for them
+  # create rooms and fill initial prices
   def sync_rooms
     create_rooms if hotel.rooms.size.zero?
     hotel.rooms.each do |room|

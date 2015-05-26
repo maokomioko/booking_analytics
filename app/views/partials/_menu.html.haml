@@ -10,6 +10,20 @@
         %i.clip-bars
         %span.title= t('calendar.menu.analytics')
         %span.selected
+  -# - if defined?(Overbooking::Engine)
+  -#   %li
+  -#     %a(href="javascript:void(0)")
+  -#       %i.clip-cube
+  -#       %span.title= t('calendar.menu.overbooking')
+  -#       %i.icon-arrow
+  -#       %span.selected
+  -#     %ul.sub-menu
+  -#       %li{ data: { menu: 'overbooking:related_hotels:index overbooking:related_hotels:edit' } }
+  -#         = link_to [overbooking, :related_hotels] do
+  -#           %span.title= t('menu.overbooking.related')
+  -#       %li{ data: { menu: 'overbooking:directions:index overbooking:directions:show' } }
+  -#         = link_to [overbooking, :directions], "data-no-turbolink" => true do
+  -#           %span.title= t('menu.overbooking.directions')
   - if current_user.company.present? && can?(:edit, current_user.company)
     %li
       %a(href="javascript:void(0)")
@@ -32,8 +46,8 @@
       %span.selected
     %ul.sub-menu
       %li{ data: { menu: 'channel_manager:edit channel_manager:new' } }
-        - if current_user && current_user.channel_managers.size > 0
-          = link_to edit_channel_manager_path(current_user.channel_managers.first.id), class: active_class(edit_channel_manager_path(current_user.channel_managers.first.id)) do
+        - if current_user && current_user.channel_manager
+          = link_to edit_channel_manager_path(current_user.channel_manager.id), class: active_class(edit_channel_manager_path(current_user.channel_manager.id)) do
             %span.title= t('menu.connection')
         - else
           = link_to new_channel_manager_path, class: active_class(new_channel_manager_path) do

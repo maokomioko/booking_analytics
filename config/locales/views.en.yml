@@ -13,8 +13,8 @@ en:
     new:
       header: Fill your company information
       alert:
-        header: You should fill fields to continue
-        text: "Some text that tells why user should do this... See <strong>config/locales/views.yml</strong> file to edit this message"
+        header: Please tell us about your company.
+        text: You need to provide company registration information in order to continue.
     edit:
       header: Edit company information
     form:

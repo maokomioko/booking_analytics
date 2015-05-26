@@ -143,6 +143,12 @@ window.Main = do ->
       return
     return
 
+  runCustomCheck = ->
+    $('input[type="checkbox"].flat-grey, input[type="radio"].flat-grey').iCheck
+      checkboxClass: 'icheckbox_flat-grey'
+      radioClass: 'iradio_flat-grey'
+      increaseArea: '10%'
+
   #function to avoid closing the dropdown on click
 
   runDropdownEnduring = ->
@@ -171,6 +177,7 @@ window.Main = do ->
     runPopovers()
     runShowTab()
     runQuickSideBar()
+    runCustomCheck()
   }
 
 Main.init()

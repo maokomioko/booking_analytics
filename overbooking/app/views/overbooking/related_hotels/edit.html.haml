@@ -1,0 +1,84 @@
+= content_for(:main_content_header) do
+  .row
+    .col-sm-12
+      .page-header
+        %h1
+          = t('.header')
+          %small= @hotel.name
+
+.row
+  .hidden
+    %span(data-message="select_hotels_first")= t('overbooking.messages.select_hotels_first')
+    %span(data-message="confirm_related_bulk_delete")= t('overbooking.messages.confirm_related_bulk_delete')
+    %span(data-message="related_search_prompt")= t('overbooking.messages.related_search_prompt')
+  .col-sm-12
+    .row
+      .col-sm-6
+        .well
+          = form_tag add_related_related_hotel_path(id: @hotel.booking_id), method: :post, remote: true, class: 'add-related-form' do
+            .form-group
+              = hidden_field_tag :ids, nil, id: 'add_related_select2', data: { url: search_related_hotel_path }
+            .form-group
+              = submit_tag t('.add_related'), class: 'btn btn-purple'
+
+    - if @related.length > 0
+      .btn-group
+        %button.btn.btn-dark-beige.dropdown-toggle.bulk-action-button(type="button" data-toggle="dropdown")
+          = icon('wrench')
+          = t('.action_with_selected')
+          %span.caret
+        %ul.dropdown-menu(role="menu")
+          %li
+            = link_to [:drop_related, :related_hotel], class: 'bulk-delete-related' do
+              = icon('trash')
+              = t('overbooking.shared.remove')
+          %li
+            = link_to [:enable_overbooking, :related_hotel], class: 'bulk-overbooking' do
+              = icon('chain')
+              = t('.become_partner')
+          %li
+            = link_to [:disable_overbooking, :related_hotel], class: 'bulk-overbooking' do
+              = icon('chain-broken')
+              = t('.remove_partner')
+      %table.table.table-hover.table-condensed
+        %thead
+          %tr
+            %th
+            %th= Overbooking::Hotel.human_attribute_name(:booking_id)
+            %th= Overbooking::Hotel.human_attribute_name(:name)
+            %th= t('.overbooking_partner')
+            %th.hidden-sm.hidden-xs= Overbooking::Hotel.human_attribute_name(:url)
+            %th= Overbooking::Hotel.human_attribute_name(:address)
+            %th= Overbooking::Hotel.human_attribute_name(:district)
+            %th
+        %tbody
+          - @related.each do |related_hotel|
+            %tr
+              %td.center
+                .checkbox-table
+                  %label
+                    = check_box_tag 'ids[]', related_hotel.related.booking_id, false, class: 'flat-grey'
+              %td= related_hotel.related.booking_id
+              %td= related_hotel.related.name
+              %td
+                - if related_hotel.is_overbooking
+                  %span.label.label-success= t('overbooking.shared.partner')
+                - else
+                  —
+              %td.hidden-sm.hidden-xs= link_to t('overbooking.shared.view_in_web'), related_hotel.related.url, target: '_blank'
+              %td= [related_hotel.related.zip, related_hotel.related.city, related_hotel.related.address].compact.join(', ')
+              %td= related_hotel.related.district.to_sentence
+              %td.center
+                .visible-md.visible-lg.hidden-sm.hidden-xs
+                  = link_to [:drop_related, :related_hotel, ids: [related_hotel.related.booking_id]],
+                  class: 'btn btn-xs btn-bricky tooltips remove-related',
+                  remote: true, method: :post,
+                  data: { 'original-title' => t('overbooking.shared.remove')} do
+                    = icon('times white')
+                .visible-sm.visible-xs.hidden-md.hidden-lg
+                  = link_to [:drop_related, :related_hotel, ids: [related_hotel.related.booking_id]],
+                  class: 'btn btn-xs btn-bricky remove-related',
+                  remote: true, method: :post do
+                    = icon('times white')
+
+      = paginate @related

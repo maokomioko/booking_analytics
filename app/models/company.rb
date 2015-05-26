@@ -4,7 +4,6 @@
 #
 #  id            :integer          not null, primary key
 #  name          :string
-#  wb_auth       :boolean          default(FALSE)
 #  owner_id      :integer
 #  created_at    :datetime
 #  updated_at    :datetime
@@ -19,8 +18,8 @@
 
 class Company < ActiveRecord::Base
   has_many :users, dependent: :destroy
-  has_many :channel_managers, dependent: :destroy
-  has_many :hotels, through: :channel_managers
+  has_one :channel_manager, dependent: :destroy
+  has_many :hotels, through: :channel_manager
 
   has_many :settings
 
@@ -29,5 +28,5 @@ class Company < ActiveRecord::Base
   mount_uploader :logo, AvatarUploader
 
   validates_presence_of :name
-  validates_numericality_of :bank_code, :bank_account, only_integer: true, allow_blank: true
+  validates :bank_code, :bank_account, numericality: true, allow_blank: true
 end

@@ -23,13 +23,13 @@ describe PrevioConnector do
     before(:each){ VCR.insert_cassette('get_plans') }
     after(:each){ VCR.eject_cassette }
 
-    it 'return plans valid for today' do
+    it 'return plans valid for next 3 month' do
       Timecop.freeze(Date.new(2015, 5, 15)) do
-        expect(connector.get_plans.count).to eq 1
+        expect(connector.get_plans.count).to eq 2
       end
     end
 
-    it 'raises if no plans for today' do
+    it 'raises if no plans for next 3 month' do
       Timecop.freeze(Date.new(2010, 1, 1)) do
         expect { connector.get_plans }.
           to raise_error PrevioConnector::PrevioError

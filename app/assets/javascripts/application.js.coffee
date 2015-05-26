@@ -37,8 +37,10 @@
 #= require jquery.validate
 
 #= require graph/application
+#= require overbooking/application
 
 #= require_tree ../../../vendor/assets/javascripts/
+#= require js/jquery.icheck
 #= require_tree .
 #= require_self
 

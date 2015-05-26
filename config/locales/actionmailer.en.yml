@@ -1,0 +1,7 @@
+en:
+  company_mailer:
+    weekly_report:
+      subject: "Weekly price report on HotelCommander.net"
+  user_mailer:
+    new_in_company:
+      subject: "New user in company on HotelCommander.net"

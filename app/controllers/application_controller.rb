@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :auth_user, :company_present, :update_last_activity, :ch_manager_present, unless: :devise_controller?
-  after_filter :flash_to_headers
+  after_action :flash_to_headers
 
   layout :layout_by_resource
 
@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
   end
 
   def ch_manager_present
-    if current_user && !current_user.role == 'admin' && current_user.company.present? && !current_user.company.wb_auth?
+    if current_user && !current_user.company.try(:channel_manager).present?
       respond_to do |f|
         f.json { render json: { error: t('errors.no_ch_manager') }, status: 403 }
         f.all { redirect_to main_app.new_channel_manager_path unless controller_name == 'channel_manager' }

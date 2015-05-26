@@ -73,6 +73,7 @@ gem 'redis'
 gem 'redis-store'
 gem 'redis-rails'
 gem 'remotipart', '~> 1.2.1'
+gem 'roadie-rails'
 gem 'rubysl', platform: :rbx
 
 gem 'sass-rails', '>= 5'

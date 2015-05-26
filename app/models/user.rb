@@ -56,6 +56,8 @@ class User < ActiveRecord::Base
   before_create :set_default_role
   after_invitation_accepted :set_company!
 
+  after_update :trigger_notifications
+
   scope :related_to, Proc.new{ |owner|
     where("\"invited_by_id\" = :owner_id OR \"company_id\" = :owner_company_id",
           owner_id: owner.id,
@@ -79,5 +81,11 @@ class User < ActiveRecord::Base
   def set_company!
     self.company_id = User.find(invited_by_id).company_id
     self.save
+  end
+
+  def trigger_notifications
+    if previous_changes[:company_id].present? && previous_changes[:company_id].last.present?
+      ActiveSupport::Notifications.instrument('user.new_in_company', user_id: id)
+    end
   end
 end

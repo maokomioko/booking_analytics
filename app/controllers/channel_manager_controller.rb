@@ -3,7 +3,9 @@ class ChannelManagerController < ApplicationController
   before_filter :set_channel_manager, only: [:edit, :update]
 
   def new
-    @channel_manager = ChannelManager.new
+    unless current_user.channel_manager
+      @channel_manager = ChannelManager.new
+    end
   end
 
   def create

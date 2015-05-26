@@ -28,6 +28,8 @@ en:
     edit: "Edit"
     are_you_sure: "Are you sure?"
     no_company: "Company isn't defined"
+    updated: Updated
+    error: Error
   errors:
     booking_id: "Hotel doesn't exist"
     hotel_name: "Hotel name can't be blank"

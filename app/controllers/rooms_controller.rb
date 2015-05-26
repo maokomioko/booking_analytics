@@ -9,9 +9,14 @@ class RoomsController < ApplicationController
   end
 
   def bulk_update
-    rooms = Room.update(bulk_update_params.keys, bulk_update_params.values)
-    flash[:alert] = bulk_errors(rooms) if bulk_errors(rooms).present?
-    @rooms = bulk_success(rooms)
+    @rooms = Room.update(bulk_update_params.keys, bulk_update_params.values)
+    if bulk_errors(@rooms).present?
+      flash[:alert] = bulk_errors(@rooms)
+    else
+      if params[:manual] && params[:manual] == 'true'
+        flash[:success] = t('messages.room_updated')
+      end
+    end
   end
 
   protected
@@ -45,11 +50,5 @@ class RoomsController < ApplicationController
       next if room.errors.empty?
       "<strong>#{ room.name }</strong>: #{ room.errors.full_messages.to_sentence }"
     end.compact.join('<br>')
-  end
-
-  def bulk_success(rooms)
-    rooms.select do |room|
-      room.previous_changes.length > 0
-    end
   end
 end

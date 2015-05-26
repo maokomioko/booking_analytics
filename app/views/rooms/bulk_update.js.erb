@@ -1,10 +1,25 @@
 <% @rooms.each do |room| %>
 ( function() {
     var $roomRow = $('tr[data-room-id="<%= room.id %>"]');
-    $roomRow.addClass('success');
 
-    setTimeout( function(){
-        $roomRow.removeClass('success');
-    }, 3000)
+    <% if room.errors.size.zero? %>
+        <% if room.previous_changes.length > 0 %>
+            $roomRow.addClass('success');
+            $roomRow.find('.action .success').show();
+
+            setTimeout( function(){
+                $roomRow.removeClass('success');
+                $roomRow.find('.action .success').hide();
+            }, 3000);
+        <% end %>
+    <% else %>
+        $roomRow.addClass('danger');
+        $roomRow.find('.action .failure').show();
+
+        setTimeout( function(){
+            $roomRow.removeClass('danger');
+            $roomRow.find('.action .failure').hide();
+        }, 5000);
+    <% end %>
 })();
 <% end %>

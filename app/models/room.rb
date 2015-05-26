@@ -55,6 +55,7 @@ class Room < ActiveRecord::Base
 
   validates_numericality_of :min_price_cents, greater_than_or_equal_to: 0
   validate :validate_max_price
+  validates_uniqueness_of :booking_id, scope: :hotel_id, allow_blank: true
 
   def occupancy_fallback
     occupancy.to_i == 0 ? 1 : occupancy

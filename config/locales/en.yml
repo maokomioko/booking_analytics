@@ -45,6 +45,7 @@ en:
     hotel_name: "Name of your Hotel"
     non_refundable_tarif: "Default <b>non-refundable</b> tarif"
     standard_tarif: "Default tarif for <b>standard</b> rates"
+    select_room: "Select room candidate"
   placeholders:
     zero_euro: "0 EUR"
   messages:

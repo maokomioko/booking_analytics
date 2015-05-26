@@ -32,9 +32,9 @@ class ChannelManagerController < ApplicationController
     @channel_manager = @channel_manager.becomes!(channel_manager_params[:type].constantize)
 
     begin
-      if @channel_manager.update_attributes!(channel_manager_params)
+      if @channel_manager.update_attributes(channel_manager_params)
         impressionist(@channel_manager)
-        redirect_to calendar_index_path, flash: { success: t('messages.cm_verified') }
+        redirect_to settings_index_path, flash: { success: t('messages.cm_verified') }
       else
         redirect_to edit_channel_manager_path(@channel_manager.id), flash: { error: t('messages.cm_update_error') }
       end

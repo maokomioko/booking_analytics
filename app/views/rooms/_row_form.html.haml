@@ -12,12 +12,12 @@
         = currency_symbol
   - if can?(:update_connector_credentials, Room)
     %td.edit-cm
-      = f.select :booking_id, options_for_booking_id(f.object.booking_id, f.object.hotel_id),
-          { include_blank: true },
-          class: 'form-control booking-select'
-    - if f.object.hotel.channel_manager.connector_type == 'previo'
-      %td.edit-cm
-        = f.text_field :previo_id, class: 'form-control'
+      - case f.object.hotel.channel_manager.connector_type
+      - when 'previo'
+        = f.select :previo_id, options_for_select(@cm_rooms, f.object.previo_id), {include_blank: t('labels.select_room')}, class: 'form-control'
+      - when 'wubook'
+        = f.select :wubook_id, options_for_select(@cm_rooms, f.object.wubook_id), {include_blank: t('labels.select_room')}, class: 'form-control'
+
   %td.action
     .success
       %span.text-success

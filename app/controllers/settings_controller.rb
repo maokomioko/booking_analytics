@@ -12,6 +12,7 @@ class SettingsController < ApplicationController
   def edit
     @hotel = @setting.hotel
     @related_hotels = @hotel.related
+    @cm_rooms = @hotel.channel_manager.connector.get_rooms.collect{|x| [x['name'], x['id']]}
   end
 
   def update
@@ -20,6 +21,7 @@ class SettingsController < ApplicationController
     if @setting.save
       flash[:success] = I18n.t('messages.settings_updated')
       impressionist(@setting)
+      @setting.hotel.channel_manager.sync_rooms
       redirect_to [:settings] unless request.xhr?
     else
       flash[:alert] = @setting.errors.full_messages.to_sentence

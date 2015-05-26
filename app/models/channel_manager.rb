@@ -34,8 +34,6 @@ class ChannelManager < ActiveRecord::Base
   validate :hotel_existence
   validates_inclusion_of :connector_type, in: TYPES, allow_blank: true
 
-  after_update :sync_rooms
-
   # stub
   def create_rooms
   end

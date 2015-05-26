@@ -20,6 +20,7 @@
 #  booking_id         :integer
 #  booking_hotel_id   :integer
 #  previo_id          :integer
+#  wubook_id          :integer
 #
 # Indexes
 #
@@ -46,7 +47,6 @@ class Room < ActiveRecord::Base
   has_and_belongs_to_many :facilities,
                           class_name: 'Facility::Room',
                           association_foreign_key: 'room_facility_id' # counter as PG trigger
-  # has_and_belongs_to_many :wubook_auths
 
   has_one :bedding
 

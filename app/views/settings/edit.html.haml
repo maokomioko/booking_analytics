@@ -47,10 +47,7 @@
                   %th= Room.human_attribute_name(:min_price)
                   %th= Room.human_attribute_name(:max_price)
                   - if can?(:update_connector_credentials, Room)
-                    %th Booking ID
-                    - if @hotel.channel_manager.connector_type == 'previo'
-                      %th Expedia ID
-                  %th
+                    %th= t('labels.select_room')
               %tbody
                 - @hotel.rooms.each do |room|
                   = fields_for 'rooms[]', room do |f|

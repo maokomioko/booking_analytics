@@ -34,15 +34,12 @@ class ChannelManagerController < ApplicationController
     begin
       if @channel_manager.update_attributes!(channel_manager_params)
         impressionist(@channel_manager)
-        redirect_to calendar_index_path
-        flash[:success] = t('messages.cm_verified')
+        redirect_to calendar_index_path, flash: { success: t('messages.cm_verified') }
       else
-        redirect_to edit_channel_manager_path(@channel_manager.id)
-        flash[:error] = t('messages.cm_update_error')
+        redirect_to edit_channel_manager_path(@channel_manager.id), flash: { error: t('messages.cm_update_error') }
       end
     rescue
-      redirect_to edit_channel_manager_path(@channel_manager.id)
-      flash[:error] = t('messages.cm_empty_tarif')
+      redirect_to edit_channel_manager_path(@channel_manager.id), flash: { error: t('messages.cm_empty_tarif') }
     end
   end
 

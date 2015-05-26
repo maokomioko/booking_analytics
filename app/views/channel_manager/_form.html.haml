@@ -13,7 +13,7 @@
     .form-group
       = f.label :password, t('labels.cm_password'), class: 'col-sm-4 control-label'
       .col-sm-3
-        = f.password_field :password, class: 'form-control'
+        = f.text_field :password, class: 'form-control'
 
     .form-group
       = f.label :lcode, t('labels.lcode'), class: 'col-sm-4 control-label'
@@ -35,12 +35,12 @@
     .form-group
       = f.label :non_refundable_pid, t('labels.non_refundable_tarif').html_safe, class: 'col-sm-4 control-label'
       .col-sm-3
-        = f.select :non_refundable_pid, options_for_select(@channel_manager.list_plans.sort), {}, class: 'form-control'
+        = f.select :non_refundable_pid, options_for_select(@channel_manager.list_plans.sort, f.object.non_refundable_pid), {}, class: 'form-control'
 
     .form-group
       = f.label :default_pid, t('labels.standard_tarif').html_safe, class: 'col-sm-4 control-label'
       .col-sm-3
-        = f.select :default_pid, options_for_select(@channel_manager.list_plans.sort.reverse), {}, class: 'form-control'
+        = f.select :default_pid, options_for_select(@channel_manager.list_plans.sort.reverse, f.object.default_pid), {}, class: 'form-control'
 
   .form-group
     .col-sm-3.col-sm-offset-4

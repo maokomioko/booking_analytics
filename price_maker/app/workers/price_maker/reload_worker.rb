@@ -7,7 +7,7 @@ module PriceMaker
     def perform(company_id)
       company = Company.find(company_id)
 
-      Hotel.where(booking_id: company.channel_managers.pluck(:booking_id)).each do |hotel|
+      Hotel.where(booking_id: company.channel_manager.booking_id).each do |hotel|
         next if hotel.current_job? && Sidekiq::Status.working?(hotel.current_job)
 
         if Sidekiq::Status.queued?(hotel.current_job)

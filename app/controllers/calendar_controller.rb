@@ -18,7 +18,7 @@ class CalendarController < ApplicationController
   private
 
   def set_channel_manager
-    @channel_manager = current_user.channel_managers.first
+    @channel_manager = current_user.channel_manager
     redirect_to new_channel_manager_path unless @channel_manager.present?
   end
 end

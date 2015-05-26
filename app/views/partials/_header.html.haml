@@ -23,7 +23,7 @@
               = link_to destroy_user_session_path, method: :delete do
                 %i.clip-exit
                 = t('auth.buttons.logout')
-        - if controller_name == 'calendar' && current_user && current_user.channel_managers.count > 0
+        - if controller_name == 'calendar' && current_user && current_user.channel_manager
           %li
             %a.sb-toggle{href: '#'}
               %i.fa.fa-outdent

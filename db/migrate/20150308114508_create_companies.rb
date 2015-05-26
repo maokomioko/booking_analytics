@@ -10,7 +10,6 @@ class CreateCompanies < ActiveRecord::Migration
 
     add_column :users, :company_id, :integer
     add_index :users, :company_id
-    remove_column :users, :wb_auth, :boolean, default: false
 
     remove_column :wubook_auths, :user_id, :integer
     add_column :wubook_auths, :company_id, :integer

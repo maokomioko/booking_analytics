@@ -3,10 +3,7 @@ class ChannelManagerController < ApplicationController
   before_filter :set_channel_manager, only: [:edit, :update]
 
   def new
-    unless current_user.company.wb_auth?
-      @channel_manager = ChannelManager.new
-    else redirect_to calendar_index_path, notice: t('messages.cm_already_added')
-    end
+    @channel_manager = ChannelManager.new
   end
 
   def create
@@ -14,7 +11,6 @@ class ChannelManagerController < ApplicationController
     @channel_manager.company = current_user.company
 
     if @channel_manager.save && wubook_auth_state
-      current_user.company.update_attribute(:wb_auth, true) unless current_user.company.wb_auth?
       redirect_to match_plans_channel_manager_path(id: @channel_manager.id)
     else
       flash[:error] = t('messages.cm_verification_error')

@@ -38,8 +38,8 @@
 #
 
 class User < ActiveRecord::Base
-  has_many :hotels, through: :channel_managers
-  has_many :channel_managers, through: :company
+  has_many :hotels, through: :channel_manager
+  has_one :channel_manager, through: :company
   has_many :actions
 
   belongs_to :company

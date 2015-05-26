@@ -18,7 +18,7 @@
               = render_flash
           = yield
 
-    = render 'partials/sidebar' if controller_name == 'calendar' && current_user && current_user.channel_managers.size > 0
+    = render 'partials/sidebar' if controller_name == 'calendar' && current_user && current_user.channel_manager
 
     #spinner_placeholder.hidden.hidden-print
       = render partial: 'partials/spinner'

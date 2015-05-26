@@ -8,9 +8,7 @@ class ActiveCompaniesWorker
 
   def perform
     Company.where("last_activity > current_timestamp - interval '30 minutes'").each do |company|
-      company.channel_managers.pluck(:id).each do |id|
-        DefaultRoomPriceSyncWorker.perform_async(id)
-      end
+      DefaultRoomPriceSyncWorker.perform_async(company.channel_manager.id)
     end
   end
 end

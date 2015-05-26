@@ -6,7 +6,7 @@ class RelatedHotelsCleanerWorker
   def perform(company_id)
     company = Company.find(company_id)
 
-    Hotel.where(booking_id: company.channel_managers.pluck(:booking_id)).each do |hotel|
+    Hotel.where(booking_id: company.channel_manager.booking_id).each do |hotel|
       hotel.related.clear
     end
   end

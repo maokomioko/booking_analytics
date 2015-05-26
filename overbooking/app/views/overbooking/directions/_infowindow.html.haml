@@ -18,6 +18,23 @@
       %span= hotel.class.human_attribute_name(:review_score)
       = hotel.review_score
 
+  - if block.present?
+    .space12
+
+    .col-sm-12
+      %table.table.table-condensed
+        %thead
+          %tr
+            %th= t('.room_name')
+            %th= t('.room_max_occupancy')
+            %th= t('.room.price')
+        %tbody
+          - block.data['block'].each do |room|
+            %tr
+              %td= room['name']
+              %td= room['max_occupancy']
+              %td= "€" + room['min_price']['price']
+
   .space12
 
   .col-sm-4

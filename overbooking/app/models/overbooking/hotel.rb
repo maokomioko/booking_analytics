@@ -20,5 +20,9 @@ module Overbooking
       query[query.length - 1] += ':*'
       query.join(' & ')
     end
+
+    def blocks
+      Overbooking::Block.where("(data->>'hotel_id')::integer = ?", booking_id)
+    end
   end
 end

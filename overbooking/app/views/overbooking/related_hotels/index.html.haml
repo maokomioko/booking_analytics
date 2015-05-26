@@ -33,3 +33,4 @@
                 = link_to [:edit, :related_hotel, id: hotel.booking_id],
                 class: 'btn btn-xs btn-teal tooltips' do
                   = icon('edit')
+    = paginate @hotels

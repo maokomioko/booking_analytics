@@ -8,6 +8,10 @@ module Overbooking
     def initialize(hotel_booking_id)
       @hotel = Overbooking::Hotel.find_by_booking_id(hotel_booking_id)
       @related = @hotel.related_hotels.includes(:related)
+      @blocks = Overbooking::BlockExtractor.new(
+          Overbooking::Block.for_hotels(@related.map{|r| r.related.booking_id})
+            .today
+      ).hotel_hash
     end
 
     def self.build(hotel_booking_id)
@@ -34,7 +38,11 @@ module Overbooking
     def marker_infowindow(hotel)
       ApplicationController.new.render_to_string(
           :partial => 'overbooking/directions/infowindow',
-          :locals => { hotel: hotel.related, related: hotel }
+          :locals => {
+            hotel: hotel.related,
+            related: hotel,
+            block: @blocks[hotel.related.booking_id.to_s]
+          }
       )
     end
   end

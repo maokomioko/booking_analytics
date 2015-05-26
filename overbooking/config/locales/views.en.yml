@@ -6,6 +6,9 @@ en:
         driving: Driving
         walking: Walking
         transit: Public transit
+        room_name: Room type
+        room_max_occupancy: Max people
+        room_price: Price
       show:
         header: Build your routes between hotels
     related_hotels:

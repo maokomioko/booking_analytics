@@ -9,7 +9,9 @@ module Overbooking
     append_after_action :add_flash_after_add, only: :add_related
 
     def index
-      @hotels = Overbooking::Hotel.accessible_by(current_engine_ability)
+      @hotels = Overbooking::Hotel
+                    .accessible_by(current_engine_ability)
+                    .page params[:page]
       current_engine_ability.authorize! :index, Overbooking::Hotel
 
       if @hotels.length == 1

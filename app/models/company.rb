@@ -29,5 +29,5 @@ class Company < ActiveRecord::Base
   mount_uploader :logo, AvatarUploader
 
   validates_presence_of :name
-  validates_numericality_of :bank_code, :bank_account, only_integer: true, allow_blank: true
+  validates :bank_code, :bank_account, numericality: true, allow_blank: true
 end

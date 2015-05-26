@@ -13,10 +13,13 @@
       .main-content
         .container
           = yield(:main_content_header)
-          #flash-container= render_flash
+          #flash-container
+            .col-sm-12
+              = render_flash
           = yield
 
     = render 'partials/sidebar' if controller_name == 'calendar' && current_user && current_user.channel_managers.size > 0
+
     #spinner_placeholder.hidden.hidden-print
       = render partial: 'partials/spinner'
       %p.loading_text= t('shared.loading')

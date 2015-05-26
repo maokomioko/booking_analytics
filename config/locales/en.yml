@@ -1,6 +1,6 @@
 en:
   meta:
-    title: "Hotel Commander | v 0.0.4 - preview"
+    title: "Hotel Commander | v 0.1.0"
     description: "Hotel revenue management software"
     author: "Hotel Commander"
   shared:
@@ -18,26 +18,31 @@ en:
     loading: "Loading..."
     just_moment: "Just a moment..."
     please_check_errors: "You have some form errors. Please check below."
-    submit: Submit
-    select_image: Select image
-    change: Change
-    update: Update
-    save: Save
-    remove: Remove
-    invited: Invited
-    edit: Edit
-    are_you_sure: Are you sure?
-    no_company: No company
+    submit: "Submit"
+    select_image: "Select image"
+    change: "Change"
+    update: "Update"
+    save: "Save"
+    remove: "Remove"
+    invited: "Invited"
+    edit: "Edit"
+    are_you_sure: "Are you sure?"
+    no_company: "Company isn't defined"
   errors:
     booking_id: "Hotel doesn't exist"
     hotel_name: "Hotel name can't be blank"
     price_value_missing: "No price"
-    unauthorized: Unauthorized
-    no_company: No attached company to this account
-    no_ch_manager: No channel manager defined
+    unauthorized: "Unauthorized"
+    no_company: "This account doesn't have any company"
+    no_ch_manager: "No channel manager defined"
   labels:
+    cm_login: "Your login for Channel Manager"
+    cm_password: "Your password for Channel Manager"
+    lcode: "WuBook LCode (Facility/Website tab at wubook administration)"
     booking_id: "Hotel ID (login) at Booking.com"
     hotel_name: "Name of your Hotel"
+    non_refundable_tarif: "Default <b>non-refundable</b> tarif"
+    standard_tarif: "Default tarif for <b>standard</b> rates"
   placeholders:
     zero_euro: "0 EUR"
   messages:
@@ -45,12 +50,15 @@ en:
     cm_already_added: "Only one channel manager can be added at this point."
     cm_verification_error: "Error! Please check entered credentials."
     cm_updated: "Settings where updated successfully!"
-    cm_update_error: Settings update failed!
+    cm_update_error: "Settings update failed!"
+    cm_empty_tarif: "Selected tarifs doesn't containt prices for all rooms!"
+    setup_tarif_p1: "Congatulations! You are almost set."
+    setup_tarif_p2: "Last thing left we need: <b>default (non virtual) tarif plans.</b>"
     prices_updated: "Suggested prices where applied successfully!"
     price_update_failed: "Error during prices update! Please contact technical support."
-    settings_updated: Settings updated successfully
-    company_created: Your company created successfully! Now you can invite new users to your company
-    company_updated: Company updated successfully!
+    settings_updated: "Settings updated successfully!"
+    company_created: "Your company created successfully! Now you can invite new users to your company."
+    company_updated: "Company updated successfully!"
     user_deleted: "User '%{email}' successfully deleted from system"
     room_updated: "Succesfully saved"
   devise:
@@ -105,10 +113,11 @@ en:
     buttons:
       login: "Log in"
       back_login: "Back to log in"
-      skip_channel_manager: "I don't have a Channel Manager"
       logout: "Log out"
       signup: "Sign up"
       new: "Create"
+      save_tarif_plans: "Save tarif plans"
+      submit_and_proceed_to_tarifs: "Proceed to tarif plans"
       edit: "Update settings"
       update: "Update settings"
   menu:

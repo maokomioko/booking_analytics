@@ -31,6 +31,9 @@ Rails.application.routes.draw do
     collection do
       post :update_prices
     end
+    member do
+      get :match_plans
+    end
   end
 
   resource :company, except: [:destroy] do

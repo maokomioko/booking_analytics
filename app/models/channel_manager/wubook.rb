@@ -23,14 +23,6 @@ class ChannelManager::Wubook < ChannelManager
     WubookConnector.new(login: login, password: password, lcode: lcode)
   end
 
-  def non_refundable_candidate
-    connector.get_plans[0]['name']
-  end
-
-  def standart_rate_candidate
-    connector.get_plans[1]['name']
-  end
-
   def create_rooms
     rooms_data = connector.get_rooms
     rooms_data.each do |rd|

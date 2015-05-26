@@ -34,12 +34,15 @@
 
 @import "print";
 
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: 200;
+}
+
 #helpers {
   display: none;
 }
 
 #flash-container {
   z-index: 9999;
-  position: absolute;
-  width: calc(100% - 255px);
+  position: relative;
 }

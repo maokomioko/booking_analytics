@@ -48,12 +48,12 @@
     .col-md-6
       .form-group
         = f.label :bank_name, class: 'control-label'
-        = f.text_field :bank_name, class: 'form-control with_validation'
+        = f.text_field :bank_name, class: 'form-control'
       .form-group
         = f.label :bank_code, class: 'control-label'
-        = f.text_field :bank_code, class: 'form-control number_validation'
+        = f.text_field :bank_code, class: 'form-control'
       .form-group
-        = f.label :bank_account, class: 'control-label number_validation'
+        = f.label :bank_account, class: 'control-label'
         = f.text_field :bank_account, class: 'form-control'
     .col-md-12
       %hr

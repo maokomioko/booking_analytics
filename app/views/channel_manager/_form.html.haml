@@ -1,36 +1,55 @@
 = form_for @channel_manager, as: :channel_manager, url: { action: (@channel_manager.new_record? ? :create : :update) }, html: { class: 'form-horizontal' } do |f|
-  .form-group
-    = f.label :connector_type, class: 'col-sm-2 control-label'
-    .col-sm-5
-      = f.select :connector_type, options_for_cm_types(@channel_manager.connector_type), {}, class: 'form-control'
+  - unless action_name == 'match_plans'
+    .form-group
+      = f.label :connector_type, class: 'col-sm-4 control-label'
+      .col-sm-3
+        = f.select :connector_type, options_for_cm_types(@channel_manager.connector_type), {}, class: 'form-control'
+
+    .form-group
+      = f.label :login, t('labels.cm_login'), class: 'col-sm-4 control-label'
+      .col-sm-3
+        = f.text_field :login, class: 'form-control'
+
+    .form-group
+      = f.label :password, t('labels.cm_password'), class: 'col-sm-4 control-label'
+      .col-sm-3
+        = f.password_field :password, class: 'form-control'
+
+    .form-group
+      = f.label :lcode, t('labels.lcode'), class: 'col-sm-4 control-label'
+      .col-sm-3
+        = f.text_field :lcode, class: 'form-control'
+
+    .form-group
+      = f.label :booking_id, t('labels.booking_id'), class: 'col-sm-4 control-label'
+      .col-sm-3
+        = f.text_field :booking_id, class: 'form-control'
+
+    .form-group
+      = f.label :hotel_name, t('labels.hotel_name'), class: 'col-sm-4 control-label'
+      .col-sm-3
+        = f.text_field :hotel_name, class: 'form-control'
+
+  - if %w(update edit match_plans).include?(action_name)
+    = f.hidden_field :connector_type, value: @channel_manager.connector_type if action_name == 'match_plans'
+    .form-group
+      = f.label :non_refundable_pid, t('labels.non_refundable_tarif').html_safe, class: 'col-sm-4 control-label'
+      .col-sm-3
+        = f.select :non_refundable_pid, options_for_select(@channel_manager.list_plans.sort), {}, class: 'form-control'
+
+    .form-group
+      = f.label :default_pid, t('labels.standard_tarif').html_safe, class: 'col-sm-4 control-label'
+      .col-sm-3
+        = f.select :default_pid, options_for_select(@channel_manager.list_plans.sort.reverse), {}, class: 'form-control'
 
   .form-group
-    = f.label :login, class: 'col-sm-2 control-label'
-    .col-sm-5
-      = f.text_field :login, class: 'form-control'
-
-  .form-group
-    = f.label :password, class: 'col-sm-2 control-label'
-    .col-sm-5
-      = f.password_field :password, class: 'form-control'
-
-  .form-group
-    = f.label :lcode, class: 'col-sm-2 control-label'
-    .col-sm-5
-      = f.text_field :lcode, class: 'form-control'
-
-  .form-group
-    = f.label :booking_id, t('labels.booking_id'), class: 'col-sm-2 control-label'
-    .col-sm-5
-      = f.text_field :booking_id, class: 'form-control'
-
-  .form-group
-    = f.label :hotel_name, t('labels.hotel_name'), class: 'col-sm-2 control-label'
-    .col-sm-5
-      = f.text_field :hotel_name, class: 'form-control'
-
-  .form-group
-    .col-sm-5.col-sm-offset-2
+    .col-sm-3.col-sm-offset-4
       = f.button class: 'btn btn-primary', type: :submit do
-        = t("auth.buttons.#{ action_name }")
+        - case action_name
+        - when 'match_plans'
+          = t('auth.buttons.save_tarif_plans')
+        - when 'edit'
+          = t('shared.update')
+        - else
+          = t('auth.buttons.submit_and_proceed_to_tarifs')
         = icon('arrow-circle-right')

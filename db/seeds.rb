@@ -7,5 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Hotel::BASE_FACILITIES.each do |facility|
-  HotelFacility.find_or_create_by(name: facility)
+  Facility::Hotel.find_or_create_by(name: facility, id: Random.rand(10000))
 end

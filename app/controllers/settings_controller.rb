@@ -21,7 +21,9 @@ class SettingsController < ApplicationController
     if @setting.save
       flash[:success] = I18n.t('messages.settings_updated')
       impressionist(@setting)
-      @setting.hotel.channel_manager.sync_rooms
+
+      force_fetch_prices_and_rooms
+
       redirect_to [:settings] unless request.xhr?
     else
       flash[:alert] = @setting.errors.full_messages.to_sentence
@@ -35,6 +37,13 @@ class SettingsController < ApplicationController
   end
 
   protected
+
+  def force_fetch_prices_and_rooms
+    cm = @setting.hotel.channel_manager
+
+    cm.sync_rooms
+    cm.try(:fill_prices)
+  end
 
   def settings_params
     # HACK for select2 empty value

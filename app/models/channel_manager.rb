@@ -98,9 +98,10 @@ class ChannelManager < ActiveRecord::Base
   # create rooms and fill initial prices
   def sync_rooms
     create_rooms if hotel.rooms.size.zero?
-    hotel.rooms.each do |room|
+    hotel.rooms.real.each do |room|
       room_id = room.send(connector_room_id_key)
       setup_room_prices(room_id, room.id)
+      room.fill_prices
     end
   end
 

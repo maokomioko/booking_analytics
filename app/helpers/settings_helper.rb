@@ -17,13 +17,6 @@ module SettingsHelper
     options_for_select(options, default)
   end
 
-  def options_for_rating(default = nil)
-    default ||= DefaultSetting.default[:user_ratings]
-    options = Setting::USER_RATINGS
-
-    options_for_select(options, default)
-  end
-
   def options_for_properties(default = nil)
     default ||= DefaultSetting.default[:property_types]
     options = Hotel::OLD_PROPERTY_TYPES.map do |property, _id|

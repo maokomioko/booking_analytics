@@ -4,6 +4,7 @@ require 'previo_connector/ar'
 require 'previo_connector/bc'
 require 'previo_connector/br'
 require 'previo_connector/previo'
+require 'previo_connector/room_collection'
 
 class PrevioConnector
   attr_accessor :ar, :bc, :br, :previo
@@ -27,7 +28,7 @@ class PrevioConnector
       resp['roomKinds']['objectKind'] = [rooms]
     end
 
-    resp
+    RoomCollection.new(resp['roomKinds']['objectKind'])
   end
 
   def get_plans

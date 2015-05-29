@@ -1,3 +1,5 @@
+require 'wubook_connector/room_collection'
+
 class WubookConnector
   require 'uri'
   require 'net/http'
@@ -21,7 +23,7 @@ class WubookConnector
 
   def get_rooms
     response = @server.call('fetch_rooms', @token, @lcode)
-    set_response(response)
+    RoomCollection.new(set_response(response))
   end
 
   def get_plans

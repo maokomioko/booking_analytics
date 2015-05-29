@@ -1,8 +1,26 @@
 class @Settings
   constructor: ->
+    @initUserRatingSlider()
     @roomsSubmit()
     @roomsAutoSave()
     @settingsSubmit()
+
+  initUserRatingSlider: ->
+    $slider = $('#user-rating-slider')
+
+    $slider.rangeSlider
+      bounds:
+        min: 0
+        max: 100
+      defaultValues:
+        min: $('#user-rating-from').val()
+        max: $('#user-rating-to').val()
+      step: 1
+      formatter: (val) -> val / 10
+
+    $slider.bind 'userValuesChanged', (e, data) ->
+      $('#user-rating-from').val(data.values.min)
+      $('#user-rating-to').val(data.values.max)
 
   roomsSubmit: ->
     $form = $('.rooms-form')

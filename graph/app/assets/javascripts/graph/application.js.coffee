@@ -2,7 +2,6 @@
 #= require morris
 #= require moment
 #= require moment/en-gb
-#= require jQAllRangeSliders-min
 
 graphReady = ->
   # strict

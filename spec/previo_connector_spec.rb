@@ -14,7 +14,14 @@ describe PrevioConnector do
     it 'fetches room list' do
       VCR.use_cassette('get_rooms', record: :once) do
         results = connector.get_rooms
-        expect(results['roomKinds']['objectKind'].count).to be > 0
+        expect(results.rooms.count).to be > 0
+      end
+    end
+
+    it 'returns RoomCollection' do
+      VCR.use_cassette('get_rooms', record: :once) do
+        results = connector.get_rooms
+        expect(results).to be_kind_of PrevioConnector::RoomCollection
       end
     end
   end
@@ -81,4 +88,36 @@ end
 
 describe PrevioConnector::BR do
   it { expect(described_class.new).to be_kind_of PrevioConnector::Client }
+end
+
+describe PrevioConnector::RoomCollection do
+  let(:connector) do
+    PrevioConnector.new(
+        login: 'login',
+        password: 'password',
+        hotel_id: 666
+    )
+  end
+
+  let(:object) do
+    VCR.use_cassette('get_rooms', record: :once) do
+      connector.get_rooms
+    end
+  end
+
+  describe 'initialize' do
+    it 'assigns @rooms' do
+      expect(described_class.new({ test: 'test' }).rooms).to eq({ test: 'test'})
+    end
+  end
+
+  describe 'name_id_mapping' do
+    it 'returns Array' do
+      expect(object.name_id_mapping).to be_kind_of(Array)
+    end
+
+    it 'contains room names and ids' do
+      expect(object.name_id_mapping).to eq [['Standart Solo', '500794'], ['Standard Double', '499788']]
+    end
+  end
 end

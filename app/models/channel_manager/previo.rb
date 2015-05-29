@@ -31,7 +31,7 @@ class ChannelManager::Previo < ChannelManager
     rooms_data = connector.get_rooms
     return unless rooms_data['roomKinds'].present?
 
-    rooms_data['roomKinds']['objectKind'].each do |rd|
+    rooms_data.rooms.each do |rd|
       room = Room.find_by_previo_id(rd['obkId']) || hotel.rooms.new
 
       room.name = rd['name']

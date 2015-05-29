@@ -29,7 +29,7 @@ class ChannelManager::Wubook < ChannelManager
 
   def create_rooms
     rooms_data = connector.get_rooms
-    rooms_data.each do |rd|
+    rooms_data.rooms.each do |rd|
       if [0, nil, ''].include? rd['subroom']
         room = hotel.rooms.new
 

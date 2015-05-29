@@ -36,6 +36,8 @@
 
 #= require jquery.validate
 
+#= require jQAllRangeSliders-min
+
 #= require graph/application
 #= require overbooking/application
 

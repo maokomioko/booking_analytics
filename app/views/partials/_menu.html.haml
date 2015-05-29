@@ -18,9 +18,6 @@
   -#       %i.icon-arrow
   -#       %span.selected
   -#     %ul.sub-menu
-  -#       %li{ data: { menu: 'overbooking:related_hotels:index overbooking:related_hotels:edit' } }
-  -#         = link_to [overbooking, :related_hotels] do
-  -#           %span.title= t('menu.overbooking.related')
   -#       %li{ data: { menu: 'overbooking:directions:index overbooking:directions:show' } }
   -#         = link_to [overbooking, :directions], "data-no-turbolink" => true do
   -#           %span.title= t('menu.overbooking.directions')
@@ -56,3 +53,7 @@
         %li{ data: { menu: 'settings:edit settings:new settings:index' } }
           = link_to [:settings] do
             %span.title= t('menu.worker')
+      - if defined?(Overbooking::Engine)
+        %li{ data: { menu: 'overbooking:related_hotels:index overbooking:related_hotels:edit' } }
+          = link_to [overbooking, :related_hotels] do
+            %span.title= t('menu.overbooking.related')

@@ -25,7 +25,7 @@ class RoomsController < ApplicationController
     attributes = %i(max_price min_price)
 
     if can?(:update_connector_credentials, Room)
-      attributes += %i(booking_id previo_id)
+      attributes += %i(booking_id previo_id wubook_id)
     end
 
     attributes

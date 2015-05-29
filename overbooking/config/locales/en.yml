@@ -3,7 +3,7 @@ en:
     shared:
       edit: Edit
       remove: Remove
-      view_in_web: View in Web
+      view_in_web: Open Web Page
       partner: Partner
     messages:
       success_remove_related: "Successfull remove: <strong>%{list}</strong>"

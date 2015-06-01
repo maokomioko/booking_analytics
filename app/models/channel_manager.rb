@@ -47,7 +47,11 @@ class ChannelManager < ActiveRecord::Base
     if connector_type.include?('wubook')
       plans.collect{|x| [x['name'], x['id']]}
     else
-      plans.collect{|x| [x['name'], x['priId']]}
+      name = Proc.new do |plan|
+        "#{ plan['priId'] }, #{ plan['from'] } - #{ plan['to'] }"
+      end
+
+      plans.collect{|x| [name.call(x), x['priId']]}
     end
   end
 

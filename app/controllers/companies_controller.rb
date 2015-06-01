@@ -1,6 +1,8 @@
 class CompaniesController < ApplicationController
   before_filter :load_company, only: [:show, :edit, :update]
   skip_before_filter :company_present, only: [:new, :create]
+  skip_before_filter :ch_manager_present, only: [:new, :create]
+
   load_and_authorize_resource :company, singleton: true
 
   def show

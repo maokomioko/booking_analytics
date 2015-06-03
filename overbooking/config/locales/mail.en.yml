@@ -1,0 +1,5 @@
+en:
+  overbooking:
+    directions_mailer:
+      notify_partner:
+        subject: "Client from %{from}"

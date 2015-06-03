@@ -1,9 +1,10 @@
 Overbooking::Engine.routes.draw do
-  root 'welcome#index'
+  root 'related_hotels#index'
 
   resources :directions do
     member do
       get :markers
+      post 'notify_partner/:partner_id', action: :notify_partner, as: :notify_partner
     end
   end
 

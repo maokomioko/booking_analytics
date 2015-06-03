@@ -1,10 +1,4 @@
-class UserMailer < ActionMailer::Base
-  include Roadie::Rails::Automatic
-
-  default from: 'no-reply@hotelcommander.net'
-
-  layout 'email'
-
+class UserMailer < DefaultMailer
   def new_in_company(user_id)
     @user    = User.find(user_id)
     @company = @user.company

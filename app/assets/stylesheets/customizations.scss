@@ -35,3 +35,15 @@
     }
   }
 }
+
+[data-page='sessions:new'],
+[data-page='sessions:create'],
+[data-page='registrations:new'],
+[data-page='registrations:create'],
+[data-page='passwords:new'],
+[data-page='passwords:create'] {
+  #flash-container {
+    position: static;
+    width: 100%;
+  }
+}

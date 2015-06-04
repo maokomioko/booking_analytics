@@ -40,6 +40,7 @@
   .col-sm-4
     %span= t('.trace_route')
   .col-sm-8
-    .btn-group.btn-group-sm.routes{ data: { lat: hotel.latitude.to_f, lng: hotel.longitude.to_f } }
+    .btn-group.btn-group-sm.routes{ data: { lat: hotel.latitude.to_f, lng: hotel.longitude.to_f, booking_id: hotel.booking_id, notify_partner_url: Overbooking::Engine.routes.url_helpers.notify_partner_direction_path(id: current_hotel.booking_id, partner_id: hotel.booking_id) } }
       - %w(driving walking transit).each do |travel_mode|
-        %a.btn.btn-default(href="#" data-travel-mode="#{ travel_mode.upcase }")= t(".#{ travel_mode }")
+        %a.btn.btn-default(href="#" data-travel-mode="#{ travel_mode.upcase }" data-print-header="#{ t(".print_header.#{ travel_mode }", destination: hotel.name) }")
+          = t(".#{ travel_mode }")

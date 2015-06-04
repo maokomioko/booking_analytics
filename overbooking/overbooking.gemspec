@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'google_directions', '>= 0.1.6'
   s.add_dependency 'haml-rails', '>= 0.9.0'
   s.add_dependency 'kaminari', '>= 0.16.3'
+  s.add_dependency 'roadie-rails', '>= 1.0.6'
   s.add_dependency 'underscore-rails', '>= 1.8.2'
 
   s.add_development_dependency 'pg'
@@ -37,4 +38,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'ffaker'
+  s.add_development_dependency 'letter_opener', '>= 1.3'
 end

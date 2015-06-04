@@ -2,6 +2,7 @@ class @Directions
   constructor: ->
     @initGlobals()
     @traceRoute()
+    @initPrint()
 
   initGlobals: ->
     $.getJSON location.toString(), {}, (hotelJson) ->
@@ -18,7 +19,6 @@ class @Directions
             width: 64
             height: 64
 
-
         $.getJSON window.hotel.markers_path, {}, (markersJson) ->
           markers = map.addMarkers(markersJson)
           map.bounds.extendWith(markers)
@@ -32,9 +32,24 @@ class @Directions
   traceRoute: ->
     $(document).on 'click', '.routes a', (e) ->
       e.preventDefault()
-      console.log('click')
+
       $parent = $(@).parents('.routes')
       travelMode = $(@).data('travelMode')
+      printHeader = $(@).data('printHeader')
+
+      window.currentHotel =
+        id: $parent.data('bookingId')
+        notifyPartnerUrl: $parent.data('notifyPartnerUrl')
+
+      preparePrint = (data) ->
+        buildStaticMap(data)
+        $('.page-header h1.visible-print').html(printHeader)
+        $('#print-button').removeClass('hidden')
+
+      buildStaticMap = (data) ->
+        polyline = data.routes[0].overview_polyline
+        $img = $('#static-map')
+        $img.attr('src', 'https://maps.googleapis.com/maps/api/staticmap?size=800x500&path=weight:5%7Ccolor:red%7Cenc:' + polyline)
 
       request =
         origin: new google.maps.LatLng(window.hotel.lat, window.hotel.lng)
@@ -47,4 +62,19 @@ class @Directions
           directionsDisplay.setMap(map.getMap())
           directionsDisplay.setPanel document.getElementById("directions-panel")
 
+          preparePrint(response)
+
       return
+
+  initPrint: ->
+    $(document).on 'click', '#print-button', (e) ->
+      e.preventDefault()
+
+      if window.currentHotel
+        $.ajax
+          url: window.currentHotel.notifyPartnerUrl
+          method: 'POST'
+          data:
+            map: $('#static-map').attr('src')
+          success: ->
+            window.print()

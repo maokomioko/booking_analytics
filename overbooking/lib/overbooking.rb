@@ -11,6 +11,9 @@ module Overbooking
   mattr_accessor :parent_controller
   @@parent_controller = 'ApplicationController'
 
+  mattr_accessor :default_mailer
+  @@default_mailer = '::ActionMailer::Base'
+
   def self.setup
     yield self
   end

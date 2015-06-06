@@ -1,4 +1,4 @@
-class PrevioConnector
+class PrevioConnector < AbstractConnector
   class RoomCollection
     attr_accessor :rooms
 

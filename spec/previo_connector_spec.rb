@@ -4,9 +4,9 @@ require 'previo_connector'
 describe PrevioConnector do
   let(:connector) do
     described_class.new(
-        login: 'login',
-        password: 'password',
-        hotel_id: 666
+      login: 'login',
+      password: 'password',
+      hotel_id: 666
     )
   end
 
@@ -43,6 +43,15 @@ describe PrevioConnector do
       end
     end
   end
+
+  describe 'get_reservations' do
+    before(:each){ VCR.insert_cassette('search_reservations') }
+    after(:each){ VCR.eject_cassette }
+
+    it_behaves_like 'a reservation JSON response' do
+      let(:hash) { connector.get_reservations.first }
+    end
+  end
 end
 
 describe PrevioConnector::Client do
@@ -73,6 +82,14 @@ describe PrevioConnector::Previo do
     it 'returns array' do
       VCR.use_cassette('get_plans', record: :once) do
         expect(client.get_rates({ 'hotId' => 666 })).to be_a(Array)
+      end
+    end
+  end
+
+  describe 'search_reservations' do
+    it 'returns array' do
+      VCR.use_cassette('search_reservations', record: :once) do
+        expect(client.search_reservations({ 'hotId' => 666 })).to be_a(Array)
       end
     end
   end

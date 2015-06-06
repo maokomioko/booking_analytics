@@ -1,4 +1,4 @@
-class WubookConnector
+class WubookConnector < AbstractConnector
   class RoomCollection
     attr_accessor :rooms
 

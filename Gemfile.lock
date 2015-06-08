@@ -275,6 +275,8 @@ GEM
     google-analytics-turbolinks (0.0.4)
     google_directions (0.1.6.2)
       nokogiri (>= 1.4.1)
+    google_places (0.32.0)
+      httparty (~> 0.13.1)
     haml (4.0.6)
       tilt
     haml-rails (0.9.0)
@@ -865,6 +867,7 @@ DEPENDENCIES
   geocoder
   globalize!
   google-analytics-turbolinks
+  google_places
   graph!
   haml-rails
   here_places!

@@ -44,6 +44,8 @@ Rails.application.routes.draw do
     put :bulk_update, on: :collection
   end
 
+  resources :reservations, only: [:show, :index]
+
   resources :settings, only: [:index, :edit, :update]
 
   root to: 'calendar#index'

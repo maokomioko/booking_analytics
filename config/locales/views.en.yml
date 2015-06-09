@@ -32,6 +32,20 @@ en:
         password_tip: "leave blank if you don't want to change it"
         my_avatar: My avatar
         remove_avatar: Remove avatar from system
+  reservations:
+    index:
+      header: Your hotel reservations
+      thead:
+        reservation_period: Reservation period
+        price: Price
+        room: Room
+        occupancy: Occupancy
+        contacts: Contacts
+      total: Total
+      room: room
+      adults_count: Adults
+      children_count: Children
+      show_available_hotels: Show available hotels
   settings:
     edit:
       header: Algorithm fine-tuning

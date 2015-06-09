@@ -79,6 +79,7 @@ en:
       set_prices: "Manual override"
       manual_input: "<strong>Enter</strong> new price"
       cal: "Calendar"
+      reservations: "Reservations"
       analytics: "Analytics"
       overbooking: "Overbooking"
       my_company: "My company"

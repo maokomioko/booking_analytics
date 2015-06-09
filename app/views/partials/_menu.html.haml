@@ -4,6 +4,12 @@
       %i.clip-calendar-3
       %span.title= t('calendar.menu.cal')
       %span.selected
+  - if current_user.channel_manager.present?
+    %li{ data: { menu: 'reservations:index' } }
+      = link_to [main_app, :reservations] do
+        %i.clip-book
+        %span.title= t('calendar.menu.reservations')
+        %span.selected
   - if defined?(Graph::Engine)
     %li{ data: { menu: 'graph:hotels:index' } }
       = link_to graph.root_url do

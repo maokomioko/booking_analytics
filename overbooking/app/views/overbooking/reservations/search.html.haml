@@ -19,34 +19,36 @@
         %dd= params[:occupancy]
 
 .row
-  .col-sm-12
+  .col-sm-6
     %h2= t('.cheap')
 
-    %table.table.table-hover
-      %thead
-        %tr
-          %th
-          %th
-          %th
+    %table.table
       %tbody
-        - @blocks[0].each do |block|
+        - @blocks[0].each do |_booking_id, hotels|
           %tr
-            %td= block[:hotel][:name]
-            %td= block[:room]['name']
-            %td= humanized_money_with_symbol block[:room]['min_price']['price'].to_money('EUR')
-
-  .col-sm-12
+            %td(colspan="2")
+              %h4
+                = hotels.first[:hotel][:name]
+                - if hotels.first[:hotel][:address].present?
+                  = "(" + hotels.first[:hotel][:address] + ")"
+          - hotels.each do |block|
+            %tr
+              %td= block[:room]['name']
+              %td= humanized_money_with_symbol block[:room]['min_price']['price'].to_money('EUR')
+.row
+  .col-sm-6
     %h2= t('.expensive')
 
     %table.table
-      %thead
-        %tr
-          %th
-          %th
-          %th
       %tbody
-        - @blocks[1].each do |block|
+        - @blocks[0].each do |_booking_id, hotels|
           %tr
-            %td= block[:hotel][:name]
-            %td= block[:room]['name']
-            %td= humanized_money_with_symbol block[:room]['min_price']['price'].to_money('EUR')
+            %td(colspan="2")
+              %h4
+                = hotels.first[:hotel][:name]
+                - if hotels.first[:hotel][:address].present?
+                  = "(" + hotels.first[:hotel][:address] + ")"
+          - hotels.each do |block|
+            %tr
+              %td= block[:room]['name']
+              %td= humanized_money_with_symbol block[:room]['min_price']['price'].to_money('EUR')

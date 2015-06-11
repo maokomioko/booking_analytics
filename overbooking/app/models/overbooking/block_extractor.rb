@@ -26,7 +26,7 @@ module Overbooking
     # +sort+ - Boolean. Sort by price. Cheaper first
     #
     # Array element schema:
-    # {
+    #  booking_id: {
     #    room: Overbooking::Block.data['block'][],
     #    block: Overbooking::Block
     #    hotel: {
@@ -42,8 +42,8 @@ module Overbooking
       end
 
       result = @blocks.each_with_object([]) do |block, array|
-        array[0] ||= [] # cheap rooms
-        array[1] ||= [] # expensive rooms
+        array[0] ||= {} # cheap rooms
+        array[1] ||= {} # expensive rooms
 
         hotel = hotels[block.data['hotel_id']] || OpenStruct.new({
           booking_id: block.data['hotel_id'],
@@ -65,16 +65,21 @@ module Overbooking
           }
 
           if price >= min_price
-            array[0] << result_object
+            array[0][hotel.booking_id] ||= []
+            array[0][hotel.booking_id] << result_object
           else
-            array[1] << result_object
+            array[1][hotel.booking_id] ||= []
+            array[1][hotel.booking_id] << result_object
           end
         end
       end
 
       if sort
-        result[0].sort_by! { |v| v[:room]['min_price']['price'].to_f }
-        result[1].sort_by! { |v| v[:room]['min_price']['price'].to_f }
+        result.each_with_index do |part, i|
+          part.each do |k, _block|
+            result[i][k].sort_by! { |v| v[:room]['min_price']['price'].to_f }
+          end
+        end
       end
 
       result

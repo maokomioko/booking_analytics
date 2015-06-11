@@ -38,12 +38,12 @@ module Overbooking
     end
 
     def enable_overbooking
-      hotel_ids = Hotel.where(booking_id: params[:ids]).pluck(:id)
+      hotel_ids = Overbooking::Hotel.where(booking_id: params[:ids]).pluck(:id)
       @hotel.related_hotels.where(related_id: hotel_ids).update_all(is_overbooking: true)
     end
 
     def disable_overbooking
-      hotel_ids = Hotel.where(booking_id: params[:ids]).pluck(:id)
+      hotel_ids = Overbooking::Hotel.where(booking_id: params[:ids]).pluck(:id)
       @hotel.related_hotels.where(related_id: hotel_ids).update_all(is_overbooking: false)
     end
 

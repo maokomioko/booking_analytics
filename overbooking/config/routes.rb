@@ -17,4 +17,10 @@ Overbooking::Engine.routes.draw do
       get :search
     end
   end
+
+  resources :reservations do
+    collection do
+      get :search
+    end
+  end
 end

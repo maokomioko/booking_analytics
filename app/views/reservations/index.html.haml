@@ -38,4 +38,4 @@
               = [reservation[:contact_email], reservation[:contact_phone]].select(&:present?).to_sentence
             - if defined?(Overbooking::Engine)
               %td
-                = link_to t('.show_available_hotels'), '#', class: 'btn btn-teal'
+                = link_to t('.show_available_hotels'), link_for_search_reservation(reservation), class: 'btn btn-teal'

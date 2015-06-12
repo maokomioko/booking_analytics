@@ -1,4 +1,6 @@
 %tr(data-room-id="#{ f.object.id }")
+  %td= f.object.booking_id
+  %td= f.object.wubook_id || f.object.previo_id
   %td= f.object.name
   %td.edit-price
     .input-group

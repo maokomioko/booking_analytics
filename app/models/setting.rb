@@ -13,6 +13,8 @@
 #  districts          :text             default([]), is an Array
 #  hotel_id           :integer
 #  strategy           :string
+#  booking_page       :integer
+#  page_position      :integer
 #
 # Indexes
 #
@@ -45,10 +47,18 @@ class Setting < ActiveRecord::Base
   validates :property_types, array: { inclusion: { in: Hotel::OLD_PROPERTY_TYPES.keys } }
 
   def user_ratings_range
-    @user_ratings_range || OpenStruct.new(
-      from: user_ratings.map(&:to_f).min * 10,
-      to: user_ratings.map(&:to_f).max * 10
-    )
+    @user_ratings_range ||
+    begin
+      OpenStruct.new(
+        from: user_ratings.map(&:to_f).min * 10,
+        to: user_ratings.map(&:to_f).max * 10
+      )
+    rescue
+      OpenStruct.new(
+        from: 1,
+        to: 100
+      )
+    end
   end
 
   def user_ratings_range= (hash)

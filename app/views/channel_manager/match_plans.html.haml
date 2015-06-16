@@ -1,7 +1,11 @@
-.col-sm-12
-  .page-header
-    %h3
-      %p= t('messages.setup_tarif_p1').html_safe
-      %p= t('messages.setup_tarif_p2').html_safe
+= content_for :main_content_header do
+  .row
+    .col-sm-12
+      .page-header
+        %h3
+          %p= t('messages.setup_tarif_p1').html_safe
+          %p= t('messages.setup_tarif_p2').html_safe
 
-= render partial: 'form'
+.row
+  .col-sm-12
+    = render partial: 'form'

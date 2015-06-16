@@ -41,6 +41,7 @@ module Overbooking
           :locals => {
             hotel: hotel.related,
             related: hotel,
+            current_hotel: @hotel,
             block: @blocks[hotel.related.booking_id.to_s]
           }
       )

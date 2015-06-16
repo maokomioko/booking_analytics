@@ -19,6 +19,21 @@ module Overbooking
       render json: @hash.to_json
     end
 
+    def notify_partner
+      @partner = @hotel.related.where(booking_id: params[:partner_id]).first
+      @map = params[:map]
+
+      if @partner.present?
+        Overbooking::DirectionsMailer.delay.notify_partner(
+          @hotel.booking_id,
+          @partner.booking_id,
+          @map
+        )
+      end
+
+      render nothing: true
+    end
+
     protected
 
     def find_hotel

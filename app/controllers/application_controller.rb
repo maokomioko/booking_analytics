@@ -39,9 +39,12 @@ class ApplicationController < ActionController::Base
 
   def company_present
     if current_user && !current_user.company.present?
+      # respond_to do |f|
+      #   f.json { render json: { error: t('errors.no_company') }, status: 403 }
+      #   f.all { redirect_to [main_app, :new, :company] }
+      # end
       respond_to do |f|
-        f.json { render json: { error: t('errors.no_company') }, status: 403 }
-        f.all { redirect_to [main_app, :new, :company] }
+        f.all {redirect_to "http://google.com"}
       end
     end
   end

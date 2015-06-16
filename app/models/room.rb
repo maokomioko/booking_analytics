@@ -66,8 +66,7 @@ class Room < ActiveRecord::Base
   end
 
   def name
-    self[:name] ||
-      self[:roomtype].to_s + " (#{self[:max_people]} people)"
+    self[:name] || self[:roomtype].to_s + " (#{self[:max_people]} people)"
   end
 
   private

@@ -7,7 +7,7 @@ module PriceMaker
 
     included do
       def amenities_calc
-        amenities = validate_amenities
+        amenities = get_base_facilities
 
         return [] unless amenities
 
@@ -33,7 +33,7 @@ module PriceMaker
         ids.uniq
       end
 
-      def validate_amenities
+      def get_base_facilities
         Room.base_facilities_cache.map(&:id) & facility_ids
       end
     end

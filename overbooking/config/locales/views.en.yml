@@ -6,11 +6,16 @@ en:
         driving: Driving
         walking: Walking
         transit: Public transit
+        print_header:
+          driving: "Driving route to %{destination}"
+          walking: "Walking route to %{destination}"
+          transit: "Public transit route to %{destination}"
         room_name: Room type
         room_max_occupancy: Max people
         room_price: Price
       show:
         header: Build your routes between hotels
+        print: Print route
     related_hotels:
       index:
         header: Select your hotel
@@ -22,3 +27,11 @@ en:
         action_with_selected: Action with selected
         become_partner: Become overbooking partner
         remove_partner: Disable partnership
+    reservations:
+      search:
+        header: "Free rooms in overbooking partner's hotels"
+        reservation_period: Reservation period
+        price: Price
+        occupancy: Occupancy
+        cheap: Cheap
+        expensive: Expensive

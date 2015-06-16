@@ -13,6 +13,8 @@
 #  districts          :text             default([]), is an Array
 #  hotel_id           :integer
 #  strategy           :string
+#  booking_page       :integer
+#  page_position      :integer
 #
 # Indexes
 #
@@ -29,6 +31,8 @@ class Setting < ActiveRecord::Base
 
   USER_RATINGS = (0..100).to_a.map { |n| (n.to_f / 10).to_s }.freeze
 
+  attr_accessor :user_ratings_range
+
   is_impressionable
 
   belongs_to :company
@@ -41,6 +45,27 @@ class Setting < ActiveRecord::Base
   validates :stars, array: { inclusion: { in: STARS } }
   validates :user_ratings, array: { inclusion: { in: USER_RATINGS } }
   validates :property_types, array: { inclusion: { in: Hotel::OLD_PROPERTY_TYPES.keys } }
+
+  def user_ratings_range
+    @user_ratings_range ||
+    begin
+      OpenStruct.new(
+        from: user_ratings.map(&:to_f).min * 10,
+        to: user_ratings.map(&:to_f).max * 10
+      )
+    rescue
+      OpenStruct.new(
+        from: 1,
+        to: 100
+      )
+    end
+  end
+
+  def user_ratings_range= (hash)
+    @user_ratings_range = OpenStruct.new hash
+    range = user_ratings_range.from..user_ratings_range.to
+    self[:user_ratings] = range.to_a.map{ |x| (x.to_f / 10).to_s }
+  end
 
   private
 

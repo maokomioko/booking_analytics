@@ -1,4 +1,6 @@
-class WubookConnector
+require 'wubook_connector/room_collection'
+
+class WubookConnector < AbstractConnector
   require 'uri'
   require 'net/http'
   require 'xmlrpc/client'
@@ -21,7 +23,7 @@ class WubookConnector
 
   def get_rooms
     response = @server.call('fetch_rooms', @token, @lcode)
-    set_response(response)
+    RoomCollection.new(set_response(response))
   end
 
   def get_plans
@@ -59,6 +61,32 @@ class WubookConnector
       end
     else
       cache.fetch('wb_token')
+    end
+  end
+
+  def get_reservations(from = Date.today, to = 3.month.from_now.to_date)
+    response = @server.call(
+        'fetch_bookings',
+        @token,
+        @lcode,
+        format_date(from),
+        format_date(to)
+    )
+
+    set_response(response).map do |r|
+      {
+        arrival: r['date_arrival'].to_datetime,
+        deparute: r['date_departure'].to_datetime,
+        created_at: r['date_received'].to_datetime,
+        room_ids: r['rooms'].map(&:to_i),
+        room_amount: 1,
+        price: r['amount'].to_f.to_money('EUR'),
+        status: r['status'],
+        adults: r['men'].to_i,
+        children: r['children'].to_i,
+        contact_phone: r['customer_phone'],
+        contact_email: r['customer_mail']
+      }
     end
   end
 

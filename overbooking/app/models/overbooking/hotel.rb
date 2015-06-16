@@ -2,7 +2,7 @@ module Overbooking
   class Hotel < ActiveRecord::Base
     self.table_name = :hotels
 
-    has_many :related_hotels
+    has_many :related_hotels, class_name: 'Overbooking::RelatedHotel'
     has_many :related,
              through: :related_hotels,
              class_name: 'Overbooking::Hotel'

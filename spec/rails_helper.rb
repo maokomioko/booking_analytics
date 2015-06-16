@@ -20,6 +20,8 @@ ActiveRecord::Migration.maintain_test_schema!
 Money.default_bank.update_rates('spec/documents/bank_rates.xml')
 
 RSpec.configure do |config|
+  config.include JsonSpec::Helpers
+
   config.use_transactional_fixtures = false
   config.failure_color = :magenta
   config.tty = true

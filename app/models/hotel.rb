@@ -17,6 +17,7 @@
 #  latitude     :decimal(10, 6)
 #  longitude    :decimal(10, 6)
 #  district     :text             default([]), is an Array
+#  website_url  :string
 #  phone        :string
 #
 # Indexes

@@ -10,7 +10,7 @@ module PriceMaker
       def amenities_calc
         if related_ids.blank?
           settings  = setting_fallback
-          amenities = validate_amenities
+          amenities = get_base_facilities
 
           args = [id]
           if settings.present?
@@ -48,7 +48,7 @@ module PriceMaker
         related.map(&:booking_id)
       end
 
-      def validate_amenities
+      def get_base_facilities
         Hotel.base_facilities_cache.map(&:id) & facility_ids
       end
     end

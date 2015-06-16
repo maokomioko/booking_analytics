@@ -34,10 +34,10 @@ module PriceMaker
                 hw_pool.future.amenities_mix(*args, facility_ids)
               rescue Celluloid::DeadActorError
               end
-            end
+            end.map(&:value).flatten.uniq.compact
 
-            unless results.blank? && !results[0].nil?
-              self.related_ids = results.map(&:value).flatten.uniq.compact
+            unless results.blank?
+              self.related_ids = results
               hw_pool.terminate
               break
             end

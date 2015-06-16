@@ -22,7 +22,7 @@ module HotelProperties
   }
 
   included do
-    scope :by_property_type, -> (type_id) { where(hoteltype_id: type_id) }
+    scope :with_property_type, -> (type_id) { where(hoteltype_id: type_id) }
 
     def hoteltype
       OLD_PROPERTY_TYPES.invert[hoteltype_id.to_i]
@@ -30,11 +30,7 @@ module HotelProperties
   end
 
   module ClassMethods
-    def by_old_property_type(type)
-      by_property_type(OLD_PROPERTY_TYPES[type])
-    end
-
-    def by_property_type(type)
+    def by_property_type(type, version = nil)
       type_id = case type
                 when 'hotel' then 204
                 when 'hostel' then 203
@@ -45,8 +41,7 @@ module HotelProperties
                 when 'homestay' then 202
                 when 'boat' then 215
                 end
-
-      by_property_type(type_id)
+      version.nil? ? with_property_type(type_id) : with_property_type(OLD_PROPERTY_TYPES[type])
     end
 
     def base_facilities
@@ -60,17 +55,6 @@ module HotelProperties
     end
   end
 end
-
-# OLD IDS
-# 2   Apartment
-# 3   Guest accommodation
-# 13  Hostel
-# 14  Hotel
-# 19  Motel
-# 21  Resort
-# 23  Residence
-# 24  Bed and Breakfast
-# 25  Ryokan
 
 # NEW IDS
 # 201 Apartment

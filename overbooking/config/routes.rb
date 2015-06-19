@@ -8,13 +8,10 @@ Overbooking::Engine.routes.draw do
     end
   end
 
-  resources :related_hotels do
+  resources :partners do
     member do
-      post :drop_related
-      post :add_related
-      post :enable_overbooking
-      post :disable_overbooking
-      get :search
+      post :enable
+      post :disable
     end
   end
 

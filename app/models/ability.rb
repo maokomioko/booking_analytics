@@ -25,7 +25,7 @@ class Ability
     # can [:index, :show], Action
     can :manage, Company, owner_id: user.id
     can :manage, ChannelManager, company_id: user.company_id
-    can :index, Hotel, id: user.hotels.pluck(:id)
+    can [:index, :update], Hotel, id: user.hotels.pluck(:id)
     can :update, Room, hotel_id: user.hotels.pluck(:id)
     can :update_connector_credentials, Room
     can :manage, Setting do |setting|

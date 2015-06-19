@@ -19,10 +19,16 @@ class Dispatcher
     switch page
       when 'calendar:index', 'calendar:demo'
         new Calendar()
+      when 'related_hotels:edit'
+        new Related()
       when 'settings:edit'
         new Settings()
       when 'users:index'
         new Users()
+
+    if page.match(/wizard:step/i)
+      new Wizard()
+      new Related() # step 5
 
 ready = ->
   new Dispatcher()

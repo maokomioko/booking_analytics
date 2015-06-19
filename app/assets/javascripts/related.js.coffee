@@ -1,10 +1,9 @@
-class @OverbookingRelated
+class @Related
   constructor: ->
     @deleteRelated()
     @addRelated()
     @initBulkActionButton()
     @bulkDeleteRelated()
-    @bulkOverbooking()
     @initSelect2RelatedSearch()
 
   deleteRelated: ->
@@ -40,18 +39,6 @@ class @OverbookingRelated
           data: params
           method: 'POST'
           beforeSend: -> triggerSpinner()
-
-  bulkOverbooking: ->
-    $('.bulk-overbooking').on 'click', (e) ->
-      e.preventDefault()
-
-      params = $('[name="ids[]"]:checked').serialize()
-
-      $.ajax
-        url: @href
-        data: params
-        method: 'POST'
-        beforeSend: -> triggerSpinner()
 
   initSelect2RelatedSearch: ->
     $select = $('#add_related_select2')

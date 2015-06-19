@@ -9,8 +9,8 @@ class OverbookingDispatcher
       return false
 
     switch page
-      when 'overbooking:related_hotels:edit'
-        new OverbookingRelated()
+      when 'overbooking:partners:edit'
+        new OverbookingPartner()
       when 'overbooking:directions:show'
         new Directions()
 

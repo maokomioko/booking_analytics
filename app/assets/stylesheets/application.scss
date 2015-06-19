@@ -32,6 +32,8 @@
 
 @import "spinner";
 
+@import "wizard";
+
 @import "print";
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -43,7 +45,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 #flash-container {
-  position: relative;
+  position: fixed;
   top: 64px;
   width: 100%;
   z-index: 10;

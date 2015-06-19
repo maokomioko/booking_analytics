@@ -1,6 +1,8 @@
 en:
   activerecord:
     attributes:
+      channel_manager/previo:
+        lcode: Hotel ID in Previo Admin panel
       company:
         name: Company name
         reg_number: Registration number

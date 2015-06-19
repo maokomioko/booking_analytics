@@ -16,13 +16,12 @@ en:
       show:
         header: Build your routes between hotels
         print: Print route
-    related_hotels:
+    partners:
       index:
         header: Select your hotel
         subheader: to edit related
       edit:
-        header: Manage related hotels
-        add_related: Add related hotels
+        header: Manage overbooking partners
         overbooking_partner: Overbooking partner
         action_with_selected: Action with selected
         become_partner: Become overbooking partner

@@ -32,6 +32,14 @@ en:
         password_tip: "leave blank if you don't want to change it"
         my_avatar: My avatar
         remove_avatar: Remove avatar from system
+  related_hotels:
+    index:
+      header: Select your hotel
+      subheader: to edit related
+    edit:
+      header: Manage related hotels
+      add_related: Add related hotels
+      action_with_selected: Action with selected
   reservations:
     index:
       header: Your hotel reservations
@@ -72,3 +80,23 @@ en:
     index:
       header: Company users
       subheader: and invitations list
+  wizard:
+    progressbar:
+      step_number: "Step %{number}"
+      step1: Hotel
+      step2: Channel Manager
+      step3: Tariffs
+      step4: Rooms
+      step5: Related hotels
+    step1:
+      header: 'Step #1. Find your hotel'
+      search_prompt: Start enter hotel name, address or Booking ID
+    step2:
+      header: 'Step #2. Setup channel manager'
+    step3:
+      header: 'Step #3. Choose your tarif plans'
+    step4:
+      header: 'Step #4. Check hotel rooms preferences'
+    step5:
+      header: 'Step #5. Manage related hotels'
+      finish: Finish setup!

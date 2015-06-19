@@ -26,10 +26,12 @@ en:
     remove: "Remove"
     invited: "Invited"
     edit: "Edit"
+    next: "Next"
     are_you_sure: "Are you sure?"
     no_company: "Company isn't defined"
     updated: Updated
     error: Error
+    view_in_web: Open Web Page
   errors:
     booking_id: "Hotel doesn't exist"
     hotel_name: "Hotel name can't be blank"
@@ -64,6 +66,11 @@ en:
     company_updated: "Company updated successfully!"
     user_deleted: "User '%{email}' successfully deleted from system"
     room_updated: "Succesfully saved"
+    success_remove_related: "Successfull remove: <strong>%{list}</strong>"
+    success_add_related: "Successfull add: <strong>%{list}</strong>"
+    select_hotels_first: "Select hotels first"
+    confirm_related_bulk_delete: "Please confirm your action"
+    related_search_prompt: Search for related hotels by hotel name, address or booking id
   devise:
     waiting_confirmation: "Currently waiting confirmation for: %{user}"
     links:
@@ -105,6 +112,7 @@ en:
       title: "Sign up"
       subtitle: "One step from the awesomeness!"
       form_title: "Give us some info."
+      company_info: "Company information"
     password_restore:
       title: "Password reset"
       subtitle: "Password reset instructions will be sent to this email."
@@ -113,6 +121,9 @@ en:
       email: "Email"
       password: "Password"
       password_confirmation: "Password confirmation"
+      company_name: "Company name"
+      company_reg_number: "Registration number"
+      company_reg_address: "Registration address"
       lcode: "Lcode"
     buttons:
       login: "Log in"
@@ -128,13 +139,14 @@ en:
     profile: "Edit my profile"
     worker: "Algorithm"
     connection: "Channel Manager"
+    related: "Manage related hotels"
     company:
       title: "Company profile"
       users: "Manage users"
       existing_users: "Existing users"
       invite_new: "Invite new users"
     overbooking:
-      related: "Manage related hotels"
+      partners: "Manage partners"
       directions: "Directions"
   flash:
     info: "Info!"

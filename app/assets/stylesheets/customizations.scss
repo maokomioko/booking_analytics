@@ -6,7 +6,9 @@
   }
 }
 
-[data-page='settings:edit'] {
+[data-page='settings:edit'],
+[data-page='wizard:step4'],
+[data-page='wizard:step4_post'] {
   .edit-price {
     .input-group {
       width: 110px;

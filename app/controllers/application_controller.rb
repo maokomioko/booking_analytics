@@ -2,7 +2,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  before_filter :auth_user, :company_present, :update_last_activity, :ch_manager_present, unless: :devise_controller?
+
+  before_filter :auth_user,
+                :company_present,
+                :check_step_1,
+                :check_step_2,
+                :check_step_3,
+                :check_step_4,
+                :check_step_5,
+                :update_last_activity,
+                unless: :devise_controller?
+
   after_action :flash_to_headers
 
   layout :layout_by_resource
@@ -22,6 +32,11 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) do |u|
+      u.permit(:email, :password, :password_confirmation,
+               company_attributes: [:name, :reg_number, :reg_address])
+    end
+
     devise_parameter_sanitizer.for(:account_update) do |u|
       u.permit(:email, :password, :password_confirmation,
                :avatar, :avatar_cache, :remove_avatar)
@@ -34,6 +49,39 @@ class ApplicationController < ActionController::Base
         f.json { render json: { error: t('errors.unauthorized') }, status: 401 }
         f.all { redirect_to [main_app, :new, :user, :session] }
       end
+    end
+  end
+
+  def check_step_1
+    unless current_user.channel_manager.present?
+      redirect_to [:wizard, :step1] and return
+    end
+  end
+
+  def check_step_2
+    unless current_user.channel_manager.login.present?
+      redirect_to [:wizard, :step2] and return
+    end
+  end
+
+  def check_step_3
+    unless current_user.channel_manager.default_pid.present?
+      redirect_to [:wizard, :step3] and return
+    end
+  end
+
+  def check_step_4
+    ids = current_user.channel_manager.hotel.rooms.pluck(:wubook_id, :previo_id)
+
+    # if none of the rooms have CM_ID
+    if ids.flatten.compact.size.zero?
+      redirect_to [:wizard, :step4] and return
+    end
+  end
+
+  def check_step_5
+    if current_user.channel_manager.hotel.related.count.zero?
+      redirect_to [:wizard, :step5] and return
     end
   end
 
@@ -52,15 +100,6 @@ class ApplicationController < ActionController::Base
   def update_last_activity
     if current_user && current_user.company.present?
       current_user.company.update_column(:last_activity, Time.now.utc)
-    end
-  end
-
-  def ch_manager_present
-    if current_user && !current_user.company.try(:channel_manager).present?
-      respond_to do |f|
-        f.json { render json: { error: t('errors.no_ch_manager') }, status: 403 }
-        f.all { redirect_to main_app.new_channel_manager_path unless controller_name == 'channel_manager' }
-      end
     end
   end
 

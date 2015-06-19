@@ -40,13 +40,36 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :destroy]
   end
 
+  namespace :hotels do
+    get :search, action: :search, as: :search
+  end
+
   resources :rooms, only: [:update] do
     put :bulk_update, on: :collection
   end
 
+  resources :related_hotels, only: [:index, :edit] do
+    member do
+      post :drop
+      post :add
+      get :search
+    end
+  end
   resources :reservations, only: :index
 
   resources :settings, only: [:index, :edit, :update]
+
+  namespace :wizard do
+    (1..5).to_a.each do |i|
+      action = "step#{ i }".to_sym
+      action_post = "step#{ i }_post".to_sym
+
+      get action, action: action, as: action
+      post action_post, action: action_post, as: action_post
+    end
+
+    get :complete, action: :complete, as: :complete
+  end
 
   root to: 'calendar#index'
   devise_for :users, controllers: {

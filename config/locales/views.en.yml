@@ -83,14 +83,14 @@ en:
   wizard:
     progressbar:
       step_number: "Step %{number}"
-      step1: Hotel
+      step1: Your Hotel
       step2: Channel Manager
       step3: Tariffs
       step4: Rooms
-      step5: Related hotels
+      step5: Competitors
     step1:
       header: 'Step #1. Find your hotel'
-      search_prompt: Start enter hotel name, address or Booking ID
+      search_prompt: Start entering hotel name, address or Booking ID
     step2:
       header: 'Step #2. Setup channel manager'
     step3:

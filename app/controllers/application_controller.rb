@@ -3,13 +3,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  before_filter :auth_user,
+  before_filter :wizard_completed,
                 :company_present,
-                :check_step_1,
-                :check_step_2,
-                :check_step_3,
-                :check_step_4,
-                :check_step_5,
                 :update_last_activity,
                 unless: :devise_controller?
 
@@ -43,56 +38,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def auth_user
+  def wizard_completed
     if !devise_controller? && !user_signed_in?
       respond_to do |f|
         f.json { render json: { error: t('errors.unauthorized') }, status: 401 }
         f.all { redirect_to [main_app, :new, :user, :session] }
       end
-    end
-  end
-
-  def check_step_1
-    unless current_user.channel_manager.present?
-      redirect_to [:wizard, :step1] and return
-    end
-  end
-
-  def check_step_2
-    unless current_user.channel_manager.login.present?
-      redirect_to [:wizard, :step2] and return
-    end
-  end
-
-  def check_step_3
-    unless current_user.channel_manager.default_pid.present?
-      redirect_to [:wizard, :step3] and return
-    end
-  end
-
-  def check_step_4
-    ids = current_user.channel_manager.hotel.rooms.pluck(:wubook_id, :previo_id)
-
-    # if none of the rooms have CM_ID
-    if ids.flatten.compact.size.zero?
-      redirect_to [:wizard, :step4] and return
-    end
-  end
-
-  def check_step_5
-    if current_user.channel_manager.hotel.related.count.zero?
-      redirect_to [:wizard, :step5] and return
+    elsif current_user && !current_user.setup_completed
+      redirect_to [:wizard, :step1] unless controller_name == 'wizard'
     end
   end
 
   def company_present
     if current_user && !current_user.company.present?
-      # respond_to do |f|
-      #   f.json { render json: { error: t('errors.no_company') }, status: 403 }
-      #   f.all { redirect_to [main_app, :new, :company] }
-      # end
       respond_to do |f|
-        f.all {redirect_to "http://google.com"}
+        f.json { render json: { error: t('errors.no_company') }, status: 403 }
+        f.all { redirect_to [main_app, :new, :company] }
       end
     end
   end

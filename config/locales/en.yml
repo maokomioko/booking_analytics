@@ -42,7 +42,7 @@ en:
   labels:
     cm_login: "Your login for Channel Manager"
     cm_password: "Your password for Channel Manager"
-    lcode: "WuBook LCode (Facility/Website tab at wubook administration)"
+    lcode: "WuBook LCode <br>(Facility/Website tab at wubook)"
     booking_id: "Hotel ID (login) at Booking.com"
     hotel_name: "Name of your Hotel"
     non_refundable_tarif: "Default <b>non-refundable</b> tarif"

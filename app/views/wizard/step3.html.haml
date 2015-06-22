@@ -7,20 +7,20 @@
 = render 'progressbar', active: 3, progress: (100 / 5) * 3
 
 .row
-  .col-sm-10
+  .col-md-6.col-md-offset-3
     = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step3_post], method: :post, html: { class: 'form-horizontal' } do |f|
       .form-group
-        = f.label :non_refundable_pid, t('labels.non_refundable_tarif').html_safe, class: 'col-sm-4 control-label'
-        .col-sm-3
+        = f.label :non_refundable_pid, t('labels.non_refundable_tarif').html_safe, class: 'col-sm-6 control-label'
+        .col-sm-5
           = f.select :non_refundable_pid, options_for_select(@channel_manager.list_plans.sort, f.object.non_refundable_pid), {}, class: 'form-control'
 
       .form-group
-        = f.label :default_pid, t('labels.standard_tarif').html_safe, class: 'col-sm-4 control-label'
-        .col-sm-3
+        = f.label :default_pid, t('labels.standard_tarif').html_safe, class: 'col-sm-6 control-label'
+        .col-sm-5
           = f.select :default_pid, options_for_select(@channel_manager.list_plans.sort.reverse, f.object.default_pid), {}, class: 'form-control'
 
       .form-group
-        .col-sm-3.col-sm-offset-4
+        .col-sm-3.col-sm-offset-5
           = f.button class: 'btn btn-primary', type: :submit do
             = t('shared.next')
             = icon('arrow-circle-right')

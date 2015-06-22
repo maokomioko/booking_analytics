@@ -13,6 +13,8 @@
 #  districts          :text             default([]), is an Array
 #  hotel_id           :integer
 #  strategy           :string
+#  booking_page       :integer
+#  page_position      :integer
 #
 # Indexes
 #

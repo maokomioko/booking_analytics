@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
   load_and_authorize_resource except: :bulk_update
 
-  skip_before_filter :check_step_4, only: :bulk_update
+  skip_before_filter :check_step_4, :wizard_completed, only: :bulk_update
 
   def update
     unless @room.update(room_params)

@@ -7,10 +7,10 @@
 = render 'progressbar', active: 1, progress: (100 / 5) * 1
 
 .row
-  .col-sm-5
-    = form_for @channel_manager, url: [:wizard, :step1_post], class: 'form' do |f|
+  .col-md-6.col-md-offset-3
+    = form_for @channel_manager, url: [:wizard, :step1_post], method: :post, class: 'form' do |f|
       .form-group
-        %p= t('.search_prompt')
+        %h4= t('.search_prompt')
         = f.hidden_field :booking_id, id: 'search_hotel', data: { url: hotels_search_path }
       .form-group
         = f.button class: 'btn btn-primary' do

@@ -2,12 +2,12 @@
 #
 # Table name: archive_block_availabilities
 #
-#  id            :integer          primary key
+#  max_occupancy :string
 #  data          :jsonb
 #  booking_id    :integer
-#  max_occupancy :text             is an Array
-#  fetch_stamp   :integer
-
+#  fetch_stamp   :string
+#  id            :integer          not null, primary key
+#
 
 class ArchiveBlockAvailability < BlockAvailability
   self.table_name = 'archive_block_availabilities'

@@ -1,5 +1,5 @@
 class HotelsController < ApplicationController
-  skip_before_filter :check_step_1, only: :search
+  skip_before_filter :check_step_1, :wizard_completed, only: :search
   skip_after_action :flash_to_headers, only: :search
 
   def search

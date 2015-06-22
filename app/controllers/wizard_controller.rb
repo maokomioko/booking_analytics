@@ -1,15 +1,13 @@
 class WizardController < ApplicationController
-  skip_before_filter :check_step_1,
-                     :check_step_2,
-                     :check_step_3,
-                     :check_step_4,
-                     :check_step_5
-
   before_filter :check_steps, except: :step1_post
 
   # hotel search
   def step1
-    @channel_manager = current_user.channel_manager || ChannelManager.new
+    unless current_user.channel_manager.try(:hotel)
+      @channel_manager = ChannelManager.new
+    else
+      redirect_to [:wizard, :step2]
+    end
   end
 
   # POST /wizard/step1
@@ -133,19 +131,38 @@ class WizardController < ApplicationController
 
   def check_steps
     if controller_name == 'wizard'
-      case action_name
-        when 'step1' then true
-        when 'step2'
-        then check_step_1
-        when 'step3'
-        then check_step_1; check_step_2
-        when 'step4'
-        then check_step_1; check_step_2; check_step_3
-        when 'step5'
-        then check_step_1; check_step_2; check_step_3
+      1.upto(5) do |n|
+        if action_name.to_s == "step#{n}"
+          steps_checking_methods
+        end
       end
+    end
+  end
+
+  def steps_checking_methods
+    unless current_user.channel_manager.present?
+      redirect_to [:wizard, :step1] and return
+    end
+
+    unless current_user.channel_manager.login.present?
+      redirect_to [:wizard, :step2] and return
+    end
+
+    unless current_user.channel_manager.default_pid.present?
+      redirect_to [:wizard, :step3] and return
+    end
+
+    ids = current_user.channel_manager.hotel.rooms.pluck(:wubook_id, :previo_id)
+
+    # if none of the rooms have CM_ID
+    if ids.flatten.compact.size.zero?
+      redirect_to [:wizard, :step4] and return
+    end
+
+    if current_user.channel_manager.hotel.related.count.zero?
+      redirect_to [:wizard, :step5] and return
     else
-      check_step_1; check_step_2; check_step_3; check_step_4; check_step_5
+      redirect_to calendar_index_path
     end
   end
 end

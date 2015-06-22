@@ -2,11 +2,11 @@
 #
 # Table name: archive_block_availabilities
 #
+#  id            :integer          primary key
 #  max_occupancy :string
 #  data          :jsonb
 #  booking_id    :integer
 #  fetch_stamp   :string
-#  id            :integer          not null, primary key
 #
 
 class ArchiveBlockAvailability < BlockAvailability

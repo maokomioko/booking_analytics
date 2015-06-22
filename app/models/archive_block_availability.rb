@@ -7,7 +7,7 @@
 #  booking_id    :integer
 #  max_occupancy :text             is an Array
 #  fetch_stamp   :integer
-#
+
 
 class ArchiveBlockAvailability < BlockAvailability
   self.table_name = 'archive_block_availabilities'

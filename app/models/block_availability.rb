@@ -12,6 +12,10 @@
 #
 #  index_active_block_availabilities_on_booking_id  (booking_id)
 #
+# Indexes
+#
+#  index_active_block_availabilities_on_booking_id  (booking_id)
+#
 
 class BlockAvailability < ActiveRecord::Base
   self.table_name = 'active_block_availabilities'

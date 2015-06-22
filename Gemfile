@@ -67,6 +67,7 @@ gem 'pg'
 gem 'premailer-rails'
 gem 'progress_bar'
 gem 'price_maker', path: 'price_maker'
+gem 'puma'
 
 gem 'racc'
 gem 'rails', '>= 4.2'
@@ -106,6 +107,7 @@ group :development, :test do
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-puma', require: false
   gem 'quiet_assets'
   gem 'rails-dev-tweaks'
   gem 'rails-erd'

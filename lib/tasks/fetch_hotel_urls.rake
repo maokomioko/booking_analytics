@@ -1,4 +1,4 @@
-namespace :hotel do
+namespace :hotels do
   desc "Fetch hotel websites"
   task fetch_hotel_urls: :environment do
     puts "Processing hotels"

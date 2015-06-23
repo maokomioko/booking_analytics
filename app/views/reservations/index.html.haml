@@ -6,36 +6,39 @@
 
 .row
   .col-sm-12
-    %table.table
-      %thead
-        %tr
-          %th= t('.thead.reservation_period')
-          %th= t('.thead.price')
-          %th= t('.thead.room')
-          %th= t('.thead.occupancy')
-          %th= t('.thead.contacts')
-          - if defined?(Overbooking::Engine)
-            %th
-      %tbody
-        - @reservations.each do |reservation|
+    - if @reservations.nil?
+      %h3= t('errors.no_reservations')
+    - else
+      %table.table
+        %thead
           %tr
-            %td
-              = l reservation[:arrival], format: :short
-              &mdash;
-              = l reservation[:departure], format: :short
-            %td= humanized_money_with_symbol reservation[:price]
-            %td
-              = Room.where(@channel_manager.connector_room_id_key => reservation[:room_ids]).map(&:name).to_sentence
-              %small
-                (
-                = t('.total')
-                = pluralize(reservation[:room_amount], t('.room'))
-                )
-            %td
-              %p #{ t('.adults_count') } #{ reservation[:adults] }
-              %p #{ t('.children_count') } #{ reservation[:children] }
-            %td
-              = [reservation[:contact_email], reservation[:contact_phone]].select(&:present?).to_sentence
+            %th= t('.thead.reservation_period')
+            %th= t('.thead.price')
+            %th= t('.thead.room')
+            %th= t('.thead.occupancy')
+            %th= t('.thead.contacts')
             - if defined?(Overbooking::Engine)
+              %th
+        %tbody
+          - @reservations.each do |reservation|
+            %tr
               %td
-                = link_to t('.show_available_hotels'), link_for_search_reservation(reservation), class: 'btn btn-teal'
+                = l reservation[:arrival], format: :short
+                &mdash;
+                = l reservation[:departure], format: :short
+              %td= humanized_money_with_symbol reservation[:price]
+              %td
+                = Room.where(@channel_manager.connector_room_id_key => reservation[:room_ids]).map(&:name).to_sentence
+                %small
+                  (
+                  = t('.total')
+                  = pluralize(reservation[:room_amount], t('.room'))
+                  )
+              %td
+                %p #{ t('.adults_count') } #{ reservation[:adults] }
+                %p #{ t('.children_count') } #{ reservation[:children] }
+              %td
+                = [reservation[:contact_email], reservation[:contact_phone]].select(&:present?).to_sentence
+              - if defined?(Overbooking::Engine)
+                %td
+                  = link_to t('.show_available_hotels'), link_for_search_reservation(reservation), class: 'btn btn-teal'

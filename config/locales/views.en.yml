@@ -42,7 +42,7 @@ en:
       action_with_selected: Action with selected
   reservations:
     index:
-      header: Your hotel reservations
+      header: Reservations from Channel Manager
       thead:
         reservation_period: Reservation period
         price: Price

@@ -72,21 +72,23 @@ class WubookConnector < AbstractConnector
         format_date(from),
         format_date(to)
     )
-
-    set_response(response).map do |r|
-      {
-        arrival: r['date_arrival'].to_datetime,
-        deparute: r['date_departure'].to_datetime,
-        created_at: r['date_received'].to_datetime,
-        room_ids: r['rooms'].map(&:to_i),
-        room_amount: 1,
-        price: r['amount'].to_f.to_money('EUR'),
-        status: r['status'],
-        adults: r['men'].to_i,
-        children: r['children'].to_i,
-        contact_phone: r['customer_phone'],
-        contact_email: r['customer_mail']
-      }
+    answer = set_response(response)
+    unless answer.nil?
+      answer.map do |r|
+        {
+          arrival: r['date_arrival'].to_datetime,
+          deparute: r['date_departure'].to_datetime,
+          created_at: r['date_received'].to_datetime,
+          room_ids: r['rooms'].map(&:to_i),
+          room_amount: 1,
+          price: r['amount'].to_f.to_money('EUR'),
+          status: r['status'],
+          adults: r['men'].to_i,
+          children: r['children'].to_i,
+          contact_phone: r['customer_phone'],
+          contact_email: r['customer_mail']
+        }
+      end
     end
   end
 

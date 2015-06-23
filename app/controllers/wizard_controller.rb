@@ -162,7 +162,8 @@ class WizardController < ApplicationController
     if current_user.channel_manager.hotel.related.count.zero?
       redirect_to [:wizard, :step5] and return
     else
-      redirect_to calendar_index_path
+      current_user.update_attribute(:setup_completed, true)
+      redirect_to [:calendar, :index] and return
     end
   end
 end

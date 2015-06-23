@@ -1,19 +1,22 @@
-= form_for room, html: { class: 'form-horizontal', 'data-room-id' => room.id }, remote: true do |f|
-  .form-group
-    = f.label :min_price, class: 'col-sm-3 control-label'
-    .col-sm-3
-      .input-group
-        = f.text_field :min_price, class: 'form-control'
-        .input-group-addon
-          = room.min_price_currency
-  .form-group
-    = f.label :max_price, class: 'col-sm-3 control-label'
-    .col-sm-3
-      .input-group
-        = f.text_field :max_price, class: 'form-control'
-        .input-group-addon
-          = room.max_price_currency
-  .form-group
-    .col-sm-2.col-sm-offset-3
-      = f.submit t('shared.save'), class: 'btn btn-default'
-    %span.help-inline.col-sm-3
+= form_tag bulk_update_rooms_path, method: :put, class: 'form-horizontal rooms-form', remote: true do
+  = hidden_field_tag :manual, true
+  %table.table.rooms-table
+    %thead
+      %tr
+        %th Booking ID
+        %th CM ID
+        %th= Room.human_attribute_name(:name)
+        %th= Room.human_attribute_name(:min_price)
+        %th= Room.human_attribute_name(:max_price)
+        - if can?(:update_connector_credentials, Room)
+          %th= t('labels.select_room')
+    %tbody
+      - @hotel.rooms.each do |room|
+        = fields_for 'rooms[]', room do |f|
+          = render 'rooms/row_form', f: f
+  - if controller_name == 'settings'
+    = submit_tag t('shared.save'), class: 'btn btn-teal'
+  - else
+    = button_tag class: 'btn btn-primary', type: :submit do
+      = t('shared.next')
+      = icon('arrow-circle-right')

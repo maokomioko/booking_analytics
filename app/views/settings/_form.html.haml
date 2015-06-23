@@ -6,20 +6,12 @@
       = t('.settings_header_1')
     .panel-body
       .form-group
-        = f.label :strategy, t('settings.form.algorithm_strategy.title'), class: 'col-sm-3 control-label'
-        .col-sm-3
-          = f.select :strategy, options_for_select([[t('settings.form.algorithm_strategy.max_revenue'), 'max_revenue'], [t('settings.form.algorithm_strategy.balanced'), 'balanced'], [t('settings.form.algorithm_strategy.max_occupancy'), 'max_occupancy']]), {}, class: 'search-select'
-      .form-group
         = f.label :crawling_frequency, class: 'col-sm-3 control-label'
         .col-sm-3
           = f.select :crawling_frequency,
           options_for_crawling_frequencies(@setting.crawling_frequency),
           {},
           class: 'search-select'
-      .form-group
-        = f.label :possible_combinations, t('settings.shared.provider_listing_count', provider: 'Booking.com'), class: 'col-sm-3 control-label'
-        .col-sm-3
-          Coming soon.
   .panel.panel-default
     .panel-heading
       %i.fa.fa-building

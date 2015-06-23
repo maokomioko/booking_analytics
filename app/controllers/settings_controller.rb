@@ -53,7 +53,7 @@ class SettingsController < ApplicationController
       end
     end
 
-    params.require(:setting).permit(:crawling_frequency, :strategy, stars: [],
+    params.require(:setting).permit(:crawling_frequency, stars: [],
       property_types: [], districts: [], user_ratings_range: [:from, :to]
     )
   end

@@ -34,3 +34,5 @@ en:
         occupancy: Occupancy
         cheap: Cheap
         expensive: Expensive
+        no_cheap: No cheap
+        no_expensive: No expensive

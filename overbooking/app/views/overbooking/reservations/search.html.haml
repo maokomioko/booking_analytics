@@ -19,36 +19,55 @@
         %dd= params[:occupancy]
 
 .row
-  .col-sm-6
-    %h2= t('.cheap')
+  .col-sm-12
+    .tabbable
+      %ul.nav.nav-tabs.tab-blue
+        %li.active
+          %a{"data-toggle" => "tab", href: "#cheap_tab"}
+            %i.clip-arrow-down-3
+            = t('.cheap')
+        %li
+          %a{"data-toggle" => "tab", href: "#expensive_tab"}
+            %i.clip-arrow-up-3
+            = t('.expensive')
 
-    %table.table
-      %tbody
-        - @blocks[0].each do |_booking_id, hotels|
-          %tr
-            %td(colspan="2")
-              %h4
-                = hotels.first[:hotel][:name]
-                - if hotels.first[:hotel][:address].present?
-                  = "(" + hotels.first[:hotel][:address] + ")"
-          - hotels.each do |block|
-            %tr
-              %td= block[:room]['name']
-              %td= humanized_money_with_symbol block[:room]['min_price']['price'].to_money('EUR')
-.row
-  .col-sm-6
-    %h2= t('.expensive')
+    .tab-content
+      #cheap_tab.tab-pane.active
+        .col-sm-6
+          - if @blocks[0].present?
+            %table.table
+              %tbody
+                - @blocks[0].each do |_booking_id, hotels|
+                  %tr
+                    %td(colspan="2")
+                      %h4
+                        = hotels.first[:hotel][:name]
+                        - if hotels.first[:hotel][:address].present?
+                          = "(" + hotels.first[:hotel][:address] + ")"
+                  - hotels.each do |block|
+                    %tr
+                      %td= block[:room]['name']
+                      %td= humanized_money_with_symbol block[:room]['min_price']['price'].to_money('EUR')
+          - else
+            %p.lead= t('.no_cheap')
+        .clearfix
 
-    %table.table
-      %tbody
-        - @blocks[0].each do |_booking_id, hotels|
-          %tr
-            %td(colspan="2")
-              %h4
-                = hotels.first[:hotel][:name]
-                - if hotels.first[:hotel][:address].present?
-                  = "(" + hotels.first[:hotel][:address] + ")"
-          - hotels.each do |block|
-            %tr
-              %td= block[:room]['name']
-              %td= humanized_money_with_symbol block[:room]['min_price']['price'].to_money('EUR')
+      #expensive_tab.tab-pane
+        .col-sm-6
+          - if @blocks[1].present?
+            %table.table
+              %tbody
+                - @blocks[1].each do |_booking_id, hotels|
+                  %tr
+                    %td(colspan="2")
+                      %h4
+                        = hotels.first[:hotel][:name]
+                        - if hotels.first[:hotel][:address].present?
+                          = "(" + hotels.first[:hotel][:address] + ")"
+                  - hotels.each do |block|
+                    %tr
+                      %td= block[:room]['name']
+                      %td= humanized_money_with_symbol block[:room]['min_price']['price'].to_money('EUR')
+          - else
+            %p.lead= t('.no_expensive')
+        .clearfix

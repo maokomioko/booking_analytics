@@ -14,6 +14,10 @@
           %a{"data-toggle" => "tab", href: "#room_settings_tab"}
             %i.clip-circle-small
             = t('.room_settings')
+        %li
+          %a{"data-toggle" => "tab", href: "#search_ranking_tab"}
+            %i.clip-rating-3
+            = t('.search_ranking')
 
     .tab-content
       #hotel_settings_tab.tab-pane.active
@@ -39,4 +43,8 @@
       #room_settings_tab.tab-pane
         .col-sm-12
           = render partial: 'rooms/form'
+        .clearfix
+      #search_ranking_tab.tab-pane
+        .col-sm-5
+          = render partial: 'room_settings/form'
         .clearfix

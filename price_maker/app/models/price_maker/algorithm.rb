@@ -1,15 +1,19 @@
 module PriceMaker
   class Algorithm
     HOTELS_PER_PAGE = 15
+    PRICE_STEP = 0.5 # 50 cents \m/
 
     attr_reader :get_top_prices, :price_tiers
 
-    def initialize(hotel_room_ids, occupancy, arrival, departure)
+    # @param   hotel_room_ids     [ [hotel_booking_id, [room_booking_id, room_booking_id]], [hotel_booking_id, []] ]
+    def initialize(hotel_room_ids, occupancy, arrival, departure, desired_position)
       @hotel_room_ids = hotel_room_ids
       @occupancy      = occupancy
 
       @arrival = arrival.strftime('%Y-%m-%d')
       @departure = departure.strftime('%Y-%m-%d')
+
+      @desired_position = desired_position || 1
 
       @price_blocks = []
       @chunks = []
@@ -33,7 +37,19 @@ module PriceMaker
 
     def best_price
       prices = get_top_prices
-      prices.length > 1 ? prices.second.first : prices.first.last
+      page = (@desired_position - 1) / HOTELS_PER_PAGE + 1
+
+      if prices[page - 1].present? # because array index starts from 0
+        price = prices[page - 1][@desired_position - 1]
+
+        if price.present?
+          price - PRICE_STEP
+        else
+          prices[page - 1].last # last price from page
+        end
+      else
+        prices.last.last # last price from last page
+      end
     end
 
     def split_chunks

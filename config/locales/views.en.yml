@@ -60,6 +60,7 @@ en:
       related_hotels: "%{count} hotels matching your location criteria"
       hotel_settings: "Hotel-wide configuration"
       room_settings: "Per room configuration"
+      search_ranking: "Search ranking"
     form:
       settings_header_1: Update frequency
       settings_header_2: Market segment criteria

@@ -4,6 +4,7 @@ class @Settings
     @roomsSubmit()
     @roomsAutoSave()
     @settingsSubmit()
+    @rankingSubmit()
 
   initUserRatingSlider: ->
     $slider = $('#user-rating-slider')
@@ -46,6 +47,15 @@ class @Settings
 
   settingsSubmit: ->
     $form = $('.settings-form')
+
+    $form.on 'submit.rails', ->
+      blockElemet $(@).parents('.tab-pane')
+
+    $form.on 'ajax:complete', ->
+      $(@).parents('.tab-pane').unblock()
+
+  rankingSubmit: ->
+    $form = $('.room-settings-form')
 
     $form.on 'submit.rails', ->
       blockElemet $(@).parents('.tab-pane')

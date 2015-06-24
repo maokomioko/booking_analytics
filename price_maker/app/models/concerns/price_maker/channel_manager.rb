@@ -8,14 +8,15 @@ module PriceMaker
     included do
       scope :real, -> { where(subroom: nil) }
 
-      def fill_prices
+      def fill_prices(setting_id)
         hotel_room_ids = matching_hotels
 
         if hotel_room_ids
+          desired_position = RoomSetting.where(setting_id: setting_id, room_id: id).pluck(:position).first || 1
           dates = [*Date.today..Date.today + 3.month]
           dates.each do |date|
             begin
-              price = PriceMaker::Algorithm.new(hotel_room_ids, max_people_fallback, date, date + 1.day).best_price
+              price = PriceMaker::Algorithm.new(hotel_room_ids, max_people_fallback, date, date + 1.day, desired_position).best_price
               # be aware, that prices are in cents
 
               rp = RoomPrice.find_or_initialize_by(date: date, room: self)
@@ -44,7 +45,7 @@ module PriceMaker
       # returns Array
       # [ [hotel_booking_id, [room_booking_id, room_booking_id]], [hotel_booking_id, []] ]
       def matching_hotels
-        if hotel.validate_amenities.size > 0
+        if hotel.get_base_facilities.size > 0
           booking_ids = hotel.amenities_calc
           room_ids    = amenities_calc
           Hotel

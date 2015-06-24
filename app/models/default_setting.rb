@@ -1,6 +1,6 @@
 class DefaultSetting
   attr_accessor :crawling_frequency, :stars, :user_ratings,
-                :property_types, :districts
+                :property_types, :districts, :company_id
 
   def self.default
     self.new.build
@@ -13,6 +13,7 @@ class DefaultSetting
     obj.user_ratings = obj.score_range(hotel.review_score)
     obj.property_types = [ hotel.hoteltype ] if hotel.hoteltype
     obj.districts = hotel.district
+    obj.company_id = hotel.try(:channel_manager).try(:company).try(:id)
 
     obj.build
   end

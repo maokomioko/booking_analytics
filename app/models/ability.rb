@@ -28,6 +28,7 @@ class Ability
     can [:index, :update], Hotel, id: user.hotels.pluck(:id)
     can :update, Room, hotel_id: user.hotels.pluck(:id)
     can :update_connector_credentials, Room
+    can :manage, RoomSetting, setting_id: user.company.settings.pluck(:id)
     can :manage, Setting do |setting|
       user.hotels.pluck(:id).include?(setting.hotel_id) &&
         user.company.owner_id == user.id

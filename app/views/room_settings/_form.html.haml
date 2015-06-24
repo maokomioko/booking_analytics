@@ -1,0 +1,15 @@
+= form_tag room_settings_bulk_update_path, method: :put, class: 'form-horizontal room-settings-form', remote: true do
+  %table.table
+    %thead
+      %tr
+        %th= Room.human_attribute_name(:name)
+        %th= RoomSetting.human_attribute_name(:position)
+    %tbody
+      - @hotel.rooms.each do |room|
+        %tr(data-room-setting-id="#{@room_settings[room.id].id}")
+          %td= room.name
+          %td
+            = fields_for 'room_settings[]', @room_settings[room.id] do |f|
+              = f.number_field :position, class: 'form-control', min: 1, step: 1
+
+  = button_tag t('shared.save'), type: :submit, class: 'btn btn-teal'

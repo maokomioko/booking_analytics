@@ -12,8 +12,7 @@
 #  updated_at         :datetime
 #  districts          :text             default([]), is an Array
 #  hotel_id           :integer
-#  booking_page       :integer
-#  page_position      :integer
+#  strategy           :string
 #
 # Indexes
 #
@@ -36,6 +35,16 @@ class Setting < ActiveRecord::Base
 
   belongs_to :company
   belongs_to :hotel
+
+  has_many :room_settings do
+    def room_hash
+      each_with_object({}) do |rs, hash|
+        hash[rs.room_id] = rs
+      end
+    end
+  end
+
+  after_create :create_room_settings
 
   after_save :reload_hotel_workers, if: -> { self.crawling_frequency_changed? }
   after_save :clean_related_hotels
@@ -74,5 +83,14 @@ class Setting < ActiveRecord::Base
 
   def clean_related_hotels
     RelatedHotelsCleanerWorker.perform_async(id)
+  end
+
+  def create_room_settings
+    return true unless hotel.present?
+    hotel.rooms.pluck(:id).each do |room_id|
+      RoomSetting.find_or_create_by(room_id: room_id, setting: self) do |obj|
+        obj.position = 1
+      end
+    end
   end
 end

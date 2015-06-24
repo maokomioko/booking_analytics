@@ -5,7 +5,11 @@ class SettingsController < ApplicationController
     @hotels = current_user.company.hotels
 
     if @hotels.size == 1
-      redirect_to [:edit, @hotels[0].setting_fallback]
+      setting = @hotels[0].setting_fallback
+
+      if can?(:update, setting)
+        redirect_to [:edit, setting]
+      end
     end
   end
 
@@ -13,6 +17,7 @@ class SettingsController < ApplicationController
     @hotel = @setting.hotel
     @related_hotels = @hotel.related
     @cm_rooms = @hotel.channel_manager.connector.get_rooms.name_id_mapping
+    @room_settings = @setting.room_settings.room_hash
   end
 
   def update
@@ -42,7 +47,7 @@ class SettingsController < ApplicationController
     cm = @setting.hotel.channel_manager
 
     cm.sync_rooms
-    cm.try(:fill_prices)
+    cm.try(:fill_prices, @setting.id)
   end
 
   def settings_params

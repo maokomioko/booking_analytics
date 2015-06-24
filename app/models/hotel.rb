@@ -17,7 +17,6 @@
 #  latitude     :decimal(10, 6)
 #  longitude    :decimal(10, 6)
 #  district     :text             default([]), is an Array
-#  website_url  :string
 #  phone        :string
 #
 # Indexes
@@ -46,7 +45,7 @@ class Hotel < ActiveRecord::Base
   scope :full_text_search, -> (query) {
     return none if query.empty? || query.length < 3
 
-    query = Overbooking::Hotel.prepare_fts_query(query)
+    query = Hotel.prepare_fts_query(query)
     fields = %w(name booking_id address).join(', ')
     where("to_tsvector(concat_ws(' ', #{ fields }, array_to_string(district, ' '))) @@ to_tsquery(?)", query)
   }

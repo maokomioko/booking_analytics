@@ -58,7 +58,7 @@
         - else
           = link_to new_channel_manager_path, class: active_class(new_channel_manager_path) do
             %span.title= t('menu.connection')
-      - if current_user.hotels.present?
+      - if can?(:edit, current_user.hotels.first.setting_fallback)
         %li{ data: { menu: 'settings:edit settings:new settings:index' } }
           = link_to [:settings] do
             %span.title= t('menu.worker')

@@ -11,6 +11,8 @@ en:
       room:
         min_price_cents: Minimum price
         max_price_cents: Maximum price
+      room_setting:
+        position: Desired position
       setting:
         districts: City districts
       user:

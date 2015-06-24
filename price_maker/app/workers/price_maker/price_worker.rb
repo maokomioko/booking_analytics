@@ -12,11 +12,11 @@ module PriceMaker
       hotel = Hotel.find(hotel_id)
 
       hotel.rooms.real.each do |room|
-        room.fill_prices if room.roomtype?
+        room.fill_prices(hotel.channel_manager.company.settings.first.id) if room.roomtype?
       end
 
       unless manual
-        time = hotel.channel_manager.company.setting.crawling_frequency rescue Setting.default_attributes[:crawling_requency]
+        time = hotel.channel_manager.company.settings.first.crawling_frequency rescue Setting.default_attributes[:crawling_requency]
         job_id = PriceMaker::PriceWorker.perform_in(time, hotel_id)
         hotel.update_column(:current_job, job_id)
       end

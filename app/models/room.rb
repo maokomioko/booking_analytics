@@ -43,6 +43,7 @@ class Room < ActiveRecord::Base
   belongs_to :hotel
 
   has_many :room_prices, dependent: :destroy
+  has_many :room_settings, dependent: :destroy
 
   has_and_belongs_to_many :facilities,
                           class_name: 'Facility::Room',
@@ -52,6 +53,8 @@ class Room < ActiveRecord::Base
 
   monetize :min_price_cents
   monetize :max_price_cents
+
+  after_create :create_room_settings
 
   validates_numericality_of :min_price_cents, greater_than_or_equal_to: 0
   validate :validate_max_price
@@ -74,6 +77,16 @@ class Room < ActiveRecord::Base
   def validate_max_price
     if max_price < min_price
       errors.add(:max_price_cents, :greater_than_or_equal_to, count: min_price.to_s)
+    end
+  end
+
+  def create_room_settings
+    Setting.where(hotel_id: room.hotel_id).find_each do |setting|
+      RoomSetting.create(
+        setting: setting,
+        room: self,
+        position: 1
+      )
     end
   end
 end

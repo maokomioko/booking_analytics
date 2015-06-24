@@ -1,0 +1,25 @@
+<% @room_settings.each do |rs| %>
+( function() {
+    var $roomRow = $('tr[data-room-setting-id="<%= rs.id %>"]');
+
+    <% if rs.errors.size.zero? %>
+        <% if rs.previous_changes.length > 0 %>
+            $roomRow.addClass('success');
+            $roomRow.find('.action .success').show();
+
+            setTimeout( function(){
+                $roomRow.removeClass('success');
+                $roomRow.find('.action .success').hide();
+            }, 3000);
+        <% end %>
+    <% else %>
+        $roomRow.addClass('danger');
+        $roomRow.find('.action .failure').show();
+
+        setTimeout( function(){
+            $roomRow.removeClass('danger');
+            $roomRow.find('.action .failure').hide();
+        }, 5000);
+    <% end %>
+})();
+<% end %>

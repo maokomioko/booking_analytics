@@ -39,7 +39,7 @@ en:
     unauthorized: "Unauthorized"
     no_company: "This account doesn't have any company"
     no_ch_manager: "No channel manager defined"
-    no_reservations: "No reservations found in your Channel Manager"
+    no_reservations: "Sorry, we couldn't find any reservation in your Channel Manager."
   labels:
     cm_login: "Your login for Channel Manager"
     cm_password: "Your password for Channel Manager"

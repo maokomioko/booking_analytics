@@ -10,6 +10,7 @@
         %th= Room.human_attribute_name(:max_price)
         - if can?(:update_connector_credentials, Room)
           %th= t('labels.select_room')
+        %th
     %tbody
       - @hotel.rooms.each do |room|
         = fields_for 'rooms[]', room do |f|

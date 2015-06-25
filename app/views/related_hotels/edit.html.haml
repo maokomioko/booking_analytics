@@ -12,16 +12,14 @@
     %span(data-message="select_hotels_first")= t('messages.select_hotels_first')
     %span(data-message="confirm_related_bulk_delete")= t('messages.confirm_related_bulk_delete')
     %span(data-message="related_search_prompt")= t('messages.related_search_prompt')
-  .col-sm-12
-    .row
-      .col-sm-6
-        .well
-          = form_tag add_related_hotel_path(id: @hotel.booking_id), method: :post, remote: true, class: 'add-related-form' do
-            .form-group
-              = hidden_field_tag :ids, nil, id: 'add_related_select2', data: { url: search_related_hotel_path(id: @hotel.booking_id) }
-            .form-group
-              = submit_tag t('.add_related'), class: 'btn btn-purple'
+  .col-sm-12{style: 'margin-bottom: 20px'}
+    = form_tag add_related_hotel_path(id: @hotel.booking_id), method: :post, remote: true, class: 'add-related-form' do
+      .col-md-6.no-left-padding
+        = hidden_field_tag :ids, nil, id: 'add_related_select2', data: { url: search_related_hotel_path(id: @hotel.booking_id) }
+      .col-md-3.no-left-padding
+        = submit_tag t('.add_related'), class: 'btn btn-purple'
 
+  .col-sm-12
     - if @related.length > 0
       .btn-group
         %button.btn.btn-dark-beige.dropdown-toggle.bulk-action-button(type="button" data-toggle="dropdown")

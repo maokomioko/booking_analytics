@@ -24,8 +24,11 @@ feature 'Sign up', js: true do
     fill_in :user_email, with: FFaker::Internet.email
     fill_in :user_password, with: '12345678'
     fill_in :user_password_confirmation, with: '12345678'
+    fill_in :user_company_attributes_name, with: 'My company'
     find('label[for="agree"]').click
     click_on 'Submit'
+
+    # Capybara::Screenshot.screenshot_and_open_image
 
     expect(page).to have_content(I18n.t('devise.registrations.signed_up'))
   end

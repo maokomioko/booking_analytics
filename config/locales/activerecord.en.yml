@@ -9,8 +9,8 @@ en:
         reg_address: Registration address
         logo: Logotype
       room:
-        min_price_cents: Minimum price
-        max_price_cents: Maximum price
+        min_price: Minimum price
+        max_price: Maximum price
       room_setting:
         position: Desired position
       setting:
@@ -21,7 +21,7 @@ en:
       models:
         room:
           attributes:
-            min_price_cents:
+            min_price:
               greater_than_or_equal_to: "must be greater than or equal to <em>&euro; %{count}</em>"
-            max_price_cents:
+            max_price:
               greater_than_or_equal_to: "must be greater than or equal to <em>&euro; %{count}</em>"

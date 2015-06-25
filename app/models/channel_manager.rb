@@ -75,7 +75,7 @@ class ChannelManager < ActiveRecord::Base
       end
     else
       new_prices = [custom_price]
-      price_blocks.update_all(default_price_cents: custom_price.to_money('EUR').cents, locked: true)
+      price_blocks.update_all(default_price: custom_price, locked: true)
     end
 
     price_blocks.map(&:date).each do |date|

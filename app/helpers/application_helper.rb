@@ -60,4 +60,8 @@ module ApplicationHelper
       end
     end.compact.reverse.join(' ')
   end
+
+  def number_to_euro(amount)
+    number_to_currency(amount, unit: '€').gsub(' ', '&nbsp')
+  end
 end

@@ -37,7 +37,7 @@ shared_examples_for 'a reservation JSON response' do
     end
 
     it 'validates price' do
-      expect(hash[:price]).to be_a Money
+      expect(hash[:price]).to be_a Float
     end
   end
 end

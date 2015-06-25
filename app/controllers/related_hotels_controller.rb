@@ -5,8 +5,6 @@ class RelatedHotelsController < ApplicationController
   append_after_action :add_flash_after_drop, only: :drop
   append_after_action :add_flash_after_add, only: :add
 
-  skip_before_filter :check_step_5, only: [:search, :drop, :add]
-
   def index
     @hotels = Hotel
                   .accessible_by(current_ability)

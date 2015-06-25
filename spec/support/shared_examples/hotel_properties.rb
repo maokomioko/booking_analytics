@@ -12,14 +12,21 @@ shared_examples_for HotelProperties do
 
   context 'scopes' do
     describe 'by_property_type' do
-      let!(:scoped_hotel) { Fabricate.create(:hotel, hoteltype_id: 1) }
-      let!(:other_hotel) { Fabricate.create(:hotel, hoteltype_id: 2) }
+      context 'old properties' do
+        let!(:scoped_hoteltype) { described_class::OLD_PROPERTY_TYPES.first.first }
+        let!(:scoped_hoteltype_id) { described_class::OLD_PROPERTY_TYPES.first.last }
+        let!(:scoped_hotel) { Fabricate.create(:hotel, hoteltype_id: scoped_hoteltype_id) }
 
-      it 'includes object only with desired property' do
-        scoped = described_class.by_property_type(1)
+        let!(:other_hoteltype) { described_class::OLD_PROPERTY_TYPES.to_a.last.first }
+        let!(:other_hoteltype_id) { described_class::OLD_PROPERTY_TYPES.to_a.last.last }
+        let!(:other_hotel) { Fabricate.create(:hotel, hoteltype_id: other_hoteltype_id) }
 
-        expect(scoped).to include(scoped_hotel)
-        expect(scoped).not_to include(other_hotel)
+        it 'includes object only with desired property' do
+          scoped = described_class.by_property_type(scoped_hoteltype, 'old')
+
+          expect(scoped).to include(scoped_hotel)
+          expect(scoped).not_to include(other_hotel)
+        end
       end
     end
   end

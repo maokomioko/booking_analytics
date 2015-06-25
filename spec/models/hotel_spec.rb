@@ -8,12 +8,12 @@ describe Hotel do
       it { should have_one(n) }
     end
 
-    it { should have_many(:rooms) }
-    it { should have_one(:channel_manager).with_foreign_key(:booking_id) }
-
-    %i(related facilities).each do |n|
-      it { should have_and_belong_to_many(n) }
+    %i(rooms related_hotels related).each do |n|
+      it { should have_many(n)}
     end
+
+    it { should have_one(:channel_manager).with_foreign_key(:booking_id) }
+    it { should have_and_belong_to_many(:facilities) }
   end
 
   context 'scopes' do

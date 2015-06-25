@@ -53,8 +53,6 @@ gem 'jbuilder'
 gem 'mini_magick'
 gem 'mime-types'
 gem 'mail-logger'
-gem 'money'
-gem 'money-rails'
 
 gem 'naturally', github: 'zedalaye/naturally'
 
@@ -123,6 +121,7 @@ end
 
 group :test do
   gem 'capybara', github: 'jnicklas/capybara'
+  gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'ffaker'
   gem 'fuubar'

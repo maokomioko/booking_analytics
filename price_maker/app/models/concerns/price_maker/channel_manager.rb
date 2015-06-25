@@ -17,20 +17,19 @@ module PriceMaker
           dates.each do |date|
             begin
               price = PriceMaker::Algorithm.new(hotel_room_ids, max_people_fallback, date, date + 1.day, desired_position).best_price
-              # be aware, that prices are in cents
 
               rp = RoomPrice.find_or_initialize_by(date: date, room: self)
-              rp.default_price_cents = 0 if rp.default_price_cents.nil?
+              rp.default_price = 0 if rp.default_price.nil?
 
-              if max_price_cents > 0 && price > max_price_cents
-                price = max_price_cents
+              if max_price > 0 && price > max_price
+                price = max_price
               end
 
-              if min_price_cents > 0 && price < min_price_cents
-                price = min_price_cents
+              if min_price > 0 && price < min_price
+                price = min_price
               end
 
-              rp.price_cents = price * 100
+              rp.price = price
 
               rp.save! unless rp.locked == true
             rescue

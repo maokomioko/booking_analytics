@@ -26,7 +26,7 @@
                 = l reservation[:arrival], format: :short
                 &mdash;
                 = l reservation[:departure], format: :short
-              %td= humanized_money_with_symbol reservation[:price]
+              %td= number_to_euro reservation[:price]
               %td
                 = Room.where(@channel_manager.connector_room_id_key => reservation[:room_ids]).map(&:name).to_sentence
                 %small

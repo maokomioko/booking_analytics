@@ -4,8 +4,8 @@
 #
 #  id                 :integer          not null, primary key
 #  roomtype           :string
-#  max_price_cents    :integer
-#  min_price_cents    :integer
+#  max_price          :float
+#  min_price          :float
 #  hotel_id           :integer
 #  name               :string
 #  availability       :integer
@@ -15,8 +15,6 @@
 #  subroom            :integer
 #  max_people         :integer
 #  price              :float
-#  min_price_currency :string           default("EUR")
-#  max_price_currency :string           default("EUR")
 #  booking_id         :integer
 #  booking_hotel_id   :integer
 #  previo_id          :integer
@@ -51,12 +49,9 @@ class Room < ActiveRecord::Base
 
   has_one :bedding
 
-  monetize :min_price_cents
-  monetize :max_price_cents
-
   after_create :create_room_settings
 
-  validates_numericality_of :min_price_cents, greater_than_or_equal_to: 0
+  validates_numericality_of :min_price, greater_than_or_equal_to: 0
   validate :validate_max_price
   validates_uniqueness_of :booking_id, scope: :hotel_id, allow_blank: true
 
@@ -76,7 +71,7 @@ class Room < ActiveRecord::Base
 
   def validate_max_price
     if max_price < min_price
-      errors.add(:max_price_cents, :greater_than_or_equal_to, count: min_price.to_s)
+      errors.add(:max_price, :greater_than_or_equal_to, count: min_price.to_s)
     end
   end
 

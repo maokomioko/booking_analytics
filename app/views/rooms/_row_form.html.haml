@@ -5,13 +5,11 @@
   %td.edit-price
     .input-group
       = f.text_field :min_price, class: 'form-control'
-      .input-group-addon
-        = currency_symbol
+      .input-group-addon €
   %td.edit-price
     .input-group
       = f.text_field :max_price, class: 'form-control'
-      .input-group-addon
-        = currency_symbol
+      .input-group-addon €
   - if can?(:update_connector_credentials, Room)
     %td.edit-cm
       - case f.object.hotel.channel_manager.connector_type

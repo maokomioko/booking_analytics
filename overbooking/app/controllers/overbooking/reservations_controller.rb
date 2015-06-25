@@ -6,7 +6,7 @@ module Overbooking
       @hotel = current_engine_user.channel_manager.hotel
 
       partner_ids = @hotel.related.where(related_hotels: { is_overbooking: true }).pluck(:booking_id)
-      price = Money.new(params[:price], 'EUR').to_f
+      price = params[:price].to_f
 
       @blocks = Overbooking::Block
         .for_hotels(partner_ids)

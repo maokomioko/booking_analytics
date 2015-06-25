@@ -14,7 +14,7 @@
           &mdash;
           = l params[:departure].to_datetime, format: :short
         %dt= t('.price')
-        %dd= humanized_money_with_symbol Money.new(params[:price], 'EUR')
+        %dd= number_to_euro params[:price]
         %dt= t('.occupancy')
         %dd= params[:occupancy]
 
@@ -47,7 +47,7 @@
                   - hotels.each do |block|
                     %tr
                       %td= block[:room]['name']
-                      %td= humanized_money_with_symbol block[:room]['min_price']['price'].to_money('EUR')
+                      %td= number_to_euro block[:room]['min_price']['price']
           - else
             %p.lead= t('.no_cheap')
         .clearfix
@@ -67,7 +67,7 @@
                   - hotels.each do |block|
                     %tr
                       %td= block[:room]['name']
-                      %td= humanized_money_with_symbol block[:room]['min_price']['price'].to_money('EUR')
+                      %td= number_to_euro block[:room]['min_price']['price']
           - else
             %p.lead= t('.no_expensive')
         .clearfix

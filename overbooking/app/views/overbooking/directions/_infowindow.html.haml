@@ -33,7 +33,7 @@
             %tr
               %td= room['name']
               %td= room['max_occupancy']
-              %td= "€" + room['min_price']['price']
+              %td= number_to_euro room['min_price']['price']
 
   .space12
 

@@ -81,7 +81,7 @@ class WubookConnector < AbstractConnector
           created_at: r['date_received'].to_datetime,
           room_ids: r['rooms'].map(&:to_i),
           room_amount: 1,
-          price: r['amount'].to_f.to_money('EUR'),
+          price: r['amount'].to_f,
           status: r['status'],
           adults: r['men'].to_i,
           children: r['children'].to_i,

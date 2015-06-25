@@ -31,7 +31,7 @@ class AbstractConnector
   #     created_at: <DATETIME>,  # created date of booking
   #     room_ids: <INT ARRAY>,   # room id in current connector
   #     room_amount: <INTEGER>,  # room amount
-  #     price: <MONEY>,          # total price, Money object
+  #     price: <FLOAT>,          # total price
   #     status: <STRING>,
   #     adults: <INTEGER>,       # adults count
   #     children: <INTEGER>,     # children count

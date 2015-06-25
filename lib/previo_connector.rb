@@ -82,7 +82,7 @@ class PrevioConnector < AbstractConnector
         created_at: r['created'].to_datetime,
         room_ids: [r['objectKind']['obkId'].to_i],
         room_amount: 1,
-        price: r['price'].to_i.to_money(r['currency']['code']),
+        price: r['price'].to_f,
         status: Previo::RESERVATION_STATUSES[r['status']['statusId'].to_i][:name],
         adults: r['guest'].select{|g| g['guestCategory']['name'] == "dospělý"}.count,
         children: r['guest'].select{|g| g['guestCategory']['name'] != "dospělý"}.count,

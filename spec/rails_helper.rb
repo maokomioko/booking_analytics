@@ -7,6 +7,7 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
 require 'capybara/poltergeist'
 require 'fabrication/syntax/make'
 require 'sidekiq/testing'
@@ -16,8 +17,6 @@ require 'webmock/rspec'
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
-
-Money.default_bank.update_rates('spec/documents/bank_rates.xml')
 
 RSpec.configure do |config|
   config.include JsonSpec::Helpers

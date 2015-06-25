@@ -39,7 +39,7 @@ module Graph
           hash[room.id] ||= {}
           room.room_prices.each do |price|
             hash[room.id][price.date.strftime(Graph::Data.date_format)] =
-              price.price_cents.to_f / 100
+              price.price
           end
 
           hash

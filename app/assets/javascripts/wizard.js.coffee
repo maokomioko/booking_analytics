@@ -60,6 +60,9 @@ class @Wizard
     $form.on 'ajax:complete', ->
       $(@).parents('.container').unblock()
 
+    $form.on 'ajax:success', ->
+      Turbolinks.visit('/wizard/step5')
+
   step4RoomsAutoSave: ->
     $form = $('.rooms-form')
 

@@ -142,29 +142,37 @@ class WizardController < ApplicationController
 
   def steps_checking_methods
     unless current_user.channel_manager.present?
-      redirect_to [:wizard, :step1] and return
+      step_redirect('step1') and return
     end
 
     unless current_user.channel_manager.login.present?
-      redirect_to [:wizard, :step2] and return
+      step_redirect('step2') and return
     end
 
     unless current_user.channel_manager.default_pid.present?
-      redirect_to [:wizard, :step3] and return
+      step_redirect('step3') and return
     end
 
     ids = current_user.channel_manager.hotel.rooms.pluck(:wubook_id, :previo_id)
 
     # if none of the rooms have CM_ID
     if ids.flatten.compact.size.zero?
-      redirect_to [:wizard, :step4] and return
+      step_redirect('step4') and return
     end
 
     if current_user.channel_manager.hotel.related.count.zero?
-      redirect_to [:wizard, :step5] and return
+      step_redirect('step5') and return
     else
       current_user.update_attribute(:setup_completed, true)
       redirect_to [:calendar, :index] and return
+    end
+  end
+
+  def step_redirect(step)
+    if action_name == step
+      true
+    else
+      redirect_to [:wizard, step.to_sym] and return
     end
   end
 end

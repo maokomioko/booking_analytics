@@ -90,6 +90,7 @@ class WizardController < ApplicationController
   # channel manager rooms
   def step4
     @channel_manager = current_user.channel_manager
+    @hotel = @channel_manager.hotel
     @cm_rooms = @channel_manager.connector.get_rooms.name_id_mapping
 
     @channel_manager.create_rooms if @channel_manager.hotel.rooms.size.zero?

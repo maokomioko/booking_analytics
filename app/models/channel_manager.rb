@@ -19,7 +19,7 @@
 #
 
 class ChannelManager < ActiveRecord::Base
-  TYPES = %w(wubook previo).freeze
+  TYPES = %w(empty wubook previo).freeze
 
   belongs_to :company
   belongs_to :hotel, foreign_key: :booking_id, primary_key: :booking_id
@@ -28,9 +28,7 @@ class ChannelManager < ActiveRecord::Base
 
   attr_accessor :connector_type
 
-  validates :login, :password, :lcode, :booking_id, :hotel_name, presence: true
-  validates :non_refundable_pid, :default_pid, presence: true, on: :update
-
+  validates :booking_id, :hotel_name, presence: true
   validate :hotel_existence
   validates_inclusion_of :connector_type, in: TYPES, allow_blank: true
 

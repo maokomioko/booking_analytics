@@ -19,6 +19,9 @@
 #
 
 class ChannelManager::Wubook < ChannelManager
+  validates :login, :password, :lcode, presence: true
+  validates :non_refundable_pid, :default_pid, presence: true, on: :update
+
   def connector_room_id_key
     'wubook_id'
   end

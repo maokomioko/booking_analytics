@@ -1,5 +1,3 @@
-require 'money'
-
 class AbstractConnector
   def initialize
     raise NotImplementedError.new("#{self.class.name} is an abstract class.")

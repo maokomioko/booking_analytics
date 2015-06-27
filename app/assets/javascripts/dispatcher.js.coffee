@@ -19,6 +19,8 @@ class Dispatcher
     switch page
       when 'calendar:index', 'calendar:demo'
         new Calendar()
+      when 'channel_manager:edit', 'channel_manager:new'
+        new ChannelManagerForm()
       when 'related_hotels:edit'
         new Related()
       when 'settings:edit'
@@ -28,6 +30,7 @@ class Dispatcher
 
     if page.match(/wizard:step/i)
       new Wizard()
+      new ChannelManagerForm() # step 2
       new Related() # step 5
 
 ready = ->

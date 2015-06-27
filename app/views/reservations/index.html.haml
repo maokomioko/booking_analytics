@@ -6,7 +6,11 @@
 
 .row
   .col-sm-12
-    - if @reservations.nil?
+    - if current_user.channel_manager.connector_type == 'empty'
+      .row
+        .col-sm-6
+          = render 'empty_connector'
+    - if @reservations.empty?
       %h3= t('errors.no_reservations')
     - else
       %table.table

@@ -1,6 +1,7 @@
 %tr(data-room-id="#{ f.object.id }")
   %td= f.object.booking_id
-  %td= f.object.wubook_id || f.object.previo_id
+  - unless current_user.channel_manager.connector_type == 'empty'
+    %td= f.object.wubook_id || f.object.previo_id
   %td= f.object.name
   %td.edit-price
     .input-group
@@ -10,7 +11,7 @@
     .input-group
       = f.text_field :max_price, class: 'form-control'
       .input-group-addon €
-  - if can?(:update_connector_credentials, Room)
+  - if current_user.channel_manager.connector_type != 'empty' && can?(:update_connector_credentials, Room)
     %td.edit-cm
       - case f.object.hotel.channel_manager.connector_type
       - when 'previo'

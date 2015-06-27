@@ -88,6 +88,7 @@ en:
       search_prompt: Start entering hotel name, address or Booking ID
     step2:
       header: 'Step #2. Setup channel manager'
+      empty_connector_warning: Without channel manager you cannot update your room prices
     step3:
       header: 'Step #3. Choose your tarif plans'
     step4:

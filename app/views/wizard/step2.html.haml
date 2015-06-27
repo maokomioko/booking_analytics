@@ -19,25 +19,36 @@
         .col-sm-5
           = f.select :connector_type, options_for_cm_types(@channel_manager.connector_type), {}, class: 'form-control'
 
-      .form-group
-        = f.label :login, t('labels.cm_login'), class: 'col-sm-6 control-label '
-        .col-sm-5
-          = f.text_field :login, class: 'form-control with_validation'
-
-      .form-group
-        = f.label :password, t('labels.cm_password'), class: 'col-sm-6 control-label'
-        .col-sm-5
-          = f.text_field :password, class: 'form-control with_validation'
-
       .connector-fieldset.hidden
 
+      %fieldset.hidden(data-connector="empty")
+        %p.lead= t('.empty_connector_warning')
+
       %fieldset.hidden(data-connector="wubook")
+        .form-group
+          = f.label :login, t('labels.cm_login'), class: 'col-sm-6 control-label '
+          .col-sm-5
+            = f.text_field :login, class: 'form-control with_validation'
+
+        .form-group
+          = f.label :password, t('labels.cm_password'), class: 'col-sm-6 control-label'
+          .col-sm-5
+            = f.text_field :password, class: 'form-control with_validation'
         .form-group
           = f.label :lcode, t('labels.lcode').html_safe, class: 'col-sm-6 control-label'
           .col-sm-5
             = f.text_field :lcode, class: 'form-control with_validation'
 
       %fieldset.hidden(data-connector="previo")
+        .form-group
+          = f.label :login, t('labels.cm_login'), class: 'col-sm-6 control-label '
+          .col-sm-5
+            = f.text_field :login, class: 'form-control with_validation'
+
+        .form-group
+          = f.label :password, t('labels.cm_password'), class: 'col-sm-6 control-label'
+          .col-sm-5
+            = f.text_field :password, class: 'form-control with_validation'
         .form-group
           = f.label :lcode, ChannelManager::Previo.human_attribute_name(:lcode), class: 'col-sm-6 control-label'
           .col-sm-5

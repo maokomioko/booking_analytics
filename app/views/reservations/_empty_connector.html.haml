@@ -1,0 +1,8 @@
+.alert.alert-block.alert-warning.fade.in
+  %button.close(data-dismiss="alert" type="button") ×
+  %h4.alert-heading
+    = icon('exclamation-triangle')
+    You work without connector
+  %p To see reservations in your hotel you should select and setup Channel Manager
+  %p
+    = link_to 'Setup Channel Manager', [:edit, :channel_manager, id: current_user.channel_manager.id], class: 'btn btn-yellow'

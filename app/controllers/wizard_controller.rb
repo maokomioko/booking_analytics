@@ -12,21 +12,15 @@ class WizardController < ApplicationController
 
   # POST /wizard/step/1
   def step1_post
-    @channel_manager = current_user.channel_manager || ChannelManager::Wubook.new
+    @channel_manager = current_user.channel_manager || ChannelManager::Empty.new
     @channel_manager.attributes = step1_params
 
     # let's hack rails validation ]:->
-    @channel_manager.login ||= '1'
-    @channel_manager.password ||= '1'
-    @channel_manager.lcode ||= '1'
     @channel_manager.hotel_name ||= '1'
     @channel_manager.company = current_user.company
 
     if @channel_manager.save
       attrs = {}.tap do |hash|
-        hash[:login] = nil if @channel_manager.login == '1'
-        hash[:password] = nil if @channel_manager.password == '1'
-        hash[:lcode] = nil if @channel_manager.lcode == '1'
         hash[:hotel_name] = @channel_manager.hotel.name if @channel_manager.hotel_name == '1'
       end
 
@@ -65,9 +59,13 @@ class WizardController < ApplicationController
 
       @channel_manager.update_columns(attrs) if attrs.present?
 
-      allow_next_step
-
-      redirect_to [:wizard, :step3], turbolinks: true
+      if @channel_manager.connector_type == 'empty'
+        current_user.company.update_column(:setup_step, 4)
+        redirect_to [:wizard, :step4], turbolinks: true
+      else
+        allow_next_step
+        redirect_to [:wizard, :step3], turbolinks: true
+      end
     else
       flash[:alert] = @channel_manager.errors.full_messages.to_a.to_sentence
       render :step2
@@ -77,6 +75,10 @@ class WizardController < ApplicationController
   # tariff plans
   def step3
     @channel_manager = current_user.channel_manager
+
+    if @channel_manager.connector_type == 'empty'
+      redirect_to [:wizard, :step4], turbolinks: true
+    end
   end
 
   # POST /wizard/step/3

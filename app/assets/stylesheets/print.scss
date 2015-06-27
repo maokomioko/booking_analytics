@@ -3,15 +3,14 @@
   margin: 0;
 }
 
+
 @media print {
   html, body {
     width: 210mm;
     height: 297mm;
   }
-
   .main-container {
     margin-top: 0;
-    
     .main-content {
       margin-left: 0;
     }

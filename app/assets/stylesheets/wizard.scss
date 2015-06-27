@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------- */
-/*	Form Wizard
+/*  Form Wizard
  /* ---------------------------------------------------------------------- */
 .swMain > ul {
   display: table;
@@ -9,11 +9,13 @@
   position: relative;
   width: 100%;
 }
+
 .swMain > ul li {
   display: table-cell;
   text-align: center;
   width: 1%;
 }
+
 .swMain > ul li > a:before {
   border-top: 4px solid #CED1D6;
   content: "";
@@ -26,17 +28,21 @@
   width: 100%;
   z-index: 1;
 }
+
 .swMain > ul li:first-child > a:before {
   left: 50%;
   max-width: 51%;
 }
+
 .swMain > ul li:last-child > a:before {
   max-width: 50%;
   width: 50%;
 }
+
 .swMain > ul li > a.selected:before, .swMain li > a.done:before {
   border-color: #5293C4;
 }
+
 .swMain > ul .stepNumber {
   background-color: #FFFFFF;
   border: 5px solid #CED1D6;
@@ -51,15 +57,18 @@
   width: 40px;
   z-index: 2;
 }
+
 .swMain > ul li > a.selected .stepNumber {
   border-color: #5293C4;
 }
+
 .swMain ul li > a.done .stepNumber {
   border-color: #5293C4;
   background-color: #5293C4;
   color: #fff;
   text-indent: -9999px;
 }
+
 .swMain ul li > a.done .stepNumber:before {
   content: "\f00c";
   display: inline;
@@ -71,14 +80,17 @@
   margin-right: 7px;
   text-indent: 0;
 }
+
 .swMain ul li > a.done.wait .stepNumber {
   background-color: #F6F6F6 !important;
   color: #CCCCCC !important;
   text-indent: -0px !important;
 }
+
 .swMain ul li > a.done.wait .stepNumber:before {
   content: "" !important;
 }
+
 .swMain > ul li .stepDesc {
   color: #949EA7;
   display: block;
@@ -90,27 +102,35 @@
   word-wrap: break-word;
   z-index: 104;
 }
+
 .swMain > ul li > a.selected .stepDesc, .swMain li > a.done .stepDesc {
   color: #2B3D53;
 }
+
 .swMain > ul li > a:hover {
   text-decoration: none;
 }
+
 .swMain > ul li > a.disabled {
   cursor: default;
 }
+
 .swMain .progress {
   margin-bottom: 30px;
 }
+
 .swMain .stepContainer {
   height: auto !important;
 }
+
 .swMain .loader {
   display: none;
 }
+
 .swMain [class^="button"], .swMain [class*=" button"] {
   display: none;
 }
+
 .swMain .close {
   display: none;
 }

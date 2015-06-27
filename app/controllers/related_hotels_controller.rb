@@ -1,6 +1,8 @@
 class RelatedHotelsController < ApplicationController
   before_filter :find_and_auth_resource, except: :index
 
+  skip_before_filter :wizard_completed, only: [:drop, :add, :search]
+
   skip_after_action :flash_to_headers, only: [:drop, :add]
   append_after_action :add_flash_after_drop, only: :drop
   append_after_action :add_flash_after_add, only: :add

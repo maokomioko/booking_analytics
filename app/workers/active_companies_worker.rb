@@ -7,7 +7,8 @@ class ActiveCompaniesWorker
   recurrence { hourly.minute_of_hour(0, 10, 20, 30, 40, 50) }
 
   def perform
-    Company.where("last_activity > current_timestamp - interval '30 minutes'").each do |company|
+    Company.where("last_activity > current_timestamp - interval '30 minutes'").find_each do |company|
+      next unless company.setup_completed?
       DefaultRoomPriceSyncWorker.perform_async(company.channel_manager.id)
     end
   end

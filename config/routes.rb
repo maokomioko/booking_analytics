@@ -40,8 +40,8 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :destroy]
   end
 
-  namespace :hotels do
-    get :search, action: :search, as: :search
+  resources :hotels, only: :show do
+    get :search, action: :search, as: :search, on: :collection
   end
 
   resources :rooms, only: [:update] do
@@ -68,11 +68,12 @@ Rails.application.routes.draw do
       action = "step#{ i }".to_sym
       action_post = "step#{ i }_post".to_sym
 
-      get action, action: action, as: action
-      post action_post, action: action_post, as: action_post
+      get "step/#{ i }", action: action, as: action, step: i
+      post "step/#{ i }", action: action_post, as: action_post, step: i
     end
 
     get :complete, action: :complete, as: :complete
+    get :setup_not_completed, action: :setup_not_completed, as: :setup_not_completed
   end
 
   root to: 'calendar#index'

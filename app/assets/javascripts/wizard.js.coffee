@@ -4,6 +4,7 @@ class @Wizard
     @step2Form()
     @step4RoomsSubmit()
     @step4RoomsAutoSave()
+    @step5Finish()
 
   initSelect2HotelSearch: ->
     $select = $('#search_hotel')
@@ -21,6 +22,12 @@ class @Wizard
         data: (term, page) -> { q: term }
         results: (data, page) ->
           { results: data }
+      initSelection: (element, callback) ->
+        id = $(element).val()
+        if id != ''
+          $.ajax
+            url: $select.data('hotelUrl') + id
+            success: (data) -> callback(data)
 
     return
 
@@ -50,6 +57,7 @@ class @Wizard
 
   step4RoomsSubmit: ->
     $form = $('.rooms-form')
+    $finishForm = $('.step4-finish-form')
     manual = ->
       $form.find('[name=manual]').val()
 
@@ -61,7 +69,14 @@ class @Wizard
       $(@).parents('.container').unblock()
 
     $form.on 'ajax:success', ->
-      Turbolinks.visit('/wizard/step5')
+      if manual() == 'true'
+        $finishForm.trigger('submit.rails')
+
+    $finishForm.on 'submit.rails', ->
+      blockElemet $form.parents('.container')
+
+    $finishForm.on 'ajax:complete', ->
+      $form.parents('.container').unblock()
 
   step4RoomsAutoSave: ->
     $form = $('.rooms-form')
@@ -72,3 +87,9 @@ class @Wizard
       $form.trigger('submit.rails')
       $manual.val('true')
     , 1300
+
+  step5Finish: ->
+    $finishForm = $('.step5-finish-form')
+
+    $finishForm.on 'submit.rails', -> triggerSpinner()
+    $finishForm.on 'ajax:complete', -> triggerSpinner()

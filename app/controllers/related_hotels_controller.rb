@@ -40,6 +40,7 @@ class RelatedHotelsController < ApplicationController
       .where.not(booking_id: params[:id])
       .where.not(id: @hotel.related_ids)
       .where(city: @hotel.city)
+      .limit(300)
   end
 
   protected

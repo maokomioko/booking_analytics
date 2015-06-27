@@ -26,7 +26,6 @@
 #  invited_by_id          :integer
 #  invited_by_type        :string
 #  invitations_count      :integer          default(0)
-#  setup_completed        :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -64,6 +63,8 @@ class User < ActiveRecord::Base
           owner_id: owner.id,
           owner_company_id: owner.company_id)
   }
+
+  delegate :setup_step, :setup_completed?, to: :company, allow_nil: true
 
   def self.serialize_into_session(record)
     [record.id.to_s, record.authenticatable_salt]

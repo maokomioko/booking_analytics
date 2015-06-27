@@ -23,6 +23,7 @@ class Ability
 
   def manager_abilities
     # can [:index, :show], Action
+    can :wizard_setup, Object
     can :manage, Company, owner_id: user.id
     can :manage, ChannelManager, company_id: user.company_id
     can [:index, :update], Hotel, id: user.hotels.pluck(:id)

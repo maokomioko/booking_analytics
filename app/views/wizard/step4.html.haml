@@ -6,3 +6,7 @@
 
 = render 'progressbar', active: 4, progress: (100 / 5) * 4
 = render partial: 'rooms/form'
+
+.hidden
+  = form_tag [:wizard, :step4_post], method: :post, class: 'step4-finish-form', remote: true do
+    = submit_tag 'submit'

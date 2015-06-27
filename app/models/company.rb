@@ -14,6 +14,7 @@
 #  bank_code     :string
 #  bank_account  :string
 #  last_activity :datetime
+#  setup_step    :integer          default(1)
 #
 
 class Company < ActiveRecord::Base
@@ -29,4 +30,8 @@ class Company < ActiveRecord::Base
 
   validates_presence_of :name
   validates :bank_code, :bank_account, numericality: true, allow_blank: true
+
+  def setup_completed?
+    setup_step == 6 # last step + 1
+  end
 end

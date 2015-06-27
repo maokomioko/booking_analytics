@@ -1,16 +1,16 @@
 class WizardController < ApplicationController
-  before_filter :check_steps, except: :step1_post
+  before_filter :check_ability, except: [:setup_not_completed, :complete]
 
   # hotel search
   def step1
-    unless current_user.channel_manager.try(:hotel)
-      @channel_manager = ChannelManager.new
-    else
-      redirect_to [:wizard, :step2]
-    end
+    @channel_manager = if current_user.channel_manager.try(:hotel).present?
+                         current_user.channel_manager
+                       else
+                         ChannelManager.new
+                       end
   end
 
-  # POST /wizard/step1
+  # POST /wizard/step/1
   def step1_post
     @channel_manager = current_user.channel_manager || ChannelManager::Wubook.new
     @channel_manager.attributes = step1_params
@@ -23,16 +23,18 @@ class WizardController < ApplicationController
     @channel_manager.company = current_user.company
 
     if @channel_manager.save
-      @channel_manager.update_columns(
-        {}.tap do |hash|
-          hash[:login] = nil if @channel_manager.login == '1'
-          hash[:password] = nil if @channel_manager.password == '1'
-          hash[:lcode] = nil if @channel_manager.lcode == '1'
-          hash[:hotel_name] = @channel_manager.hotel.name if @channel_manager.hotel_name == '1'
-        end
-      )
+      attrs = {}.tap do |hash|
+        hash[:login] = nil if @channel_manager.login == '1'
+        hash[:password] = nil if @channel_manager.password == '1'
+        hash[:lcode] = nil if @channel_manager.lcode == '1'
+        hash[:hotel_name] = @channel_manager.hotel.name if @channel_manager.hotel_name == '1'
+      end
 
-      redirect_to [:wizard, :step2]
+      @channel_manager.update_columns(attrs) if attrs.present?
+
+      allow_next_step
+
+      redirect_to [:wizard, :step2], turbolinks: true
     else
       flash[:alert] = @channel_manager.errors.full_messages.to_a.to_sentence
       render :step1
@@ -44,7 +46,7 @@ class WizardController < ApplicationController
     @channel_manager = current_user.channel_manager
   end
 
-  # POST /wizard/step2
+  # POST /wizard/step/2
   def step2_post
     @channel_manager = current_user.channel_manager
 
@@ -56,14 +58,16 @@ class WizardController < ApplicationController
     @channel_manager.default_pid ||= 1
 
     if @channel_manager.update_attributes(step2_params)
-      @channel_manager.update_columns(
-        {}.tap do |hash|
-          hash[:non_refundable_pid] = nil if @channel_manager.non_refundable_pid == 1
-          hash[:default_pid] = nil if @channel_manager.default_pid == 1
-        end
-      )
+      attrs = {}.tap do |hash|
+        hash[:non_refundable_pid] = nil if @channel_manager.non_refundable_pid == 1
+        hash[:default_pid] = nil if @channel_manager.default_pid == 1
+      end
 
-      redirect_to [:wizard, :step3]
+      @channel_manager.update_columns(attrs) if attrs.present?
+
+      allow_next_step
+
+      redirect_to [:wizard, :step3], turbolinks: true
     else
       flash[:alert] = @channel_manager.errors.full_messages.to_a.to_sentence
       render :step2
@@ -75,12 +79,13 @@ class WizardController < ApplicationController
     @channel_manager = current_user.channel_manager
   end
 
-  # POST /wizard/step3
+  # POST /wizard/step/3
   def step3_post
     @channel_manager = current_user.channel_manager
 
     if @channel_manager.update_attributes(step3_params)
-      redirect_to [:wizard, :step4]
+      allow_next_step
+      redirect_to [:wizard, :step4], turbolinks: true
     else
       flash[:alert] = @channel_manager.errors.full_messages.to_a.to_sentence
       render :step3
@@ -96,6 +101,18 @@ class WizardController < ApplicationController
     @channel_manager.create_rooms if @channel_manager.hotel.rooms.size.zero?
   end
 
+  def step4_post
+    ids = current_user.channel_manager.hotel.rooms.pluck(:wubook_id, :previo_id)
+
+    # if none of the rooms have CM_ID
+    if ids.flatten.compact.size.zero?
+      render nothing: true, status: :unprocessable_entity
+    else
+      allow_next_step
+      redirect_to [:wizard, :step5], turbolinks: true
+    end
+  end
+
   # related hotel search
   def step5
     @hotel = current_user.channel_manager.hotel
@@ -108,8 +125,20 @@ class WizardController < ApplicationController
        .page params[:page]
   end
 
+  def step5_post
+    if current_user.channel_manager.hotel.related.count.zero?
+      render nothing: true, status: :unprocessable_entity
+    else
+      allow_next_step
+      redirect_to [:wizard, :complete], turbolinks: true
+    end
+  end
+
   # yay! complete!
   def complete
+  end
+
+  def setup_not_completed
   end
 
   protected
@@ -130,49 +159,17 @@ class WizardController < ApplicationController
     params.require(:channel_manager).permit(:default_pid, :non_refundable_pid)
   end
 
-  def check_steps
-    if controller_name == 'wizard'
-      1.upto(5) do |n|
-        if action_name.to_s == "step#{n}"
-          steps_checking_methods
-        end
+  def check_ability
+    if can?(:wizard_setup, Object)
+      if params[:step].to_i > current_user.setup_step
+        redirect_to [:wizard, :"step#{ current_user.setup_step }"] and return
       end
+    else
+      redirect_to [:wizard, :setup_not_completed] and return
     end
   end
 
-  def steps_checking_methods
-    unless current_user.channel_manager.present?
-      step_redirect('step1') and return
-    end
-
-    unless current_user.channel_manager.login.present?
-      step_redirect('step2') and return
-    end
-
-    unless current_user.channel_manager.default_pid.present?
-      step_redirect('step3') and return
-    end
-
-    ids = current_user.channel_manager.hotel.rooms.pluck(:wubook_id, :previo_id)
-
-    # if none of the rooms have CM_ID
-    if ids.flatten.compact.size.zero?
-      step_redirect('step4') and return
-    end
-
-    if current_user.channel_manager.hotel.related.count.zero?
-      step_redirect('step5') and return
-    else
-      current_user.update_attribute(:setup_completed, true)
-      redirect_to [:calendar, :index] and return
-    end
-  end
-
-  def step_redirect(step)
-    if action_name == step
-      true
-    else
-      redirect_to [:wizard, step.to_sym] and return
-    end
+  def allow_next_step
+    current_user.company.update_column(:setup_step, params[:step].to_i + 1)
   end
 end

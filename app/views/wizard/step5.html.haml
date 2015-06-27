@@ -9,6 +9,7 @@
 = render template: 'related_hotels/edit'
 
 - if @related.size > 0
-  = link_to [:wizard, :complete], class: 'btn btn-lg btn-primary' do
-    = icon('flag-checkered')
-    = t('.finish')
+  = form_tag [:wizard, :step5_post], method: :post, class: 'step5-finish-form', remote: true do
+    = button_tag type: :submit, class: 'btn btn-lg btn-primary' do
+      = icon('flag-checkered')
+      = t('.finish')

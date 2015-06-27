@@ -10,7 +10,7 @@
 
 .row
   .col-md-6.col-md-offset-3
-    = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step2_post], method: :post, html: { class: 'form-horizontal' } do |f|
+    = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step2_post], method: :post, remote: true, html: { class: 'form-horizontal' } do |f|
       .errorHandler.alert.alert-danger.no-display
         = icon('remove-sign')
         = t('shared.please_check_errors')

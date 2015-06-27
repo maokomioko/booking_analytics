@@ -1,6 +1,8 @@
 class RoomsController < ApplicationController
   load_and_authorize_resource except: :bulk_update # ability checking in permit method
 
+  skip_before_filter :wizard_completed, only: :bulk_update
+
   def update
     unless @room.update(room_params)
       flash[:alert] = @room.errors.full_messages.to_sentence

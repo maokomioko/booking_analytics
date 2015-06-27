@@ -3,8 +3,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  before_filter :wizard_completed,
+  before_filter :auth_user,
                 :company_present,
+                :wizard_completed,
                 :update_last_activity,
                 unless: :devise_controller?
 
@@ -38,14 +39,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def wizard_completed
+  def auth_user
     if !devise_controller? && !user_signed_in?
       respond_to do |f|
         f.json { render json: { error: t('errors.unauthorized') }, status: 401 }
-        f.all { redirect_to [main_app, :new, :user, :session] }
+        f.all { redirect_to [main_app, :new, :user, :session] and return }
       end
-    elsif current_user && !current_user.setup_completed
-      redirect_to [:wizard, :step1] unless controller_name == 'wizard'
     end
   end
 
@@ -53,8 +52,16 @@ class ApplicationController < ActionController::Base
     if current_user && !current_user.company.present?
       respond_to do |f|
         f.json { render json: { error: t('errors.no_company') }, status: 403 }
-        f.all { redirect_to [main_app, :new, :company] }
+        f.all { redirect_to [main_app, :new, :company] and return }
       end
+    end
+  end
+
+  def wizard_completed
+    if !current_user.setup_completed? && controller_name != 'wizard'
+      redirect_to [:wizard, :"step#{ current_user.setup_step }"] and return
+    elsif current_user.setup_completed? && controller_name == 'wizard' && params[:step].present?
+      redirect_to root_path and return
     end
   end
 

@@ -24,7 +24,6 @@ gem 'devise_invitable'
 
 gem 'encryptor'
 gem 'erb2haml'
-gem 'eu_central_bank'
 
 gem 'font-awesome-sass', github: 'FortAwesome/font-awesome-sass'
 

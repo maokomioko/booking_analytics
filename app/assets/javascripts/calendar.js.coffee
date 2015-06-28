@@ -1,5 +1,8 @@
 class @Calendar
   constructor: ->
+    connector = $('#calendar').data('channelManager')
+    return if connector == 'empty'
+
     @priceControl = $('#price_control')
     @roomsList()
     @removeSelectableFromEmptyCells()

@@ -11,10 +11,11 @@
         - %w(mon tue wed thu fri sat sun).each do |day|
           %td= t("calendar.days.#{day}")
 
-= content_for(:left_menu_header) do
-  = render 'price_control'
+- unless current_user.channel_manager.connector_type == 'empty'
+  = content_for(:left_menu_header) do
+    = render 'price_control'
 
-#calendar
+#calendar(data-channel-manager="#{ current_user.channel_manager.connector_type }")
   %table.calendar(data-room-id="#{ @room.id }")
     = calendar(@dates.min) do |date|
       - price_block = @prices[date].try(:first)

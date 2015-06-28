@@ -12,7 +12,7 @@ en:
         min_price: Minimum price
         max_price: Maximum price
       room_setting:
-        position: Desired position
+        position: Desired position among competitors
       setting:
         districts: City districts
       user:

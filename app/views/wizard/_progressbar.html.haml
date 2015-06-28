@@ -4,7 +4,7 @@
       %ul
         - (1..5).to_a.each do |step|
           %li
-            = link_to [:wizard, "step#{ step }".to_sym], class: wizard_step_class(step, active) do
+            = link_to '#', class: wizard_step_class(step, active) do
               .stepNumber= step
               %span.stepDesc
                 = t('.step_number', number: step)

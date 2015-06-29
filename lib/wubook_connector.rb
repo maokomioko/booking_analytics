@@ -1,3 +1,6 @@
+require 'abstract_connector'
+
+require 'wubook_connector/error'
 require 'wubook_connector/room_collection'
 
 class WubookConnector < AbstractConnector
@@ -102,7 +105,13 @@ class WubookConnector < AbstractConnector
   end
 
   def set_response(response)
-    response[1].length > 0 ? response[1] : nil
+    code, body = response
+
+    if code.to_i != 0
+      raise WubookAPIError.new(response), response
+    else
+      body.length > 0 ? body : nil
+    end
   end
 
   def format_date(date)

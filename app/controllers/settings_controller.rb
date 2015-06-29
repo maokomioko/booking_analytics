@@ -16,7 +16,13 @@ class SettingsController < ApplicationController
   def edit
     @hotel = @setting.hotel
     @related_hotels = @hotel.related
-    @cm_rooms = @hotel.channel_manager.connector.get_rooms.name_id_mapping
+
+    @cm_rooms = begin
+      @hotel.channel_manager.connector.get_rooms.name_id_mapping
+    rescue ConnectorError => e
+      []
+    end
+
     @room_settings = @setting.room_settings.room_hash
   end
 

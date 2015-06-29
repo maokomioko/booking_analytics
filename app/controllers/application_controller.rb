@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  before_filter :auth_user,
+  before_filter :globalize_session,
+                :auth_user,
                 :company_present,
                 :wizard_completed,
                 :update_last_activity,
@@ -37,6 +38,10 @@ class ApplicationController < ActionController::Base
       u.permit(:email, :password, :password_confirmation,
                :avatar, :avatar_cache, :remove_avatar)
     end
+  end
+
+  def globalize_session
+    Thread.current[:session] = session
   end
 
   def auth_user

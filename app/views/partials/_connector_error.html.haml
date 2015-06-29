@@ -1,0 +1,14 @@
+.row
+  .col-sm-7
+    .alert.alert-block.alert-warning.fade.in
+      %button.close(data-dismiss="alert" type="button") ×
+      %h4.alert-heading
+        = icon('exclamation-triangle')
+        Error
+      %p
+        Your Channel Manager has returned an error
+        %strong
+          "
+          = error
+          "
+      %p Please send the following details to mike@hotelcommander.net

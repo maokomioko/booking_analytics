@@ -16,6 +16,8 @@
           #flash-container
             .col-sm-12
               = render_flash
+          - if session[:connector_error].present?
+            = render 'partials/connector_error', error: session.delete(:connector_error)
           = yield
 
     = render 'partials/sidebar' if controller_name == 'calendar' && current_user && current_user.channel_manager

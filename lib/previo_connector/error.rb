@@ -1,5 +1,7 @@
+require 'connector_error'
+
 class PrevioConnector < AbstractConnector
-  class PrevioError < StandardError
+  class PrevioError < ConnectorError
   end
 
   class PrevioAPIError < PrevioError
@@ -9,6 +11,8 @@ class PrevioConnector < AbstractConnector
       @response = response
       @error_message = response['error']['message'] rescue 'Unknown Error'
       @code = response['error']['code'] rescue ''
+
+      super(@error_message)
     end
   end
 end

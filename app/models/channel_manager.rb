@@ -51,6 +51,8 @@ class ChannelManager < ActiveRecord::Base
 
       plans.collect{|x| [name.call(x), x['priId']]}
     end
+  rescue ConnectorError => e
+    return [['', '']]
   end
 
   def connector_room_id_key

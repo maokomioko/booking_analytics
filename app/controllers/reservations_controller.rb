@@ -4,7 +4,11 @@ class ReservationsController < ApplicationController
   before_action :load_channel_manager
 
   def index
-    @reservations = @channel_manager.connector.get_reservations
+    @reservations = begin
+      @channel_manager.connector.get_reservations
+    rescue ConnectorError => e
+      []
+    end
   end
 
   protected

@@ -59,6 +59,9 @@ class WizardController < ApplicationController
 
       @channel_manager.update_columns(attrs) if attrs.present?
 
+      # check channel manager for correct credentials
+      @channel_manager.connector.get_plans
+
       if @channel_manager.connector_type == 'empty'
         current_user.company.update_column(:setup_step, 4)
         redirect_to [:wizard, :step4], turbolinks: true
@@ -68,8 +71,10 @@ class WizardController < ApplicationController
       end
     else
       flash[:alert] = @channel_manager.errors.full_messages.to_a.to_sentence
-      render :step2
+      redirect_to [:wizard, :step2], turbolinks: true
     end
+  rescue ConnectorError => _e
+    redirect_to [:wizard, :step2], turbolinks: true
   end
 
   # tariff plans

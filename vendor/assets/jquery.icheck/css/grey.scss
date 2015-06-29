@@ -7,7 +7,7 @@
     padding: 0;
     width: 20px;
     height: 20px;
-    background: url(images/grey.png) no-repeat;
+    background: image-url('images/grey.png') no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -47,7 +47,7 @@
        only screen and (min-device-pixel-ratio: 1.5) {
     .icheckbox_flat-grey,
     .iradio_flat-grey {
-        background-image: url(images/grey@2x.png);
+        background-image: image-url('images/grey@2x.png');
         -webkit-background-size: 176px 22px;
         background-size: 176px 22px;
     }

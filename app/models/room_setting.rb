@@ -17,6 +17,7 @@ class RoomSetting < ActiveRecord::Base
   validates_uniqueness_of :room_id, scope: :setting_id
   validates_numericality_of :position,
     greater_than_or_equal_to: 1,
+    less_than_or_equal_to: 100,
     only_integer: true,
     allow_nil: false
 end

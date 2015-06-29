@@ -10,6 +10,6 @@
           %td= room.name
           %td
             = fields_for 'room_settings[]', @room_settings[room.id] do |f|
-              = f.number_field :position, class: 'form-control', min: 1, step: 1
+              = f.number_field :position, class: 'form-control desired_position', min: 1, max: 100, step: 1
 
   = button_tag t('shared.save'), type: :submit, class: 'btn btn-teal'

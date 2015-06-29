@@ -1,1 +1,1 @@
-Rails.application.config.assets.precompile += %w( email.css )
+Rails.application.config.assets.precompile += %w( email.css images/grey.png images/grey@2x.png )

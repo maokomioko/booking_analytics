@@ -6,14 +6,16 @@ class DefaultSetting
     self.new.build
   end
 
-  def self.for_hotel(hotel)
+  def self.for_company(company)
     obj = self.new
+
+    hotel = company.hotel
 
     obj.stars = [hotel.exact_class.to_i] if hotel.exact_class
     obj.user_ratings = obj.score_range(hotel.review_score)
     obj.property_types = [ hotel.hoteltype ] if hotel.hoteltype
     obj.districts = hotel.district
-    obj.company_id = hotel.try(:channel_manager).try(:company).try(:id)
+    obj.company_id = company.id
 
     obj.build
   end

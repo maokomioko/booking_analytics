@@ -43,6 +43,7 @@
 
 #= require_tree ../../../vendor/assets/javascripts/
 #= require js/jquery.icheck
+#= require google-analytics-turbolinks
 #= require_tree .
 #= require_self
 

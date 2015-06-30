@@ -2,14 +2,12 @@ class SettingsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @hotels = current_user.company.hotels
+    setting = current_user.setting
 
-    if @hotels.size == 1
-      setting = @hotels[0].setting_fallback
-
-      if can?(:update, setting)
-        redirect_to [:edit, setting]
-      end
+    if can?(:update, setting)
+      redirect_to [:edit, setting]
+    else
+      redirect_to root_path
     end
   end
 
@@ -18,7 +16,7 @@ class SettingsController < ApplicationController
     @related_hotels = @hotel.related
 
     @cm_rooms = begin
-      @hotel.channel_manager.connector.get_rooms.name_id_mapping
+      @setting.company.channel_manager.connector.get_rooms.name_id_mapping
     rescue ConnectorError => e
       []
     end
@@ -50,10 +48,8 @@ class SettingsController < ApplicationController
   protected
 
   def force_fetch_prices_and_rooms
-    cm = @setting.hotel.channel_manager
-
+    cm = @setting.company.channel_manager
     cm.sync_rooms
-    cm.try(:fill_prices, @setting.id)
   end
 
   def settings_params

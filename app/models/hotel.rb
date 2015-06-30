@@ -13,11 +13,9 @@
 #  review_score :float
 #  zip          :string
 #  booking_id   :integer
-#  current_job  :string
 #  latitude     :decimal(10, 6)
 #  longitude    :decimal(10, 6)
 #  district     :text             default([]), is an Array
-#  website_url  :string
 #  phone        :string
 #
 # Indexes
@@ -51,6 +49,8 @@ class Hotel < ActiveRecord::Base
     where("to_tsvector(concat_ws(' ', #{ fields }, array_to_string(district, ' '))) @@ to_tsquery(?)", query)
   }
 
+  has_many :channel_managers, foreign_key: :booking_id, primary_key: :booking_id
+
   has_many :rooms
 
   has_many :related_hotels
@@ -62,11 +62,9 @@ class Hotel < ActiveRecord::Base
                           class_name: 'Facility::Hotel',
                           association_foreign_key: 'hotel_facility_id' # counter as PG trigger
 
-  has_one :channel_manager, foreign_key: :booking_id, primary_key: :booking_id
   has_one :location
   has_one :checkin
   has_one :checkout
-  has_one :setting
 
   after_validation :geocode, if: -> { address.present? }
 
@@ -112,14 +110,5 @@ class Hotel < ActiveRecord::Base
 
   def full_address
     [city, address].reject(&:blank?).join(', ')
-  end
-
-  def setting_fallback
-    if setting.present?
-      setting
-    else
-      create_setting!(DefaultSetting.for_hotel(self))
-      setting
-    end
   end
 end

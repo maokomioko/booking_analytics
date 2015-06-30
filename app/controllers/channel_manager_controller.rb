@@ -76,7 +76,7 @@ class ChannelManagerController < ApplicationController
     dates = params[:dates]
     dates.delete('')
 
-    wba = wubook_for_company(params[:room_id])
+    wba = current_user.channel_manager
     raise if wba.nil?
 
     if wba.apply_room_prices(params[:room_id], dates, params[:price])
@@ -105,21 +105,6 @@ class ChannelManagerController < ApplicationController
     true
   rescue ConnectorError => e
     false
-  end
-
-  def wubook_auth_state
-    if channel_manager_params[:type] == 'ChannelManager::Wubook'
-      connector = WubookConnector.new(channel_manager_params)
-      connector.get_token.nil? ? false : true
-    else
-      true
-    end
-  end
-
-  def wubook_for_company(room_id)
-    Room.find(room_id).hotel.channel_manager
-  rescue
-    nil
   end
 
   def channel_manager_params

@@ -6,6 +6,12 @@
   }
 }
 
+[data-page*='wizard:step'], [data-page='wizard:setup_not_completed'] {
+  .main-content {
+    margin-left: 0;
+  }
+}
+
 [data-page='settings:edit'],
 [data-page='wizard:step4'],
 [data-page='wizard:step4_post'] {

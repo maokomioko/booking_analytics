@@ -9,9 +9,15 @@ describe DefaultSetting do
     end
   end
 
-  describe '#for_hotel' do
-    let(:hotel) { Fabricate.build(:hotel) }
-    let(:hash) { described_class.for_hotel(hotel) }
+  describe '#for_company' do
+    let(:cm) do
+      cm = Fabricate(:channel_manager) do
+        company { Fabricate(:company) }
+      end
+    end
+    let(:company) { cm.company }
+    let(:hotel) { cm.hotel }
+    let(:hash) { described_class.for_company(company) }
 
     it 'uses values from hotel object' do
       expect(hash[:stars]).to eq [hotel.exact_class.to_i.to_s]

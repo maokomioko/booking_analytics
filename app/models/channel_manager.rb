@@ -32,6 +32,8 @@ class ChannelManager < ActiveRecord::Base
   validate :hotel_existence
   validates_inclusion_of :connector_type, in: TYPES, allow_blank: true
 
+  after_update :update_settings, if: -> { booking_id_changed? }
+
   # stub
   def create_rooms
   end
@@ -114,5 +116,15 @@ class ChannelManager < ActiveRecord::Base
     else
       self.name
     end
+  end
+
+  private
+
+  # remove useless room_settings
+  # useful when booking_id changed
+  def update_settings
+    setting = company.setting_fallback
+    RoomSetting.delete(setting.room_settings)
+    setting.send(:create_room_settings)
   end
 end

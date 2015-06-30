@@ -4,7 +4,7 @@ describe Hotel do
   it_behaves_like HotelProperties
 
   context 'association' do
-    %i(location checkin checkout setting).each do |n|
+    %i(location checkin checkout).each do |n|
       it { should have_one(n) }
     end
 
@@ -12,7 +12,7 @@ describe Hotel do
       it { should have_many(n)}
     end
 
-    it { should have_one(:channel_manager).with_foreign_key(:booking_id) }
+    it { should have_many(:channel_managers).with_foreign_key(:booking_id) }
     it { should have_and_belong_to_many(:facilities) }
   end
 
@@ -133,20 +133,6 @@ describe Hotel do
     it 'rejects blank options' do
       hotel = Fabricate.build(:hotel_without_address, city: 'Test city')
       expect(hotel.full_address).to eq('Test city')
-    end
-  end
-
-  describe '#setting_fallback' do
-    it 'return Setting through relation' do
-      hotel = Fabricate.create(:hotel_prague,
-                               setting: Fabricate.build(:setting))
-      expect(hotel.setting).to eq hotel.setting_fallback
-    end
-
-    it 'creates Setting object for empty relation' do
-      hotel = Fabricate.create(:hotel_prague)
-      expect(hotel.setting).to be_nil
-      expect(hotel.setting_fallback).to eq hotel.setting
     end
   end
 end

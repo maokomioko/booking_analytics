@@ -13,7 +13,7 @@
       .input-group-addon €
   - if current_user.channel_manager.connector_type != 'empty' && can?(:update_connector_credentials, Room)
     %td.edit-cm
-      - case f.object.hotel.channel_manager.connector_type
+      - case current_user.channel_manager.connector_type
       - when 'previo'
         = f.select :previo_id, options_for_select(@cm_rooms, f.object.previo_id), {include_blank: t('labels.select_room')}, class: 'form-control'
       - when 'wubook'

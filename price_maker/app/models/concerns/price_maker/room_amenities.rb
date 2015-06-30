@@ -6,13 +6,13 @@ module PriceMaker
     extend ActiveSupport::Concern
 
     included do
-      def amenities_calc
+      def amenities_calc(company_id)
         amenities = get_base_facilities
 
         return [] unless amenities
 
         if hotel.related_ids.blank?
-          hotel.amenities_calc
+          hotel.amenities_calc(company_id)
         end
 
         hotel_related_ids = hotel.related_ids

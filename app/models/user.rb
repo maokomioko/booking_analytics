@@ -40,6 +40,7 @@
 class User < ActiveRecord::Base
   has_many :hotels, through: :channel_manager
   has_one :channel_manager, through: :company
+  has_one :setting, through: :company
   has_many :actions
 
   belongs_to :company
@@ -64,6 +65,7 @@ class User < ActiveRecord::Base
           owner_company_id: owner.company_id)
   }
 
+  delegate :setting_fallback, to: :company
   delegate :setup_step, :setup_completed?, to: :company, allow_nil: true
 
   def self.serialize_into_session(record)

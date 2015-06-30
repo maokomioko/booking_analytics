@@ -26,9 +26,9 @@ module SettingsHelper
     options_for_select(options, default)
   end
 
-  def options_for_districts(default = nil, hotel = nil)
-    city = hotel.present? ? hotel.city : 'Prague'
-    default ||= DefaultSetting.for_hotel(hotel)[:districts] if hotel.present?
+  def options_for_districts(default = nil, setting = nil)
+    city = setting.present? ? setting.hotel.city : 'Prague'
+    default ||= DefaultSetting.for_company(setting.company)[:districts] if setting.present?
 
     options_for_select(Hotel.city_districts(city), default)
   end

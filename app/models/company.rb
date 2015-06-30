@@ -19,10 +19,10 @@
 
 class Company < ActiveRecord::Base
   has_many :users, dependent: :destroy
-  has_one :channel_manager, dependent: :destroy
-  has_many :hotels, through: :channel_manager
 
-  has_many :settings
+  has_one :channel_manager, dependent: :destroy
+  has_one :hotel, through: :channel_manager
+  has_one :setting
 
   belongs_to :owner, class_name: 'User'
 
@@ -33,5 +33,14 @@ class Company < ActiveRecord::Base
 
   def setup_completed?
     setup_step == 6 # last step + 1
+  end
+
+  def setting_fallback
+    if setting.present?
+      setting
+    else
+      create_setting!(DefaultSetting.for_company(self))
+      setting
+    end
   end
 end

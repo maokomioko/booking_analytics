@@ -11,15 +11,13 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  districts          :text             default([]), is an Array
-#  hotel_id           :integer
-#  booking_page       :integer
-#  page_position      :integer
 #  strategy           :string
+#  current_job        :string
+#  sidekiq_lock       :boolean          default(FALSE)
 #
 # Indexes
 #
 #  index_settings_on_company_id  (company_id) UNIQUE
-#  index_settings_on_hotel_id    (hotel_id)
 #
 
 class Setting < ActiveRecord::Base
@@ -36,7 +34,6 @@ class Setting < ActiveRecord::Base
   is_impressionable
 
   belongs_to :company
-  belongs_to :hotel
 
   has_many :room_settings do
     def room_hash
@@ -48,7 +45,7 @@ class Setting < ActiveRecord::Base
 
   after_create :create_room_settings
 
-  after_save :reload_hotel_workers, if: -> { self.crawling_frequency_changed? }
+  after_update :restart_algorithm
 
   validates_inclusion_of :crawling_frequency, within: CRAWLING_FREQUENCIES
   validates :stars, array: { inclusion: { in: STARS } }
@@ -76,10 +73,22 @@ class Setting < ActiveRecord::Base
     self[:user_ratings] = range.to_a.map{ |x| (x.to_f / 10).to_s }
   end
 
+  def lock!
+    update_column(:sidekiq_lock, true)
+  end
+
+  def unlock!
+    update_column(:sidekiq_lock, false)
+  end
+
+  def hotel
+    company.channel_manager.hotel rescue nil
+  end
+
   private
 
-  def reload_hotel_workers
-    PriceMaker::ReloadWorker.perform_async(id)
+  def restart_algorithm
+    PriceMaker::PriceWorker.perform_async(id)
   end
 
   def create_room_settings

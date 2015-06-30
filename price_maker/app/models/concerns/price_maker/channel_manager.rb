@@ -9,7 +9,7 @@ module PriceMaker
       scope :real, -> { where(subroom: nil) }
 
       def fill_prices(setting_id)
-        hotel_room_ids = matching_hotels
+        hotel_room_ids = matching_hotels(setting_id)
 
         if hotel_room_ids
           desired_position = RoomSetting.where(setting_id: setting_id, room_id: id).pluck(:position).first || 1
@@ -43,10 +43,11 @@ module PriceMaker
 
       # returns Array
       # [ [hotel_booking_id, [room_booking_id, room_booking_id]], [hotel_booking_id, []] ]
-      def matching_hotels
+      def matching_hotels(setting_id)
         if hotel.get_base_facilities.size > 0
-          booking_ids = hotel.amenities_calc
-          room_ids    = amenities_calc
+          setting = Setting.find(setting_id)
+          booking_ids = hotel.amenities_calc(setting.company_id)
+          room_ids    = amenities_calc(setting.company_id)
           Hotel
             .includes(:rooms)
             .where(booking_id: booking_ids)

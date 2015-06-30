@@ -7,9 +7,9 @@ module PriceMaker
 
     included do
       # returns booking_id for related hotels
-      def amenities_calc
+      def amenities_calc(company_id)
         if related_ids.blank?
-          settings  = setting_fallback
+          settings  = Company.find(company_id).setting_fallback
           amenities = get_base_facilities
 
           args = [id]

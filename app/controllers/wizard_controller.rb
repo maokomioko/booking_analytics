@@ -103,7 +103,12 @@ class WizardController < ApplicationController
   def step4
     @channel_manager = current_user.channel_manager
     @hotel = @channel_manager.hotel
-    @cm_rooms = @channel_manager.connector.get_rooms.name_id_mapping
+
+    @cm_rooms = begin
+      @channel_manager.connector.get_rooms.name_id_mapping
+    rescue ConnectorError => e
+      []
+    end
 
     @channel_manager.create_rooms if @channel_manager.hotel.rooms.size.zero?
   end
@@ -123,7 +128,7 @@ class WizardController < ApplicationController
   # related hotel search
   def step5
     @hotel = current_user.channel_manager.hotel
-    @hotel.amenities_calc
+    @hotel.amenities_calc(current_user.company.id)
 
     @related = @hotel
        .related_hotels
@@ -133,9 +138,13 @@ class WizardController < ApplicationController
   end
 
   def step5_post
-    if current_user.channel_manager.hotel.related.count.zero?
+    hotel = current_user.channel_manager.hotel
+    if hotel.related.count.zero?
       render nothing: true, status: :unprocessable_entity
     else
+      # create Setting if necessary and start algorithm
+      PriceMaker::PriceWorker.perform_async(current_user.setting_fallback.id)
+
       allow_next_step
       redirect_to [:wizard, :complete], turbolinks: true
     end

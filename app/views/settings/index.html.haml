@@ -20,16 +20,16 @@
               %th= Setting.human_attribute_name(:property_types)
               %th= Setting.human_attribute_name(:districts)
               %th
-          - @hotels.each do |hotel|
+          - @settings.each do |setting|
             %tbody
               %tr
-                %td= hotel.name
-                %td= hotel.full_address
-                %td= humanize hotel.setting_fallback.crawling_frequency
-                %td= hotel.setting_fallback.stars.map(&:to_i).to_sentence
-                %td= hotel.setting_fallback.user_ratings.to_sentence
-                %td= hotel.setting_fallback.property_types.map{|p| t("enum.property_type.#{p}")}.to_sentence
-                %td= hotel.setting_fallback.districts.to_sentence
+                %td= setting.hotel.name
+                %td= setting.hotel.full_address
+                %td= humanize setting.company.setting_fallback.crawling_frequency
+                %td= setting.company.setting_fallback.stars.map(&:to_i).to_sentence
+                %td= setting.company.setting_fallback.user_ratings.to_sentence
+                %td= setting.company.setting_fallback.property_types.map{|p| t("enum.property_type.#{p}")}.to_sentence
+                %td= setting.company.setting_fallback.districts.to_sentence
                 %td
-                  = link_to [:edit, hotel.setting_fallback], class: 'btn btn-xs btn-green tooltips', data: {'original-title' => t('shared.edit')} do
+                  = link_to [:edit, setting.company.setting_fallback], class: 'btn btn-xs btn-green tooltips', data: {'original-title' => t('shared.edit')} do
                     = icon(:edit)

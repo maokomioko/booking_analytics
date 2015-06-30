@@ -26,13 +26,13 @@ class Ability
     can :wizard_setup, Object
     can :manage, Company, owner_id: user.id
     can :manage, ChannelManager, company_id: user.company_id
-    can [:index, :update], Hotel, id: user.hotels.pluck(:id)
-    can :update, Room, hotel_id: user.hotels.pluck(:id)
+    can [:index, :update], Hotel, id: user.channel_manager.hotel.id
+    can :update, Room, hotel_id: user.channel_manager.hotel.id
     can :update_connector_credentials, Room
-    can :manage, RoomSetting, setting_id: user.company.settings.pluck(:id)
+    can :manage, RoomSetting, setting_id: user.setting.id
     can :manage, Setting do |setting|
-      user.hotels.pluck(:id).include?(setting.hotel_id) &&
-        user.company.owner_id == user.id
+      user.channel_manager.hotel.id == setting.hotel.id &&
+        setting.company.owner_id == user.id
     end
     can :invite, User
     can [:index, :destroy], User, User.related_to(user) do |other|

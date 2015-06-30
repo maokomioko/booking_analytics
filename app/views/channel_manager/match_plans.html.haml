@@ -8,4 +8,21 @@
 
 .row
   .col-sm-12
-    = render partial: 'form'
+    = form_for @channel_manager, as: :channel_manager, url: { action: :update }, html: { class: 'form-horizontal' }, remote: true do |f|
+      = hidden_field_tag :only_tarif, true
+      = f.hidden_field :connector_type
+      .form-group
+        = f.label :non_refundable_pid, t('labels.non_refundable_tarif').html_safe, class: 'col-sm-4 control-label'
+        .col-sm-3
+          = f.select :non_refundable_pid, options_for_select(@channel_manager.list_plans.sort, f.object.non_refundable_pid), {}, class: 'form-control'
+
+      .form-group
+        = f.label :default_pid, t('labels.standard_tarif').html_safe, class: 'col-sm-4 control-label'
+        .col-sm-3
+          = f.select :default_pid, options_for_select(@channel_manager.list_plans.sort.reverse, f.object.default_pid), {}, class: 'form-control'
+
+      .form-group
+        .col-sm-3.col-sm-offset-4
+          = f.button class: 'btn btn-primary', type: :submit do
+            = t('auth.buttons.save_tarif_plans')
+            = icon('arrow-circle-right')

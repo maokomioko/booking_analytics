@@ -5,12 +5,11 @@ module Overbooking
     def search
       @hotel = current_engine_user.channel_manager.hotel
 
-      partner_ids = @hotel.related.where(related_hotels: { is_overbooking: true }).pluck(:booking_id)
+      @partner_ids = @hotel.related.where(related_hotels: { is_overbooking: true }).pluck(:booking_id)
       price = params[:price].to_f
 
       @blocks = Overbooking::Block
-        .for_hotels(partner_ids)
-        .with_occupancy_gt(params[:occupancy])
+        .for_hotels(@partner_ids)
         .where("(data->>'arrival_date')::date <= ?", params[:arrival].to_date)
         .where("(data->>'departure_date')::date >= ?", params[:departure].to_date)
 

@@ -1,0 +1,8 @@
+.alert.alert-block.alert-warning.fade.in
+  %button.close(data-dismiss="alert" type="button") ×
+  %h4.alert-heading
+    = icon('exclamation-triangle')
+    No partners found
+  %p Please setup overbooking partners to able search reservations
+  %p
+    = link_to 'Setup partners', [overbooking, :edit, :partner, id: hotel.booking_id], class: 'btn btn-yellow'

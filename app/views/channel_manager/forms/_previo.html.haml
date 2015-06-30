@@ -18,15 +18,3 @@
   = f.label :hotel_name, t('labels.hotel_name'), class: 'col-sm-4 control-label'
   .col-sm-3
     = f.text_field :hotel_name, class: 'form-control with_validation'
-
-- if %w(update edit match_plans).include?(action_name)
-  = f.hidden_field :connector_type, value: @channel_manager.connector_type if action_name == 'match_plans'
-  .form-group
-    = f.label :non_refundable_pid, t('labels.non_refundable_tarif').html_safe, class: 'col-sm-4 control-label'
-    .col-sm-3
-      = f.select :non_refundable_pid, options_for_select(@channel_manager.list_plans.sort, f.object.non_refundable_pid), {}, class: 'form-control'
-
-  .form-group
-    = f.label :default_pid, t('labels.standard_tarif').html_safe, class: 'col-sm-4 control-label'
-    .col-sm-3
-      = f.select :default_pid, options_for_select(@channel_manager.list_plans.sort.reverse, f.object.default_pid), {}, class: 'form-control'

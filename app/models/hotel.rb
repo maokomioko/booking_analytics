@@ -2,21 +2,23 @@
 #
 # Table name: hotels
 #
-#  id           :integer          not null, primary key
-#  name         :string
-#  hoteltype_id :string
-#  city         :string
-#  city_id      :string
-#  address      :string
-#  url          :string
-#  exact_class  :float
-#  review_score :float
-#  zip          :string
-#  booking_id   :integer
-#  latitude     :decimal(10, 6)
-#  longitude    :decimal(10, 6)
-#  district     :text             default([]), is an Array
-#  phone        :string
+#  id              :integer          not null, primary key
+#  name            :string
+#  hoteltype_id    :string
+#  city            :string
+#  city_id         :string
+#  address         :string
+#  url             :string
+#  exact_class     :float
+#  review_score    :float
+#  zip             :string
+#  booking_id      :integer
+#  latitude        :decimal(10, 6)
+#  longitude       :decimal(10, 6)
+#  district        :text             default([]), is an Array
+#  website_url     :string
+#  phone           :string
+#  normalized_name :string
 #
 # Indexes
 #

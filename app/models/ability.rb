@@ -29,7 +29,7 @@ class Ability
     can [:index, :update], Hotel, id: user.channel_manager.hotel.id
     can :update, Room, hotel_id: user.channel_manager.hotel.id
     can :update_connector_credentials, Room
-    can :manage, RoomSetting, setting_id: user.setting.id
+    can :manage, RoomSetting, setting_id: user.company.setting.id
     can :manage, Setting do |setting|
       user.channel_manager.hotel.id == setting.hotel.id &&
         setting.company.owner_id == user.id

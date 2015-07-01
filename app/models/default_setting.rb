@@ -11,7 +11,7 @@ class DefaultSetting
 
     hotel = company.hotel
 
-    obj.stars = [hotel.exact_class.to_i] if hotel.exact_class
+    obj.stars = [hotel.class_fallback.to_i]
     obj.user_ratings = obj.score_range(hotel.review_score)
     obj.property_types = [ hotel.hoteltype ] if hotel.hoteltype
     obj.districts = hotel.district

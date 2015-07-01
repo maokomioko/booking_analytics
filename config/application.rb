@@ -35,5 +35,7 @@ module BookingAnalytics
 
     # mapping custom errors
     config.action_dispatch.rescue_responses.merge! 'CanCan::AccessDenied' => :forbidden
+
+    config.cache_store = :redis_store, ENV['REDISCLOUD_URL'] || 'redis://localhost:6379/0/cache', { expires_in: 3.days }
   end
 end

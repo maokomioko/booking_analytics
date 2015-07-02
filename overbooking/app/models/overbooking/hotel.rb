@@ -11,8 +11,8 @@ module Overbooking
       return none if query.empty? || query.length < 3
 
       query = Overbooking::Hotel.prepare_fts_query(query)
-      fields = %w(name booking_id address).join(', ')
-      where("to_tsvector(concat_ws(' ', #{ fields }, array_to_string(district, ' '))) @@ to_tsquery(?)", query)
+      fields = %w(name booking_id address district).join(', ')
+      where("to_tsvector(concat_ws(' ', #{ fields }))) @@ to_tsquery(?)", query)
     }
 
     def self.prepare_fts_query(query)

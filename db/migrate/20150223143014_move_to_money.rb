@@ -4,23 +4,23 @@ class MoveToMoney < ActiveRecord::Migration
     execute 'ALTER TABLE incremental_prices ALTER COLUMN price TYPE integer USING ((price*100)::integer);'
     rename_column :incremental_prices, :price, :price_cents
     rename_column :incremental_prices, :currency, :price_currency
-    change_column_default :incremental_prices, :price_currency, Money.default_currency.to_s
+    change_column_default :incremental_prices, :price_currency, 'EUR'
 
     # RoomPrice
     execute 'ALTER TABLE room_prices ALTER COLUMN price TYPE integer USING ((price*100)::integer);'
     rename_column :room_prices, :price, :price_cents
-    add_column :room_prices, :price_currency, :string, default: Money.default_currency.to_s
+    add_column :room_prices, :price_currency, :string, default: 'EUR'
     execute 'ALTER TABLE room_prices ALTER COLUMN default_price TYPE integer USING ((default_price*100)::integer);'
     rename_column :room_prices, :default_price, :default_price_cents
-    add_column :room_prices, :default_price_currency, :string, default: Money.default_currency.to_s
+    add_column :room_prices, :default_price_currency, :string, default: 'EUR'
 
     # Room
     execute 'ALTER TABLE rooms ALTER COLUMN min_price TYPE integer USING ((min_price*100)::integer);'
     rename_column :rooms, :min_price, :min_price_cents
-    add_column :rooms, :min_price_currency, :string, default: Money.default_currency.to_s
+    add_column :rooms, :min_price_currency, :string, default: 'EUR'
     execute 'ALTER TABLE rooms ALTER COLUMN max_price TYPE integer USING ((max_price*100)::integer);'
     rename_column :rooms, :max_price, :max_price_cents
-    add_column :rooms, :max_price_currency, :string, default: Money.default_currency.to_s
+    add_column :rooms, :max_price_currency, :string, default: 'EUR'
   end
 
   def down

@@ -15,8 +15,7 @@
 #  booking_id      :integer
 #  latitude        :decimal(10, 6)
 #  longitude       :decimal(10, 6)
-#  district        :text             default([]), is an Array
-#  website_url     :string
+#  district        :string           default("{}")
 #  phone           :string
 #  normalized_name :string
 #
@@ -39,16 +38,14 @@ class Hotel < ActiveRecord::Base
   scope :with_score_gt, -> (score) { where('review_score > ?', score) }
   scope :with_score_lt, -> (score) { where('review_score < ?', score) }
 
-  scope :with_district, -> (districts) {
-    where("district && ARRAY[?]", districts)
-  }
+  scope :with_district, -> (districts) { where(district: districts) }
 
   scope :full_text_search, -> (query) {
     return none if query.empty? || query.length < 3
 
     query = Hotel.prepare_fts_query(query)
-    fields = %w(name booking_id address).join(', ')
-    where("to_tsvector(concat_ws(' ', #{ fields }, array_to_string(district, ' '))) @@ to_tsquery(?)", query)
+    fields = %w(name booking_id address district).join(', ')
+    where("to_tsvector(concat_ws(' ', #{ fields })) @@ to_tsquery(?)", query)
   }
 
   has_many :channel_managers, foreign_key: :booking_id, primary_key: :booking_id
@@ -81,22 +78,18 @@ class Hotel < ActiveRecord::Base
            q: [obj.city, obj.zip].join(', '),
            at: [geo.latitude.to_f, geo.longitude.to_f].join(',')
           })
-          [here["search"]["context"]["location"]["address"]["district"]]
+          here["search"]["context"]["location"]["address"]["district"]
         rescue Exception
-          geo.districts
+          geo.districts[0] rescue ''
         end
       else
-        geo.districts
+        geo.districts[0] rescue ''
       end
     end
   end
 
   def self.city_districts(city)
-    districts = self.distinct
-                    .select('UNNEST(district) as d')
-                    .where(city: city)
-                    .map(&:d)
-
+    districts = Hotel.distinct.where(city: city).pluck(:district)
     Naturally.sort(districts)
   end
 

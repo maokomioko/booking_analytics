@@ -22,7 +22,7 @@
             %td= hotel.booking_id
             %td= hotel.name
             %td= [hotel.zip, hotel.city, hotel.address].compact.join(', ')
-            %td= hotel.district.to_sentence
+            %td= hotel.district
             %td.center
               .visible-md.visible-lg.hidden-sm.hidden-xs
                 = link_to [:edit, :related_hotel, id: hotel.booking_id],

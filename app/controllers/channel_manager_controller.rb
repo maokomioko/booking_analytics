@@ -108,8 +108,8 @@ class ChannelManagerController < ApplicationController
   end
 
   def channel_manager_params
-    allow_attributes = %i(login password lcode booking_id hotel_name
-      connector_type non_refundable_pid default_pid)
+    allow_attributes = %i(login password lcode booking_id connector_type
+      non_refundable_pid default_pid)
 
     if @channel_manager.present? && @channel_manager.persisted? # define update action
       unless can?(:update_booking_id, @channel_manager)

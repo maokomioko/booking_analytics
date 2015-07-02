@@ -80,8 +80,8 @@ describe Hotel do
 
     describe 'with_district' do
       it 'includes any of searched district' do
-        Fabricate.create(:hotel_without_address, district: ['d_1', 'd_2'])
-        Fabricate.create(:hotel_without_address, district: ['d_1', 'd_3'])
+        Fabricate.create(:hotel_without_address, district: 'd_1')
+        Fabricate.create(:hotel_without_address, district: 'd_2')
 
         results = described_class.with_district('d_1').map do |hotel|
           hotel.district.include? 'd_1'
@@ -96,12 +96,12 @@ describe Hotel do
     before(:all) do
       Fabricate.create(:hotel_without_address,
                        city: 'Prague',
-                       district: ['cd 1', 'cd 2']
+                       district: 'cd 2'
       )
 
       Fabricate.create(:hotel_without_address,
                        city: 'Prague',
-                       district: ['cd 1', 'cd 11']
+                       district: 'cd 11'
       )
 
       Fabricate.create(:hotel_without_address,

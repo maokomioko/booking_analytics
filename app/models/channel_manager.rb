@@ -7,7 +7,6 @@
 #  password           :string
 #  lcode              :string
 #  booking_id         :integer
-#  hotel_name         :string
 #  non_refundable_pid :integer
 #  default_pid        :integer
 #  company_id         :integer
@@ -28,7 +27,7 @@ class ChannelManager < ActiveRecord::Base
 
   attr_accessor :connector_type
 
-  validates :booking_id, :hotel_name, presence: true
+  validates :booking_id, presence: true
   validate :hotel_existence
   validates_inclusion_of :connector_type, in: TYPES, allow_blank: true
 

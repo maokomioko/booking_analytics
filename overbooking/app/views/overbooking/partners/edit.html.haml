@@ -53,6 +53,6 @@
                   —
               %td.hidden-sm.hidden-xs= link_to t('overbooking.shared.view_in_web'), related_hotel.related.url, target: '_blank'
               %td= [related_hotel.related.zip, related_hotel.related.city, related_hotel.related.address].compact.join(', ')
-              %td= related_hotel.related.district.to_sentence
+              %td= related_hotel.related.district
 
       = paginate @related

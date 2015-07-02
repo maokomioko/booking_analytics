@@ -44,8 +44,8 @@ module ApplicationHelper
         t('auth.edit.edit_connection', provider: 'WuBook')
       end
     else
-      if current_user && current_user.wubook_auth.size > 0
-        current_user.wubook_auth.first.hotel_name
+      if current_user && current_user.channel_manager.present?
+        current_user.channel_manager.hotel.name
       end
     end
   end

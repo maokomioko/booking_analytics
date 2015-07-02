@@ -16,18 +16,10 @@ class WizardController < ApplicationController
     @channel_manager.attributes = step1_params
 
     # let's hack rails validation ]:->
-    @channel_manager.hotel_name ||= '1'
     @channel_manager.company = current_user.company
 
     if @channel_manager.save
-      attrs = {}.tap do |hash|
-        hash[:hotel_name] = @channel_manager.hotel.name if @channel_manager.hotel_name == '1'
-      end
-
-      @channel_manager.update_columns(attrs) if attrs.present?
-
       allow_next_step
-
       redirect_to [:wizard, :step2], turbolinks: true
     else
       flash[:alert] = @channel_manager.errors.full_messages.to_a.to_sentence

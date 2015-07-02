@@ -108,7 +108,16 @@ class ChannelManagerController < ApplicationController
   end
 
   def channel_manager_params
-    params.require(:channel_manager).permit(:login, :password, :lcode, :booking_id, :hotel_name, :connector_type, :non_refundable_pid, :default_pid).tap do |whitelisted|
+    allow_attributes = %i(login password lcode booking_id hotel_name
+      connector_type non_refundable_pid default_pid)
+
+    if @channel_manager.present? && @channel_manager.persisted? # define update action
+      unless can?(:update_booking_id, @channel_manager)
+        allow_attributes.delete(:booking_id)
+      end
+    end
+
+    params.require(:channel_manager).permit(*allow_attributes).tap do |whitelisted|
       whitelisted[:type] = ChannelManager.define_type(params[:channel_manager][:connector_type])
     end
   end

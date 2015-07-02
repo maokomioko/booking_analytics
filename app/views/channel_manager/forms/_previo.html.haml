@@ -13,7 +13,11 @@
 .form-group
   = f.label :booking_id, t('labels.booking_id'), class: 'col-sm-4 control-label'
   .col-sm-3
-    = f.text_field :booking_id, class: 'form-control with_validation'
+    - if can?(:update_booking_id, f.object)
+      = f.text_field :booking_id, class: 'form-control with_validation'
+    - else
+      %label.control-label
+        = f.object.booking_id
 .form-group
   = f.label :hotel_name, t('labels.hotel_name'), class: 'col-sm-4 control-label'
   .col-sm-3

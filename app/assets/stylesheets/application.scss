@@ -45,15 +45,19 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 #flash-container {
-  position: fixed;
-  top: 64px;
+  position: relative;
+  top: 20px;
+  bottom: 20px;
   width: 100%;
-  z-index: 10;
+  z-index: 200;
+  .col-sm-12 {
+    float: none !important;
+  }
   .alert {
-    margin-bottom: 10px;
+    margin: 10px 0;
   }
 }
 
 .no-left-padding {
-  padding-left: 0
+  padding-left: 0;
 }

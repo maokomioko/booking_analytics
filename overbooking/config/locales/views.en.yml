@@ -1,5 +1,10 @@
 en:
   overbooking:
+    contacts:
+      edit:
+        header: "Edit %{hotel}'s %{contact_type}"
+      new:
+        header: "New contact for %{hotel}"
     directions:
       infowindow:
         trace_route: Trace route to this hotel

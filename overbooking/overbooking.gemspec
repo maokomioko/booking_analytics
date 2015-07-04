@@ -23,12 +23,14 @@ Gem::Specification.new do |s|
   s.test_files = Dir['spec/**/*']
   s.require_paths = ['lib', 'app']
 
-  s.add_dependency 'rails', '~> 4.2.1'
+  s.add_dependency 'rails', '~> 4.2.3'
   s.add_dependency 'cancancan', '>= 1.10.1'
+  s.add_dependency 'geocoder', '>= 1.2.9'
   s.add_dependency 'gmaps4rails', '>= 2.1.2'
   s.add_dependency 'google_directions', '>= 0.1.6'
   s.add_dependency 'haml-rails', '>= 0.9.0'
   s.add_dependency 'kaminari', '>= 0.16.3'
+  s.add_dependency 'phony_rails', '>= 0.12.8'
   s.add_dependency 'roadie-rails', '>= 1.0.6'
   s.add_dependency 'underscore-rails', '>= 1.8.2'
 

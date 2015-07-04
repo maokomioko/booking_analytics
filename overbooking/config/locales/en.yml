@@ -2,6 +2,8 @@ en:
   overbooking:
     shared:
       edit: Edit
+      save: Save
+      add_contact: Add new contact
       remove: Remove
       view_in_web: Open Web Page
       partner: Partner

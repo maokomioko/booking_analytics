@@ -1,0 +1,11 @@
+en:
+  overbooking:
+    enum:
+      contact_type:
+        phone: Phone
+        email: E-mail
+        skype: Skype
+        whatsapp: WhatsApp
+        viber: Viber
+        telegram: Telegram
+        other: Other

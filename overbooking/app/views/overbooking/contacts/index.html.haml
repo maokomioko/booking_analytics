@@ -1,0 +1,29 @@
+%table.table.table-condensed
+  %tbody
+    - contacts.group_by(&:contact_name).each do |group, groupped|
+      - groupped.each_with_index do |contact, index|
+        %tr(data-contact-id="#{ contact.id }")
+          - if index.zero?
+            %td(rowspan="#{ groupped.length }")= t("overbooking.enum.contact_type.#{ group }", default: group.capitalize)
+          %td
+            - if Overbooking::Contact::TYPES.include?(group)
+              = render "overbooking/contacts/#{ group }", contact: contact
+            - else
+              = render 'overbooking/contacts/other', contact: contact
+          %td
+            %a.btn.btn-xs.btn-teal.tooltips.ajax{data: { toggle: 'modal',
+            href: "#{ overbooking.edit_hotel_contact_path(id: contact.id, hotel_id: contact.hotel.booking_id) }",
+            'original-title' => t('overbooking.shared.edit') }}
+              = icon('edit')
+            = link_to [:hotel, :contact, id: contact.id, hotel_id: contact.hotel.booking_id],
+                class: 'btn btn-xs btn-bricky tooltips',
+                method: :delete, remote: true,
+                data: { 'original-title' => t('shared.remove')} do
+              = icon('times white')
+
+.row
+  .col-sm-12.center
+    %a.btn.btn-xs.btn-primary.tooltips.ajax{data: { toggle: 'modal',
+                href: "#{ overbooking.new_hotel_contact_path(hotel_id: hotel.booking_id) }",
+                'original-title' => t('overbooking.shared.add_contact') }}
+      = icon('plus')

@@ -54,6 +54,7 @@ gem 'mime-types'
 gem 'mail-logger'
 
 gem 'naturally', github: 'zedalaye/naturally'
+gem 'non-stupid-digest-assets'
 
 gem 'omniauth'
 gem 'omniauth-facebook'

@@ -1,0 +1,21 @@
+= form_for contact, as: :contact, html: { class: 'form-horizontal' }, remote: true,
+  url: (contact.persisted? ? [overbooking, :hotel, :contact, id: contact.id, hotel_id: contact.hotel.booking_id] : [overbooking, :hotel, :contacts, hotel_id: contact.hotel.booking_id]) do |f|
+
+  .errorHandler.alert.alert-danger.no-display
+    = icon('remove-sign')
+    = t('shared.please_check_errors')
+
+  .form-group
+    = f.label :contact_type, class: 'col-sm-4 control-label'
+    .col-sm-6
+      = f.select :contact_type, options_for_contact_types(contact.contact_type), {}, class: 'form-control'
+
+  .contact-fieldset.hidden
+
+  - Overbooking::Contact::TYPES.each do |type|
+    %fieldset.hidden(data-contact="#{ type }")
+      = render "overbooking/contacts/fields/#{ type }", f: f
+
+  .form-group
+    .col-sm-6.col-sm-offset-4
+      = f.submit t('overbooking.shared.save'), class: 'btn btn-teal'

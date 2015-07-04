@@ -8,6 +8,10 @@ Overbooking::Engine.routes.draw do
     end
   end
 
+  scope 'hotels/:hotel_id', as: :hotel do
+    resources :contacts
+  end
+
   resources :partners do
     member do
       post :enable

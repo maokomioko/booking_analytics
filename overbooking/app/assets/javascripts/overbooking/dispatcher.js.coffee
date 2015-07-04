@@ -11,6 +11,7 @@ class OverbookingDispatcher
     switch page
       when 'overbooking:partners:edit'
         new OverbookingPartner()
+        new OverbookingContact()
       when 'overbooking:directions:show'
         new Directions()
 

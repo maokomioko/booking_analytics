@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    attributes:
+      overbooking/contact/email:
+        value: E-mail address
+      overbooking/contact/other:
+        value: Value
+        custom_type: Contact type
+      overbooking/contact/phone:
+        value: Phone number
+        optional: Additional
+      overbooking/contact/skype:
+        value: Skype login
+      overbooking/contact/telegram:
+        value: Telegam nickname
+      overbooking/contact/viber:
+        value: Viber
+      overbooking/contact/whatsapp:
+        value: WhatsApp

@@ -27,7 +27,7 @@
             = link_to [:disable, :partner], class: 'bulk-overbooking' do
               = icon('chain-broken')
               = t('.remove_partner')
-      %table.table.table-hover.table-condensed
+      %table.table.table-condensed
         %thead
           %tr
             %th
@@ -36,7 +36,7 @@
             %th= t('.overbooking_partner')
             %th.hidden-sm.hidden-xs= Overbooking::Hotel.human_attribute_name(:url)
             %th= Overbooking::Hotel.human_attribute_name(:address)
-            %th= Overbooking::Hotel.human_attribute_name(:district)
+            %th
         %tbody
           - @related.each do |related_hotel|
             %tr
@@ -52,7 +52,9 @@
                 - else
                   —
               %td.hidden-sm.hidden-xs= link_to t('overbooking.shared.view_in_web'), related_hotel.related.url, target: '_blank'
-              %td= [related_hotel.related.zip, related_hotel.related.city, related_hotel.related.address].compact.join(', ')
-              %td= related_hotel.related.district
+              %td= [related_hotel.related.zip, related_hotel.related.city, related_hotel.related.district, related_hotel.related.address].compact.join(', ')
+              %td
+                = render template: 'overbooking/contacts/index', locals: { contacts: related_hotel.related.contacts,
+                                                    hotel: related_hotel.related }
 
       = paginate @related

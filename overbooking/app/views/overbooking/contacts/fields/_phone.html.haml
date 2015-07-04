@@ -1,0 +1,10 @@
+.form-group
+  = f.label :value, Overbooking::Contact::Phone.human_attribute_name(:value), class: 'col-sm-4 control-label'
+  .col-sm-6
+    .input-group
+      %span.input-group-addon= icon('phone')
+      = f.text_field :value, class: 'form-control with_validation phone'
+.form-group
+  = f.label :optional, Overbooking::Contact::Phone.human_attribute_name(:optional), class: 'col-sm-4 control-label'
+  .col-sm-3
+    = f.text_field :optional, class: 'form-control', placeholder: 'add. 9'

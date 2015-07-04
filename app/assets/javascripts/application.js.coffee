@@ -27,6 +27,8 @@
 #= require bootstrap-hover-dropdown.min
 #= require bootstrap-tagsinput
 #= require bootstrap-fileupload.min
+#= require js/bootstrap-modal
+#= require js/bootstrap-modalmanager
 
 #= require jquery.blockUI
 
@@ -35,6 +37,11 @@
 #= require select2
 
 #= require jquery.validate
+
+#= require inputmask
+#= require jquery.inputmask
+#= require inputmask.extensions
+#= require inputmask.phone.extensions
 
 #= require jQAllRangeSliders-min
 

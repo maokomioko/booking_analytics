@@ -86,6 +86,7 @@ en:
     step1:
       header: 'Step #1. Find your hotel'
       search_prompt: Start entering hotel name, address or Booking ID
+      please_fill_contacts: Please check and fill contacts for your hotel
     step2:
       header: 'Step #2. Setup channel manager'
       empty_connector_warning: Without channel manager you cannot update your room prices

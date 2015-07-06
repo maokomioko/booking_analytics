@@ -3,7 +3,8 @@ class WizardController < ApplicationController
 
   # hotel search
   def step1
-    @channel_manager = if current_user.channel_manager.try(:hotel).present?
+    hotel = current_user.channel_manager.try(:hotel)
+    @channel_manager = if hotel.present?
                          current_user.channel_manager
                        else
                          ChannelManager.new
@@ -23,7 +24,7 @@ class WizardController < ApplicationController
       redirect_to [:wizard, :step2], turbolinks: true
     else
       flash[:alert] = @channel_manager.errors.full_messages.to_a.to_sentence
-      render :step1
+      redirect_to [:wizard, :step1], turbolinks: true
     end
   end
 

@@ -11,6 +11,7 @@ Overbooking::Engine.routes.draw do
   scope 'hotels/:hotel_id', as: :hotel do
     resources :contacts
   end
+  get 'hotels/contacts/by_hotel', controller: :contacts, action: :by_hotel
 
   resources :partners do
     member do

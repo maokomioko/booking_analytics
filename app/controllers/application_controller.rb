@@ -64,9 +64,9 @@ class ApplicationController < ActionController::Base
 
   def wizard_completed
     if !current_user.setup_completed? && controller_name != 'wizard'
-      redirect_to [:wizard, :"step#{ current_user.setup_step }"] and return
+      redirect_to [main_app, :wizard, :"step#{ current_user.setup_step }"] and return
     elsif current_user.setup_completed? && controller_name == 'wizard' && params[:step].present?
-      redirect_to root_path and return
+      redirect_to main_app.root_path and return
     end
   end
 

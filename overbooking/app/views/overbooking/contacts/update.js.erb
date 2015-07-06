@@ -2,5 +2,5 @@ $( function(){
     var $modal = $('#ajax-modal');
     $modal.modal('hide');
 
-    Turbolinks.visit(location.toString())
+    OverbookingContact.loadContacts(<%= @hotel.booking_id %>)
 });

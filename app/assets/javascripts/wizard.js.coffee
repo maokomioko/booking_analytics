@@ -1,11 +1,12 @@
 class @Wizard
   constructor: ->
-    @initSelect2HotelSearch()
+    @step1HotelSearch()
+    @step1LoadContacts()
     @step4RoomsSubmit()
     @step4RoomsAutoSave()
     @step5Finish()
 
-  initSelect2HotelSearch: ->
+  step1HotelSearch: ->
     $select = $('#search_hotel')
 
     return unless $select.length
@@ -27,6 +28,17 @@ class @Wizard
           $.ajax
             url: $select.data('hotelUrl') + id
             success: (data) -> callback(data)
+
+    return
+
+  step1LoadContacts: ->
+    $select = $('#search_hotel')
+    $modal  = $('#ajax-modal')
+
+    OverbookingContact.loadContacts($select.val())
+    $select.on 'change', (e) ->
+      $('.hotel-contacts').attr('data-contact-hotel-id', e.val)
+      OverbookingContact.loadContacts(e.val)
 
     return
 

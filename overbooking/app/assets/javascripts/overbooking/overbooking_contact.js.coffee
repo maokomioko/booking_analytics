@@ -6,7 +6,7 @@ class @OverbookingContact
   initModals: ->
     $modal = $('#ajax-modal')
 
-    $('.ajax[data-toggle="modal"]').on 'click', (e) ->
+    $('body').on 'click', '.ajax[data-toggle="modal"]', (e) ->
       triggerSpinner()
 
       href = $(@).data('href')
@@ -50,3 +50,18 @@ class @OverbookingContact
     $contactSelect.on 'change', ->
       detachFields()
       showFields($(@).val())
+
+  @loadContacts: (id) ->
+    target = $("[data-contact-hotel-id=#{id}]")
+    return unless target.length
+
+    $.ajax
+      url: target.data('url')
+      method: 'GET'
+      data:
+        hotel_id: id
+      beforeSend: -> triggerSpinner()
+      complete: -> triggerSpinner()
+      success: (data) ->
+        target.html(data)
+        target.find('.tooltips').tooltip()

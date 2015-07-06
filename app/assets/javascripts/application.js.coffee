@@ -72,7 +72,7 @@ ready = ->
     minScrollbarLength: 20
     suppressScrollX: true
 
-  $(document).mouseup ->
+  $('body').mouseup ->
     window.isMouseDown = false
 
   $('.search-select').select2

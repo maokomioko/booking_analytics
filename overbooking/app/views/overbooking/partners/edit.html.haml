@@ -53,7 +53,7 @@
                   —
               %td.hidden-sm.hidden-xs= link_to t('overbooking.shared.view_in_web'), related_hotel.related.url, target: '_blank'
               %td= [related_hotel.related.zip, related_hotel.related.city, related_hotel.related.district, related_hotel.related.address].compact.join(', ')
-              %td
+              %td(data-contact-hotel-id="#{ related_hotel.related.booking_id }" data-url="#{ overbooking.hotels_contacts_by_hotel_path }")
                 = render template: 'overbooking/contacts/index', locals: { contacts: related_hotel.related.contacts,
                                                     hotel: related_hotel.related }
 

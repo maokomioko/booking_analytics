@@ -27,6 +27,8 @@ class Dispatcher
         new Settings()
       when 'users:index'
         new Users()
+      when 'wizard:step1', 'wizard:step5'
+        new OverbookingContact()
 
     if page.match(/wizard:step/i)
       new Wizard()

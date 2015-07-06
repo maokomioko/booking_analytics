@@ -3,10 +3,16 @@ module Overbooking
     before_filter :find_hotel
     before_filter :find_contact, only: [:edit, :update, :destroy]
 
+    skip_before_filter :wizard_completed
+
     layout 'modal'
 
     def index
       @contacts = @hotel.contacts
+    end
+
+    def by_hotel
+      render :index, layout: false, locals: { contacts: @hotel.contacts, hotel: @hotel }
     end
 
     def new

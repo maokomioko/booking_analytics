@@ -39,7 +39,8 @@
             %th= Hotel.human_attribute_name(:name)
             %th.hidden-sm.hidden-xs= Hotel.human_attribute_name(:url)
             %th= Hotel.human_attribute_name(:address)
-            %th= Hotel.human_attribute_name(:district)
+            - if controller_name == 'wizard' && defined?(Overbooking::Engine)
+              %th
             %th
         %tbody
           - @related.each do |related_hotel|
@@ -51,8 +52,11 @@
               %td= related_hotel.related.booking_id
               %td= related_hotel.related.name
               %td.hidden-sm.hidden-xs= link_to t('shared.view_in_web'), related_hotel.related.url, target: '_blank'
-              %td= [related_hotel.related.zip, related_hotel.related.city, related_hotel.related.address].compact.join(', ')
-              %td= related_hotel.related.district
+              %td= [related_hotel.related.zip, related_hotel.related.city, related_hotel.related.district, related_hotel.related.address].compact.join(', ')
+              - if controller_name == 'wizard' && defined?(Overbooking::Engine)
+                %td(data-contact-hotel-id="#{ related_hotel.related.booking_id }" data-url="#{ overbooking.hotels_contacts_by_hotel_path }")
+                  = render template: 'overbooking/contacts/index', locals: { contacts: related_hotel.related.becomes(Overbooking::Hotel).contacts,
+                                                    hotel: related_hotel.related.becomes(Overbooking::Hotel) }
               %td.center
                 .visible-md.visible-lg.hidden-sm.hidden-xs
                   = link_to [:drop, :related_hotel, id: @hotel.booking_id, ids: [related_hotel.related.booking_id]],

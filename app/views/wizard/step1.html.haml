@@ -12,6 +12,13 @@
       .form-group
         %h4= t('.search_prompt')
         = f.hidden_field :booking_id, id: 'search_hotel', data: { url: search_hotels_path, hotel_url: hotel_path(id: '') }
+      - if defined?(Overbooking::Engine)
+        .row
+          .col-sm-7.col-sm-offset-3
+            .alert.alert-block.alert-info.fade.in
+              %button.close(data-dismiss="alert" type="button") ×
+              %p= t('.please_fill_contacts')
+            .hotel-contacts{ data: { url: overbooking.hotels_contacts_by_hotel_path, 'contact-hotel-id' => @channel_manager.booking_id } }
       .form-group
         = f.button class: 'btn btn-primary' do
           = t('shared.next')

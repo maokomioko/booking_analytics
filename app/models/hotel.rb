@@ -16,6 +16,7 @@
 #  latitude        :decimal(10, 6)
 #  longitude       :decimal(10, 6)
 #  district        :string           default("{}")
+#  website_url     :string
 #  phone           :string
 #  normalized_name :string
 #

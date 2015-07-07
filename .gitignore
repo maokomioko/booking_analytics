@@ -6,6 +6,7 @@
 .ruby-version
 .ruby-gemset
 
+.DS_Store
 public
 
 # Ignore bundler config

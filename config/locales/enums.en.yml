@@ -11,6 +11,6 @@ en:
       bed_breakfast: Bed and Breakfast
       ryokan: Ryokan
     channel_manager_type:
-      empty: Work without ChannelManager
+      empty: Without ChannelManager
       wubook: WuBook
       previo: Previo

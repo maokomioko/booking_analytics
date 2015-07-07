@@ -1,6 +1,6 @@
 %table.table.table-condensed
   %tbody
-    - contacts.group_by(&:contact_name).each do |group, groupped|
+    - contacts.order('preferred DESC, created_at ASC').group_by(&:contact_name).each do |group, groupped|
       - groupped.each_with_index do |contact, index|
         %tr(data-contact-id="#{ contact.id }")
           - if index.zero?

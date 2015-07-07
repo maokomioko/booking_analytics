@@ -8,7 +8,7 @@
 
 .row
   .col-md-6.col-md-offset-3
-    = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step1_post], method: :post, remote: true, class: 'form' do |f|
+    = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step1_post], method: :post, remote: true, html: { class: 'form step1-form', 'data-confirm-msg' => t('.no_contacts') } do |f|
       .form-group
         %h4= t('.search_prompt')
         = f.hidden_field :booking_id, id: 'search_hotel', data: { url: search_hotels_path, hotel_url: hotel_path(id: '') }

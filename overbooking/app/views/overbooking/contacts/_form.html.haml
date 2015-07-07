@@ -10,6 +10,13 @@
     .col-sm-6
       = f.select :contact_type, options_for_contact_types(contact.contact_type), {}, class: 'form-control'
 
+  .form-group
+    = f.label :preferred, class: 'col-sm-4 control-label'
+    .col-sm-6
+      .checkbox
+        %label
+          = f.check_box :preferred
+
   .contact-fieldset.hidden
 
   - Overbooking::Contact::TYPES.each do |type|

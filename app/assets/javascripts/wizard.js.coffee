@@ -1,10 +1,19 @@
 class @Wizard
   constructor: ->
+    @step1ConfirmContacts()
     @step1HotelSearch()
     @step1LoadContacts()
     @step4RoomsSubmit()
     @step4RoomsAutoSave()
     @step5Finish()
+
+  step1ConfirmContacts: ->
+    $('.step1-form').on 'submit.rails', (e) ->
+      if $('.hotel-contacts table tr').size() == 0
+        unless confirm($(@).data('confirmMsg'))
+          e.preventDefault()
+          e.stopPropagation()
+          return false
 
   step1HotelSearch: ->
     $select = $('#search_hotel')
@@ -35,7 +44,9 @@ class @Wizard
     $select = $('#search_hotel')
     $modal  = $('#ajax-modal')
 
-    OverbookingContact.loadContacts($select.val())
+    if parseInt($select.val()) > 0
+      OverbookingContact.loadContacts($select.val())
+
     $select.on 'change', (e) ->
       $('.hotel-contacts').attr('data-contact-hotel-id', e.val)
       OverbookingContact.loadContacts(e.val)

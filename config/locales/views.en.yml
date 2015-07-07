@@ -89,7 +89,7 @@ en:
       please_fill_contacts: Please check and fill contacts for your hotel
     step2:
       header: 'Step #2. Setup channel manager'
-      empty_connector_warning: Without channel manager you cannot update your room prices
+      empty_connector_warning: "Please note, that calendar prices cannot be applied without a Channel Manager."
     step3:
       header: 'Step #3. Choose your tarif plans'
     step4:

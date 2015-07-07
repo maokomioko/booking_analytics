@@ -2,7 +2,7 @@
   %button.close(data-dismiss="alert" type="button") ×
   %h4.alert-heading
     = icon('exclamation-triangle')
-    You work without connector
-  %p To see reservations in your hotel you should select and setup Channel Manager
+    = t('messages.no_cm_header')
+  %p= t('messages.no_cm_desc')
   %p
-    = link_to 'Setup Channel Manager', [:edit, :channel_manager, id: current_user.channel_manager.id], class: 'btn btn-yellow'
+    = link_to t('auth.buttons.setup_cm'), [:edit, :channel_manager, id: current_user.channel_manager.id], class: 'btn btn-yellow'

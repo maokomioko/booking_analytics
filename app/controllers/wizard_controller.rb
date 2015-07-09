@@ -110,7 +110,7 @@ class WizardController < ApplicationController
     ids = current_user.channel_manager.hotel.rooms.pluck(:wubook_id, :previo_id)
 
     # if none of the rooms have CM_ID
-    if ids.flatten.compact.size.zero?
+    if current_user.channel_manager.connector_type != 'empty' && ids.flatten.compact.size.zero?
       render nothing: true, status: :unprocessable_entity
     else
       allow_next_step

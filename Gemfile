@@ -35,7 +35,7 @@ gem 'google-cse'
 gem 'graph', path: 'graph'
 
 gem 'haml-rails'
-gem 'here_places', github: 'sigra/here_places'
+gem 'here_places'
 gem 'httparty'
 
 gem 'i18n', '0.7'

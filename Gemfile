@@ -31,7 +31,7 @@ gem 'gaffe' # handling error pages
 gem 'geocoder'
 gem 'globalize', github: 'globalize/globalize'
 gem 'google-analytics-turbolinks'
-gem 'google-cse'
+
 gem 'graph', path: 'graph'
 
 gem 'haml-rails'

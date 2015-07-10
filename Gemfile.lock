@@ -276,8 +276,6 @@ GEM
       activesupport (>= 4.1.0)
     gmaps4rails (2.1.2)
     google-analytics-turbolinks (0.0.4)
-    google-cse (1.0.1)
-      json
     google_directions (0.1.6.2)
       nokogiri (>= 1.4.1)
     haml (4.0.6)
@@ -874,7 +872,6 @@ DEPENDENCIES
   geocoder
   globalize!
   google-analytics-turbolinks
-  google-cse
   graph!
   haml-rails
   here_places

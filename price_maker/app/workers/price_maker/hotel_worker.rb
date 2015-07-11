@@ -20,7 +20,7 @@ class PriceMaker::HotelWorker
         hotels = hotels.with_score_gt(score)
       end
 
-      hotels = hotels.by_property_type(properties, 'old') if properties.present?
+      hotels = hotels.by_property_type(properties) if properties.present?
       hotels = hotels.with_district(districts) if districts.present?
       hotels = hotels.with_facilities(facility_ids)
 

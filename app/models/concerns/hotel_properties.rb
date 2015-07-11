@@ -16,6 +16,11 @@ module HotelProperties
     'Restaurant'
   ]
 
+  NEW_PROPERTY_TYPES = {
+    'hotel' => 204, 'hostel' => 203, 'motel' => 205, 'apartment' => 201, 'guesthouse' => 216,
+    'bed_breakfast' => 208, 'homestay' => 202, 'boat' => 215
+  }
+
   OLD_PROPERTY_TYPES = {
     'apartment' => 2, 'guesthouse' => 3, 'hostel' => 13, 'motel' => 19, 'hotel' => 14,
     'resort' => 21, 'homestay' => 23, 'bed_breakfast' => 24, 'ryokan' => 25
@@ -30,18 +35,15 @@ module HotelProperties
   end
 
   module ClassMethods
-    def by_property_type(type, version = nil)
-      type_id = case type
-                when 'hotel' then 204
-                when 'hostel' then 203
-                when 'motel' then 205
-                when 'apartment' then 201
-                when 'guesthouse' then 216
-                when 'bed_breakfast' then 208
-                when 'homestay' then 202
-                when 'boat' then 215
-                end
-      version.nil? ? with_property_type(type_id) : with_property_type(OLD_PROPERTY_TYPES[type])
+    def by_property_type(type)
+      if type.to_i > 0
+        return with_property_type(type)
+      else
+        res = with_property_type(OLD_PROPERTY_TYPES[type])
+        res = with_property_type(NEW_PROPERTY_TYPES[type]) if res.nil?
+      end
+
+      res
     end
 
     def base_facilities

@@ -22,7 +22,7 @@ shared_examples_for HotelProperties do
         let!(:other_hotel) { Fabricate.create(:hotel, hoteltype_id: other_hoteltype_id) }
 
         it 'includes object only with desired property' do
-          scoped = described_class.by_property_type(scoped_hoteltype, 'old')
+          scoped = described_class.by_property_type(scoped_hoteltype)
 
           expect(scoped).to include(scoped_hotel)
           expect(scoped).not_to include(other_hotel)

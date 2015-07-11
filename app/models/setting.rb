@@ -11,11 +11,8 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  districts          :text             default([]), is an Array
-#  booking_page       :integer
-#  page_position      :integer
+#  hotel_id           :integer
 #  strategy           :string
-#  current_job        :string
-#  sidekiq_lock       :boolean          default(FALSE)
 #
 # Indexes
 #

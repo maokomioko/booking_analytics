@@ -940,3 +940,6 @@ DEPENDENCIES
   webmock
   whenever
   wicked_pdf
+
+BUNDLED WITH
+   1.10.3

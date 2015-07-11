@@ -7,9 +7,9 @@ module PriceMaker
 
     included do
       # returns booking_id for related hotels
-      def amenities_calc(company_id)
+      def amenities_calc(company_id = nil)
         if related_ids.blank?
-          settings  = Company.find(company_id).setting_fallback
+          settings  = Company.find(company_id).setting_fallback if company_id
           amenities = get_base_facilities
 
           args = [id]
@@ -22,7 +22,7 @@ module PriceMaker
             args << class_fallback
             args << review_score.to_i
             args << hoteltype_id
-            args << districts
+            args << district
           end
 
           amenities.size.downto(1).map do |i|

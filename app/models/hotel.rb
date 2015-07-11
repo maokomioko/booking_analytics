@@ -15,8 +15,7 @@
 #  booking_id      :integer
 #  latitude        :decimal(10, 6)
 #  longitude       :decimal(10, 6)
-#  district        :string           default("{}")
-#  website_url     :string
+#  district        :text             default([]), is an Array
 #  phone           :string
 #  normalized_name :string
 #
@@ -98,6 +97,13 @@ class Hotel < ActiveRecord::Base
     query = query.split(' ')
     query[query.length - 1] += ':*'
     query.join(' & ')
+  end
+
+  def district
+    atr = read_attribute(:district)
+    update_attribute(:district, geocode) if atr.blank?
+
+    atr ||= read_attribute(:district)
   end
 
   def class_fallback

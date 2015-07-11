@@ -8,9 +8,6 @@
 #  min_price          :float
 #  hotel_id           :integer
 #  name               :string
-#  availability       :integer
-#  occupancy          :integer
-#  children           :integer
 #  channel_manager_id :integer
 #  subroom            :integer
 #  max_people         :integer
@@ -54,10 +51,6 @@ class Room < ActiveRecord::Base
   validates_numericality_of :min_price, greater_than_or_equal_to: 0
   validate :validate_max_price
   validates_uniqueness_of :booking_id, scope: :hotel_id, allow_blank: true
-
-  def occupancy_fallback
-    occupancy.to_i == 0 ? 1 : occupancy
-  end
 
   def max_people_fallback
     max_people.to_i == 0 ? 1 : max_people

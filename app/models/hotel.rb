@@ -15,7 +15,8 @@
 #  booking_id      :integer
 #  latitude        :decimal(10, 6)
 #  longitude       :decimal(10, 6)
-#  district        :text             default([]), is an Array
+#  district        :string           default("{}")
+#  website_url     :string
 #  phone           :string
 #  normalized_name :string
 #

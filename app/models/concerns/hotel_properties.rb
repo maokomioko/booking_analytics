@@ -36,14 +36,18 @@ module HotelProperties
 
   module ClassMethods
     def by_property_type(type)
-      if type.to_i > 0
-        return with_property_type(type)
-      else
-        res = with_property_type(OLD_PROPERTY_TYPES[type])
-        res = with_property_type(NEW_PROPERTY_TYPES[type]) if res.nil?
-      end
+      type_ids = [].tap do |ids|
+        type.each do |t|
+          if t.to_i > 0
+            ids << t.to_i
+          else
+            ids << OLD_PROPERTY_TYPES[t]
+            ids << NEW_PROPERTY_TYPES[t]
+          end
+        end
+      end.uniq
 
-      res
+      with_property_type(type_ids)
     end
 
     def base_facilities

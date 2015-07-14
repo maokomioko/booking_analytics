@@ -2,17 +2,6 @@ require 'sidekiq/web'
 require 'sidekiq-status/web'
 
 Rails.application.routes.draw do
-  namespace :api, defaults: { format: :json } do
-    resources :views_data do
-      collection do
-        get :get_views
-        get :get_rejections
-        get :get_destinations
-        get :get_sources
-      end
-    end
-  end
-
   mount Graph::Engine, at: '/graph'
   mount Overbooking::Engine, at: '/overbooking'
 

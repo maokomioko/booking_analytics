@@ -38,10 +38,7 @@ class CompaniesController < ApplicationController
   private
 
   def company_params
-    params.require(:company).permit(
-      :name, :reg_number, :reg_address, :bank_name, :bank_code, :bank_account,
-      :logo, :logo_cache, :remove_logo
-    )
+    params.require(:company).permit(:name, :reg_number, :reg_address)
   end
 
   def load_company

@@ -30,7 +30,7 @@ class BlockAvailability < ActiveRecord::Base
     arr = []
     [].push(self).flatten.each do |block_availability|
       block_availability.data['block'].each do |block|
-        occupancy = block['min_price']['max_occupancy'].to_i
+        occupancy = block['max_occupancy'].to_i
 
         if occupancy >= people.to_i
           arr << block
@@ -70,10 +70,6 @@ class BlockAvailability < ActiveRecord::Base
 
   private
 
-  def self.collection_name
-    :block_availability
-  end
-
   def filtered_blocks(occupancy, room_booking_ids)
     data['block'].select do |block|
       occupancy_cond = block['max_occupancy'] == occupancy.to_s
@@ -81,5 +77,9 @@ class BlockAvailability < ActiveRecord::Base
 
       occupancy_cond && rooms_cond
     end || []
+  end
+
+  def self.collection_name
+    :block_availability
   end
 end

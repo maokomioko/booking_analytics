@@ -35,7 +35,7 @@ class Room < ActiveRecord::Base
   scope :contains_facilities, -> (ids) { includes(:facilities).where(room_facilities: { id: ids }) }
   scope :with_facilities, -> (ids) { contains_facilities(ids).select { |h| (ids - h.facilities.map(&:id)).size.zero? } }
 
-  belongs_to :hotel
+  belongs_to :hotel, foreign_key: :booking_hotel_id, primary_key: :booking_id
 
   has_many :room_prices, dependent: :destroy
   has_many :room_settings, dependent: :destroy

@@ -1,35 +1,46 @@
 class PaymentsController < ApplicationController
-  require 'rest-client'
-
   before_filter :set_subscription
 
-  def pay
-    send_request
+  def details
+    if @subscription.nil?
+      redirect_to root_path
+    else
+      @signature = cooked_signature
+      @merchant_id = merchant_id
+    end
+  end
+
+  def status
+
   end
 
   private
 
   def set_subscription
-    @subscription = Payment::Subscription.find(params[:id])
+    begin
+      @subscription = current_user.company.subscriptions.last
+    rescue
+      nil
+    end
   end
 
   def send_request
-    RestClient.get payment_url, {params: {
+    RestClient.post 'http://xmpay.dev.keks-n.net/Pay',
       merchantId: merchant_id,
-      productPrice: @subscription.amount,
+      price: @subscription.amount,
       currency: @subscription.currency,
       orderId: @subscription.id,
       recurring: @subscription.recurring,
-      sign: cooked_signature}
-    }
+      days: @subscription.days,
+      sign: cooked_signature
   end
 
   def merchant_id
-    123
+    6
   end
 
   def sharedsec
-    "lorem-ipsum"
+    "123321"
   end
 
   def payment_url
@@ -37,6 +48,6 @@ class PaymentsController < ApplicationController
   end
 
   def cooked_signature
-    Digest::SHA256.digest("#{merchant_id}-#{@subscription.id}-#{@subscription.amount}-#{sharedsec}")
+    Digest::SHA256.hexdigest("#{merchant_id}-#{@subscription.id}-#{@subscription.amount}-#{sharedsec}")
   end
 end

@@ -1,0 +1,18 @@
+%h3 Payment details
+%table
+  - @subscription.payment_items.each do |item|
+    %tr
+      %td= item.name
+      %td= item.price
+      %td= @subscription.currency
+
+= form_tag 'http://xmpay.dev.keks-n.net/Pay', method: 'POST' do
+  = hidden_field_tag :merchantId, @merchant_id
+  = hidden_field_tag :price, @subscription.amount
+  = hidden_field_tag :currency, @subscription.currency
+  = hidden_field_tag :orderId, @subscription.id
+  = hidden_field_tag :recurring, @subscription.recurring
+  = hidden_field_tag :days, @subscription.days
+  = hidden_field_tag :sign, @signature
+
+  = submit_tag 'SUBMIT'

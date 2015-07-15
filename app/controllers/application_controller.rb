@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :globalize_session,
                 :auth_user,
-                :company_present,
+                :check_subscription,
                 :wizard_completed,
                 :update_last_activity,
                 unless: :devise_controller?
@@ -53,12 +53,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def company_present
-    if current_user && !current_user.company.present?
-      respond_to do |f|
-        f.json { render json: { error: t('errors.no_company') }, status: 403 }
-        f.all { redirect_to [main_app, :new, :company] and return }
+  def check_subscription
+    unless current_user.company.subscriptions.present?
+      subscription = current_user.company.subscriptions.new
+
+      types = Payment::PaymentItem::TYPES.keys
+      prices = Payment::PaymentItem::TYPES.values
+
+      types.each_with_index do |type, i|
+        item = Payment::PaymentItem.find_or_initialize_by(name: type, price: prices[i])
+        subscription.payment_items << item
       end
+
+      subscription.save!
     end
   end
 

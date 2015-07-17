@@ -27,6 +27,8 @@ class Dispatcher
         new Settings()
       when 'users:index'
         new Users()
+      when 'payments:details'
+        new Subscription()
       when 'wizard:step1', 'wizard:step5'
         new OverbookingContact()
 

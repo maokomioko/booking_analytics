@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   namespace :payments do
     get :details, action: :details
     get :status, action: :status
+    post :update_signature, action: :update_signature
   end
 
   namespace :wizard do

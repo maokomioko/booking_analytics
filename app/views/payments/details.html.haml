@@ -1,10 +1,7 @@
-%h3 Payment details
-%table
-  - @subscription.payment_items.each do |item|
-    %tr
-      %td= item.name
-      %td= item.price
-      %td= @subscription.currency
+= content_for(:main_content_header) do
+  .page-header
+    %h1
+      Payment details
 
 = form_tag 'http://xmpay.dev.keks-n.net/Pay', method: 'POST' do
   = hidden_field_tag :merchantId, @merchant_id
@@ -15,4 +12,24 @@
   = hidden_field_tag :days, @subscription.days
   = hidden_field_tag :sign, @signature
 
-  = submit_tag 'SUBMIT'
+  .col-md-5
+    .table-responsive
+      %table.table.table-bordered.table-hover
+        %thead
+          %tr
+            %td Name
+            %td Price
+            %td Currency
+            %td Add / Delete
+        %tbody
+          - @subscription.payment_items.each do |item|
+            %tr.active
+              %td= item.name
+              %td.price= item.price
+              %td= @subscription.currency
+              %td
+                = link_to '#', class: 'modify_subscription remove' do
+                  %span.label.label-sm.label-danger= t('shared.remove')
+                  %span.label.label-sm.label-success.hidden= t('shared.activate')
+          %tr
+            %td{colspan: 4}= submit_tag 'Proceed to payment', class: 'btn btn-primary'

@@ -10,6 +10,18 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def update_signature
+    amount = params[:amount]
+
+    respond_to do |f|
+      if amount.to_i > 0
+        f.json { render json: { signature: cooked_signature(amount) } }
+      else
+        render nothing: true
+      end
+    end
+  end
+
   def status
 
   end
@@ -24,17 +36,6 @@ class PaymentsController < ApplicationController
     end
   end
 
-  def send_request
-    RestClient.post 'http://xmpay.dev.keks-n.net/Pay',
-      merchantId: merchant_id,
-      price: @subscription.amount,
-      currency: @subscription.currency,
-      orderId: @subscription.id,
-      recurring: @subscription.recurring,
-      days: @subscription.days,
-      sign: cooked_signature
-  end
-
   def merchant_id
     6
   end
@@ -47,7 +48,8 @@ class PaymentsController < ApplicationController
     "http://xmpay.dev.keks-n.net/Pay"
   end
 
-  def cooked_signature
-    Digest::SHA256.hexdigest("#{merchant_id}-#{@subscription.id}-#{@subscription.amount}-#{sharedsec}")
+  def cooked_signature(amount = nil)
+    amount ||= @subscription.amount
+    Digest::SHA256.hexdigest("#{merchant_id}-#{@subscription.id}-#{amount}-#{sharedsec}")
   end
 end

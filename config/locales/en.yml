@@ -23,6 +23,7 @@ en:
     change: "Change"
     update: "Update"
     save: "Save changes"
+    activate: "Activate"
     remove: "Remove"
     invited: "Invited"
     edit: "Edit"

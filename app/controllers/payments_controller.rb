@@ -35,8 +35,10 @@ class PaymentsController < ApplicationController
   end
 
   def update_status
-    if params[:status] = 'success'
+    if params[:status] = 'success' && @subscription.present?
       @subscription.update_attributes(state: 'success', xmpay_answer: params[:transaction], extended_at: DateTime.now)
+    else
+      render text: "Subscription not found", status: 404
     end
   end
 

@@ -10,42 +10,60 @@ class PaymentsController < ApplicationController
     end
   end
 
-  def update_signature
+  def modify_items
     amount = params[:amount]
+    payment_item = Payment::PaymentItem.find_by(name: params[:item_name])
 
-    respond_to do |f|
-      if amount.to_i > 0
-        f.json { render json: { signature: cooked_signature(amount) } }
+    if amount.to_i > 0 && payment_item.present?
+      @subscription.update_attribute(:amount, amount)
+      if params[:action_name] == 'add'
+        unless @subscription.payment_items.include?(payment_item)
+          @subscription.payment_items << payment_item
+        end
       else
-        render nothing: true
+        @subscription.payment_items.delete(payment_item)
       end
+
+      render json: { signature: cooked_signature(amount) }
+    else
+      render nothing: true
     end
   end
 
-  def status
+  def transaction_result
 
+  end
+
+  def update_status
+    if params[:status] = 'success'
+      @subscription.update_attributes(state: 'success', xmpay_answer: params[:transaction], extended_at: DateTime.now)
+    end
   end
 
   private
 
   def set_subscription
-    begin
-      @subscription = current_user.company.subscriptions.last
+    @subscription = begin
+      if params[:orderId].present?
+        Payment::Subscription.find(params[:orderId])
+      else
+        current_user.company.subscriptions.first
+      end
     rescue
       nil
     end
   end
 
   def merchant_id
-    6
+    XMPAY_CONFIG['merchant_id']
   end
 
   def sharedsec
-    "123321"
+    XMPAY_CONFIG['sharedsec']
   end
 
   def payment_url
-    "http://xmpay.dev.keks-n.net/Pay"
+    XMPAY_CONFIG['payment_url']
   end
 
   def cooked_signature(amount = nil)

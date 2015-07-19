@@ -1,13 +1,15 @@
 class ApplicationController < ActionController::Base
+  include SubscriptionMethods
+
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   before_filter :globalize_session,
                 :auth_user,
-                :check_subscription,
                 :wizard_completed,
                 :update_last_activity,
+                :validate_subscription,
                 unless: :devise_controller?
 
   after_action :flash_to_headers
@@ -50,22 +52,6 @@ class ApplicationController < ActionController::Base
         f.json { render json: { error: t('errors.unauthorized') }, status: 401 }
         f.all { redirect_to [main_app, :new, :user, :session] and return }
       end
-    end
-  end
-
-  def check_subscription
-    unless current_user.company.subscriptions.present?
-      subscription = current_user.company.subscriptions.new
-
-      types = Payment::PaymentItem::TYPES.keys
-      prices = Payment::PaymentItem::TYPES.values
-
-      types.each_with_index do |type, i|
-        item = Payment::PaymentItem.find_or_initialize_by(name: type, price: prices[i])
-        subscription.payment_items << item
-      end
-
-      subscription.save!
     end
   end
 

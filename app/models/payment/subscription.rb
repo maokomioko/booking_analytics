@@ -2,15 +2,17 @@
 #
 # Table name: subscriptions
 #
-#  id         :integer          not null, primary key
-#  amount     :float
-#  currency   :string
-#  days       :integer
-#  state      :string
-#  recurring  :boolean
-#  company_id :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  id           :integer          not null, primary key
+#  amount       :float
+#  currency     :string
+#  days         :integer
+#  state        :string
+#  recurring    :boolean
+#  company_id   :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  xmpay_answer :string
+#  extended_at  :datetime
 #
 # Indexes
 #
@@ -25,12 +27,22 @@ class Payment::Subscription < ActiveRecord::Base
   has_and_belongs_to_many :payment_items, join_table: "subscriptions_payment_items", class_name: "Payment::PaymentItem"
   accepts_nested_attributes_for :payment_items
 
+  default_scope { order('updated_at DESC') }
   scope :actual, -> { where(state: 'payed', recurring: true) }
   scope :trial, -> {where(state: 'trial', recurring: false) }
 
-  before_save :set_default_attributes
+  before_create :set_default_attributes
 
   STATES = %w(trial pending_payment payed cancelled)
+
+  def valid?
+    case state
+    when STATES[0], STATES[2]
+      true
+    else
+      false
+    end
+  end
 
   private
 

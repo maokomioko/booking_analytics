@@ -6,25 +6,35 @@ class @Subscription
     $('.modify_subscription').click ->
       highlightChanges($(@))
       setAmount()
-      updateSignature()
+      if $('#subscriptions .active').length > 0
+        updateSubscription($(@))
+      else
+        toggleWarning()
 
   highlightChanges = (element) ->
     $(element).find('span').toggleClass('hidden')
     $(element).parents('tr').toggleClass('active')
 
-  updateSignature = ->
+  updateSubscription = (element) ->
     $.ajax
-      url: "/payments/update_signature"
+      url: "/payments/modify_items"
       method: 'POST'
-      data: { amount: $('#price').val() }
+      data: {
+        amount: $('#price').val(),
+        item_name: $(element).data('item-name'),
+        action_name: $(element).find('span.hidden').data('action')
+      }
       success: (data) ->
-        console.log data
         $('#sign').val(data['signature'])
 
   setAmount = ->
     sum = 0
 
-    $('.active').each ->
+    $('#subscriptions .active').each ->
       sum += Number($(@).find('.price').text())
 
     $('#price').val(sum)
+
+  toggleWarning = ->
+    $('#payment_button').toggleClass('hidden')
+    $('#payment_button').siblings('p').toggleClass('hidden')

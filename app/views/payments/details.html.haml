@@ -3,6 +3,16 @@
     %h1
       Payment details
 
+- unless @subscription.valid?
+  %h3
+    Your subscription has expired! Please use the form below to select items
+    and make a payment.
+  %p
+    If you require any assistance, you can call us by xxx-xxx-xxx or
+    write us an email at : 'support@hotelcommander.net'. Don't forget to include
+    your username.
+
+
 = form_tag 'http://xmpay.dev.keks-n.net/Pay', method: 'POST' do
   = hidden_field_tag :merchantId, @merchant_id
   = hidden_field_tag :price, @subscription.amount
@@ -14,7 +24,7 @@
 
   .col-md-5
     .table-responsive
-      %table.table.table-bordered.table-hover
+      %table#subscriptions.table.table-bordered.table-hover
         %thead
           %tr
             %td Name
@@ -22,14 +32,17 @@
             %td Currency
             %td Add / Delete
         %tbody
-          - @subscription.payment_items.each do |item|
-            %tr.active
-              %td= item.name
-              %td.price= item.price
+          - Payment::PaymentItem.find_each do |payment_item|
+            - item_included = @subscription.payment_items.include?(payment_item)
+            %tr{class: ('active' if item_included)}
+              %td= payment_item.name
+              %td.price= payment_item.price
               %td= @subscription.currency
               %td
-                = link_to '#', class: 'modify_subscription remove' do
-                  %span.label.label-sm.label-danger= t('shared.remove')
-                  %span.label.label-sm.label-success.hidden= t('shared.activate')
+                = link_to '#', class: 'modify_subscription', data: {item_name: payment_item.name} do
+                  %span.label.label-sm.label-danger{ class: ('hidden' unless item_included), data: {action: 'remove'} }= t('shared.remove')
+                  %span.label.label-sm.label-success{ class: ('hidden' if item_included), data: {action: 'add'} }= t('shared.activate')
           %tr
-            %td{colspan: 4}= submit_tag 'Proceed to payment', class: 'btn btn-primary'
+            %td{colspan: 4}
+              = submit_tag 'Proceed to payment', id: 'payment_button', class: 'btn btn-primary'
+              %p.hidden Changes not saved. You need to select at least one service.

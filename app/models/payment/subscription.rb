@@ -35,7 +35,7 @@ class Payment::Subscription < ActiveRecord::Base
 
   STATES = %w(trial pending_payment payed cancelled)
 
-  def valid?
+  def active?
     case state
     when STATES[0], STATES[2]
       true

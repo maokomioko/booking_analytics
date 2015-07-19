@@ -3,7 +3,7 @@
     %h1
       Payment details
 
-- unless @subscription.valid?
+- unless @subscription.active?
   %h3
     Your subscription has expired! Please use the form below to select items
     and make a payment.

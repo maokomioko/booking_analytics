@@ -6,7 +6,7 @@ module SubscriptionMethods
 
     if !subscription.present?
       set_subscription
-    elsif !subscription.valid?
+    elsif !subscription.active?
       redirect_to [:payments, :details] unless controller_name == 'payments'
     end
   end

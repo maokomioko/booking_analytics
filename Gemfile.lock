@@ -58,12 +58,6 @@ GIT
       coffee-rails
 
 GIT
-  remote: git://github.com/seuros/state_machine.git
-  revision: b5baef856b170f18dc2fdc36def2411c255335b9
-  specs:
-    state_machine (1.2.0)
-
-GIT
   remote: git://github.com/teampoltergeist/poltergeist.git
   revision: 705df38d5081e5e2940f8c302e2e1ad531f46aaf
   specs:
@@ -940,7 +934,6 @@ DEPENDENCIES
   sidetiq
   simplecov (>= 0.9)
   sinatra
-  state_machine!
   stringex
   thin
   timecop

@@ -1,0 +1,10 @@
+development: &defaults
+  merchant_id: 6
+  sharedsec: 123321
+  payment_url: "http://xmpay.dev.keks-n.net/Pay"
+
+production:
+  <<: *defaults
+
+test:
+  <<: *defaults

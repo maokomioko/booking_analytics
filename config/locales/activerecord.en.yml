@@ -7,7 +7,6 @@ en:
         name: Company name
         reg_number: Registration number
         reg_address: Registration address
-        logo: Logotype
       room:
         min_price: Minimum price
         max_price: Maximum price

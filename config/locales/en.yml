@@ -23,12 +23,12 @@ en:
     change: "Change"
     update: "Update"
     save: "Save changes"
+    activate: "Activate"
     remove: "Remove"
     invited: "Invited"
     edit: "Edit"
     next: "Next"
     are_you_sure: "Are you sure?"
-    no_company: "Company isn't defined"
     updated: Updated
     error: Error
     view_in_web: Open Web Page
@@ -37,7 +37,6 @@ en:
     hotel_name: "Hotel name can't be blank"
     price_value_missing: "No price"
     unauthorized: "Unauthorized"
-    no_company: "This account doesn't have any company"
     no_ch_manager: "No channel manager defined"
     no_reservations: "Sorry, we couldn't find any reservation in your Channel Manager."
   labels:

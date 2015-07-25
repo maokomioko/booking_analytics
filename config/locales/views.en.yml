@@ -19,9 +19,6 @@ en:
       header: Edit company information
     form:
       main_info: Main information
-      company_logo: Company logo
-      remove_logo: Delete logo
-      bank_info: Banking requisites
   devise:
     registrations:
       new:

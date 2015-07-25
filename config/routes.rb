@@ -54,6 +54,14 @@ Rails.application.routes.draw do
 
   resources :settings, only: [:index, :edit, :update]
 
+  namespace :payments do
+    get :details, action: :details
+    get :update_status, action: :update_status
+    get :transaction_result, action: :transaction_result
+
+    post :modify_items, action: :modify_items
+  end
+
   namespace :wizard do
     (1..5).to_a.each do |i|
       action = "step#{ i }".to_sym

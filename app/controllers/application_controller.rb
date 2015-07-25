@@ -1,13 +1,15 @@
 class ApplicationController < ActionController::Base
+  include SubscriptionMethods
+
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   before_filter :globalize_session,
                 :auth_user,
-                :company_present,
                 :wizard_completed,
                 :update_last_activity,
+                :validate_subscription,
                 unless: :devise_controller?
 
   after_action :flash_to_headers
@@ -49,15 +51,6 @@ class ApplicationController < ActionController::Base
       respond_to do |f|
         f.json { render json: { error: t('errors.unauthorized') }, status: 401 }
         f.all { redirect_to [main_app, :new, :user, :session] and return }
-      end
-    end
-  end
-
-  def company_present
-    if current_user && !current_user.company.present?
-      respond_to do |f|
-        f.json { render json: { error: t('errors.no_company') }, status: 403 }
-        f.all { redirect_to [main_app, :new, :company] and return }
       end
     end
   end

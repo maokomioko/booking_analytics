@@ -30,6 +30,8 @@ gem 'font-awesome-sass', github: 'FortAwesome/font-awesome-sass'
 gem 'gaffe' # handling error pages
 gem 'geocoder'
 gem 'globalize', github: 'globalize/globalize'
+gem 'gmaps4rails'
+gem 'gon'
 gem 'google-analytics-turbolinks'
 
 gem 'graph', path: 'graph'
@@ -67,6 +69,7 @@ gem 'progress_bar'
 gem 'price_maker', path: 'price_maker'
 gem 'puma'
 
+gem 'rabl-rails'
 gem 'racc'
 gem 'rails', '>= 4.2'
 gem 'redis'

@@ -7,10 +7,6 @@
     .tabbable
       %ul.nav.nav-tabs.tab-blue
         %li.active
-          %a{"data-toggle" => "tab", href: "#hotel_settings_tab"}
-            %i.clip-tree
-            = t('.hotel_settings')
-        %li
           %a{"data-toggle" => "tab", href: "#room_settings_tab"}
             %i.clip-circle-small
             = t('.room_settings')
@@ -18,33 +14,35 @@
           %a{"data-toggle" => "tab", href: "#search_ranking_tab"}
             %i.clip-rating-3
             = t('.search_ranking')
+        %li
+          %a{"data-toggle" => "tab", href: "#competitors_tab"}
+            = t('.competitors_lookup')
+        %li
+          %a{"data-toggle" => "tab", href: "#channel_manager_tab"}
+            = t('.channel_manager')
 
     .tab-content
-      #hotel_settings_tab.tab-pane.active
-        .col-sm-6
-          = render 'form'
-        .col-sm-6
-          .panel.panel-default
-            .panel-heading
-              %i.clip-globe
-              = t('.related_hotels', count: @related_hotels.size)
-            .panel-body
-              - Hotel.city_districts(@hotel.city).each do |district|
-                - hotels_within_district = @related_hotels.with_district(district)
-
-                - if hotels_within_district.size > 0
-                  .form-group
-                    .col-sm-3.control-label
-                      = district
-                    .col-sm-9
-                      = hotels_within_district.collect{|x| link_to(x.name, x.url, target: '_blank')}.join(', ').html_safe
-        .clearfix
-
-      #room_settings_tab.tab-pane
+      #room_settings_tab.tab-pane.active
         .col-sm-12
           = render partial: 'rooms/form'
         .clearfix
       #search_ranking_tab.tab-pane
         .col-sm-5
           = render partial: 'room_settings/form'
+        .clearfix
+      #competitors_tab.tab-pane
+        .col-sm-7
+          .row
+            .col-sm-12
+              = render 'form'
+            .col-sm-12(data-partial="related_hotels")
+              = render template: 'related_hotels/edit'
+        .col-sm-5
+          .url-helpers.hidden
+            %span.hotel-url= hotel_path(id: @hotel.id)
+          #map(style="height: 900px;")
+        .clearfix
+      #channel_manager_tab.tab-pane
+        .col-sm-12
+          = render 'channel_manager/form'
         .clearfix

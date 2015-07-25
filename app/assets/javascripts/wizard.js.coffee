@@ -61,7 +61,7 @@ class @Wizard
 
     $form.on 'submit.rails', ->
       if manual() == 'true'
-        blockElemet $(@).parents('.container')
+        blockElement $(@).parents('.container')
 
     $form.on 'ajax:complete', ->
       $(@).parents('.container').unblock()
@@ -71,7 +71,7 @@ class @Wizard
         $finishForm.trigger('submit.rails')
 
     $finishForm.on 'submit.rails', ->
-      blockElemet $form.parents('.container')
+      blockElement $form.parents('.container')
 
     $finishForm.on 'ajax:complete', ->
       $form.parents('.container').unblock()

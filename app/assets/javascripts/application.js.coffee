@@ -2,6 +2,9 @@
 
 #= require jquery_ujs
 
+#= require underscore
+#= require gmaps/google
+
 # require jquery-ui/core
 # require jquery-ui/widget
 #= require jquery-ui/mouse
@@ -102,7 +105,7 @@ window.triggerSpinner = ->
   $("html").toggleClass "no-scroll"
   return
 
-window.blockElemet = (el) ->
+window.blockElement = (el) ->
   el.block
     overlayCSS:
       backgroundColor: '#fff'
@@ -111,3 +114,19 @@ window.blockElemet = (el) ->
       border: 'none'
       color: '#333'
       background: 'none'
+
+window.blockRowElement = (row) ->
+  row.data('html', row.html())
+  height  = row.height()
+  colspan = row.find('td').length
+  row.html("<td colspan='#{colspan}'></td>").find('td').css('height', height)
+  blockElement(row.find('td'))
+
+window.unblockRowElement = (row) ->
+  row.find('td').unblock()
+  row.html(row.data('html'))
+
+window.removeRow = (row) ->
+  row.find('td').contents().wrap("<div class='tdrow' />")
+  row.find('.tdrow').slideUp '200', ->
+    row.empty().remove()

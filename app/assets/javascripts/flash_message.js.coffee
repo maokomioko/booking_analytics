@@ -23,7 +23,7 @@ class @FlashMessage
   show_ajax_message: (value, key) ->
     $("#flash_container").html "
       <div class='alert #{key}'>
-        <strgon>#{value}</strong>
+        <strong>#{value}</strong>
         <a href='#' class='close'></a>
       </div>
     "

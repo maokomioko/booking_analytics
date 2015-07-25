@@ -60,8 +60,3 @@
         %li{ data: { menu: 'settings:edit settings:new settings:index' } }
           = link_to [:settings] do
             %span.title= t('menu.worker')
-      - if current_user.channel_manager.try(:hotel)
-        %li{ data: { menu: 'related_hotels:index related_hotels:edit' } }
-          = link_to [:related_hotels] do
-            %span.title= t('menu.related')
-

@@ -14,9 +14,14 @@ class SettingsController < ApplicationController
   def edit
     @hotel = @setting.hotel
     @related_hotels = @hotel.related
+    @related = @hotel.related_hotels.includes(:related)
+
+    @channel_manager = @setting.company.channel_manager
+
+    gon.rabl template: 'app/views/hotels/show.rabl'
 
     @cm_rooms = begin
-      @setting.company.channel_manager.connector.get_rooms.name_id_mapping
+      @channel_manager.connector.get_rooms.name_id_mapping
     rescue ConnectorError => e
       []
     end
@@ -27,6 +32,12 @@ class SettingsController < ApplicationController
   def update
     @setting.attributes = settings_params
 
+    if request.xhr?
+      # for render related_hotels/edit template
+      @hotel = @setting.hotel
+      @related = @hotel.related_hotels.includes(:related)
+    end
+
     if @setting.save
       flash[:success] = I18n.t('messages.settings_updated')
       impressionist(@setting)
@@ -36,12 +47,7 @@ class SettingsController < ApplicationController
       redirect_to [:settings] unless request.xhr?
     else
       flash[:alert] = @setting.errors.full_messages.to_sentence
-
-      if request.xhr?
-        render none: true
-      else
-        render :edit
-      end
+      render :edit unless request.xhr?
     end
   end
 

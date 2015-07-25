@@ -1,73 +1,55 @@
-- unless controller_name == 'wizard'
-  = content_for(:main_content_header) do
-    .row
-      .col-sm-12
-        .page-header
-          %h1
-            = t('.header')
-            %small= @hotel.name
-
 .row
   .hidden
     %span(data-message="select_hotels_first")= t('messages.select_hotels_first')
     %span(data-message="confirm_related_bulk_delete")= t('messages.confirm_related_bulk_delete')
     %span(data-message="related_search_prompt")= t('messages.related_search_prompt')
   .col-sm-12{style: 'margin-bottom: 20px'}
-    = form_tag add_related_hotel_path(id: @hotel.booking_id), method: :post, remote: true, class: 'add-related-form' do
+    = form_tag related_hotels_path(hotel_id: @hotel.booking_id), method: :post, remote: true, class: 'add-related-form' do
       .col-md-6.no-left-padding
-        = hidden_field_tag :ids, nil, id: 'add_related_select2', data: { url: search_related_hotel_path(id: @hotel.booking_id) }
+        = hidden_field_tag :id, nil, id: 'add_related_select2', data: { url: related_hotels_search_path(hotel_id: @hotel.booking_id) }
       .col-md-3.no-left-padding
         = submit_tag t('.add_related'), class: 'btn btn-purple'
 
   .col-sm-12
     - if @related.length > 0
-      .btn-group
-        %button.btn.btn-dark-beige.dropdown-toggle.bulk-action-button(type="button" data-toggle="dropdown")
-          = icon('wrench')
-          = t('.action_with_selected')
-          %span.caret
-        %ul.dropdown-menu(role="menu")
-          %li
-            = link_to [:drop, :related_hotel, id: @hotel.booking_id], class: 'bulk-delete-related' do
-              = icon('trash')
-              = t('shared.remove')
-      %table.table.table-hover.table-condensed
+      %table.table.table-hover.table-condensed.related-hotels-table
         %thead
           %tr
-            %th
             %th= Hotel.human_attribute_name(:booking_id)
             %th= Hotel.human_attribute_name(:name)
-            %th.hidden-sm.hidden-xs= Hotel.human_attribute_name(:url)
-            %th= Hotel.human_attribute_name(:address)
-            - if controller_name == 'wizard' && defined?(Overbooking::Engine)
+            %th= t('.overbooking_partner')
+            - if controller_name == 'wizard'
               %th
             %th
         %tbody
           - @related.each do |related_hotel|
-            %tr
-              %td.center
-                .checkbox-table
-                  %label
-                    = check_box_tag 'ids[]', related_hotel.related.booking_id, false, class: 'flat-grey'
+            %tr(data-hotel-id="#{ related_hotel.related.booking_id }")
               %td= related_hotel.related.booking_id
-              %td= related_hotel.related.name
-              %td.hidden-sm.hidden-xs= link_to t('shared.view_in_web'), related_hotel.related.url, target: '_blank'
-              %td= [related_hotel.related.zip, related_hotel.related.city, related_hotel.related.district, related_hotel.related.address].compact.join(', ')
-              - if controller_name == 'wizard' && defined?(Overbooking::Engine)
+              %td
+                %strong= related_hotel.related.name
+                - if related_hotel.added_manually
+                  %span.label.label-default= RelatedHotel.human_attribute_name(:added_manually)
+                %br
+                %small
+                  = related_hotel.related.post_address
+              %td
+                - if related_hotel.is_overbooking
+                  %span.label.label-success= t('overbooking.shared.partner')
+                - else
+                  —
+              - if controller_name == 'wizard'
                 %td(data-contact-hotel-id="#{ related_hotel.related.booking_id }" data-url="#{ overbooking.hotels_contacts_by_hotel_path }")
                   = render template: 'overbooking/contacts/index', locals: { contacts: related_hotel.related.becomes(Overbooking::Hotel).contacts,
                                                     hotel: related_hotel.related.becomes(Overbooking::Hotel) }
               %td.center
                 .visible-md.visible-lg.hidden-sm.hidden-xs
-                  = link_to [:drop, :related_hotel, id: @hotel.booking_id, ids: [related_hotel.related.booking_id]],
+                  = link_to [:related_hotels, :destroy, hotel_id: @hotel.booking_id, id: related_hotel.related.booking_id],
                   class: 'btn btn-xs btn-bricky tooltips remove-related',
-                  remote: true, method: :post,
+                  remote: true, method: :delete,
                   data: { 'original-title' => t('shared.remove')} do
                     = icon('times white')
                 .visible-sm.visible-xs.hidden-md.hidden-lg
-                  = link_to [:drop, :related_hotel, id: @hotel.booking_id, ids: [related_hotel.related.booking_id]],
+                  = link_to [:related_hotels, :destroy, hotel_id: @hotel.booking_id, id: related_hotel.related.booking_id],
                   class: 'btn btn-xs btn-bricky remove-related',
-                  remote: true, method: :post do
+                  remote: true, method: :delete do
                     = icon('times white')
-
-      = paginate @related

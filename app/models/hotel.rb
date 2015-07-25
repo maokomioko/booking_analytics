@@ -16,7 +16,6 @@
 #  latitude        :decimal(10, 6)
 #  longitude       :decimal(10, 6)
 #  district        :string           default("{}")
-#  website_url     :string
 #  phone           :string
 #  normalized_name :string
 #
@@ -112,5 +111,9 @@ class Hotel < ActiveRecord::Base
 
   def full_address
     [city, address].reject(&:blank?).join(', ')
+  end
+
+  def post_address
+    [zip, city, district, address].reject(&:blank?).join(', ')
   end
 end

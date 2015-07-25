@@ -39,6 +39,9 @@ en:
     edit:
       header: Manage related hotels
       add_related: Add related hotels
+      overbooking_partner: Overbooking partner
+      become_partner: Become overbooking partner
+      remove_partner: Disable partnership
       action_with_selected: Action with selected
   reservations:
     index:
@@ -58,9 +61,10 @@ en:
     edit:
       header: Algorithm fine-tuning
       related_hotels: "%{count} hotels matching your location criteria"
-      hotel_settings: "Hotel-wide configuration"
       room_settings: "Per room configuration"
       search_ranking: "Search ranking"
+      competitors_lookup: "Competitors lookup"
+      channel_manager: "Channel manager"
     form:
       settings_header_1: Update frequency
       settings_header_2: Market segment criteria

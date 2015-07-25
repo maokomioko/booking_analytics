@@ -1,39 +1,32 @@
 class RelatedHotelsController < ApplicationController
-  before_filter :find_and_auth_resource, except: :index
+  before_filter :find_and_auth_resource
+  skip_before_filter :wizard_completed
 
-  skip_before_filter :wizard_completed, only: [:drop, :add, :search]
+  def create
+    @new_related = Hotel.where(booking_id: params[:id].split(','))
 
-  skip_after_action :flash_to_headers, only: [:drop, :add]
-  append_after_action :add_flash_after_drop, only: :drop
-  append_after_action :add_flash_after_add, only: :add
-
-  def index
-    @hotels = Hotel
-                  .accessible_by(current_ability)
-                  .page params[:page]
-    authorize! :index, Hotel
-
-    if @hotels.length == 1
-      redirect_to [:edit, :related_hotel, id: @hotels.first.booking_id] and return
+    @new_related.each do |related|
+      @hotel.related_hotels << RelatedHotel.new(
+        hotel: @hotel,
+        related: related,
+        added_manually: true
+      )
     end
+
+    list = @new_related.map(&:name).to_sentence
+    flash[:success] = t('messages.success_add_related', list: list)
+
+    # for render related_hotels/edit template
+    @related = @hotel.related_hotels.includes(:related)
   end
 
-  def edit
-    @related = @hotel
-       .related_hotels
-       .includes(:related)
-       .order('id DESC')
-       .page params[:page]
-  end
+  def destroy
+    @related = Hotel.where(booking_id: params[:id])
 
-  def drop
-    @related = Hotel.where(booking_id: params[:ids])
-    @hotel.related.delete(@related)
-  end
-
-  def add
-    @related = Hotel.where(booking_id: params[:ids].split(','))
-    @hotel.related << @related
+    if @hotel.related.delete(@related)
+      list = @related.map(&:name).to_sentence
+      flash[:success] = t('messages.success_remove_related', list: list)
+    end
   end
 
   def search
@@ -49,18 +42,8 @@ class RelatedHotelsController < ApplicationController
 
   def find_and_auth_resource
     @hotel = Hotel.accessible_by(current_ability)
-                 .find_by_booking_id(params[:id])
+                 .find_by_booking_id(params[:hotel_id])
 
     authorize! :update, @hotel
-  end
-
-  def add_flash_after_drop
-    list = @related.map(&:name).to_sentence
-    flash[:success] = t('messages.success_remove_related', list: list)
-  end
-
-  def add_flash_after_add
-    list = @related.map(&:name).to_sentence
-    flash[:success] = t('messages.success_add_related', list: list)
   end
 end

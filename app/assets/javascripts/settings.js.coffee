@@ -5,6 +5,7 @@ class @Settings
     @roomsAutoSave()
     @settingsSubmit()
     @rankingSubmit()
+    @tabHacks()
 
   initUserRatingSlider: ->
     $slider = $('#user-rating-slider')
@@ -30,7 +31,7 @@ class @Settings
 
     $form.on 'submit.rails', ->
       if manual() == 'true'
-        blockElemet $(@).parents('.tab-pane')
+        blockElement $(@).parents('.tab-pane')
 
     $form.on 'ajax:complete', ->
       $(@).parents('.tab-pane').unblock()
@@ -49,7 +50,7 @@ class @Settings
     $form = $('.settings-form')
 
     $form.on 'submit.rails', ->
-      blockElemet $(@).parents('.tab-pane')
+      blockElement $(@).parents('.tab-pane')
 
     $form.on 'ajax:complete', ->
       $(@).parents('.tab-pane').unblock()
@@ -58,7 +59,14 @@ class @Settings
     $form = $('.room-settings-form')
 
     $form.on 'submit.rails', ->
-      blockElemet $(@).parents('.tab-pane')
+      blockElement $(@).parents('.tab-pane')
 
     $form.on 'ajax:complete', ->
       $(@).parents('.tab-pane').unblock()
+
+  tabHacks: ->
+    $('a[href="#competitors_tab"]').on 'shown.bs.tab', ->
+      $(window).trigger('resize') # fix slider
+      google.maps.event.trigger map.getMap(), 'resize' # fix Gmap
+      map.getMap().setZoom(16)
+      map.getMap().setCenter(new google.maps.LatLng(gon.hotel.lat, gon.hotel.lng))

@@ -1,0 +1,10 @@
+( function(){
+    var $row;
+    $row = $('.related-hotels-table').find('[data-hotel-id="<%= params[:id] %>"]');
+    unblockRowElement($row);
+    removeRow($row);
+
+    setTimeout( function(){
+        Related.initMap();
+    }, 500);
+})();

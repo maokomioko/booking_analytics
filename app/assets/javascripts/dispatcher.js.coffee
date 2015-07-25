@@ -25,6 +25,8 @@ class Dispatcher
         new Related()
       when 'settings:edit'
         new Settings()
+        new Related()
+        new ChannelManagerForm()
       when 'users:index'
         new Users()
       when 'wizard:step1', 'wizard:step5'

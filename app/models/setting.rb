@@ -11,8 +11,6 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  districts          :text             default([]), is an Array
-#  booking_page       :integer
-#  page_position      :integer
 #  strategy           :string
 #  current_job        :string
 #  sidekiq_lock       :boolean          default(FALSE)
@@ -48,6 +46,7 @@ class Setting < ActiveRecord::Base
   after_create :create_room_settings
 
   after_update :restart_algorithm
+  after_save :recreate_related_hotels
 
   validates_inclusion_of :crawling_frequency, within: CRAWLING_FREQUENCIES
   validates :stars, array: { inclusion: { in: STARS } }
@@ -91,6 +90,14 @@ class Setting < ActiveRecord::Base
 
   def restart_algorithm
     PriceMaker::PriceWorker.perform_async(id)
+  end
+
+  def recreate_related_hotels
+    if hotel.present?
+      RelatedHotelsCleanerWorker.new.perform(company_id)
+      hotel.amenities_calc(company_id, true)
+    end
+    true
   end
 
   def create_room_settings

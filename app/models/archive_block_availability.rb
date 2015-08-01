@@ -3,10 +3,10 @@
 # Table name: archive_block_availabilities
 #
 #  id            :integer          primary key
-#  max_occupancy :string
 #  data          :jsonb
 #  booking_id    :integer
-#  fetch_stamp   :string
+#  max_occupancy :text             is an Array
+#  fetch_stamp   :integer
 #
 
 class ArchiveBlockAvailability < BlockAvailability

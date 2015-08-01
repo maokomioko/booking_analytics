@@ -7,6 +7,8 @@
 %meta{ content: t('meta.description'), name: 'description' }
 %meta{ content: t('meta.author'), name: 'author' }
 
+= Gon::Base.render_data(init: true)
+
 = stylesheet_link_tag 'application', 'data-turbolinks-track' => true, media: 'all'
 = javascript_include_tag 'application', 'data-turbolinks-track' => true
 

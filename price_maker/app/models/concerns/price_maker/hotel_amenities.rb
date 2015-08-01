@@ -7,8 +7,8 @@ module PriceMaker
 
     included do
       # returns booking_id for related hotels
-      def amenities_calc(company_id = nil)
-        if related_ids.blank?
+      def amenities_calc(company_id = nil, force = false)
+        if related_ids.blank? || force
           settings  = Company.find(company_id).setting_fallback if company_id
           amenities = get_base_facilities
 
@@ -37,7 +37,9 @@ module PriceMaker
             end.map(&:value).flatten.uniq.compact
 
             unless results.blank?
-              self.related_ids = results
+              results.each do |id|
+                self.related << Hotel.find(id) unless related_ids.include?(id)
+              end
               hw_pool.terminate
               break
             end

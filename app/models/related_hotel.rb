@@ -6,6 +6,7 @@
 #  hotel_id       :integer
 #  related_id     :integer
 #  is_overbooking :boolean          default(FALSE)
+#  added_manually :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -20,4 +21,6 @@ class RelatedHotel < ActiveRecord::Base
   belongs_to :related,
              foreign_key: :related_id,
              class_name: 'Hotel'
+
+  validates_uniqueness_of :hotel_id, scope: :related_id
 end

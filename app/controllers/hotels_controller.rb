@@ -9,4 +9,9 @@ class HotelsController < ApplicationController
   def search
     @hotels = Hotel.full_text_search(params[:q]).limit(300)
   end
+
+  def markers
+    @hash = MarkerBuilder.build(params[:booking_ids])
+    render json: @hash.to_json
+  end
 end

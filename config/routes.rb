@@ -54,7 +54,7 @@ Rails.application.routes.draw do
 
   namespace :payments do
     get :details, action: :details
-    get :update_status, action: :update_status
+    post :update_status, action: :update_status
     get :transaction_result, action: :transaction_result
 
     post :modify_items, action: :modify_items

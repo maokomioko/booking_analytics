@@ -10,11 +10,10 @@
     %meta{ content: t('meta.description'), name: 'description' }
     %meta{ content: t('meta.author'), name: 'author' }
 
+    %link{:href=>"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", :rel=>"stylesheet"}
+
     :css
-      #map {
-        width: 100%;
-        height: 500px;
-      }
+      #{BookingAnalytics::Application.assets.find_asset('related_sender.scss').source}
 
     :javascript
       #{BookingAnalytics::Application.assets.find_asset('related_sender.js.coffee').source}
@@ -36,17 +35,55 @@
               width: 64
               height: 64
 
-          markers = map.addMarkers(#{@markers})
+          json_markers = #{@markers}
+          markers = map.addMarkers(json_markers)
+
+          _.each json_markers, (json, index) ->
+            json.marker = markers[index]
+
+          window.json_markers = json_markers
+
+          $('.show-on-map').on 'click', (e) ->
+            e.preventDefault()
+            booking_id = $(@).parents('tr').data('bookingId')
+            marker = _.find(json_markers, (j) -> j.booking_id.toString() == booking_id.toString())
+
+            if marker
+              $('body').scrollTop(0)
+              map.getMap().setZoom(14)
+              marker = marker.marker
+              marker.setMap(map.getMap())
+              marker.panTo()
+              google.maps.event.trigger(marker.getServiceObject(), 'click')
+
           map.bounds.extendWith(markers)
+          map.fitMapToBounds()
   %body
-    #map
-    %table
-      - @related_hotels.each do |related_hotel|
-        %tr
-          %td= related_hotel.related.booking_id
-          %td= related_hotel.related.name
-          %td= related_hotel.related.exact_class
-          %td= related_hotel.related.post_address
+    .container-fluid
+      .row
+        .col-lg-12
+          #map
+      .row
+        .col-lg-12
+          %table.table
+            %thead
+              %tr
+                %th= Hotel.human_attribute_name(:booking_id)
+                %th= Hotel.human_attribute_name(:name)
+                %th= Hotel.human_attribute_name(:exact_class)
+                %th= Hotel.human_attribute_name(:address)
+                %th
+            %tbody
+              - @related_hotels.each do |related_hotel|
+                %tr(data-booking-id="#{related_hotel.related.booking_id}")
+                  %td= related_hotel.related.booking_id
+                  %td= related_hotel.related.name
+                  %td
+                    - related_hotel.related.exact_class.to_i.times do
+                      .star
+                  %td= related_hotel.related.post_address
+                  %td
+                    = button_tag 'Show on map', class: 'btn btn-link show-on-map'
 
     :plain
       <script src="https://maps.google.com/maps/api/js?language=en&v=3.20&amp;sensor=false&amp;libraries=geometry" type="text/javascript"></script>

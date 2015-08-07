@@ -30,6 +30,7 @@ class MarkerBuilder
       marker.lng hotel.longitude.to_f
       marker.picture marker_picture(hotel)
       marker.infowindow marker_infowindow(hotel)
+      marker.json(booking_id: hotel.booking_id)
     end
   end
 

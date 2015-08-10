@@ -1,20 +1,18 @@
-.box-forgot
-  %h3= t('auth.password_restore.title')
-  %p= t('auth.password_restore.subtitle')
-
-  = form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'form-forgot' }  do |f|
-    .errorHandler.alert.alert-danger.no-display
-      %i.fa.fa-remove-sign
-      = t('shared.please_check_errors')
-    %fieldset
-      .form-group
-        %span.input-icon
+.sign_up_page
+  .container-fluid
+    .text-center.light
+      .header.h2= t('auth.password_restore.title')
+      .additional_text.h4= t('auth.password_restore.subtitle')
+    .sign_up_form.max_width.default_form.center-block
+      = form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :post }  do |f|
+        = render 'partials/form_error_handler'
+        .form-group
           = f.email_field :email, autofocus: true, placeholder: t('auth.fields.email'), class: 'form-control text_validation'
-          %i.fa.fa-envelope
-      .form-actions
-        = link_to new_session_path(resource_name), class: 'btn btn-light-grey go-back' do
-          %i.fa.fa-circle-arrow-left
-          = t('auth.buttons.back_login')
-        = f.button class: 'btn btn-bricky pull-right', type: :submit do
-          = t('shared.submit')
-          %i.fa.fa-arrow-circle-right
+        .separate
+        .form_btns
+          = link_to new_session_path(resource_name), class: 'back_link pull-left' do
+            = icon('arrow-left')
+            %span= t('auth.buttons.back_login')
+          = f.button class: 'btn btn_apply pull-right', type: :submit do
+            = t('shared.submit')
+          .clearfix

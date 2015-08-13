@@ -5,23 +5,13 @@
 
   %body{class: @body_class, data: { page: body_data_page }}
     = render partial: 'partials/header'
-    .main-container
-      - if current_user.setup_completed?
-        .navbar-content.hidden-print
-          .main-navigation.navbar-collapse.collapse
-            = yield(:left_menu_header)
-            = render 'partials/menu'
-      .main-content
-        .container
-          #flash-container
-            .col-sm-12
-              = render_flash
-          = yield(:main_content_header)
-          - if session[:connector_error].present?
-            = render 'partials/connector_error', error: session.delete(:connector_error)
-          = yield
-
-    = render 'partials/sidebar' if controller_name == 'calendar' && current_user && current_user.channel_manager
+    #flash-container
+      .col-sm-12
+        = render_flash
+    = yield(:main_content_header)
+    - if session[:connector_error].present?
+      = render 'partials/connector_error', error: session.delete(:connector_error)
+    = yield
 
     #spinner_placeholder.hidden.hidden-print
       = render partial: 'partials/spinner'

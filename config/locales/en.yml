@@ -139,18 +139,18 @@ en:
       edit: "Update settings"
       update: "Update settings"
   menu:
+    rate_management: rate management
+    overbooking: overbooking
+    competitors_lookup: competitors lookup
     profile: "Edit my profile"
+    company_profile: "Company profile"
+    manage_users: "Manage users"
     worker: "Algorithm"
     connection: "Channel Manager"
     related: "Manage related hotels"
     company:
-      title: "Company profile"
-      users: "Manage users"
       existing_users: "Existing users"
       invite_new: "Invite new users"
-    overbooking:
-      partners: "Manage partners"
-      directions: "Directions"
   flash:
     info: "Info!"
     warning: "Warning!"

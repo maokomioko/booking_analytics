@@ -4,14 +4,9 @@
     = render 'layouts/head'
 
   %body{class: 'login', data: { page: body_data_page }}
-    .main-login.col-sm-4.col-sm-offset-4
-      .logo
-        HOTEL
-        %i.clip-clip>
-        COMMANDER
-      #flash-container= render_flash
-      = yield
-      .copyright= render 'partials/copyright'
+    = render partial: 'partials/header'
+
+    = yield
 
     #spinner_placeholder.hidden
       = render partial: 'partials/spinner'

@@ -19,22 +19,26 @@
 @import "css/bootstrap-modal-bs3patch";
 @import "css/bootstrap-modal";
 
-@import "clip-font";
+@import "bootstrap-theme";
+@import "bootstrap-slider";
+@import "style";
 
-@import "mixins";
-@import "main";
-@import "main-responsive";
-@import "timeline";
-
-@import "theme_light";
-@import "ui_elements";
-
+//@import "clip-font";
+//
+//@import "mixins";
+//@import "main";
+//@import "main-responsive";
+//@import "timeline";
+//
+//@import "theme_light";
+//@import "ui_elements";
+//
 @import "customizations";
-@import "calendar";
-
+//@import "calendar";
+//
 @import "spinner";
-
-@import "wizard";
+//
+//@import "wizard";
 
 @import "print";
 

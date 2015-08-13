@@ -1,9 +1,7 @@
 = form_for contact, as: :contact, html: { class: 'form-horizontal' }, remote: true,
   url: (contact.persisted? ? [overbooking, :hotel, :contact, id: contact.id, hotel_id: contact.hotel.booking_id] : [overbooking, :hotel, :contacts, hotel_id: contact.hotel.booking_id]) do |f|
 
-  .errorHandler.alert.alert-danger.no-display
-    = icon('remove-sign')
-    = t('shared.please_check_errors')
+  = render 'partials/form_error_handler'
 
   .form-group
     = f.label :contact_type, class: 'col-sm-4 control-label'

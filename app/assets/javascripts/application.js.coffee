@@ -75,6 +75,10 @@ ready = ->
     minScrollbarLength: 20
     suppressScrollX: true
 
+  $('input.i_check').iCheck
+    checkboxClass: 'icheckbox_flat-blue'
+    radioClass: 'iradio_flat-blue'
+
   $('body').mouseup ->
     window.isMouseDown = false
 
@@ -85,13 +89,6 @@ ready = ->
   $('form[data-remote="true"] [type="submit"]').on 'click', (e) ->
     e.preventDefault()
     $(@).parents('form').trigger('submit.rails')
-
-  page = $('body').data('page')
-  menu = $('li[data-menu~="' + page + '"]')
-
-  if menu.length
-    menu.addClass('active')
-    menu.parents('li').addClass('open active')
 
 
 $(document).on "ready page:load", ready

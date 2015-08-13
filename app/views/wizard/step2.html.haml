@@ -1,61 +1,48 @@
-= content_for(:main_content_header) do
-  .row
-    .col-sm-12
-      .page-header
-        %h1
-          = t('.header')
-          %small= @channel_manager.hotel.name
+.sign_up_steps_page
+  .container-fluid
+    = render 'progressbar', active: 2
 
-= render 'progressbar', active: 2, progress: (100 / 5) * 2
+    .step2_block
+      .text-center.light
+        .header.h2= t('.header')
 
-.row
-  .col-md-6.col-md-offset-3
-    = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step2_post], method: :post, remote: true, html: { class: 'form-horizontal' } do |f|
-      .errorHandler.alert.alert-danger.no-display
-        = icon('remove-sign')
-        = t('shared.please_check_errors')
-      .form-group
-        = f.label :connector_type, class: 'col-sm-6 control-label'
-        .col-sm-5
-          = f.select :connector_type, options_for_cm_types(@channel_manager.connector_type), {}, class: 'form-control'
+      .default_form.max_width.center-block
+        = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step2_post], method: :post, remote: true do |f|
+          = render 'partials/form_error_handler'
+          .form-group
+            = f.label :connector_type
+            = f.select :connector_type, options_for_cm_types(@channel_manager.connector_type), {}, class: 'form-control'
 
-      .connector-fieldset.hidden
+          .connector-fieldset.hidden
 
-      %fieldset.hidden(data-connector="empty")
-        %p.lead.center= t('.empty_connector_warning')
+          %fieldset.hidden(data-connector="empty")
+            %p.lead.center= t('.empty_connector_warning')
 
-      %fieldset.hidden(data-connector="wubook")
-        .form-group
-          = f.label :login, t('labels.cm_login'), class: 'col-sm-6 control-label '
-          .col-sm-5
-            = f.text_field :login, class: 'form-control with_validation'
+          %fieldset.hidden(data-connector="wubook")
+            .form-group
+              = f.label :login, t('labels.cm_login')
+              = f.text_field :login, class: 'form-control with_validation'
+            .form-group
+              = f.label :password, t('labels.cm_password')
+              = f.text_field :password, class: 'form-control with_validation'
+            .form-group
+              = f.label :lcode, t('labels.lcode').html_safe
+              = f.text_field :lcode, class: 'form-control with_validation'
 
-        .form-group
-          = f.label :password, t('labels.cm_password'), class: 'col-sm-6 control-label'
-          .col-sm-5
-            = f.text_field :password, class: 'form-control with_validation'
-        .form-group
-          = f.label :lcode, t('labels.lcode').html_safe, class: 'col-sm-6 control-label'
-          .col-sm-5
-            = f.text_field :lcode, class: 'form-control with_validation'
+          %fieldset.hidden(data-connector="previo")
+            .form-group
+              = f.label :login, t('labels.cm_login')
+              = f.text_field :login, class: 'form-control with_validation'
 
-      %fieldset.hidden(data-connector="previo")
-        .form-group
-          = f.label :login, t('labels.cm_login'), class: 'col-sm-6 control-label '
-          .col-sm-5
-            = f.text_field :login, class: 'form-control with_validation'
+            .form-group
+              = f.label :password, t('labels.cm_password')
+              = f.text_field :password, class: 'form-control with_validation'
+            .form-group
+              = f.label :lcode, ChannelManager::Previo.human_attribute_name(:lcode)
+              = f.text_field :lcode, class: 'form-control with_validation'
 
-        .form-group
-          = f.label :password, t('labels.cm_password'), class: 'col-sm-6 control-label'
-          .col-sm-5
-            = f.text_field :password, class: 'form-control with_validation'
-        .form-group
-          = f.label :lcode, ChannelManager::Previo.human_attribute_name(:lcode), class: 'col-sm-6 control-label'
-          .col-sm-5
-            = f.text_field :lcode, class: 'form-control with_validation'
-
-      .form-group
-        .col-sm-3.col-sm-offset-5
-          = f.button class: 'btn btn-primary', type: :submit do
-            = t('shared.next')
-            = icon('arrow-circle-right')
+          .form_btns
+            %button.btn.btn_apply.pull-right{:type => "submit"}
+              = t('shared.next')
+              %i.fa.fa-arrow-right
+            .clearfix

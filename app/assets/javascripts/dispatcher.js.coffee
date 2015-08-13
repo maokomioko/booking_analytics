@@ -4,7 +4,6 @@ class Dispatcher
     @initPageScripts()
 
   initGlobalScripts: ->
-    window.Main.init()
     new FlashMessage()
     new Validation()
 

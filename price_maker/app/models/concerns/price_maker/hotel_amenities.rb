@@ -21,7 +21,7 @@ module PriceMaker
           else
             args << class_fallback
             args << review_score.to_i
-            args << hoteltype_id
+            args << [hoteltype_id.to_i] # Little hack to supply array value for *by_property_type* method
             args << district
           end
 

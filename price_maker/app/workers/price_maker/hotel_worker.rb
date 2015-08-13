@@ -22,7 +22,7 @@ class PriceMaker::HotelWorker
 
       hotels = hotels.by_property_type(properties) if properties.present?
       hotels = hotels.with_district(districts) if districts.present?
-      hotels = hotels.with_facilities(facility_ids)
+      hotels = hotels.contains_facilities(facility_ids)
 
       ids << hotels.map(&:id).reject(&:blank?) if hotels.size > 0
 

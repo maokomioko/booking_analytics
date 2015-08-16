@@ -10,11 +10,6 @@ en:
     edit:
       header: Manage your connection options
   companies:
-    new:
-      header: Fill your company information
-      alert:
-        header: Please tell us about your company.
-        text: You need to provide company registration information in order to continue.
     edit:
       header: Edit company information
     form:
@@ -25,7 +20,7 @@ en:
         iam_agree: I agree to the Terms of Service and Privacy Policy
       edit:
         header: Edit my profile
-        account_info: Account Info
+        change_password: Change Password
         password_tip: "leave blank if you don't want to change it"
         my_avatar: My avatar
         remove_avatar: Remove avatar from system

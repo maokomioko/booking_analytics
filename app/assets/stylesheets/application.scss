@@ -19,34 +19,13 @@
 @import "css/bootstrap-modal-bs3patch";
 @import "css/bootstrap-modal";
 
-@import "bootstrap-theme";
 @import "bootstrap-slider";
 @import "style";
-
-//@import "clip-font";
-//
-//@import "mixins";
-//@import "main";
-//@import "main-responsive";
-//@import "timeline";
-//
-//@import "theme_light";
-//@import "ui_elements";
-//
-@import "customizations";
-//@import "calendar";
-//
 @import "spinner";
-//
-//@import "wizard";
 
 @import "print";
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-weight: 200;
-}
-
-#helpers {
+#helpers, .no-display {
   display: none;
 }
 
@@ -62,8 +41,4 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   .alert {
     margin: 10px 0;
   }
-}
-
-.no-left-padding {
-  padding-left: 0;
 }

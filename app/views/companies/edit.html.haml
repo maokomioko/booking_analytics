@@ -1,9 +1,26 @@
-= content_for :main_content_header do
-  .row
-    .col-sm-12
-      .page-header
-        %h1= t('.header')
+.company_page
+  .container-fluid
+  = content_for :main_content_header do
+    .page_header.h2.light
+      .page_header_title= t('.header')
 
-.row
-  .col-sm-7
-    = render 'form'
+  .max_width.center-block.company_form
+    = form_for(@company, url: company_path, html: { multipart: true, class: 'form-company' }) do |f|
+      .errorHandler.alert.alert-danger.no-display
+        = icon('remove-sign')
+        = t('shared.please_check_errors')
+      .h20px= t('.form.main_info')
+      .separate2
+      .form-group
+        = f.label :name, class: 'control-label'
+        = f.text_field :name, class: 'form-control'
+      .form-group
+        = f.label :reg_number, class: 'control-label'
+        = f.text_field :reg_number, class: 'form-control'
+      .form-group
+        = f.label :reg_address, class: 'control-label'
+        = f.text_field :reg_address, class: 'form-control'
+
+      = f.button class: 'btn btn_apply' do
+        = t('shared.submit')
+        = icon('arrow-circle-right')

@@ -1,6 +1,6 @@
 en:
   meta:
-    title: "Hotel Commander | v 0.1.0"
+    title: "Hotel Commander | v1.0"
     description: "Hotel revenue management software"
     author: "Hotel Commander"
   shared:
@@ -77,11 +77,12 @@ en:
     waiting_confirmation: "Currently waiting confirmation for: %{user}"
     links:
       login: "Log in with your account"
-      signup: "Create a new account"
+      signup: "Don't have account? Create one now!"
       password: "Forgot your password?"
       confirmation: "Didn't receive confirmation instructions?"
       unlock: "Didn't receive unlock instructions?"
   calendar:
+    title: "Rate management"
     menu:
       all_dates: "<strong>Price</strong> controls"
       apply_prices: "Apply suggested"
@@ -148,6 +149,7 @@ en:
     worker: "Algorithm"
     connection: "Channel Manager"
     related: "Manage related hotels"
+    settings: "Settings"
     company:
       existing_users: "Existing users"
       invite_new: "Invite new users"

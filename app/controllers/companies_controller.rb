@@ -1,27 +1,8 @@
 class CompaniesController < ApplicationController
-  before_filter :load_company, only: [:show, :edit, :update]
-  skip_before_filter [:check_company_and_subscription, :wizard_completed], only: [:new, :create]
+  before_filter :load_company, only: [:edit, :update]
+  skip_before_filter [:check_company_and_subscription, :wizard_completed], only: :create
 
   load_and_authorize_resource :company, singleton: true
-
-  def show
-  end
-
-  def new
-    redirect_to root_path if current_user.company.present?
-  end
-
-  def create
-    redirect_to root_path if current_user.company.present?
-
-    if @company.save
-      current_user.update_column(:company_id, @company.id)
-      redirect_to root_path, success: I18n.t('messages.company_created')
-    else
-      flash[:alert] = @company.errors.full_messages.to_sentence
-      render :new
-    end
-  end
 
   def edit
   end

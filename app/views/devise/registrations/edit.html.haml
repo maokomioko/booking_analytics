@@ -1,7 +1,7 @@
 .edit_profile_page
   .container-fluid
     = content_for :main_content_header do
-      .page_header.h2.light
+      .page_header.h2.light.fixed
         %span.page_header_title= t('.header')
 
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?

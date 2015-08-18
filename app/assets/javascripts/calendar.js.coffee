@@ -3,35 +3,62 @@ class @Calendar
     connector = $('#calendar').data('channelManager')
     return if connector == 'empty'
 
-    @priceControl = $('#price_control')
     @roomsList()
-    @removeSelectableFromEmptyCells()
+    @changeMonth()
     @selectDates()
     @togglePriceControls()
     @setPrices()
-    @toggleManualPriceInput()
+
+    removeTileMargins()
 
   roomsList: ->
     $('#room_title').click (e) ->
       e.preventDefault()
       $('#rooms_list').toggleClass('visible')
 
-  removeSelectableFromEmptyCells: ->
-    $('#calendar td.selectable:empty').removeClass('selectable')
+
+  removeTileMargins = ->
+    $('.calendar_item:not(.hidden):nth-of-type(7n').css('margin-right: 0')
+
+  changeMonth: ->
+    i = 0
+    $('.calendar_daterange .drp_arrow').click ->
+
+      if $(@).hasClass('next')
+        i = i + 1
+      else
+        i = i - 1
+
+      console.log i
+
+      switch i
+        when 0
+          $(@).addClass('hidden')
+          $('.current_month').removeClass('hidden')
+          $('.next_month').toggleClass('hidden')
+        when 1
+          $('.current_month').addClass('hidden')
+          $('.next_month').toggleClass('hidden')
+          $('.last_month').addClass('hidden')
+          $(@).siblings('.prev').removeClass('hidden')
+          $(@).siblings('.next').removeClass('hidden')
+        when 2
+          $('.next_month').toggleClass('hidden')
+          $('.last_month').toggleClass('hidden')
+          $(@).addClass('hidden')
+
+      removeTileMargins()
 
   selectDates: ->
-    $('tbody td.selectable').mousedown(->
+    $('#calendar .calendar_item:not(.past)').mousedown(->
       window.isMouseDown = true
 
       $(@).toggleClass 'selected'
-      $(@).parent().toggleClass 'with_selection'
       false
 
     ).mouseenter (e) ->
       if window.isMouseDown
         $(@).toggleClass 'selected'
-        $(@).parent().toggleClass 'with_selection'
-
       return
 
     $(document).mouseup ->
@@ -39,50 +66,28 @@ class @Calendar
       return
 
   togglePriceControls: ->
-    $panel = @priceControl.find('[data-role="panel"]')
-
     $(document).click ->
-      if $('td.selected').length
-        $panel.removeClass 'hidden'
+      if $('.calendar_item.selected').length
+        $('#price_control').removeClass 'hidden'
       else
-        $panel.addClass 'hidden'
-        $(document).trigger('manualPriceInputHide')
+        $('#price_control').addClass 'hidden'
 
   setPrices: ->
-    $('#apply_suggested').click (e) =>
+    $('.modal .btn_apply').click (e) =>
       e.preventDefault()
+      $('.modal').modal('hide')
+
+    $('#apply_suggested .btn_apply').click (e) =>
       triggerSpinner()
       submitDates()
-      @priceControl.find('[data-role="panel"]').addClass 'hidden'
 
-    $('#set_manually').click (e) ->
-      e.preventDefault()
-      $(document).trigger('manualPriceInputCalled')
-      manualPriceApply()
-
-  toggleManualPriceInput: ->
-    $manual = @priceControl.find('[data-role="manual"]')
-
-    $(document).on 'manualPriceInputCalled', ->
-      $manual.toggleClass 'hidden'
-
-    $(document).on 'manualPriceInputHide', ->
-      $manual.addClass 'hidden'
-
-    $(document).on 'manualPriceInputCalled', 'manualPriceInputHide', ->
-      $('#custom_price').val(0)
-
-   manualPriceApply = ->
-    $('#apply_custom_price').click (e) ->
-      e.preventDefault()
-
+    $('#set_manually .btn_apply').click (e) ->
       if $('#custom_price').val()
         triggerSpinner()
         submitDates()
-        $(document).trigger('manualPriceInputCalled')
 
   submitDates = ->
-    room_id = $('.calendar').data('roomId')
+    room_id = $('#calendar').data('roomId')
     arr = []
     custom_price = $('#custom_price').val()
 

@@ -16,10 +16,8 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "css/bootstrap-modal-bs3patch";
-@import "css/bootstrap-modal";
-
 @import "bootstrap-slider";
+
 @import "style";
 @import "spinner";
 
@@ -27,18 +25,4 @@
 
 #helpers, .no-display {
   display: none;
-}
-
-#flash-container {
-  position: relative;
-  top: 20px;
-  bottom: 20px;
-  width: 100%;
-  z-index: 200;
-  .col-sm-12 {
-    float: none !important;
-  }
-  .alert {
-    margin: 10px 0;
-  }
 }

@@ -1,10 +1,8 @@
-%h5.sidebar-title= hotel.name
-%ul.media-list
+%ul.dropdown-menu{role: "menu", aria: {labelledby: "dLabel"}}
   - hotel.rooms.each do |room|
-    %li.media
+    %li
       = link_to [main_app, :calendar, :index, room_id: room.id], class: "#{active_class(root_path(room_id: room.id))}" do
-        .media-body
-          %h4.media-heading= room.roomtype
-          %span
-            = Room.human_attribute_name(:max_people)
-            = room.max_people
+        = room.roomtype
+        %span.max
+          = Room.human_attribute_name(:max_people)
+          = room.max_people

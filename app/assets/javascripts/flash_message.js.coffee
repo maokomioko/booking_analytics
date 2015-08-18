@@ -21,8 +21,8 @@ class @FlashMessage
       @hideContainer() if @container.length && @container.html().length
 
   show_ajax_message: (value, key) ->
-    $("#flash_container").html "
-      <div class='alert #{key}'>
+    $(".alerts_position").html "
+      <div class='alert #{key} fade in'>
         <strong>#{value}</strong>
         <a href='#' class='close'></a>
       </div>

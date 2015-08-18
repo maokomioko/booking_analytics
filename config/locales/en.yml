@@ -7,9 +7,7 @@ en:
     registration: "Registration"
     reset_instructions: "Send me password reset instructions"
     dont_have_account: "Don't have an account yet?"
-    current_price: "current"
     apply_custom_price: "Click to apply price"
-    date_locked: "Date locked"
     no_price: "No price suggestion"
     recommended_price: "Suggested %{price}"
     recommended_applied: "Suggested price applied"
@@ -83,17 +81,21 @@ en:
       unlock: "Didn't receive unlock instructions?"
   calendar:
     title: "Rate management"
-    menu:
-      all_dates: "<strong>Price</strong> controls"
-      apply_prices: "Apply suggested"
-      set_prices: "Manual override"
-      manual_input: "<strong>Enter</strong> new price"
-      cal: "Calendar"
-      reservations: "Reservations"
-      analytics: "Analytics"
-      overbooking: "Overbooking"
-      my_company: "My company"
-      preferences: "Preferences"
+    price_controls:
+      apply_suggested:
+        title: "Apply suggested"
+        modal_title_sngl: "Apply recommended price"
+        modal_title_plrl: "Apply %{n} recommendations"
+        description_text: "You are about to modify %{count} prices for '%{room}' with the '%{method}' rate."
+        apply_sngl: "Apply price"
+        apply_plrl: "Apply prices"
+      set_manually:
+        title: "Set manually"
+        modal_header: "Manual override"
+        custom_price: "Enter your price"
+        apply: "Apply price"
+      reject:
+        title: "Reject suggestions"
     days:
       mon: "Monday"
       tue: "Tuesday"

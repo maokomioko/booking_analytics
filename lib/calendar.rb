@@ -20,7 +20,7 @@ class Calendar < Struct.new(:view, :date, :month_offset, :callback)
   end
 
   def day_cell(day)
-    content_tag :td, view.capture(day, &callback), date: day, class: [day_classes(day), ('selectable' if date < day)]
+    content_tag :td, view.capture(day, &callback), date: day, class: [day_classes(day)]
   end
 
   def day_classes(day)

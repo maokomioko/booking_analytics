@@ -4,6 +4,7 @@
     = render 'layouts/head'
 
   %body{class: 'login', data: { page: body_data_page }}
+    = render_flash
     = render partial: 'partials/header'
 
     = yield

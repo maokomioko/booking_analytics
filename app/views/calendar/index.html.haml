@@ -1,13 +1,13 @@
 .calendar_page
   .container-fluid
     = content_for(:main_content_header) do
-      .page-header.h2.light
+      .page_header.h2.light.fixed
         %span.page_header_title= t('calendar.title')
         = link_to settings_path, class: 'btn btn_grey' do
           %i.fa.fa-cog
           = t('menu.settings')
 
-    .calendar_top_line
+    .calendar_top_line.fixed
       .row
         .col-xs-4.col-sm-3
           .apartment_menu
@@ -15,50 +15,46 @@
               %a{href: '#', data: { toggle: 'dropdown' }}
                 = truncate(@room.name, length: 100)
                 %i.fa.fa-chevron-down
-                .additional_text= @hotel.name
+              .additional_text= @hotel.name
+              = render 'hotels/room_list', hotel: @hotel
+        .col-xs-4.col-sm-6
+          .calendar_daterange
+            .prev.drp_arrow.hidden
+            .month_name September 2015
+            .next.drp_arrow
+        .cols-xs-4.col-sm-3
 
-    %table.weekdays
-      %tr
-        - %w(mon tue wed thu fri sat sun).each do |day|
-          %td= t("calendar.days.#{day}")
+    .calendar_items_block
+      .calendar_days
+        %ul.list-inline
+          - %w(mon tue wed thu fri sat sun).each do |day|
+            %li= t("calendar.days.#{day}")
 
-    - unless current_user.channel_manager.connector_type == 'empty'
-      = content_for(:left_menu_header) do
-        = render 'price_control'
-
-    #calendar(data-channel-manager="#{ current_user.channel_manager.connector_type }")
-      %table.calendar(data-room-id="#{ @room.id }")
+      #calendar.calendar_items_container{ data: {channel_manager: current_user.channel_manager.connector_type, room_id: @room.id } }
         = calendar(@dates.min) do |date|
           - price_block = @prices[date].try(:first)
 
           - unless date < @dates.min || price_block.nil?
-            .date_placeholder{ class: set_day_class(price_block) }
-              .day
+            .calendar_item{ class: set_day_class(date, price_block) }
+              .calendar_item_label
+                - if price_block.enabled && !price_block.locked
+                  %i.fa.fa-check
+              .calendar_item_date
                 - unless date.day == 1
                   = date.day
                 - else
                   = date.strftime("%B").limit(3) + ' 1st'
-              .current_price
-                %span= t('shared.current_price')
-                %span.ccp_price
-                  = set_price(price_block.default_price)
+              .calendar_item_info
+                .top= set_price(price_block.default_price)
+                .middle= set_price(price_block.price)
 
-              .bar.manual{class: ('hidden' unless price_block.locked)}
-                %span= t('shared.custom_applied')
+                - if set_price(price_block.price).to_i > 0
+                  .bottom{class: set_price_difference(price_block)[0][0]}
+                    %i.fa{class: set_price_difference(price_block)[0][1]}
+                      = set_price_difference(price_block)[1]
 
-              .bar.recommended
-                - if price_block.enabled && !price_block.locked
-                  %span= t('shared.recommended_applied')
-                - else
-                  - rec_price = set_price(price_block.price)
-                  %span
-                    - if rec_price.to_i > 0
-                      = t('shared.recommended_price', price: rec_price)
-                    - else
-                      = t('shared.no_price')
+  - unless current_user.channel_manager.connector_type == 'empty'
+    = render 'price_control'
 
-              .bar.sold
-                %span= t('shared.locked')
-
-              %i.fa.fa-thumbs-o-up
-              %i.fa.fa-lock
+  - %w(apply_suggested set_manually).each do |action|
+    = render partial: 'partials/calendar_modals', locals: {supplied_id: action}

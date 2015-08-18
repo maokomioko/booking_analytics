@@ -8,21 +8,13 @@
 # require jquery-ui/core
 # require jquery-ui/widget
 #= require jquery-ui/mouse
-# require jquery-ui/position
-# require jquery-ui/draggable
-# require jquery-ui/resizable
 
 #= require jquery.remotipart
 
-# require bootstrap/affix
 #= require bootstrap/alert
-# require bootstrap/button
-# require bootstrap/carousel
 #= require bootstrap/collapse
 #= require bootstrap/dropdown
 #= require bootstrap/modal
-# require bootstrap/popover
-# require bootstrap/scrollspy
 #= require bootstrap/tab
 #= require bootstrap/tooltip
 #= require bootstrap/transition
@@ -30,8 +22,6 @@
 #= require bootstrap-hover-dropdown.min
 #= require bootstrap-tagsinput
 #= require bootstrap-fileupload.min
-#= require js/bootstrap-modal
-#= require js/bootstrap-modalmanager
 
 #= require jquery.blockUI
 

@@ -1,0 +1,23 @@
+.modal.fade{id: "#{supplied_id}", tabindex: '-1', role: 'dialog', aria: {labelledby: 'priceControl', hidden: 'true'} }
+  .modal-dialog.modal-md
+    .modal-content
+      .modal-header
+        %button.close{type: 'button', data: {dismiss: 'modal'}, aria: {hidden: true}} &times;
+        .modal-title.light.h3.priceControl
+          = t("calendar.price_controls.#{supplied_id}.modal_header")
+      .modal-body
+        %div{class: "#{supplied_id}_form"}
+          .form-group
+            - if supplied_id == 'apply_suggested'
+              .additional_text
+                = t("calendar.price_controls.apply_suggested.description_text", count: 5, room: @room.name , method: 'best available')
+              .additional_text
+                %i.fa.fa-long-arrow-up
+                3 prices higher,
+                %i.fa.fa-long-arrow-down
+                2 prices lower
+            - else
+              %label= t('calendar.price_controls.set_manually.custom_price')
+              = number_field_tag :custom_price, nil, min: 0, placeholder: t('placeholders.zero_euro'), class: 'form-control'
+          .text-center
+            %a.btn.btn_apply{href: '#'}= t('calendar.price_controls.set_manually.apply')

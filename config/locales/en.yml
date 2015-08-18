@@ -82,18 +82,17 @@ en:
   calendar:
     title: "Rate management"
     price_controls:
+      apply: "Apply price(s)"
       apply_suggested:
         title: "Apply suggested"
-        modal_title_sngl: "Apply recommended price"
-        modal_title_plrl: "Apply %{n} recommendations"
-        description_text: "You are about to modify %{count} prices for '%{room}' with the '%{method}' rate."
-        apply_sngl: "Apply price"
-        apply_plrl: "Apply prices"
+        modal_title: "Apply %{n} recommended price(s)"
+        description_text: "You are about to modify <span id='prices_to_change'></span> price(s) for '%{room}' with the '%{method}' rate."
+        prices_gt: "price(s) increased"
+        prices_lt: "price(s) decreased"
       set_manually:
         title: "Set manually"
         modal_header: "Manual override"
         custom_price: "Enter your price"
-        apply: "Apply price"
       reject:
         title: "Reject suggestions"
     days:

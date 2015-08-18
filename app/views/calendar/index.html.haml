@@ -20,7 +20,10 @@
         .col-xs-4.col-sm-6
           .calendar_daterange
             .prev.drp_arrow.hidden
-            .month_name September 2015
+            - 0.upto(2) do |i|
+              .month_name
+                = display_month(Date.today.month + i)
+                = Date.today.year
             .next.drp_arrow
         .cols-xs-4.col-sm-3
 

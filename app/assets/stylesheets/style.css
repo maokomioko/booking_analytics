@@ -21,6 +21,9 @@ body {
   margin-top: 80px;
   min-width: 736px;
 }
+.no-right-margin {
+  margin-right: 0 !important;
+}
 .bg_blue {
   top: 0;
   background-color: #2467b5;

@@ -16,9 +16,9 @@ class @Calendar
       e.preventDefault()
       $('#rooms_list').toggleClass('visible')
 
-
   removeTileMargins = ->
-    $('.calendar_item:not(.hidden):nth-of-type(7n').css('margin-right: 0')
+    $('.calendar_item').removeClass('no-right-margin')
+    $('.calendar_item:not(.hidden):nth-of-type(7n)').addClass('no-right-margin')
 
   changeMonth: ->
     i = 0
@@ -28,8 +28,6 @@ class @Calendar
         i = i + 1
       else
         i = i - 1
-
-      console.log i
 
       switch i
         when 0
@@ -50,24 +48,13 @@ class @Calendar
       removeTileMargins()
 
   selectDates: ->
-    $('#calendar .calendar_item:not(.past)').mousedown(->
-      window.isMouseDown = true
-
+    $('#calendar .calendar_item.selectable').click ->
       $(@).toggleClass 'selected'
-      false
-
-    ).mouseenter (e) ->
-      if window.isMouseDown
-        $(@).toggleClass 'selected'
-      return
-
-    $(document).mouseup ->
-      window.isMouseDown = false
-      return
 
   togglePriceControls: ->
     $(document).click ->
       if $('.calendar_item.selected').length
+        notifyAboutChangedPrices()
         $('#price_control').removeClass 'hidden'
       else
         $('#price_control').addClass 'hidden'
@@ -85,6 +72,24 @@ class @Calendar
       if $('#custom_price').val()
         triggerSpinner()
         submitDates()
+
+  notifyAboutChangedPrices = ->
+    inc_count = $('.increased.selected').length
+    dec_count = $('.decreased.selected').length
+
+    if inc_count > 0
+      $('#price_inc').removeClass('hidden')
+      $('#price_inc span').html(inc_count)
+    else
+      $('#price_inc').addClass('hidden')
+
+    if dec_count > 0
+      $('#price_dec').removeClass('hidden')
+      $('#price_dec span').html(dec_count)
+    else
+      $('#price_dec').addClass('hidden')
+
+    $('#prices_to_change').html(dec_count + inc_count)
 
   submitDates = ->
     room_id = $('#calendar').data('roomId')

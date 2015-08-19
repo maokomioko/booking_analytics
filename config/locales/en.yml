@@ -4,14 +4,8 @@ en:
     description: "Hotel revenue management software"
     author: "Hotel Commander"
   shared:
-    registration: "Registration"
-    reset_instructions: "Send me password reset instructions"
     dont_have_account: "Don't have an account yet?"
     apply_custom_price: "Click to apply price"
-    no_price: "No price suggestion"
-    recommended_price: "Suggested %{price}"
-    recommended_applied: "Suggested price applied"
-    custom_applied: "Custom price in use"
     sold: "Sold"
     loading: "Loading..."
     just_moment: "Just a moment..."
@@ -24,10 +18,9 @@ en:
     remove: "Remove"
     invited: "Invited"
     edit: "Edit"
+    prev: "Back"
     next: "Next"
     are_you_sure: "Are you sure?"
-    updated: Updated
-    error: Error
     view_in_web: Open Web Page
   errors:
     booking_id: "Hotel doesn't exist"
@@ -146,9 +139,6 @@ en:
     profile: "Edit my profile"
     company_profile: "Company profile"
     manage_users: "Manage users"
-    worker: "Algorithm"
-    connection: "Channel Manager"
-    related: "Manage related hotels"
     settings: "Settings"
     company:
       existing_users: "Existing users"

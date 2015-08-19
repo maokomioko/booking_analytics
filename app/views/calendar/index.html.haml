@@ -4,7 +4,7 @@
       .page_header.h2.light.fixed
         %span.page_header_title= t('calendar.title')
         = link_to settings_path, class: 'btn btn_grey' do
-          %i.fa.fa-cog
+          =icon('cog')
           = t('menu.settings')
 
     .calendar_top_line.fixed
@@ -14,7 +14,7 @@
             .dropdown
               %a{href: '#', data: { toggle: 'dropdown' }}
                 = truncate(@room.name, length: 100)
-                %i.fa.fa-chevron-down
+                = icon('chevron-down')
               .additional_text= @hotel.name
               = render 'hotels/room_list', hotel: @hotel
         .col-xs-4.col-sm-6
@@ -41,7 +41,7 @@
             %div{ class: set_day_class(date, price_block) }
               .calendar_item_label
                 - if price_block.enabled && !price_block.locked
-                  %i.fa.fa-check
+                  = icon('check')
               .calendar_item_date
                 - unless date.day == 1
                   = date.day

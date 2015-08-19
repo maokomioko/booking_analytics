@@ -51,13 +51,6 @@ GIT
       warden (~> 1.2.3)
 
 GIT
-  remote: git://github.com/rails/turbolinks.git
-  revision: 3c3626717ebd0a198b2e860558b0296708f3d5d2
-  specs:
-    turbolinks (3.0.0)
-      coffee-rails
-
-GIT
   remote: git://github.com/teampoltergeist/poltergeist.git
   revision: 705df38d5081e5e2940f8c302e2e1ad531f46aaf
   specs:
@@ -800,6 +793,8 @@ GEM
       hitimes
     traceroute (0.5.0)
       rails (>= 3.0.0)
+    turbolinks (2.5.3)
+      coffee-rails
     turn (0.9.6)
       ansi
     tzinfo (1.2.2)
@@ -938,7 +933,7 @@ DEPENDENCIES
   thin
   timecop
   traceroute
-  turbolinks!
+  turbolinks
   turn
   uglifier (>= 1.3.0)
   vcr

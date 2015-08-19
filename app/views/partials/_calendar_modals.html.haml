@@ -13,12 +13,12 @@
                 = t("calendar.price_controls.apply_suggested.description_text", room: @room.name , method: 'best available').html_safe
               .additional_text
                 #price_inc.hidden
-                  %i.fa.fa-long-arrow-up
+                  = icon('long-arrow-up')
                   %span
                   = t('calendar.price_controls.apply_suggested.prices_gt')
 
                 #price_dec.hidden
-                  %i.fa.fa-long-arrow-down
+                  = icon('long-arrow-down')
                   %span
                   = t('calendar.price_controls.apply_suggested.prices_lt')
             - else

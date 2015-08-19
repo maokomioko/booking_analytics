@@ -395,7 +395,6 @@ body {
   padding-right: 34px;
 }
 .form-control-feedback.fa {
-  top: 11px;
   height: auto;
   color: #abadaf;
   font-size: 12px;
@@ -418,7 +417,7 @@ body {
 }
 .hotel_rooms_table>thead>tr>th:last-child, .hotel_rooms_table>tbody>tr>td:last-child {
   padding-right: 24px;
-  text-align: right;
+  text-align: left;
 }
 .hotel_rooms_table .has-feedback, .setting_room_table .has-feedback {
   width: 102px;

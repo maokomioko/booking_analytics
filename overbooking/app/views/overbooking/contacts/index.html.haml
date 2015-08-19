@@ -25,7 +25,8 @@
 .row
   .col-sm-12.center
     - path_params = { hotel_id: hotel.booking_id }
-    %p.text-center= t('overbooking.contacts.desc')
+    - if action_name.include?('step/2')
+      %p.text-center= t('overbooking.contacts.desc')
     %a.btn.btn-primary.ajax{style: "float: right", data: { toggle: 'modal',
                 href: "#{ overbooking.new_hotel_contact_path(path_params) }"} }
       = t('overbooking.shared.add_contact')

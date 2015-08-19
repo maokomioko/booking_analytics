@@ -3,11 +3,12 @@ en:
     contacts:
       desc: "Please fill in contact information for your hotel."
       title: "Contact Information"
+      suggest: "Please select your hotel in order to fill up contact information."
       edit:
         header: "Edit %{hotel}'s %{contact_type}"
         save: "Save contact"
       new:
-        header: "How can we reach you?"
+        header: "Contact information"
         save: "Add contact"
     directions:
       infowindow:
@@ -30,6 +31,7 @@ en:
         header: Select your hotel
         subheader: to edit related
       edit:
+        name_address: "Hotel name, address"
         header: Manage overbooking partners
         overbooking_partner: Overbooking partner
         action_with_selected: Action with selected

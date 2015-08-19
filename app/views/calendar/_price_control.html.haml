@@ -1,14 +1,14 @@
 #price_control.calendar_bottom_line.hidden
   = link_to '#apply_suggested', class: 'btn btn_apply', data: { toggle: 'modal' } do
-    %i.fa.fa-check
+    = icon('check')
     = t('calendar.price_controls.apply_suggested.title')
 
   = link_to '#set_manually', class: 'btn btn_set', data: { toggle: 'modal' } do
-    %i.fa.fa-check
+    = icon('check')
     = t('calendar.price_controls.set_manually.title')
 
   = link_to '#reject', class: 'btn btn_reject', data: { toggle: 'modal' } do
-    %i.fa.fa-check
+    = icon('check')
     = t('calendar.price_controls.reject.title')
 
   -# %h4= t('calendar.menu.all_dates').html_safe

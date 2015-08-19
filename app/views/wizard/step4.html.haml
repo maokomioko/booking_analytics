@@ -1,14 +1,14 @@
-.sign_up_steps_page
-  .container-fluid
-    = render 'progressbar', active: 4
+.container-fluid
+  = render 'progressbar', active: 4
 
-    .step2_block
-      .text-center.light
-        .header.h2= t('.header')
+  .step3_block
+    .text-center.light
+      .header.h2= t('.header')
+      .additional_text.h6= t('.description').html_safe
 
-      .default_form.max_width2.clear_padding.center-block
-        = render partial: 'rooms/form'
+    .default_form.max_width2.clear_padding.center-block
+      = render partial: 'rooms/form'
 
-      .hidden
-        = form_tag [:wizard, :step4_post], method: :post, class: 'step4-finish-form', remote: true do
-          = submit_tag 'submit'
+    .hidden
+      = form_tag [:wizard, :step4_post], method: :post, class: 'step4-finish-form' do
+        = submit_tag 'submit'

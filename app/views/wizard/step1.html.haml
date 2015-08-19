@@ -1,22 +1,21 @@
-.sign_up_steps_page
-  .container-fluid
-    = render 'progressbar', active: 1
+.container-fluid
+  = render 'progressbar', active: 1
 
-    .step1_block
-      .text-center.light
-        .header.h2= t('.header')
-      .default_form.max_width.center-block
-        = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step1_post], method: :post, remote: true, html: { class: 'form step1-form', 'data-confirm-msg' => t('.no_contacts') } do |f|
-          .form-group
-            %label(for="search_hotel")= t('.search_prompt')
-            = f.hidden_field :booking_id, id: 'search_hotel', data: { url: search_hotels_path, hotel_url: hotel_path(id: '') }
-          .form_btns
-            %button.btn.btn_apply.pull-right{:type => "submit"}
-              = t('shared.next')
-              %i.fa.fa-arrow-right
-            .clearfix
-      .text-center.light
-        .header.h3= t('overbooking.contacts.title')
-      .default_form.max_width.center-block
-        %p.hotel-contacts-info.text-center Please select your hotel in order to fill up contact information.
-        .hotel-contacts{ data: { url: overbooking.hotels_contacts_by_hotel_path, 'contact-hotel-id' => @channel_manager.booking_id } }
+  .step1_block
+    .text-center.light
+      .header.h2= t('.header')
+    .default_form.max_width.center-block
+      = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step1_post], method: :post, html: { class: 'form step1-form', 'data-confirm-msg' => t('.no_contacts') } do |f|
+        .form-group
+          %label(for="search_hotel")= t('.search_prompt')
+          = f.hidden_field :booking_id, id: 'search_hotel', data: { url: search_hotels_path, hotel_url: hotel_path(id: '') }
+        .form_btns
+          %button.btn.btn_apply.pull-right{:type => "submit"}
+            = t('shared.next')
+            = icon('arrow-right')
+          .clearfix
+    .text-center.light
+      .header.h3= t('overbooking.contacts.title')
+    .default_form.max_width.center-block
+      %p.hotel-contacts-info.text-center= t('overbooking.contacts.suggest')
+      .hotel-contacts{ data: { url: overbooking.hotels_contacts_by_hotel_path, 'contact-hotel-id' => @channel_manager.booking_id } }

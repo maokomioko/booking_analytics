@@ -23,9 +23,7 @@ class @FlashMessage
 
   show_ajax_message: (value, key) ->
     @container.html "
-      <div class='alert-#{key} fade in'>
-        <strong>#{value}</strong>
-      </div>
+      #{value}
     "
     return
 

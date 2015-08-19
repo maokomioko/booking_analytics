@@ -12,11 +12,11 @@
 
   .col-sm-12
     - if @related.length > 0
-      %table.table.table-hover.table-condensed.related-hotels-table
+      %table.table.manage_table.related-hotels-table
         %thead
           %tr
-            %th= Hotel.human_attribute_name(:booking_id)
-            %th= Hotel.human_attribute_name(:name)
+            %th Booking ID
+            %th= t('overbooking.partners.edit.name_address')
             %th= t('.overbooking_partner')
             - if controller_name == 'wizard'
               %th
@@ -37,19 +37,9 @@
                   %span.label.label-success= t('overbooking.shared.partner')
                 - else
                   —
-              - if controller_name == 'wizard'
-                %td(data-contact-hotel-id="#{ related_hotel.related.booking_id }" data-url="#{ overbooking.hotels_contacts_by_hotel_path }")
-                  = render template: 'overbooking/contacts/index', locals: { contacts: related_hotel.related.becomes(Overbooking::Hotel).contacts,
-                                                    hotel: related_hotel.related.becomes(Overbooking::Hotel) }
-              %td.center
-                .visible-md.visible-lg.hidden-sm.hidden-xs
-                  = link_to [:related_hotels, :destroy, hotel_id: @hotel.booking_id, id: related_hotel.related.booking_id],
-                  class: 'btn btn-xs btn-bricky tooltips remove-related',
-                  remote: true, method: :delete,
-                  data: { 'original-title' => t('shared.remove')} do
-                    = icon('times white')
-                .visible-sm.visible-xs.hidden-md.hidden-lg
-                  = link_to [:related_hotels, :destroy, hotel_id: @hotel.booking_id, id: related_hotel.related.booking_id],
-                  class: 'btn btn-xs btn-bricky remove-related',
-                  remote: true, method: :delete do
-                    = icon('times white')
+              %td
+                = link_to [:related_hotels, :destroy, hotel_id: @hotel.booking_id, id: related_hotel.related.booking_id],
+                class: 'btn btn_delete remove-related',
+                remote: true, method: :delete do
+                  = icon('trash')
+                  = t('shared.remove')

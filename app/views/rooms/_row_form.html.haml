@@ -3,14 +3,15 @@
   - unless current_user.channel_manager.connector_type == 'empty'
     %td= f.object.wubook_id || f.object.previo_id
   %td= f.object.name
+  %td
+    .has-feedback
+      = f.number_field :min_price, class: 'form-control'
+      = icon('eur')
   %td.edit-price
-    .input-group
-      = f.text_field :min_price, class: 'form-control'
-      .input-group-addon €
-  %td.edit-price
-    .input-group
-      = f.text_field :max_price, class: 'form-control'
-      .input-group-addon €
+    .has-feedback
+      = f.number_field :max_price, class: 'form-control'
+      = icon('eur')
+  %td= t('settings.strategy.revenue')
   - if current_user.channel_manager.connector_type != 'empty' && can?(:update_connector_credentials, Room)
     %td.edit-cm
       - case current_user.channel_manager.connector_type
@@ -18,13 +19,3 @@
         = f.select :previo_id, options_for_select(@cm_rooms, f.object.previo_id), {include_blank: t('labels.select_room')}, class: 'form-control'
       - when 'wubook'
         = f.select :wubook_id, options_for_select(@cm_rooms, f.object.wubook_id), {include_blank: t('labels.select_room')}, class: 'form-control'
-
-  %td.action
-    .success
-      %span.text-success
-        = icon('check')
-        = t('shared.updated')
-    .failure
-      %span.text-danger
-        = icon('exclamation-circle')
-        = t('shared.error')

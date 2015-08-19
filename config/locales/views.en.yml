@@ -57,6 +57,10 @@ en:
       search_ranking: "Search ranking"
       competitors_lookup: "Competitors lookup"
       channel_manager: "Channel manager"
+    strategy:
+      title: "Algorithm strategy"
+      revenue: "Maximized revenue"
+      occupancy: "Maximized occupancy"
     form:
       settings_header_1: Update frequency
       settings_header_2: Market segment criteria
@@ -90,7 +94,11 @@ en:
     step3:
       header: 'Choose your tarif plans'
     step4:
-      header: 'Check hotel rooms preferences'
+      header: 'Calibrate algorithm'
+      description: 'Now we need to fine tune our algorithm. In order to do so, you have to fill in minimal and maximum possible price limits for each room.
+          <br>
+          This will prevent automatic definitions from getting prices out of the scope.'
     step5:
-      header: 'Manage related hotels'
-      finish: Finish setup!
+      header: 'Find competitors'
+      description: 'Pick up a few hotels you think are similar to yours. We will use this data to optimize algorithm.'
+      finish: Complete setup

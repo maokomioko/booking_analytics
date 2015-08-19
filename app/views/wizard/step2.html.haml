@@ -1,48 +1,47 @@
-.sign_up_steps_page
-  .container-fluid
-    = render 'progressbar', active: 2
+.container-fluid
+  = render 'progressbar', active: 2
 
-    .step2_block
-      .text-center.light
-        .header.h2= t('.header')
+  .step2_block
+    .text-center.light
+      .header.h2= t('.header')
 
-      .default_form.max_width.center-block
-        = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step2_post], method: :post, remote: true do |f|
-          = render 'partials/form_error_handler'
+    .default_form.max_width.center-block
+      = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step2_post], method: :post do |f|
+        = render 'partials/form_error_handler'
+        .form-group
+          = f.label :connector_type
+          = f.select :connector_type, options_for_cm_types(@channel_manager.connector_type), {}, class: 'form-control'
+
+        .connector-fieldset.hidden
+
+        %fieldset.hidden(data-connector="empty")
+          %p.lead.text-center= t('.empty_connector_warning')
+
+        %fieldset.hidden(data-connector="wubook")
           .form-group
-            = f.label :connector_type
-            = f.select :connector_type, options_for_cm_types(@channel_manager.connector_type), {}, class: 'form-control'
+            = f.label :login, t('labels.cm_login')
+            = f.text_field :login, class: 'form-control with_validation'
+          .form-group
+            = f.label :password, t('labels.cm_password')
+            = f.text_field :password, class: 'form-control with_validation'
+          .form-group
+            = f.label :lcode, t('labels.lcode').html_safe
+            = f.text_field :lcode, class: 'form-control with_validation'
 
-          .connector-fieldset.hidden
+        %fieldset.hidden(data-connector="previo")
+          .form-group
+            = f.label :login, t('labels.cm_login')
+            = f.text_field :login, class: 'form-control with_validation'
 
-          %fieldset.hidden(data-connector="empty")
-            %p.lead.center= t('.empty_connector_warning')
+          .form-group
+            = f.label :password, t('labels.cm_password')
+            = f.text_field :password, class: 'form-control with_validation'
+          .form-group
+            = f.label :lcode, ChannelManager::Previo.human_attribute_name(:lcode)
+            = f.text_field :lcode, class: 'form-control with_validation'
 
-          %fieldset.hidden(data-connector="wubook")
-            .form-group
-              = f.label :login, t('labels.cm_login')
-              = f.text_field :login, class: 'form-control with_validation'
-            .form-group
-              = f.label :password, t('labels.cm_password')
-              = f.text_field :password, class: 'form-control with_validation'
-            .form-group
-              = f.label :lcode, t('labels.lcode').html_safe
-              = f.text_field :lcode, class: 'form-control with_validation'
-
-          %fieldset.hidden(data-connector="previo")
-            .form-group
-              = f.label :login, t('labels.cm_login')
-              = f.text_field :login, class: 'form-control with_validation'
-
-            .form-group
-              = f.label :password, t('labels.cm_password')
-              = f.text_field :password, class: 'form-control with_validation'
-            .form-group
-              = f.label :lcode, ChannelManager::Previo.human_attribute_name(:lcode)
-              = f.text_field :lcode, class: 'form-control with_validation'
-
-          .form_btns
-            %button.btn.btn_apply.pull-right{:type => "submit"}
-              = t('shared.next')
-              %i.fa.fa-arrow-right
-            .clearfix
+        .form_btns
+          %button.btn.btn_apply.pull-right{:type => "submit"}
+            = t('shared.next')
+            = icon('arrow-right')
+          .clearfix

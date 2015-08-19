@@ -88,7 +88,7 @@ gem 'sidekiq-status'
 gem 'sidetiq'
 gem 'sinatra', require: false
 
-gem 'turbolinks', github: 'rails/turbolinks'
+gem 'turbolinks'
 
 gem 'wicked_pdf'
 gem 'whenever'

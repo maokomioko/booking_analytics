@@ -1,23 +1,22 @@
-.sign_up_steps_page
-  .container-fluid
-    = render 'progressbar', active: 3
+.container-fluid
+  = render 'progressbar', active: 3
 
-    .step2_block
-      .text-center.light
-        .header.h2= t('.header')
+  .step2_block
+    .text-center.light
+      .header.h2= t('.header')
 
-      .default_form.max_width.center-block
-        = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step3_post], method: :post, remote: true do |f|
-          .form-group
-            = f.label :non_refundable_pid, t('labels.non_refundable_tarif').html_safe
-            = f.select :non_refundable_pid, options_for_select(@channel_manager.list_plans.sort, f.object.non_refundable_pid), {}, class: 'form-control'
+    .default_form.max_width.center-block
+      = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step3_post], method: :post do |f|
+        .form-group
+          = f.label :non_refundable_pid, t('labels.non_refundable_tarif').html_safe
+          = f.select :non_refundable_pid, options_for_select(@channel_manager.list_plans.sort, f.object.non_refundable_pid), {}, class: 'form-control'
 
-          .form-group
-            = f.label :default_pid, t('labels.standard_tarif').html_safe
-            = f.select :default_pid, options_for_select(@channel_manager.list_plans.sort.reverse, f.object.default_pid), {}, class: 'form-control'
+        .form-group
+          = f.label :default_pid, t('labels.standard_tarif').html_safe
+          = f.select :default_pid, options_for_select(@channel_manager.list_plans.sort.reverse, f.object.default_pid), {}, class: 'form-control'
 
-          .form_btns
-            %button.btn.btn_apply.pull-right{:type => "submit"}
-              = t('shared.next')
-              %i.fa.fa-arrow-right
-            .clearfix
+        .form_btns
+          %button.btn.btn_apply.pull-right{:type => "submit"}
+            = t('shared.next')
+            = icon('arrow-right')
+          .clearfix

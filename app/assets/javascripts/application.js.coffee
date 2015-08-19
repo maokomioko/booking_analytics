@@ -75,13 +75,19 @@ ready = ->
   $('.search-select').select2
     allowClear: true
 
+  attachSelectPicker()
+
   # turbolinks and ajax form hack
   $('form[data-remote="true"] [type="submit"]').on 'click', (e) ->
     e.preventDefault()
     $(@).parents('form').trigger('submit.rails')
 
+attachSelectPicker = ->
+  $('.selectpicker').selectpicker()
 
 $(document).on "ready page:load", ready
+$(document).ajaxComplete ->
+  attachSelectPicker()
 
 # Turbolinks spinner and another one for displaying in photo uploading boxes
 $(document).on "page:fetch page:receive eventFormSent", ->

@@ -11,7 +11,7 @@ module FlashHelper
 
   def flash_icon(key)
     case key.to_s
-      when *%w(alert error) then icon('times-circle')
+      when *%w(alert error) then icon('exclamation-circle')
       when 'notice' then icon('info-circle')
       when 'success' then icon('check-circle')
       when 'warning' then icon('exclamation-triangle')

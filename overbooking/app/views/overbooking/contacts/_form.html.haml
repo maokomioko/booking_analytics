@@ -5,12 +5,12 @@
 
   .form-group
     = f.label :contact_type, class: 'col-sm-4 control-label'
-    .col-sm-6
-      = f.select :contact_type, options_for_contact_types(contact.contact_type), {}, class: 'form-control'
+    .col-sm-7
+      = f.select :contact_type, options_for_contact_types(contact.contact_type), {}, class: 'form-control selectpicker'
 
   .form-group
     = f.label :preferred, class: 'col-sm-4 control-label'
-    .col-sm-6
+    .col-sm-7
       .checkbox
         %label
           = f.check_box :preferred
@@ -21,6 +21,5 @@
     %fieldset.hidden(data-contact="#{ type }")
       = render "overbooking/contacts/fields/#{ type }", f: f
 
-  .form-group
-    .col-sm-6.col-sm-offset-4
-      = f.submit t('overbooking.shared.save'), class: 'btn btn-teal'
+  .text-center
+    = f.submit t("overbooking.contacts.#{action_name}.save"), class: 'btn btn_apply'

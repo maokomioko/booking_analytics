@@ -24,6 +24,7 @@ module Overbooking
 
       unless @contact.save
         flash[:error] = @contact.errors.full_messages.to_sentence
+        render json: { status: :unprocessable_entity }
       end
     end
 
@@ -56,7 +57,7 @@ module Overbooking
     end
 
     def contact_params
-      attrs = %i(value description contact_type custom_type optional preferred)
+      attrs = %i(value description contact_type custom_type preferred)
       params.require(:contact).permit(*attrs).tap do |whitelisted|
         whitelisted[:type] = Overbooking::Contact.define_type(params[:contact][:contact_type])
       end

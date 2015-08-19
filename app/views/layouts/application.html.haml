@@ -4,7 +4,9 @@
     = render 'layouts/head'
 
   %body{class: @body_class, data: { page: body_data_page }}
-    = render_flash
+    #flash-container.alerts_position
+      = render_flash
+
     = render partial: 'partials/header'
     = yield(:main_content_header)
 
@@ -16,7 +18,7 @@
       = render partial: 'partials/spinner'
       %p.loading_text= t('shared.loading')
 
-    #ajax-modal.modal.fade(tabindex="-1" style="display: none;")
+    #ajax-modal.modal.fade{tabindex: '-1', role: 'dialog', hidden: true}
 
     #helpers.hidden-print= render partial: 'partials/helpers'
     = render partial: 'partials/javascript'

@@ -45,6 +45,7 @@ class @Wizard
     $modal  = $('#ajax-modal')
 
     if parseInt($select.val()) > 0
+      $('.hotel-contacts-info').remove()
       OverbookingContact.loadContacts($select.val())
 
     $select.on 'change', (e) ->

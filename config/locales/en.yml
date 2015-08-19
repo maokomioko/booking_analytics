@@ -15,7 +15,6 @@ en:
     sold: "Sold"
     loading: "Loading..."
     just_moment: "Just a moment..."
-    please_check_errors: "You have some form errors. Please check below."
     submit: "Submit"
     select_image: "Select image"
     change: "Change"

@@ -25,7 +25,8 @@
 .row
   .col-sm-12.center
     - path_params = { hotel_id: hotel.booking_id }
-    %a.btn.btn-xs.btn-primary.tooltips.ajax{data: { toggle: 'modal',
-                href: "#{ overbooking.new_hotel_contact_path(path_params) }",
-                'original-title' => t('overbooking.shared.add_contact') }}
+    %p.text-center= t('overbooking.contacts.desc')
+    %a.btn.btn-primary.ajax{style: "float: right", data: { toggle: 'modal',
+                href: "#{ overbooking.new_hotel_contact_path(path_params) }"} }
+      = t('overbooking.shared.add_contact')
       = icon('plus')

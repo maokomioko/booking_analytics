@@ -1,6 +1,5 @@
 class @OverbookingContact
   constructor: ->
-    $.fn.modalmanager.defaults.resize = true;
     @initModals()
 
   initModals: ->
@@ -63,5 +62,6 @@ class @OverbookingContact
       beforeSend: -> triggerSpinner()
       complete: -> triggerSpinner()
       success: (data) ->
+        $('.hotel-contacts-info').remove()
         target.html(data)
         target.find('.tooltips').tooltip()

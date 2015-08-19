@@ -1,9 +1,12 @@
-.modal-header
-  %button.close(type="button" data-dismiss="modal" aria-hidden="true") ×
-  - if content_for?(:modal_header)
-    = yield(:modal_header)
-.modal-body
-  = yield
-- if content_for?(:modal_footer)
-  .modal-footer
-    = yield(:modal_footer)
+.modal-dialog.modal-md
+  .modal-content
+    .modal-header
+      %button.close{type: 'button', data: {dismiss: 'modal'}, aria: {hidden: true}} &times;
+      .modal-title.light.h3.priceControl
+        - if content_for?(:modal_header)
+          = yield(:modal_header)
+    .modal-body
+      = yield
+    - if content_for?(:modal_footer)
+      .modal-footer
+        = yield(:modal_footer)

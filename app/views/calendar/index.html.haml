@@ -22,7 +22,7 @@
             .prev.drp_arrow.hidden
             - 0.upto(2) do |i|
               .month_name
-                = display_month(Date.today.month + i)
+                = display_month(Date.today + i.month)
                 = Date.today.year
             .next.drp_arrow
         .cols-xs-4.col-sm-3
@@ -38,7 +38,7 @@
           - price_block = @prices[date].try(:first)
 
           - unless date < @dates.min || price_block.nil?
-            .calendar_item{ class: set_day_class(date, price_block) }
+            %div{ class: set_day_class(date, price_block) }
               .calendar_item_label
                 - if price_block.enabled && !price_block.locked
                   %i.fa.fa-check

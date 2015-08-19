@@ -4,7 +4,7 @@ module CalendarHelper
   end
 
   def display_month(date)
-    Date::MONTHNAMES[Date.today.month]
+    Date::MONTHNAMES[date.month]
   end
 
   def set_day_class(date, price_block)
@@ -18,8 +18,8 @@ module CalendarHelper
 
     klasses << 'current_month' if date.month == Date.today.month
 
-    klasses << 'next_month hidden' if date.month == Date.today.month + 1
-    klasses << 'last_month hidden' if date.month == Date.today.month + 2
+    klasses << 'next_month' if date.month == Date.today.month + 1
+    klasses << 'last_month' if date.month == Date.today.month + 2
 
     klasses << 'active' if price_block.enabled && !price_block.locked
 

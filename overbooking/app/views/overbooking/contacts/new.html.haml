@@ -1,5 +1,4 @@
 = content_for(:modal_header) do
-  %h4= t('.header', hotel: @hotel.name)
+  = t('.header')
 
-.modal-body
-  = render 'form', contact: @contact
+= render 'form', contact: @contact

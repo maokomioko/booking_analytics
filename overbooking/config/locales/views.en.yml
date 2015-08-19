@@ -1,10 +1,14 @@
 en:
   overbooking:
     contacts:
+      desc: "Please fill in contact information for your hotel."
+      title: "Contact Information"
       edit:
         header: "Edit %{hotel}'s %{contact_type}"
+        save: "Save contact"
       new:
-        header: "New contact for %{hotel}"
+        header: "How can we reach you?"
+        save: "Add contact"
     directions:
       infowindow:
         trace_route: Trace route to this hotel

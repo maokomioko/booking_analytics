@@ -9,16 +9,13 @@ class @Calendar
     @togglePriceControls()
     @setPrices()
 
-    removeTileMargins()
+    showCurrentMonth(2)
+    hideFutureMonths()
 
   roomsList: ->
     $('#room_title').click (e) ->
       e.preventDefault()
       $('#rooms_list').toggleClass('visible')
-
-  removeTileMargins = ->
-    $('.calendar_item').removeClass('no-right-margin')
-    $('.calendar_item:not(.hidden):nth-of-type(7n)').addClass('no-right-margin')
 
   changeMonth: ->
     i = 0
@@ -32,20 +29,24 @@ class @Calendar
       switch i
         when 0
           $(@).addClass('hidden')
-          $('.current_month').removeClass('hidden')
-          $('.next_month').toggleClass('hidden')
+          $('.current_month').parent().removeClass('hidden')
+          $('.next_month').parent().toggleClass('hidden')
+
+          showCurrentMonth(2)
         when 1
-          $('.current_month').addClass('hidden')
-          $('.next_month').toggleClass('hidden')
-          $('.last_month').addClass('hidden')
+          $('.current_month').parent().addClass('hidden')
+          $('.next_month').parent().toggleClass('hidden')
+          $('.last_month').parent().addClass('hidden')
           $(@).siblings('.prev').removeClass('hidden')
           $(@).siblings('.next').removeClass('hidden')
+
+          showCurrentMonth(3)
         when 2
-          $('.next_month').toggleClass('hidden')
-          $('.last_month').toggleClass('hidden')
+          $('.next_month').parent().toggleClass('hidden')
+          $('.last_month').parent().toggleClass('hidden')
           $(@).addClass('hidden')
 
-      removeTileMargins()
+          showCurrentMonth(4)
 
   selectDates: ->
     $('#calendar .calendar_item.selectable').click ->
@@ -72,6 +73,14 @@ class @Calendar
       if $('#custom_price').val()
         triggerSpinner()
         submitDates()
+
+  hideFutureMonths = ->
+    $('.next_month').parent().addClass('hidden')
+    $('.last_month').parent().addClass('hidden')
+
+  showCurrentMonth = (i) ->
+    $(".month_name").addClass('hidden')
+    $(".month_name:nth-of-type(#{i})").removeClass('hidden')
 
   notifyAboutChangedPrices = ->
     inc_count = $('.increased.selected').length

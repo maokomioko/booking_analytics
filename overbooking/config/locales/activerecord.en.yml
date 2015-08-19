@@ -8,7 +8,6 @@ en:
         custom_type: Contact type
       overbooking/contact/phone:
         value: Phone number
-        optional: Additional
       overbooking/contact/skype:
         value: Skype login
       overbooking/contact/telegram:

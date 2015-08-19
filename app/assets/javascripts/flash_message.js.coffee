@@ -9,8 +9,9 @@ class @FlashMessage
     $(document).ajaxComplete (event, request) =>
       value = request.getResponseHeader("X-Message-Html")
       key = request.getResponseHeader("X-Message-Type")
-      @container.html(value)
-      @hideContainer()
+      if key? && key.split(',').length == 1
+        @show_ajax_message(value, key)
+        @hideContainer()
 
   hidePersistent: ->
     $(document).on 'click', "#flash-container .close", (e) ->
@@ -21,10 +22,9 @@ class @FlashMessage
       @hideContainer() if @container.length && @container.html().length
 
   show_ajax_message: (value, key) ->
-    $(".alerts_position").html "
-      <div class='alert #{key} fade in'>
+    @container.html "
+      <div class='alert-#{key} fade in'>
         <strong>#{value}</strong>
-        <a href='#' class='close'></a>
       </div>
     "
     return

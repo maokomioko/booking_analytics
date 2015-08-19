@@ -12,22 +12,13 @@ class Calendar < Struct.new(:view, :date, :month_offset, :callback)
   def week_rows
     weeks.map do |week|
       if week.count { |day| day < date } < 7
-        content_tag :tr do
-          week.map { |day| day_cell(day) }.join.html_safe
-        end
+        week.map { |day| day_cell(day) }.join.html_safe
       end
     end.join.html_safe
   end
 
   def day_cell(day)
-    content_tag :td, view.capture(day, &callback), date: day, class: [day_classes(day)]
-  end
-
-  def day_classes(day)
-    classes = []
-    classes << 'today' if day == Date.today
-    classes << 'not-month' if day.month != date.month
-    classes.empty? ? nil : classes.join(' ')
+    content_tag :div, view.capture(day, &callback), date: day, class: 'calendar_item'
   end
 
   def weeks

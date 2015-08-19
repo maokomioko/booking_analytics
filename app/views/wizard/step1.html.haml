@@ -16,6 +16,7 @@
               %i.fa.fa-arrow-right
             .clearfix
       .text-center.light
-        .header.h3 Сontact Information
+        .header.h3= t('overbooking.contacts.title')
       .default_form.max_width.center-block
+        %p.hotel-contacts-info.text-center Please select your hotel in order to fill up contact information.
         .hotel-contacts{ data: { url: overbooking.hotels_contacts_by_hotel_path, 'contact-hotel-id' => @channel_manager.booking_id } }

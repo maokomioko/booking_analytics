@@ -16,6 +16,7 @@
 #  latitude        :decimal(10, 6)
 #  longitude       :decimal(10, 6)
 #  district        :string           default("{}")
+#  website_url     :string
 #  phone           :string
 #  normalized_name :string
 #
@@ -44,7 +45,7 @@ class Hotel < ActiveRecord::Base
     return none if query.empty? || query.length < 3
 
     query = Hotel.prepare_fts_query(query)
-    fields = %w(name booking_id address district).join(', ')
+    fields = %w(name normalized_name booking_id address district).join(', ')
     where("to_tsvector(concat_ws(' ', #{ fields })) @@ to_tsquery(?)", query)
   }
 

@@ -6,16 +6,16 @@
   %td
     .has-feedback
       = f.number_field :min_price, class: 'form-control'
-      = icon('eur')
+      = icon('eur form-control-feedback')
   %td.edit-price
     .has-feedback
       = f.number_field :max_price, class: 'form-control'
-      = icon('eur')
+      = icon('eur form-control-feedback')
   %td= t('settings.strategy.revenue')
   - if current_user.channel_manager.connector_type != 'empty' && can?(:update_connector_credentials, Room)
     %td.edit-cm
       - case current_user.channel_manager.connector_type
       - when 'previo'
-        = f.select :previo_id, options_for_select(@cm_rooms, f.object.previo_id), {include_blank: t('labels.select_room')}, class: 'form-control'
+        = f.select :previo_id, options_for_select(@cm_rooms, f.object.previo_id), {include_blank: t('labels.select_room')}, class: 'form-control selectpicker'
       - when 'wubook'
-        = f.select :wubook_id, options_for_select(@cm_rooms, f.object.wubook_id), {include_blank: t('labels.select_room')}, class: 'form-control'
+        = f.select :wubook_id, options_for_select(@cm_rooms, f.object.wubook_id), {include_blank: t('labels.select_room')}, class: 'form-control selectpicker'

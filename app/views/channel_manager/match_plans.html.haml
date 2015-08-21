@@ -1,28 +1,31 @@
-= content_for :main_content_header do
-  .row
-    .col-sm-12
-      .page-header
-        %h3
-          %p= t('messages.setup_tarif_p1').html_safe
-          %p= t('messages.setup_tarif_p2').html_safe
+.container-fluid
+  = content_for :main_content_header do
+    .page_header.h3.light
+      %span.page_header_title
+        = t('messages.setup_tarif_p1').html_safe
+      %br
+      = t('messages.setup_tarif_p2').html_safe
 
-.row
-  .col-sm-12
-    = form_for @channel_manager, as: :channel_manager, url: { action: :update }, html: { class: 'form-horizontal' }, remote: true do |f|
+  .max_width.center-block.default_form
+    = form_for @channel_manager, as: :channel_manager, url: { action: :update } do |f|
       = hidden_field_tag :only_tarif, true
       = f.hidden_field :connector_type
       .form-group
-        = f.label :non_refundable_pid, t('labels.non_refundable_tarif').html_safe, class: 'col-sm-4 control-label'
-        .col-sm-3
-          = f.select :non_refundable_pid, options_for_select(@channel_manager.list_plans.sort, f.object.non_refundable_pid), {}, class: 'form-control'
+        = f.label :non_refundable_pid, t('labels.non_refundable_tarif').html_safe
+        .clearfix
+        = f.select :non_refundable_pid, options_for_select(@channel_manager.list_plans.sort, f.object.non_refundable_pid), {}, class: 'selectpicker'
+
+      .separate2
 
       .form-group
-        = f.label :default_pid, t('labels.standard_tarif').html_safe, class: 'col-sm-4 control-label'
-        .col-sm-3
-          = f.select :default_pid, options_for_select(@channel_manager.list_plans.sort.reverse, f.object.default_pid), {}, class: 'form-control'
+        = f.label :default_pid, t('labels.standard_tarif').html_safe
+        .clearfix
+        = f.select :default_pid, options_for_select(@channel_manager.list_plans.sort.reverse, f.object.default_pid), {}, class: 'selectpicker'
 
-      .form-group
-        .col-sm-3.col-sm-offset-4
-          = f.button class: 'btn btn-primary', type: :submit do
-            = t('auth.buttons.save_tarif_plans')
-            = icon('arrow-circle-right')
+      .separate2
+
+      .form-btns
+        = f.button class: 'btn btn_apply', type: :submit do
+          = icon('arrow-circle-right')
+          = t('auth.buttons.save_tarif_plans')
+        .clearfix

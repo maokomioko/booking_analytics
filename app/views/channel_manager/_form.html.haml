@@ -1,23 +1,4 @@
 = form_for @channel_manager, as: :channel_manager,
-      url: { action: (@channel_manager.new_record? ? :create : :update) },
-      html: { class: 'form-horizontal' },
-      remote: true do |f|
-  .errorHandler.alert.alert-danger.no-display
-    = icon('remove-sign')
-    = t('shared.please_check_errors')
-  .form-group
-    = f.label :connector_type, class: 'col-sm-4 control-label'
-    .col-sm-3
-      = f.select :connector_type, options_for_cm_types(@channel_manager.connector_type), {}, class: 'form-control'
+      url: (@channel_manager.new_record? ? create_channel_manager_path : channel_manager_path(@channel_manager.id)) do |f|
 
-  .connector-fieldset.hidden
-
-  - ChannelManager::TYPES.each do |connector_type|
-    %fieldset.hidden(data-connector="#{ connector_type }")
-      = render "channel_manager/forms/#{ connector_type }", f: f
-
-  .form-group
-    .col-sm-3.col-sm-offset-4
-      = f.button class: 'btn btn-primary', type: :submit do
-        = t('auth.buttons.submit_and_proceed_to_tarifs')
-        = icon('arrow-circle-right')
+  = render partial: 'channel_manager/form_contents', locals: {f: f, origin: 'settings'}

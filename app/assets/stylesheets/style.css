@@ -395,6 +395,7 @@ body {
   padding-right: 34px;
 }
 .form-control-feedback.fa {
+  right: 5px;
   height: auto;
   color: #abadaf;
   font-size: 12px;
@@ -1286,26 +1287,6 @@ body {
 }
 .calendar_days ul li+li {
   margin-left: 2.0833333333333%;
-}
-.tabs_block {
-  border-bottom: 1px solid #ebebeb;
-  margin: 0px -15px;
-  padding: 15px;
-  margin-top: -10px;
-}
-.tab_link {
-  color: #363a3f;
-  font-size: 16px;
-  padding: 5px 18px;
-  background-color: transparent;
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important;
-}
-.tab_link:hover, .tab_link.hover {
-  background-color: #d8d8d8;
-}
-.tab_link:focus, .tab_link:active, .tab_link.active {
-  background-color: #eaeaea;
 }
 .description_item {
   padding-top: 5px;

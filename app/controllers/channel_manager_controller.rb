@@ -33,9 +33,6 @@ class ChannelManagerController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   # params key +only_tafif+ is only for update from +match_plans+ action
   def update
     # STI fix

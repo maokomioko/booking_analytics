@@ -41,7 +41,7 @@ en:
   placeholders:
     zero_euro: "0 EUR"
   messages:
-    cm_verified: "Verification completed!"
+    cm_verified: "Channel manager verification completed!"
     cm_already_added: "Only one channel manager can be added at this point."
     cm_verification_error: "Error! Please check entered credentials."
     cm_updated: "Settings where updated successfully!"

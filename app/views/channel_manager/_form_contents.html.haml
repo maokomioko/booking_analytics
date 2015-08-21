@@ -1,0 +1,48 @@
+= render 'partials/form_error_handler'
+.form-group
+  = f.label :connector_type
+  = f.select :connector_type, options_for_cm_types(@channel_manager.connector_type), {}, class: 'form-control selectpicker'
+
+.connector-fieldset.hidden
+
+%fieldset.hidden(data-connector="empty")
+  %p.lead.text-center= t('wizard.step2.empty_connector_warning')
+
+%fieldset.hidden(data-connector="wubook")
+  .form-group
+    = f.label :login, t('labels.cm_login')
+    = f.text_field :login, class: 'form-control with_validation'
+  .form-group
+    = f.label :password, t('labels.cm_password')
+    = f.text_field :password, class: 'form-control with_validation'
+  .form-group
+    = f.label :lcode, t('labels.lcode').html_safe
+    = f.text_field :lcode, class: 'form-control with_validation'
+
+%fieldset.hidden(data-connector="previo")
+  .form-group
+    = f.label :login, t('labels.cm_login')
+    = f.text_field :login, class: 'form-control with_validation'
+
+  .form-group
+    = f.label :password, t('labels.cm_password')
+    = f.text_field :password, class: 'form-control with_validation'
+  .form-group
+    = f.label :lcode, ChannelManager::Previo.human_attribute_name(:lcode)
+    = f.text_field :lcode, class: 'form-control with_validation'
+
+- if origin == 'settings'
+  .connection_info
+    .separate2
+    .info
+      = t('channel_manager.edit.hotel_name', value: @channel_manager.hotel.name).html_safe
+    = f.button class: 'btn btn_apply' do
+      = icon('check')
+      = t('auth.buttons.submit_and_proceed_to_tarifs')
+
+- else
+  .form_btns
+    %button.btn.btn_apply.pull-right{type: "submit"}
+      = t('shared.next')
+      = icon('arrow-right')
+    .clearfix

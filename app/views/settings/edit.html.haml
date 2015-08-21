@@ -1,48 +1,50 @@
-= content_for(:main_content_header) do
-  .page-header
-    %h1= t('.header')
+.container-fluid
+  = content_for(:main_content_header) do
+    .page_header.h2.light
+      %span.page_header_title= t('.header')
 
-.row
-  .col-sm-12
-    .tabbable
-      %ul.nav.nav-tabs.tab-blue
-        %li.active
-          %a{"data-toggle" => "tab", href: "#room_settings_tab"}
-            %i.clip-circle-small
-            = t('.room_settings')
-        %li
-          %a{"data-toggle" => "tab", href: "#search_ranking_tab"}
-            %i.clip-rating-3
-            = t('.search_ranking')
-        %li
-          %a{"data-toggle" => "tab", href: "#competitors_tab"}
-            = t('.competitors_lookup')
-        %li
-          %a{"data-toggle" => "tab", href: "#channel_manager_tab"}
-            = t('.channel_manager')
+  .tabbable
+    %ul.nav.nav-tabs
+      %li.active
+        %a.btn{"data-toggle" => "tab", href: "#room_settings_tab"}
+          %i.clip-circle-small
+          = t('.room_settings')
+      %li
+        %a.btn{"data-toggle" => "tab", href: "#search_ranking_tab"}
+          %i.clip-rating-3
+          = t('.search_ranking')
+      %li
+        %a.btn{"data-toggle" => "tab", href: "#competitors_tab"}
+          = t('.competitors_lookup')
+      %li
+        %a.btn{"data-toggle" => "tab", href: "#channel_manager_tab"}
+          = t('.channel_manager')
 
-    .tab-content
-      #room_settings_tab.tab-pane.active
-        .col-sm-12
-          = render partial: 'rooms/form'
+  .tab-content
+    #channel_manager_tab.tab-pane.max_width.center-block.company_form
+      .h20px= t('channel_manager.edit.header')
+      .separate
+        = render 'channel_manager/form'
         .clearfix
-      #search_ranking_tab.tab-pane
-        .col-sm-5
-          = render partial: 'room_settings/form'
-        .clearfix
-      #competitors_tab.tab-pane
-        .col-sm-7
-          .row
-            .col-sm-12
-              = render 'form'
-            .col-sm-12(data-partial="related_hotels")
-              = render template: 'related_hotels/edit'
-        .col-sm-5
-          .url-helpers.hidden
-            %span.hotel-url= hotel_path(id: @hotel.id)
-          #map(style="height: 900px;")
-        .clearfix
-      #channel_manager_tab.tab-pane
-        .col-sm-12
-          = render 'channel_manager/form'
-        .clearfix
+    #room_settings_tab.tab-pane.active
+      - if @channel_manager
+        .h20px= t('channel_manager.edit.room_match_info').html_safe
+      = render partial: 'rooms/form'
+      .clearfix
+    #search_ranking_tab.tab-pane
+      .col-sm-5
+        = render partial: 'room_settings/form'
+      .clearfix
+    #competitors_tab.tab-pane
+      .col-sm-7
+        .row
+          .col-sm-12
+            = render 'form'
+          .col-sm-12(data-partial="related_hotels")
+            = render template: 'related_hotels/edit'
+      .col-sm-5
+        .url-helpers.hidden
+          %span.hotel-url= hotel_path(id: @hotel.id)
+        #map(style="height: 900px;")
+      .clearfix
+

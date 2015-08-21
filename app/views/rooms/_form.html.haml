@@ -1,6 +1,6 @@
-= form_tag bulk_update_rooms_path, method: :put, class: 'form-horizontal rooms-form', remote: true do
+= form_tag bulk_update_rooms_path, method: :put, class: 'rooms-form', remote: true do
   = hidden_field_tag :manual, true
-  %table.table.hotel_rooms_table
+  %table.table{class: (controller_name == 'settings' ? 'setting_room_table' : 'hotel_rooms_table')}
     %thead
       %tr
         %th Booking ID
@@ -9,9 +9,9 @@
         %th= Room.human_attribute_name(:name)
         %th= Room.human_attribute_name(:min_price)
         %th= Room.human_attribute_name(:max_price)
+        %th= t('settings.strategy.title')
         - if current_user.channel_manager.connector_type != 'empty' && can?(:update_connector_credentials, Room)
           %th= t('labels.select_room')
-        %th= t('settings.strategy.title')
     %tbody
       - @hotel.rooms.each do |room|
         = fields_for 'rooms[]', room do |f|
@@ -21,8 +21,13 @@
         %td
         %td
         %td
+        - if current_user.channel_manager.connector_type != 'empty' && can?(:update_connector_credentials, Room)
+          %td
+          %td
         %td
-          = submit_tag t('shared.save'), class: 'btn btn_apply pull-right'
+          = button_tag class: 'btn btn_apply pull-right', type: :submit do
+            = icon('check')
+            = t('shared.save')
       - else
         %td
           = link_to wizard_step3_path, class: 'back_link pull-left' do
@@ -31,7 +36,10 @@
         %td
         %td
         %td
+        - if current_user.channel_manager.connector_type != 'empty' && can?(:update_connector_credentials, Room)
+          %td
+          %td
         %td
           = button_tag class: 'btn btn_apply pull-right', type: :submit do
+            = icon('arrow-right')
             = t('shared.next')
-            = icon('arrow-circle-right')

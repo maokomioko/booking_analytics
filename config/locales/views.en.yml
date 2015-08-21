@@ -9,6 +9,8 @@ en:
       header: Channel manager setup
     edit:
       header: Manage your connection options
+      hotel_name: "Name of your hotel: <span>%{value}</span>"
+      room_match_info: "Here is the list of all your rooms. <br> Make sure that room information from the channel manager matches information from Booking.com"
   companies:
     edit:
       header: Edit company information
@@ -51,7 +53,7 @@ en:
       show_available_hotels: Show available hotels
   settings:
     edit:
-      header: Algorithm fine-tuning
+      header: "Settings"
       related_hotels: "%{count} hotels matching your location criteria"
       room_settings: "Per room configuration"
       search_ranking: "Search ranking"

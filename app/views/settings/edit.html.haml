@@ -24,8 +24,8 @@
     #channel_manager_tab.tab-pane.max_width.center-block.company_form
       .h20px= t('channel_manager.edit.header')
       .separate
-        = render 'channel_manager/form'
-        .clearfix
+      = render 'channel_manager/form'
+      .clearfix
     #room_settings_tab.tab-pane.active
       - if @channel_manager
         .h20px= t('channel_manager.edit.room_match_info').html_safe

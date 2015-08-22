@@ -1,4 +1,4 @@
 = form_for @channel_manager, as: :channel_manager,
-      url: (@channel_manager.new_record? ? create_channel_manager_path : channel_manager_path(@channel_manager.id)) do |f|
+      url: (@channel_manager.new_record? ? new_channel_manager_path : channel_manager_path(@channel_manager.id)) do |f|
 
   = render partial: 'channel_manager/form_contents', locals: {f: f, origin: 'settings'}

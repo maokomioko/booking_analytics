@@ -1,14 +1,18 @@
-.row
+- if @related.length > 0
+  %h3.light= t('related_hotels.index.count', count: @related.length)
+.row.add_hotels_frm
   .hidden
     %span(data-message="select_hotels_first")= t('messages.select_hotels_first')
     %span(data-message="confirm_related_bulk_delete")= t('messages.confirm_related_bulk_delete')
     %span(data-message="related_search_prompt")= t('messages.related_search_prompt')
-  .col-sm-12{style: 'margin-bottom: 20px'}
-    = form_tag related_hotels_path(hotel_id: @hotel.booking_id), method: :post, remote: true, class: 'add-related-form' do
-      .col-md-6.no-left-padding
-        = hidden_field_tag :id, nil, id: 'add_related_select2', data: { url: related_hotels_search_path(hotel_id: @hotel.booking_id) }
-      .col-md-3.no-left-padding
-        = submit_tag t('.add_related'), class: 'btn btn-purple'
+
+  = form_tag related_hotels_path(hotel_id: @hotel.booking_id), method: :post, remote: true, class: 'add-related-form' do
+    .col-xs-9.col-md-8
+      = hidden_field_tag :id, nil, id: 'add_related_select2', data: { url: search_related_hotels_path(hotel_id: @hotel.booking_id) }
+    .col-xs-3.col-md-4
+      %button.btn.btn_apply.pull-right{type: "submit"}
+        = icon('search')
+        = t('.add_related')
 
   .col-sm-12
     - if @related.length > 0
@@ -33,12 +37,14 @@
                 %small
                   = related_hotel.related.post_address
               %td
-                - if related_hotel.is_overbooking
-                  %span.label.label-success= t('overbooking.shared.partner')
-                - else
-                  —
+                = link_to disable_related_hotel_path(hotel_id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "bulk-overbooking #{related_hotel.is_overbooking ? '' : 'hidden'}" do
+                  = icon('trash')
+                  = t('.remove_partner')
+                = link_to enable_related_hotel_path(hotel_id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "bulk-overbooking #{related_hotel.is_overbooking ? 'hidden' : ''}" do
+                  = icon('chain')
+                  = t('.become_partner')
               %td
-                = link_to [:related_hotels, :destroy, hotel_id: @hotel.booking_id, id: related_hotel.related.booking_id],
+                = link_to [:related_hotels, hotel_id: @hotel.booking_id, id: related_hotel.related.booking_id],
                 class: 'btn btn_delete remove-related',
                 remote: true, method: :delete do
                   = icon('trash')

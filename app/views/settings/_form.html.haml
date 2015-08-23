@@ -1,41 +1,45 @@
-= form_for @setting, url: { action: (@setting.persisted? ? :update : :create) }, html: { class: 'form-horizontal settings-form' }, remote: true do |f|
-  .form-group
-    = f.label :property_types, class: 'col-sm-3 control-label'
-    .col-sm-9
-      = f.select :property_types,
-          options_for_properties(@setting.property_types),
-          { include_blank: false },
-          multiple: true,
-          class: 'form-control search-select'
+.overbooking_form
 
-  .form-group
-    = f.label :districts, class: 'col-sm-3 control-label'
-    .col-sm-9
-      = f.select :districts,
-        options_for_districts(@setting.districts, @setting),
-        { include_blank: false },
-        multiple: true,
-        class: 'form-control search-select'
+  .h20px= t('related_hotels.edit.header')
+  .description_text= t('related_hotels.edit.description').html_safe
+  .separate
 
-  .form-group
-    = f.label :stars, class: 'col-sm-3 control-label'
-    .col-sm-9
-      = f.select :stars,
-        options_for_stars(@setting.stars),
-        { include_blank: false },
-        multiple: true,
-        class: 'form-control search-select'
+  = form_for @setting, url: { action: (@setting.persisted? ? :update : :create) }, html: { class: 'form-horizontal settings-form' }, remote: true do |f|
+    .inputs
+      .row
+        .col-xs-6
+          = f.label :property_types
+          = f.select :property_types,
+              options_for_properties(@setting.property_types),
+              { include_blank: false },
+              multiple: true,
+              class: 'form-control search-select'
+        .col-xs-6
+          = f.label :districts
+          = f.select :districts,
+            options_for_districts(@setting.districts, @setting),
+            { include_blank: false },
+            multiple: true,
+            class: 'form-control search-select'
 
-  .form-group
-    = f.label :user_ratings, class: 'col-sm-3 control-label'
-    .col-sm-9
-      #user-rating-slider.slider-purple
-      = f.fields_for :user_ratings_range, f.object.user_ratings_range do |rf|
-        = rf.hidden_field :from, id: 'user-rating-from'
-        = rf.hidden_field :to, id: 'user-rating-to'
+      .row
+        .col-xs-6
+          = f.label :stars
+          = f.select :stars,
+            options_for_stars(@setting.stars),
+            { include_blank: false },
+            multiple: true,
+            class: 'form-control search-select'
+        .col-xs-6
+          = f.label :user_ratings
+          #user-rating-slider.slider-purple
+          = f.fields_for :user_ratings_range, f.object.user_ratings_range do |rf|
+            = rf.hidden_field :from, id: 'user-rating-from'
+            = rf.hidden_field :to, id: 'user-rating-to'
 
-  .form-group
-    .col-sm-3.col-sm-offset-3
-      = f.button class: 'btn btn-primary btn-green', type: :submit do
-        = t("auth.buttons.#{@setting.persisted? ? :update : :create}")
-        = icon('arrow-circle-right')
+    .form-group
+      .col-sm-3
+      .col-sm-9
+        = f.button class: 'btn btn_apply pull-right', type: :submit do
+          = icon('check')
+          = t("auth.buttons.#{@setting.persisted? ? :update : :create}")

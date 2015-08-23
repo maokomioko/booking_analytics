@@ -30,13 +30,13 @@ en:
     index:
       header: Select your hotel
       subheader: to edit related
+      count: "%{count} hotels matching your criteria"
     edit:
       header: Manage related hotels
-      add_related: Add related hotels
-      overbooking_partner: Overbooking partner
+      description: Use the following controls to better target your competitors. <br>You can then make any hotel to be your overbooking partner simply by clicking the "Add partner" button.
+      add_related: Find and add to the list
       become_partner: Become overbooking partner
       remove_partner: Disable partnership
-      action_with_selected: Action with selected
   reservations:
     index:
       header: Reservations from Channel Manager

@@ -20,6 +20,14 @@ class RelatedHotelsController < ApplicationController
     @related = @hotel.related_hotels.includes(:related)
   end
 
+  def enable
+    update_overbooking(params, true)
+  end
+
+  def disable
+    update_overbooking(params, false)
+  end
+
   def destroy
     @related = Hotel.where(booking_id: params[:id])
 
@@ -43,7 +51,18 @@ class RelatedHotelsController < ApplicationController
   def find_and_auth_resource
     @hotel = Hotel.accessible_by(current_ability)
                  .find_by_booking_id(params[:hotel_id])
-
     authorize! :update, @hotel
+  end
+
+  def update_overbooking(params, state)
+    begin
+      hotel_ids = Hotel.where(booking_id: params[:ids]).pluck(:id)
+      @hotel.related_hotels.where(related_id: hotel_ids).update_all(is_overbooking: state)
+      render json: {success: true}
+      flash[:success] = t('messages.settings_updated')
+    rescue Exception => e
+      render json: {status: 500}
+      flash[:error] = e.message
+    end
   end
 end

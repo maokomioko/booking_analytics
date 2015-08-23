@@ -44,10 +44,13 @@ Rails.application.routes.draw do
     put :bulk_update, action: :bulk_update, as: :bulk_update
   end
 
-  scope 'related_hotels/:hotel_id', as: :related_hotels, controller: :related_hotels, constraints: { hotel_id: /\d*/ } do
-    post '/', action: :create
-    delete '/:id', action: :destroy, as: :destroy, constraints: { id: /\d*/ }
-    get :search, action: :search, as: :search
+  resources :related_hotels do
+    get :search, on: :collection
+
+    member do
+      get :enable
+      get :disable
+    end
   end
 
   resources :reservations, only: :index

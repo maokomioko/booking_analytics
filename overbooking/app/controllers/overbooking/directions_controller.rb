@@ -39,7 +39,6 @@ module Overbooking
     def find_hotel
       @hotel = Overbooking::Hotel.accessible_by(current_engine_ability)
                    .find_by_booking_id(params[:id])
-      # @hotel = Hotel.first
     end
   end
 end

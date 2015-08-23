@@ -36,7 +36,7 @@
     .separate2
     .info
       = t('channel_manager.edit.hotel_name', value: @channel_manager.hotel.name).html_safe
-    = f.button class: 'btn btn_apply' do
+    = f.button class: 'btn btn_apply', type: :submit do
       = icon('check')
       = t('auth.buttons.submit_and_proceed_to_tarifs')
 

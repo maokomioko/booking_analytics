@@ -36,15 +36,16 @@
         = render partial: 'room_settings/form'
       .clearfix
     #competitors_tab.tab-pane
-      .col-sm-7
+      .competitors_block.width_control
         .row
-          .col-sm-12
-            = render 'form'
-          .col-sm-12(data-partial="related_hotels")
-            = render template: 'related_hotels/edit'
-      .col-sm-5
-        .url-helpers.hidden
-          %span.hotel-url= hotel_path(id: @hotel.id)
-        #map(style="height: 900px;")
+          .col-md-6
+            .left_side
+              = render 'form'
+              .separate
+              .div(data-partial="related_hotels")
+                = render template: 'related_hotels/edit'
+          .col-md-6.hidden-xs.hidden-sm
+            .right_side
+              #map(style="height: 900px;")
       .clearfix
 

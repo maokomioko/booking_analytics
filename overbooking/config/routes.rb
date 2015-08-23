@@ -13,13 +13,6 @@ Overbooking::Engine.routes.draw do
   end
   get 'hotels/contacts/by_hotel', controller: :contacts, action: :by_hotel
 
-  resources :partners do
-    member do
-      post :enable
-      post :disable
-    end
-  end
-
   resources :reservations do
     collection do
       get :search

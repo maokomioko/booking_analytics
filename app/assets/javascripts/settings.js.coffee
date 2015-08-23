@@ -5,6 +5,7 @@ class @Settings
     @roomsAutoSave()
     @settingsSubmit()
     @rankingSubmit()
+    @relatedPartnersUpdate()
     @tabHacks()
 
   initUserRatingSlider: ->
@@ -63,6 +64,11 @@ class @Settings
 
     $form.on 'ajax:complete', ->
       $(@).parents('.tab-pane').unblock()
+
+  relatedPartnersUpdate: ->
+    $(document).on 'ajax:success', '.bulk-overbooking', ->
+      $(@).parent().find('.bulk-overbooking.hidden').removeClass('hidden')
+      $(@).addClass('hidden')
 
   tabHacks: ->
     $('a[href="#competitors_tab"]').on 'shown.bs.tab', ->

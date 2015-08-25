@@ -343,7 +343,7 @@ body {
 }
 .default_form .btn_apply, .company_form .btn_apply, .profile_form .btn_apply, .setting_room_table .btn_apply {
   text-transform: uppercase;
-  font-size: 12px;    /*padding: 7px 46px;*/
+  font-size: 12px;
   padding: 0px;
   width: 136px;
   height: 31px;

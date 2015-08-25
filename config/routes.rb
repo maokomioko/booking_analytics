@@ -45,9 +45,8 @@ Rails.application.routes.draw do
   end
 
   resources :related_hotels do
-    get :search, on: :collection
-
-    member do
+    collection do
+      get :search
       get :enable
       get :disable
     end

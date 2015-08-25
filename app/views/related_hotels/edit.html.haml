@@ -10,7 +10,7 @@
     .col-xs-9.col-md-8
       = hidden_field_tag :id, nil, id: 'add_related_select2', data: { url: search_related_hotels_path(hotel_id: @hotel.booking_id) }
     .col-xs-3.col-md-4
-      %button.btn.btn_apply.pull-right{type: "submit"}
+      = button_tag type: :submit, class: 'btn pull-right' do
         = icon('search')
         = t('.add_related')
 
@@ -20,8 +20,8 @@
         %thead
           %tr
             %th Booking ID
-            %th= t('overbooking.partners.edit.name_address')
-            %th= t('.overbooking_partner')
+            %th= t('related_hotels.index.hotel_name')
+            %th= t('.overbooking_partnership')
             - if controller_name == 'wizard'
               %th
             %th
@@ -37,10 +37,10 @@
                 %small
                   = related_hotel.related.post_address
               %td
-                = link_to disable_related_hotel_path(hotel_id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "bulk-overbooking #{related_hotel.is_overbooking ? '' : 'hidden'}" do
+                = link_to disable_related_hotels_path(id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "bulk-overbooking #{related_hotel.is_overbooking ? '' : 'hidden'}" do
                   = icon('trash')
                   = t('.remove_partner')
-                = link_to enable_related_hotel_path(hotel_id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "bulk-overbooking #{related_hotel.is_overbooking ? 'hidden' : ''}" do
+                = link_to enable_related_hotels_path(id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "bulk-overbooking #{related_hotel.is_overbooking ? 'hidden' : ''}" do
                   = icon('chain')
                   = t('.become_partner')
               %td

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :globalize_session,
                 :auth_user,
-                #:wizard_completed,
+                :wizard_completed,
                 :update_last_activity,
                 :validate_subscription,
                 unless: :devise_controller?

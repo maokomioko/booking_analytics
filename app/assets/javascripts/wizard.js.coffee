@@ -5,7 +5,7 @@ class @Wizard
     @step1LoadContacts()
     @step4RoomsSubmit()
     @step4RoomsAutoSave()
-    @step5Finish()
+    #@step5Finish()
 
   step1ConfirmContacts: ->
     $('.step1-form').on 'submit.rails', (e) ->
@@ -73,9 +73,11 @@ class @Wizard
 
     $finishForm.on 'submit.rails', ->
       blockElement $form.parents('.container')
+      triggerSpinner()
 
     $finishForm.on 'ajax:complete', ->
       $form.parents('.container').unblock()
+      triggerSpinner()
 
   step4RoomsAutoSave: ->
     $form = $('.rooms-form')

@@ -121,13 +121,13 @@ class WizardController < ApplicationController
   # related hotel search
   def step5
     @hotel = current_user.channel_manager.hotel
+    @setting = current_user.setting_fallback
     @hotel.amenities_calc(current_user.company.id)
 
     @related = @hotel
        .related_hotels
        .includes(:related)
        .order('id DESC')
-       .page params[:page]
   end
 
   def step5_post
@@ -139,12 +139,8 @@ class WizardController < ApplicationController
       PriceMaker::PriceWorker.perform_async(current_user.setting_fallback.id)
 
       allow_next_step
-      redirect_to [:wizard, :complete], turbolinks: true
+      redirect_to root_path, turbolinks: true
     end
-  end
-
-  # yay! complete!
-  def complete
   end
 
   def setup_not_completed

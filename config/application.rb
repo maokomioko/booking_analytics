@@ -2,6 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
 require 'rails/all'
+require 'celluloid/autostart'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

@@ -2,6 +2,7 @@ class @Related
   constructor: ->
     @deleteRelated()
     @addRelated()
+    @relatedPartnersUpdate()
     Related.initSelect2RelatedSearch()
     Related.initMap()
 
@@ -11,6 +12,13 @@ class @Related
   addRelated: ->
     $('body').on 'submit.rails', '.add-related-form', ->
       blockElement($('[data-partial="related_hotels"]'))
+
+  relatedPartnersUpdate: ->
+    $(document).on 'ajax:success', '.bulk-overbooking', ->
+      blockRowElement $(@).parents('tr')
+      $(@).parent().find('.bulk-overbooking.hidden').removeClass('hidden')
+      $(@).addClass('hidden')
+      unblockRowElement $(@).parents('tr')
 
   @initSelect2RelatedSearch: ->
     $select = $('#add_related_select2')

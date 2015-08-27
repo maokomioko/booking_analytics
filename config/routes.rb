@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       get :search
       get :enable
       get :disable
+      delete :destroy
     end
   end
 
@@ -73,7 +74,6 @@ Rails.application.routes.draw do
       post "step/#{ i }", action: action_post, as: action_post, step: i
     end
 
-    get :complete, action: :complete, as: :complete
     get :setup_not_completed, action: :setup_not_completed, as: :setup_not_completed
   end
 

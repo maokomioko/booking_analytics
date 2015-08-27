@@ -1,18 +1,6 @@
 - if @related.length > 0
-  %h3.light= t('related_hotels.index.count', count: @related.length)
-.row.add_hotels_frm
-  .hidden
-    %span(data-message="select_hotels_first")= t('messages.select_hotels_first')
-    %span(data-message="confirm_related_bulk_delete")= t('messages.confirm_related_bulk_delete')
-    %span(data-message="related_search_prompt")= t('messages.related_search_prompt')
-
-  = form_tag related_hotels_path(hotel_id: @hotel.booking_id), method: :post, remote: true, class: 'add-related-form' do
-    .col-xs-9.col-md-8
-      = hidden_field_tag :id, nil, id: 'add_related_select2', data: { url: search_related_hotels_path(hotel_id: @hotel.booking_id) }
-    .col-xs-3.col-md-4
-      = button_tag type: :submit, class: 'btn pull-right' do
-        = icon('search')
-        = t('.add_related')
+  %h3.light
+    = t('related_hotels.index.count', count: @related.length)
 
   .col-sm-12
     - if @related.length > 0
@@ -23,8 +11,7 @@
             %th= t('related_hotels.index.hotel_name')
             %th= t('.overbooking_partnership')
             - if controller_name == 'wizard'
-              %th
-            %th
+              %th= t('shared.actions')
         %tbody
           - @related.each do |related_hotel|
             %tr(data-hotel-id="#{ related_hotel.related.booking_id }")
@@ -34,18 +21,15 @@
                 - if related_hotel.added_manually
                   %span.label.label-default= RelatedHotel.human_attribute_name(:added_manually)
                 %br
-                %small
-                  = related_hotel.related.post_address
+                %small= related_hotel.related.post_address
               %td
-                = link_to disable_related_hotels_path(id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "bulk-overbooking #{related_hotel.is_overbooking ? '' : 'hidden'}" do
+                = link_to disable_related_hotels_path(id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "btn bulk-overbooking #{related_hotel.is_overbooking ? '' : 'hidden'}" do
                   = icon('trash')
                   = t('.remove_partner')
-                = link_to enable_related_hotels_path(id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "bulk-overbooking #{related_hotel.is_overbooking ? 'hidden' : ''}" do
+                = link_to enable_related_hotels_path(id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "btn btn-success bulk-overbooking #{related_hotel.is_overbooking ? 'hidden' : ''}" do
                   = icon('chain')
                   = t('.become_partner')
               %td
-                = link_to [:related_hotels, hotel_id: @hotel.booking_id, id: related_hotel.related.booking_id],
-                class: 'btn btn_delete remove-related',
-                remote: true, method: :delete do
+                = link_to related_hotels_path(hotel_id: @hotel.booking_id, id: related_hotel.related.booking_id), class: 'btn btn_delete remove-related', remote: true, method: :delete do
                   = icon('trash')
-                  = t('shared.remove')
+                  = t('shared.remove_from_list')

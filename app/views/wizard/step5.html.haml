@@ -6,7 +6,9 @@
     .additional_text.h6= t('.description')
 
   .default_form.max_width2.center-block
-    = render template: 'related_hotels/edit'
+    = render partial: 'settings/form'
+    .div(data-partial="related_hotels")
+      = render template: 'related_hotels/edit'
     .separate
     .form_btns
       = link_to wizard_step3_path, class: 'back_link pull-left' do

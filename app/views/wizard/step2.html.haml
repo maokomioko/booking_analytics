@@ -6,5 +6,5 @@
       .header.h2= t('.header')
 
     .default_form.max_width.center-block
-      = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step2_post], method: :post do |f|
+      = form_for @channel_manager, as: :channel_manager, url: [:wizard, :step2_post], remote: true, method: :post do |f|
         = render partial: 'channel_manager/form_contents', locals: {f: f, origin: 'wizard'}

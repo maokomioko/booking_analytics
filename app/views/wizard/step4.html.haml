@@ -10,5 +10,5 @@
       = render partial: 'rooms/form'
 
     .hidden
-      = form_tag [:wizard, :step4_post], method: :post, class: 'step4-finish-form' do
+      = form_tag [:wizard, :step4_post], method: :post, remote: true, class: 'step4-finish-form' do
         = submit_tag 'submit'

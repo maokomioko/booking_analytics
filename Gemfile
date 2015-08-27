@@ -9,7 +9,7 @@ gem 'bson_ext'
 gem 'cancancan'
 gem 'carrierwave'
 
-gem 'celluloid', github: 'celluloid/celluloid'
+gem 'celluloid'
 
 gem 'coffee-rails', '~> 4.1.0'
 
@@ -82,13 +82,13 @@ gem 'rubysl', platform: :rbx
 gem 'sass-rails', '>= 5'
 gem 'select2-rails'
 gem 'stringex'
-gem 'sidekiq'
+gem 'sidekiq', github: 'mperham/sidekiq'
 gem 'sidekiq-middleware'
 gem 'sidekiq-status'
 gem 'sidetiq'
 gem 'sinatra', require: false
 
-gem 'turbolinks'
+gem 'turbolinks', github: 'rails/turbolinks'
 
 gem 'wicked_pdf'
 gem 'whenever'

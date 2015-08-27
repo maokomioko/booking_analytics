@@ -6,6 +6,7 @@ en:
   shared:
     dont_have_account: "Don't have an account yet?"
     apply_custom_price: "Click to apply price"
+    actions: "Actions"
     sold: "Sold"
     loading: "Loading..."
     just_moment: "Just a moment..."
@@ -16,6 +17,7 @@ en:
     save: "Save changes"
     activate: "Activate"
     remove: "Remove"
+    remove_from_list: "Remove from list"
     invited: "Invited"
     edit: "Edit"
     prev: "Back"
@@ -58,8 +60,8 @@ en:
     company_updated: "Company updated successfully!"
     user_deleted: "User '%{email}' successfully deleted from system"
     room_updated: "Succesfully saved"
-    success_remove_related: "Successfull remove: <strong>%{list}</strong>"
-    success_add_related: "Successfull add: <strong>%{list}</strong>"
+    success_remove_related: "Hotel removed: <strong>%{list}</strong>"
+    success_add_related: "Hotel added: <strong>%{list}</strong>"
     select_hotels_first: "Select hotels first"
     confirm_related_bulk_delete: "Please confirm your action"
     related_search_prompt: Search for related hotels by hotel name, address or booking id

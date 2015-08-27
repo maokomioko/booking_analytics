@@ -38,7 +38,7 @@ class SettingsController < ApplicationController
       @related = @hotel.related_hotels.includes(:related)
     end
 
-    if @setting.save
+    if @setting.save!
       flash[:success] = I18n.t('messages.settings_updated')
       impressionist(@setting)
 
@@ -65,6 +65,9 @@ class SettingsController < ApplicationController
         params[:setting][field].select!(&:present?)
       end
     end
+
+    params[:setting][:user_ratings_range][:from] = params[:setting][:user_ratings_range][:from].to_i
+    params[:setting][:user_ratings_range][:to] = params[:setting][:user_ratings_range][:to].to_i
 
     params.require(:setting).permit(:crawling_frequency, stars: [],
       property_types: [], districts: [], user_ratings_range: [:from, :to]

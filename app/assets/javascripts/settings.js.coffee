@@ -1,11 +1,11 @@
 class @Settings
   constructor: ->
     @initUserRatingSlider()
+    @toggleSearchBar()
     @roomsSubmit()
     @roomsAutoSave()
     @settingsSubmit()
     @rankingSubmit()
-    @relatedPartnersUpdate()
     @tabHacks()
 
   initUserRatingSlider: ->
@@ -24,6 +24,13 @@ class @Settings
     $slider.bind 'userValuesChanged', (e, data) ->
       $('#user-rating-from').val(data.values.min)
       $('#user-rating-to').val(data.values.max)
+
+  toggleSearchBar: ->
+    $link = $('.text_link')
+    $link.on 'click', ->
+      $(@).toggleClass('hidden')
+      target = $(@).data('target')
+      $(target).toggleClass('hidden')
 
   roomsSubmit: ->
     $form = $('.rooms-form')
@@ -49,12 +56,16 @@ class @Settings
 
   settingsSubmit: ->
     $form = $('.settings-form')
+    $select = $('.search-select')
+
+    $select.on 'change', ->
+      $form.trigger('submit.rails')
 
     $form.on 'submit.rails', ->
-      blockElement $(@).parents('.tab-pane')
+      blockElement $('.settings-form')
 
     $form.on 'ajax:complete', ->
-      $(@).parents('.tab-pane').unblock()
+      $('.settings-form').unblock()
 
   rankingSubmit: ->
     $form = $('.room-settings-form')
@@ -64,11 +75,6 @@ class @Settings
 
     $form.on 'ajax:complete', ->
       $(@).parents('.tab-pane').unblock()
-
-  relatedPartnersUpdate: ->
-    $(document).on 'ajax:success', '.bulk-overbooking', ->
-      $(@).parent().find('.bulk-overbooking.hidden').removeClass('hidden')
-      $(@).addClass('hidden')
 
   tabHacks: ->
     $('a[href="#competitors_tab"]').on 'shown.bs.tab', ->

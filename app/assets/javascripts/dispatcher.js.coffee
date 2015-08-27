@@ -32,6 +32,7 @@ class Dispatcher
         new Subscription()
       when 'wizard:step1', 'wizard:step5'
         new OverbookingContact()
+        new Settings()
 
     if page.match(/wizard:step/i)
       new Wizard()

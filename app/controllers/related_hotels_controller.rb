@@ -49,8 +49,9 @@ class RelatedHotelsController < ApplicationController
   protected
 
   def find_and_auth_resource
+    hotel_id = (params[:hotel_id].nil? ? params[:id] : params[:hotel_id])
     @hotel = Hotel.accessible_by(current_ability)
-                 .find_by_booking_id(params[:hotel_id])
+                 .find_by_booking_id(hotel_id)
     authorize! :update, @hotel
   end
 

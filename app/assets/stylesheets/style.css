@@ -519,6 +519,7 @@ body {
 .manage_table .btn, .users_table .btn {
   font-size: 12px;
   padding: 4px 12px;
+  width: 100%;
 }
 .manage_table .btn_apply {
   text-transform: lowercase;
@@ -530,7 +531,7 @@ body {
 }
 .manage_table>thead>tr>th:first-child, .manage_table>tbody>tr>td:first-child {
   padding-left: 0px;
-  width: 50px;
+  width: 80px;
 }
 .manage_table>thead>tr>th:last-child, .manage_table>tbody>tr>td:last-child {
   padding-right: 0px;
@@ -540,7 +541,7 @@ body {
   padding-bottom: 20px;
 }
 .manage_table>thead>tr>th:nth-child(2) {
-  width: 70%;
+  width: 50%;
 }
 .steps_line {
   margin-top: 70px;
@@ -1424,10 +1425,10 @@ body {
   height: 16px;
 }
 .price_calendar .forward i {
-  background-image: url('../img/arrow-next.png');
+  background-image: url('arrow-next.png');
 }
 .price_calendar .backward i {
-  background-image: url('../img/arrow-prev.png');
+  background-image: url('arrow-prev.png');
 }
 .price_calendar .backward:hover i, .price_calendar .forward:hover i {
   background-position: 0px -16px;
@@ -1678,19 +1679,19 @@ body {
   background-position: top left;
 }
 .pin_icon {
-  background-image: url('../img/pin-icon.png');
+  background-image: url('pin-icon.png');
   height: 16px;
 }
 .web_icon {
-  background-image: url('../img/web-icon.png');
+  background-image: url('web-icon.png');
   height: 13px;
 }
 .mail_icon {
-  background-image: url('../img/mail-icon.png');
+  background-image: url('mail-icon.png');
   height: 11px;
 }
 .mobile_icon {
-  background-image: url('../img/mobile-icon.png');
+  background-image: url('mobile-icon.png');
   height: 15px;
 }
 .walk_icon, .bus_icon, .car_icon {
@@ -1705,17 +1706,16 @@ body {
   background-position: bottom left;
 }
 .walk_icon {
-  background-image: url('../img/walk-sprite.png');
+  background-image: url('walk-sprite.png');
 }
 .bus_icon {
-  background-image: url('../img/bus-sprite.png');
+  background-image: url('bus-sprite.png');
 }
 .car_icon {
-  background-image: url('../img/car-sprite.png');
+  background-image: url('car-sprite.png');
 }
 .overbooking_form {
   font-size: 12px;
-  padding-bottom: 20px;
 }
 .overbooking_form .description_text {
   color: #96999c;
@@ -2044,7 +2044,7 @@ body {
   border: 0px;
   box-shadow: none;
   background-color: transparent;
-  background-image: url('../img/date-rangeSlider-marker.png');
+  background-image: url('date-rangeSlider-marker.png');
   background-repeat: no-repeat;
   background-position: center center;
 }

@@ -1,10 +1,10 @@
 .overbooking_form
+  - if controller_name == 'settings'
+    .h20px= t('related_hotels.edit.header')
+    .description_text= t('related_hotels.edit.description').html_safe
+    .separate
 
-  .h20px= t('related_hotels.edit.header')
-  .description_text= t('related_hotels.edit.description').html_safe
-  .separate
-
-  = form_for @setting, url: { action: (@setting.persisted? ? :update : :create) }, html: { class: 'form-horizontal settings-form' }, remote: true do |f|
+  = form_for @setting, url: @setting, html: { class: 'form-horizontal settings-form' }, remote: true do |f|
     .inputs
       .row
         .col-xs-6
@@ -37,9 +37,20 @@
             = rf.hidden_field :from, id: 'user-rating-from'
             = rf.hidden_field :to, id: 'user-rating-to'
 
-    .form-group
-      .col-sm-3
-      .col-sm-9
-        = f.button class: 'btn btn_apply pull-right', type: :submit do
-          = icon('check')
-          = t("auth.buttons.#{@setting.persisted? ? :update : :create}")
+  %a.text_link{href: '#', data: {target: '.search-container'}}
+    = icon('pencil')
+    %span= t('related_hotels.index.click_to_search')
+  .row.add_hotels_frm
+    .hidden
+      %span(data-message="select_hotels_first")= t('messages.select_hotels_first')
+      %span(data-message="confirm_related_bulk_delete")= t('messages.confirm_related_bulk_delete')
+      %span(data-message="related_search_prompt")= t('messages.related_search_prompt')
+
+    = form_tag related_hotels_path(hotel_id: @hotel.booking_id), method: :post, remote: true, class: 'add-related-form' do
+      .search-container.hidden
+        .col-xs-9.col-md-8
+          = hidden_field_tag :id, nil, id: 'add_related_select2', data: { url: search_related_hotels_path(hotel_id: @hotel.booking_id) }
+        .col-xs-3.col-md-4
+          = button_tag type: :submit, class: 'btn pull-right' do
+            = icon('search')
+            = t('related_hotels.edit.add_related')

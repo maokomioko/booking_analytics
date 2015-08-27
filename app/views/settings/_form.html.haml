@@ -2,7 +2,6 @@
   - if controller_name == 'settings'
     .h20px= t('related_hotels.edit.header')
     .description_text= t('related_hotels.edit.description').html_safe
-    .separate
 
   = form_for @setting, url: @setting, html: { class: 'form-horizontal settings-form' }, remote: true do |f|
     .inputs

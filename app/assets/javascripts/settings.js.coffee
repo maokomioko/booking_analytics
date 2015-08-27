@@ -24,6 +24,7 @@ class @Settings
     $slider.bind 'userValuesChanged', (e, data) ->
       $('#user-rating-from').val(data.values.min)
       $('#user-rating-to').val(data.values.max)
+      $('.settings-form').trigger('submit.rails')
 
   toggleSearchBar: ->
     $link = $('.text_link')

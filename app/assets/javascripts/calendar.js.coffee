@@ -9,9 +9,6 @@ class @Calendar
     @togglePriceControls()
     @setPrices()
 
-    showCurrentMonth(2)
-    hideFutureMonths()
-
   roomsList: ->
     $('#room_title').click (e) ->
       e.preventDefault()
@@ -29,32 +26,30 @@ class @Calendar
       switch i
         when 0
           $(@).addClass('hidden')
-          $('.current_month').parent().removeClass('hidden')
-          $('.next_month').parent().toggleClass('hidden')
-
           showCurrentMonth(2)
+          scrollElement('.new_month', 0)
         when 1
-          $('.current_month').parent().addClass('hidden')
-          $('.next_month').parent().toggleClass('hidden')
-          $('.last_month').parent().addClass('hidden')
+          showCurrentMonth(3)
+          scrollElement('.new_month', 1)
+
           $(@).siblings('.prev').removeClass('hidden')
           $(@).siblings('.next').removeClass('hidden')
-
-          showCurrentMonth(3)
         when 2
-          $('.next_month').parent().toggleClass('hidden')
-          $('.last_month').parent().toggleClass('hidden')
+          showCurrentMonth(4)
+          scrollElement('.new_month', 2)
+        when 3
+          showCurrentMonth(5)
+          scrollElement('.new_month', 3)
           $(@).addClass('hidden')
 
-          showCurrentMonth(4)
 
   selectDates: ->
-    $('#calendar .calendar_item.selectable').click ->
+    $('#calendar td.selectable').click ->
       $(@).toggleClass 'selected'
 
   togglePriceControls: ->
     $(document).click ->
-      if $('.calendar_item.selected').length
+      if $('#calendar td.selected').length
         notifyAboutChangedPrices()
         $('#price_control').removeClass 'hidden'
       else
@@ -73,10 +68,6 @@ class @Calendar
       if $('#custom_price').val()
         triggerSpinner()
         submitDates()
-
-  hideFutureMonths = ->
-    $('.next_month').parent().addClass('hidden')
-    $('.last_month').parent().addClass('hidden')
 
   showCurrentMonth = (i) ->
     $(".month_name").addClass('hidden')

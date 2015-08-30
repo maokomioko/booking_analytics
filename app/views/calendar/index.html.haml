@@ -20,41 +20,40 @@
         .col-xs-4.col-sm-6
           .calendar_daterange
             .prev.drp_arrow.hidden
-            - 0.upto(2) do |i|
-              .month_name
+            - 0.upto(3) do |i|
+              .month_name{class: ('hidden' if i > 0)}
                 = display_month(Date.today + i.month)
                 = Date.today.year
             .next.drp_arrow
         .cols-xs-4.col-sm-3
 
     .calendar_items_block
-      .calendar_days
-        %ul.list-inline
+      %table.weekdays.fixed
+        %tr
           - %w(mon tue wed thu fri sat sun).each do |day|
-            %li= t("calendar.days.#{day}")
+            %td= t("calendar.days.#{day}")
 
-      #calendar.calendar_items_container{ data: {channel_manager: current_user.channel_manager.connector_type, room_id: @room.id } }
-        = calendar(@dates.min) do |date|
+      %table#calendar{ data: {channel_manager: current_user.channel_manager.connector_type, room_id: @room.id } }
+        = calendar(@dates.min, @prices) do |date|
           - price_block = @prices[date].try(:first)
-
           - unless date < @dates.min || price_block.nil?
-            %div{ class: set_day_class(date, price_block) }
-              .calendar_item_label
-                - if price_block.enabled && !price_block.locked
-                  = icon('check')
-              .calendar_item_date
-                - unless date.day == 1
-                  = date.day
-                - else
-                  = date.strftime("%B").limit(3) + ' 1st'
-              .calendar_item_info
-                .top= set_price(price_block.default_price)
-                .middle= set_price(price_block.price)
+            .calendar_item_label
+              - if price_block.enabled && !price_block.locked
+                = icon('check')
+            .calendar_item_date
+              - unless date.day == 1
+                = date.day
+              - else
+                = date.strftime("%B").limit(3) + ' 1st'
+            .calendar_item_info
+              .top= set_price(price_block.default_price)
+              .middle= set_price(price_block.price)
 
-                - if set_price(price_block.price).to_i > 0
-                  .bottom{class: set_price_difference(price_block)[0][0]}
-                    %i.fa{class: set_price_difference(price_block)[0][1]}
-                      = set_price_difference(price_block)[1]
+              - if set_price(price_block.price).to_i > 0
+                .bottom{class: set_price_difference(price_block)[0][0]}
+                  %i.fa{class: set_price_difference(price_block)[0][1]}
+                    = set_price_difference(price_block)[1]
+
 
   - unless current_user.channel_manager.connector_type == 'empty'
     = render 'price_control'

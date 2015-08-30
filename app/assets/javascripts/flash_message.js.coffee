@@ -14,7 +14,7 @@ class @FlashMessage
         @hideContainer()
 
   hidePersistent: ->
-    $(document).on 'click', "#flash-container .close", (e) ->
+    $(document).on 'click', "#flash-container .close", (e) =>
       e.preventDefault()
       @hideContainer(0)
 

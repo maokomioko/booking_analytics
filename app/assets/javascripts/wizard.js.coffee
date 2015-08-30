@@ -5,7 +5,7 @@ class @Wizard
     @step1LoadContacts()
     @step4RoomsSubmit()
     @step4RoomsAutoSave()
-    #@step5Finish()
+    @step5Finish()
 
   step1ConfirmContacts: ->
     $('.step1-form').on 'submit.rails', (e) ->

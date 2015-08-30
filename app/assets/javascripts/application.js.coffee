@@ -93,6 +93,10 @@ $(document).ajaxComplete ->
 $(document).on "page:fetch page:receive eventFormSent", ->
   triggerSpinner()
 
+window.scrollElement = (element, i) ->
+  offset = $(element)[i].offsetTop
+  $("html, body").stop().animate {scrollTop: offset}, '600', 'swing'
+
 window.triggerSpinner = ->
   $("#spinner_placeholder").toggleClass "hidden"
   $("html").toggleClass "no-scroll"

@@ -1,29 +1,10 @@
 module CalendarHelper
-  def calendar(date = Date.today, month_offset = 2, &block)
-    Calendar.new(self, date, month_offset, block).week_rows
+  def calendar(date, prices, month_offset = 3, &block)
+    Calendar.new(self, date, month_offset, block, prices).output
   end
 
   def display_month(date)
     Date::MONTHNAMES[date.month]
-  end
-
-  def set_day_class(date, price_block)
-    klasses = []
-
-    klasses << 'decreased' if price_block.price.to_i < price_block.default_price
-    klasses << 'increased' if price_block.price.to_i > price_block.default_price
-
-    klasses << 'past' if date <= Date.today
-    klasses << 'selectable' if price_block.price.to_i > 0
-
-    klasses << 'current_month' if date.month == Date.today.month
-
-    klasses << 'next_month' if date.month == Date.today.month + 1
-    klasses << 'last_month' if date.month == Date.today.month + 2
-
-    klasses << 'active' if price_block.enabled && !price_block.locked
-
-    klasses.join(' ').html_safe
   end
 
   def set_price(price)
@@ -31,6 +12,11 @@ module CalendarHelper
     price.to_s + ' €'
   rescue
     t('errors.price_value_missing')
+  end
+
+  def set_price_class(price_block)
+    klass = price_block.price.to_i < price_block.default_price ? 'decreased' : 'increased'
+    klass.html_safe
   end
 
   def set_price_difference(price_block)

@@ -84,8 +84,8 @@ div.spinner {
   display: -webkit-flex;
   display: flex;
   overflow: hidden;
-  align-items: center;
-  justify-content: center;
+  @include justify-content(center);
+  @include align-items(center, center);
   z-index: 1500;
   position: absolute;
   top: 55%;

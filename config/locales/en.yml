@@ -73,30 +73,6 @@ en:
       password: "Forgot your password?"
       confirmation: "Didn't receive confirmation instructions?"
       unlock: "Didn't receive unlock instructions?"
-  calendar:
-    title: "Rate management"
-    price_controls:
-      apply: "Apply price(s)"
-      apply_suggested:
-        title: "Apply suggested"
-        modal_title: "Apply %{n} recommended price(s)"
-        description_text: "You are about to modify <span id='prices_to_change'></span> price(s) for '%{room}' with the '%{method}' rate."
-        prices_gt: "price(s) increased"
-        prices_lt: "price(s) decreased"
-      set_manually:
-        title: "Set manually"
-        modal_header: "Manual override"
-        custom_price: "Enter your price"
-      reject:
-        title: "Reject suggestions"
-    days:
-      mon: "Monday"
-      tue: "Tuesday"
-      wed: "Wednesday"
-      thu: "Thursday"
-      fri: "Friday"
-      sat: "Saturday"
-      sun: "Sunday"
   auth:
     new:
       title: "Welcome aboard!"

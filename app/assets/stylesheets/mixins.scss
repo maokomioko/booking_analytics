@@ -16,3 +16,23 @@
   -moz-box-shadow: $params;
   box-shadow: $params;
 }
+
+@mixin flex-direction($direction) {
+  -webkit-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  flex-direction: $direction;
+}
+
+@mixin justify-content($align) {
+  justify-content: $align;
+  -webkit-justify-content: $align;
+  -ms-justify-content: $align;
+}
+
+@mixin align-items($position1, $position2: false) {
+  @if $position2 {
+    -webkit-align-items: $position2;
+    -ms-align-items: $position2;
+  }
+  align-items: $position1;
+}

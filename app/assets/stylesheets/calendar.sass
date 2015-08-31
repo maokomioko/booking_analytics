@@ -115,39 +115,32 @@
 .calendar_item_info
   text-transform: uppercase
   min-height: 106px
-  flex-direction: column
-  -webkit-flex-direction: column
-  -ms-flex-direction: column
-  justify-content: center
-  -webkit-justify-content: center
-  -ms-justify-content: center
-  align-items: stretch
-  -webkit-align-items: center
-  -ms-align-items: center
+  @include flex-direction(column)
+  @include justify-content(center)
+  @include align-items(stretch, center)
   display: -webkit-box
   display: -ms-flexbox
   display: -webkit-flex
   display: flex
-  >
-    div
+  &.locked
     .top
-      color: #96999c
-      text-decoration: line-through
-    .middle
-      font-size: 20px
-      padding-bottom: 8px
-    .bottom
-      &.up_
-        color: #46c26f
-        .fa:before
-          content: ""
-      &.down_
-        color: #f13c5e
-        .fa:before
-          content: ""
-
-.calendar_item_info > div .middle
-  color: #adaeb0
+      text-decoration: none
+  .top
+    color: #96999c
+    text-decoration: line-through
+  .middle
+    font-size: 14px
+    padding-bottom: 8px
+    color: #adaeb0
+  .bottom
+    &.up_
+      color: #46c26f
+      .fa:before
+        content: ""
+    &.down_
+      color: #f13c5e
+      .fa:before
+        content: ""
 
 .calendar_bottom_line
   position: fixed

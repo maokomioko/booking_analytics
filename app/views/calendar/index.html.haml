@@ -45,9 +45,10 @@
                 = date.day
               - else
                 = date.strftime("%B").limit(3) + ' 1st'
-            .calendar_item_info
+            .calendar_item_info{class: ('locked' if price_block.locked)}
               .top= set_price(price_block.default_price)
-              .middle= set_price(price_block.price)
+              .middle
+                = price_block.locked ? t('calendar.custom_price') : set_price(price_block.price)
 
               - if set_price(price_block.price).to_i > 0
                 .bottom{class: set_price_difference(price_block)[0][0]}
@@ -58,5 +59,5 @@
   - unless current_user.channel_manager.connector_type == 'empty'
     = render 'price_control'
 
-  - %w(apply_suggested set_manually).each do |action|
-    = render partial: 'partials/calendar_modals', locals: {supplied_id: action}
+    - %w(apply_suggested set_manually).each do |action|
+      = render partial: 'calendar_modals', locals: {supplied_id: action}

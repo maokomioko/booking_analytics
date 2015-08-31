@@ -4,6 +4,31 @@ en:
       header: User actions log
     show:
       header: User timeline
+  calendar:
+    title: "Rate management"
+    custom_price: Custom price
+    price_controls:
+      apply: "Apply prices"
+      apply_suggested:
+        title: "Apply suggested"
+        modal_title: "Apply recommended prices"
+        description_text: "You are about to modify <span id='prices_to_change'></span> price(s) for '%{room}' with the '%{method}' rate."
+        prices_gt: "prices increased"
+        prices_lt: "prices decreased"
+      set_manually:
+        title: "Set manually"
+        modal_title: "Enter desired price"
+        custom_price: "Enter your price"
+      reject:
+        title: "Reject suggestions"
+    days:
+      mon: "Monday"
+      tue: "Tuesday"
+      wed: "Wednesday"
+      thu: "Thursday"
+      fri: "Friday"
+      sat: "Saturday"
+      sun: "Sunday"
   channel_manager:
     new:
       header: Channel manager setup

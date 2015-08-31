@@ -27,19 +27,19 @@ class @Calendar
         when 0
           $(@).addClass('hidden')
           showCurrentMonth(2)
-          scrollElement('.new_month', 0)
+          scrollElement('.new_month', 0, 60)
         when 1
           showCurrentMonth(3)
-          scrollElement('.new_month', 1)
+          scrollElement('.new_month', 1, 60)
 
           $(@).siblings('.prev').removeClass('hidden')
           $(@).siblings('.next').removeClass('hidden')
         when 2
           showCurrentMonth(4)
-          scrollElement('.new_month', 2)
+          scrollElement('.new_month', 2, 60)
         when 3
           showCurrentMonth(5)
-          scrollElement('.new_month', 3)
+          scrollElement('.new_month', 3, 60)
           $(@).addClass('hidden')
 
 

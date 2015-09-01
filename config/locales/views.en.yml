@@ -34,6 +34,7 @@ en:
       header: Channel manager setup
     edit:
       header: Manage your connection options
+      hotel_name: "Name of your hotel: <span>%{value}</span>"
       room_match_info: Here is the list of all your rooms. <br> Make sure that room information from the channel manager matches information from Booking.com
   companies:
     edit:
@@ -74,7 +75,6 @@ en:
       remove_partner: Remove partnership
   reservations:
     index:
-      header: Reservations from Channel Manager
       thead:
         reservation_period: Reservation period
         price: Price

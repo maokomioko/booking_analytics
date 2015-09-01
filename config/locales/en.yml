@@ -1,124 +1,124 @@
 en:
   meta:
-    title: "Hotel Commander | v1.0"
-    description: "Hotel revenue management software"
-    author: "Hotel Commander"
+    title: Hotel Commander | v1.0
+    description: Hotel revenue management software
+    author: Hotel Commander
   shared:
-    actions: "Actions"
-    sold: "Sold"
-    loading: "Loading..."
-    just_moment: "Just a moment..."
-    submit: "Submit"
-    select_image: "Select image"
-    change: "Change"
-    update: "Update"
-    save: "Save changes"
-    activate: "Activate"
-    remove: "Remove"
-    remove_from_list: "Remove from list"
-    invited: "Invited"
-    edit: "Edit"
-    prev: "Back"
-    next: "Next"
-    are_you_sure: "Are you sure?"
+    actions: Actions
+    sold: Sold
+    loading: Loading...
+    just_moment: Just a moment...
+    submit: Submit
+    select_image: Select image
+    change: Change
+    update: Update
+    save: Save changes
+    activate: Activate
+    remove: Remove
+    remove_from_list: Remove from list
+    invited: Invited
+    edit: Edit
+    prev: Back
+    next: Next
+    are_you_sure: Are you sure?
     view_in_web: Open Web Page
   errors:
-    booking_id: "Hotel doesn't exist"
-    hotel_name: "Hotel name can't be blank"
-    price_value_missing: "No price"
-    unauthorized: "Unauthorized"
-    no_ch_manager: "No channel manager defined"
-    no_reservations: "Sorry, we couldn't find any reservation in your Channel Manager."
+    booking_id: Hotel doesn't exist
+    hotel_name: Hotel name can't be blank
+    price_value_missing: No price
+    unauthorized: Unauthorized
+    no_ch_manager: No channel manager defined
+    no_reservations: Sorry, we couldn't find any reservations in your Channel Manager.
   labels:
-    cm_login: "Your login for Channel Manager"
-    cm_password: "Your password for Channel Manager"
-    lcode: "WuBook LCode <br>(Facility/Website tab at wubook)"
-    booking_id: "Hotel ID (login) at Booking.com"
-    hotel_name: "Name of your Hotel"
-    non_refundable_tarif: "Default <b>non-refundable</b> tarif"
-    standard_tarif: "Default tarif for <b>standard</b> rates"
-    select_room: "Select room candidate"
+    cm_login: Your login for Channel Manager
+    cm_password: Your password for Channel Manager
+    lcode: WuBook LCode <br>(Facility/Website tab at wubook)
+    booking_id: Hotel ID (login) at Booking.com
+    hotel_name: Name of your Hotel
+    non_refundable_tarif: Default <b>non-refundable</b> tarif
+    standard_tarif: Default tarif for <b>standard</b> rates
+    select_room: Select room candidate
   placeholders:
-    zero_euro: "0 EUR"
+    zero_euro: 0 EUR
   messages:
-    cm_verified: "Channel manager verification completed!"
-    cm_already_added: "Only one channel manager can be added at this point."
-    cm_verification_error: "Error! Please check entered credentials."
-    cm_updated: "Settings where updated successfully!"
-    cm_update_error: "Settings update failed!"
-    cm_empty_tarif: "Selected tarifs doesn't containt prices for all rooms!"
-    no_cm_header: "You didn't select a Channel Manager connection"
-    no_cm_desc: "In order to fetch reservations, we need to have an active Channel Manager connection"
-    setup_tarif_p1: "Congatulations! You are almost set."
+    cm_verified: Channel manager verification completed!
+    cm_already_added: Only one channel manager can be added at this point.
+    cm_verification_error: Error! Please check entered credentials.
+    cm_updated: Settings where updated successfully!
+    cm_update_error: Settings update failed!
+    cm_empty_tarif: Selected tarifs doesn't containt prices for all rooms!
+    no_cm_header: You didn't select a Channel Manager connection
+    no_cm_desc: In order to fetch reservations, we need to have an active Channel Manager connection
+    setup_tarif_p1: Congatulations! You are almost set.
     setup_tarif_p2: "Last thing left we need: <b>default (non virtual) tarif plans.</b>"
-    prices_updated: "Suggested prices where applied successfully!"
-    price_update_failed: "Error during prices update! Please contact technical support."
-    settings_updated: "Settings updated successfully!"
-    company_created: "Your company created successfully! Now you can invite new users to your company."
-    company_updated: "Company updated successfully!"
+    prices_updated: Suggested prices where applied successfully!
+    price_update_failed: Error during prices update! Please contact technical support.
+    settings_updated: Settings updated successfully!
+    company_created: Your company created successfully! Now you can invite new users to your company.
+    company_updated: Company updated successfully!
     user_deleted: "User '%{email}' successfully deleted from system"
-    room_updated: "Succesfully saved"
+    room_updated: Succesfully saved
     success_remove_related: "Hotel removed: <strong>%{list}</strong>"
     success_add_related: "Hotel added: <strong>%{list}</strong>"
-    select_hotels_first: "Select hotels first"
-    confirm_related_bulk_delete: "Please confirm your action"
+    select_hotels_first: Select hotels first
+    confirm_related_bulk_delete: Please confirm your action
     related_search_prompt: Search for related hotels by hotel name, address or booking id
   devise:
     waiting_confirmation: "Currently waiting confirmation for: %{user}"
     links:
-      login: "Log in with your account"
-      signup: "Don't have account? Create one now!"
-      password: "Forgot your password?"
-      confirmation: "Didn't receive confirmation instructions?"
-      unlock: "Didn't receive unlock instructions?"
+      login: Log in with your account
+      signup: Don't have account? Create one now!
+      password: Forgot your password?
+      confirmation: Didn't receive confirmation instructions?
+      unlock: Didn't receive unlock instructions?
   auth:
     new:
-      title: "Welcome aboard!"
-      subtitle: "Enter your email and password below."
-      form_title: "Sign in here!"
+      title: Welcome aboard!
+      subtitle: Enter your email and password below.
+      form_title: Sign in here!
       connect_via: "Add %{provider} connection"
       keep_signed_in: Keep me signed in
     edit:
       edit_connection: "Edit your %{provider} connection"
     new_account:
-      title: "Sign up"
-      subtitle: "One step from the awesomeness!"
-      form_title: "Give us some info."
-      company_info: "Company information"
+      title: Sign up
+      subtitle: One step from the awesomeness!
+      form_title: Give us some info.
+      company_info: Company information
     password_restore:
-      title: "Password reset"
-      subtitle: "Password reset instructions will be sent to this email."
-      form_title: "Please enter your account email."
+      title: Password reset
+      subtitle: Password reset instructions will be sent to this email.
+      form_title: Please enter your account email.
     fields:
-      email: "Email"
-      password: "Password"
-      password_confirmation: "Password confirmation"
-      company_name: "Company name"
-      company_reg_number: "Registration number"
-      company_reg_address: "Registration address"
-      lcode: "Lcode"
+      email: Email
+      password: Password
+      password_confirmation: Password confirmation
+      company_name: Company name
+      company_reg_number: Registration number
+      company_reg_address: Registration address
+      lcode: Lcode
     buttons:
-      login: "Log in"
-      back_login: "Back to log in"
-      logout: "Log out"
-      signup: "Sign up"
-      new: "Create"
-      save_tarif_plans: "Save tarif plans"
-      setup_cm: "Setup Channel Manager"
-      submit_and_proceed_to_tarifs: "Save and proceed to tarif plans"
-      edit: "Update settings"
-      update: "Update settings"
+      login: Log in
+      back_login: Back to log in
+      logout: Log out
+      signup: Sign up
+      new: Create
+      save_tarif_plans: Save tarif plans
+      setup_cm: Setup Channel Manager
+      submit_and_proceed_to_tarifs: Save and proceed to tarif plans
+      edit: Update settings
+      update: Update settings
   menu:
-    rate_management: rate management
-    overbooking: overbooking
-    competitors_lookup: competitors lookup
-    profile: "Edit my profile"
-    company_profile: "Company profile"
-    manage_users: "Manage users"
-    settings: "Settings"
+    rate_management: Rate management
+    overbooking: Overbooking
+    competitors_lookup: Competitors lookup
+    profile: Edit my profile
+    company_profile: Company profile
+    manage_users: Manage users
+    settings: Settings
     company:
-      existing_users: "Existing users"
-      invite_new: "Invite new users"
+      existing_users: Existing users
+      invite_new: Invite new users
   flash:
-    info: "Info!"
-    warning: "Warning!"
+    info: Info!
+    warning: Warning!

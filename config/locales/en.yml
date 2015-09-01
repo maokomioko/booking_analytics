@@ -4,8 +4,6 @@ en:
     description: "Hotel revenue management software"
     author: "Hotel Commander"
   shared:
-    dont_have_account: "Don't have an account yet?"
-    apply_custom_price: "Click to apply price"
     actions: "Actions"
     sold: "Sold"
     loading: "Loading..."

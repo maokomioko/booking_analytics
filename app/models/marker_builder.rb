@@ -44,8 +44,8 @@ class MarkerBuilder
 
   def marker_infowindow(hotel)
     ApplicationController.new.render_to_string(
-        :partial => 'hotels/infowindow',
-        :locals => {
+        partial: 'hotels/infowindow',
+        locals: {
           hotel: hotel,
           partner: @partners.include?(hotel.id),
           block: @blocks[hotel.booking_id.to_s]

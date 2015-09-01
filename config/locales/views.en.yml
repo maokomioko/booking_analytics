@@ -51,13 +51,21 @@ en:
         password_tip: "leave blank if you don't want to change it"
         my_avatar: My avatar
         remove_avatar: Remove avatar from system
+  hotels:
+    infowindow:
+      room:
+        name: Room type
+        max_occupancy: Max people
+        price: Price
   related_hotels:
     index:
       header: Select your hotel
       subheader: to edit related
       click_to_search: Click to search by hotel name, address or by booking id
       count: "%{count} hotels matching your criteria"
-      hotel_name: "Hotel name and address"
+      hotel_name: Hotel name and address
+    show:
+      address: Address
     edit:
       header: Manage related hotels
       description: Use the following controls to better target your competitors. <br>You can then make any hotel to be your overbooking partner simply by clicking the "Add partner" button.

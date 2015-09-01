@@ -49,10 +49,6 @@ class @Related
         lat: gon.hotel.lat
         lng: gon.hotel.lng
         marker_title: gon.hotel.title
-        picture:
-          url: 'http://maps.google.com/mapfiles/kml/paddle/blu-stars.png'
-          width: 64
-          height: 64
 
       related_ids = $.map $('.related-hotels-table').find('tr[data-hotel-id]'), (el) ->
         $(el).data('hotelId')

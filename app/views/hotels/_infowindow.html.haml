@@ -1,36 +1,36 @@
 .hotel-info-map
-  .col-sm-12
-    .page-header
-      %h4
-        = hotel.name
-        - if partner
-          %small
-            %span.label.label-success= t('overbooking.shared.partner')
-      %em= hotel.address
+  .page-header
+    %h4
+      = hotel.name
+      - if partner
+        %small
+          %span.label.label-success= t('overbooking.shared.partner')
+    %div
+      - if hotel.exact_class?
+        %span.text-warning
+          - hotel.exact_class.to_i.times do
+            = icon('star')
 
-  - if hotel.exact_class?
-    .col-sm-6
-      %span.text-warning
-        - hotel.exact_class.to_i.times do
-          = icon('star')
-  - if hotel.review_score?
-    .col-sm-6
-      %span= hotel.class.human_attribute_name(:review_score)
-      = hotel.review_score
+      - if hotel.review_score?
+        %span
+          = '- ' + hotel.class.human_attribute_name(:review_score) + ':'
+          = hotel.review_score
+
+    = t('related_hotels.show.address') + ':'
+    %em= hotel.address
 
   - if block.present?
     .space12
 
-    .col-sm-12
-      %table.table.table-condensed
-        %thead
+    %table.table.table-condensed
+      %thead
+        %tr
+          %th= t('.room.name')
+          %th= t('.room.max_occupancy')
+          %th= t('.room.price')
+      %tbody
+        - block.data['block'].each do |room|
           %tr
-            %th= t('.room_name')
-            %th= t('.room_max_occupancy')
-            %th= t('.room.price')
-        %tbody
-          - block.data['block'].each do |room|
-            %tr
-              %td= room['name']
-              %td= room['max_occupancy']
-              %td= number_to_euro room['min_price']['price']
+            %td= room['name']
+            %td= room['max_occupancy']
+            %td= number_to_euro room['min_price']['price']

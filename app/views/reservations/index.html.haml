@@ -10,7 +10,7 @@
       .row
         .col-sm-6
           = render 'empty_connector'
-    - if @reservations.empty?
+    - unless @reservations
       %h3= t('errors.no_reservations')
     - else
       %table.table

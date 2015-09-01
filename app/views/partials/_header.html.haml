@@ -13,9 +13,9 @@
           - if current_user.present? && current_user.setup_completed?
             .header_menu
               %ul.list-inline
-                %li.active= link_to t('menu.rate_management'), calendar_index_path
-                %li= link_to t('menu.overbooking'), [overbooking, :directions]
-                %li= link_to t('menu.competitors_lookup'), [main_app, :settings]
+                %li= link_to t('menu.rate_management'), calendar_index_path, class: active_link_class(calendar_index_path)
+                %li= link_to t('menu.overbooking'), reservations_path, class: active_link_class(reservations_path)
+                %li= link_to t('menu.competitors_lookup'), settings_path, class: active_link_class(settings_path)
         .col-xs-3.col-sm-3.col-md-3.col-lg-2
           - if current_user.present?
             .user_block

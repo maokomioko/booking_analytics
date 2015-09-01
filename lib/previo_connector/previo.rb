@@ -48,10 +48,13 @@ class PrevioConnector < AbstractConnector
       end
 
       result = post('Hotel.searchReservations', params)
-
-      reservations = result['reservations']['reservation']
-      reservations = [reservations] if reservations.is_a?(Hash)
-      reservations
+      begin
+        reservations = result['reservations']['reservation']
+        reservations = [reservations] if reservations.is_a?(Hash)
+        reservations
+      rescue
+        nil
+      end
     end
 
     protected

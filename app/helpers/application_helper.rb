@@ -50,6 +50,10 @@ module ApplicationHelper
     end
   end
 
+  def active_link_class(url)
+    request.fullpath.include?(url) ? 'active' : nil
+  end
+
   def humanize(secs)
     [[60, :seconds], [60, :minutes], [24, :hours], [1000, :days]].map do |count, name|
       if secs > 0

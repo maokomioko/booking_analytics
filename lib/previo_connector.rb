@@ -74,21 +74,24 @@ class PrevioConnector < AbstractConnector
       }
     end
     reservations = @previo.search_reservations(params)
-
-    reservations.map do |r|
-      {
-        arrival: r['term']['from'].to_datetime,
-        departure: r['term']['to'].to_datetime,
-        created_at: r['created'].to_datetime,
-        room_ids: [r['objectKind']['obkId'].to_i],
-        room_amount: 1,
-        price: r['price'].to_f,
-        status: Previo::RESERVATION_STATUSES[r['status']['statusId'].to_i][:name],
-        adults: r['guest'].select{|g| g['guestCategory']['name'] == "dospělý"}.count,
-        children: r['guest'].select{|g| g['guestCategory']['name'] != "dospělý"}.count,
-        contact_phone: '',
-        contact_email: ''
-      }
+    unless reservations.nil?
+      reservations.map do |r|
+        {
+          arrival: r['term']['from'].to_datetime,
+          departure: r['term']['to'].to_datetime,
+          created_at: r['created'].to_datetime,
+          room_ids: [r['objectKind']['obkId'].to_i],
+          room_amount: 1,
+          price: r['price'].to_f,
+          status: Previo::RESERVATION_STATUSES[r['status']['statusId'].to_i][:name],
+          adults: r['guest'].select{|g| g['guestCategory']['name'] == "dospělý"}.count,
+          children: r['guest'].select{|g| g['guestCategory']['name'] != "dospělý"}.count,
+          contact_phone: '',
+          contact_email: ''
+        }
+      end
+    else
+      nil
     end
   end
 

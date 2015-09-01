@@ -5,37 +5,36 @@ en:
     show:
       header: User timeline
   calendar:
-    title: "Rate management"
+    title: Rate management
     custom_price: Custom price
     price_controls:
-      apply: "Apply prices"
+      apply: Apply prices
       apply_suggested:
-        title: "Apply suggested"
-        modal_title: "Apply recommended prices"
+        title: Apply suggested
+        modal_title: Apply recommended prices
         description_text: "You are about to modify <span id='prices_to_change'></span> price(s) for '%{room}' with the '%{method}' rate."
-        prices_gt: "prices increased"
-        prices_lt: "prices decreased"
+        prices_gt: prices increased
+        prices_lt: prices decreased
       set_manually:
-        title: "Set manually"
-        modal_title: "Enter desired price"
-        custom_price: "Enter your price"
+        title: Set manually
+        modal_title: Enter desired price
+        custom_price: Enter your price
       reject:
-        title: "Reject suggestions"
+        title: Reject suggestions
     days:
-      mon: "Monday"
-      tue: "Tuesday"
-      wed: "Wednesday"
-      thu: "Thursday"
-      fri: "Friday"
-      sat: "Saturday"
-      sun: "Sunday"
+      mon: Monday
+      tue: Tuesday
+      wed: Wednesday
+      thu: Thursday
+      fri: Friday
+      sat: Saturday
+      sun: Sunday
   channel_manager:
     new:
       header: Channel manager setup
     edit:
       header: Manage your connection options
-      hotel_name: "Name of your hotel: <span>%{value}</span>"
-      room_match_info: "Here is the list of all your rooms. <br> Make sure that room information from the channel manager matches information from Booking.com"
+      room_match_info: Here is the list of all your rooms. <br> Make sure that room information from the channel manager matches information from Booking.com
   companies:
     edit:
       header: Edit company information
@@ -48,7 +47,7 @@ en:
       edit:
         header: Edit my profile
         change_password: Change Password
-        password_tip: "leave blank if you don't want to change it"
+        password_tip: leave blank if you don't want to change it
         my_avatar: My avatar
         remove_avatar: Remove avatar from system
   hotels:
@@ -68,7 +67,7 @@ en:
       address: Address
     edit:
       header: Manage related hotels
-      description: Use the following controls to better target your competitors. <br>You can then make any hotel to be your overbooking partner simply by clicking the "Add partner" button.
+      description: Use the following controls to better target your competitors. <br>You can then make any hotel to be your overbooking partner simply by clicking the Add partner button.
       overbooking_partnership: Overbooking partnership
       add_related: Add hotel to partners list
       become_partner: Name a partner
@@ -89,16 +88,16 @@ en:
       show_available_hotels: Show available hotels
   settings:
     edit:
-      header: "Settings"
+      header: Settings
       related_hotels: "%{count} hotels matching your location criteria"
-      room_settings: "Per room configuration"
-      search_ranking: "Search ranking"
-      competitors_lookup: "Competitors lookup"
-      channel_manager: "Channel manager"
+      room_settings: Per room configuration
+      search_ranking: Search ranking
+      competitors_lookup: Competitors lookup
+      channel_manager: Channel manager
     strategy:
-      title: "Algorithm strategy"
-      revenue: "Maximized revenue"
-      occupancy: "Maximized occupancy"
+      title: Algorithm strategy
+      revenue: Maximized revenue
+      occupancy: Maximized occupancy
     form:
       settings_header_1: Update frequency
       settings_header_2: Market segment criteria
@@ -121,22 +120,25 @@ en:
       step3: Tariffs
       step4: Rooms
       step5: Competitors
+    not_finished:
+      title: Setup is not completed
+      description: Please go back to the wizard and enter all required information. <br> Or contact us via email.
     step1:
-      header: 'Find your hotel'
+      header: Find your hotel
       search_prompt: Start entering hotel name, address or Booking ID
       please_fill_contacts: Please check and fill contacts for your hotel
       no_contacts: Are you sure to proceed without hotel contacts?
     step2:
-      header: 'Setup channel manager'
-      empty_connector_warning: "Please note, that calendar prices cannot be applied without a Channel Manager."
+      header: Setup channel manager
+      empty_connector_warning: Please note, that calendar prices cannot be applied without a Channel Manager.
     step3:
-      header: 'Choose your tarif plans'
+      header: Choose your tarif plans
     step4:
-      header: 'Calibrate algorithm'
-      description: 'Now we need to fine tune our algorithm. In order to do so, you have to fill in minimal and maximum possible price limits for each room.
+      header: Calibrate algorithm
+      description: "Now we need to fine tune our algorithm. In order to do so, you have to fill in minimal and maximum possible price limits for each room.
           <br>
-          This will prevent automatic definitions from getting prices out of the scope.'
+          This will prevent automatic definitions from getting prices out of the scope."
     step5:
-      header: 'Find competitors'
-      description: 'Pick up a few hotels you think are similar to yours. We will use this data to optimize algorithm.'
+      header: Find competitors
+      description: Pick up a few hotels you think are similar to yours. We will use this data to optimize algorithm.
       finish: Complete setup

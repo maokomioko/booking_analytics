@@ -86,6 +86,14 @@ en:
       adults_count: Adults
       children_count: Children
       show_available_hotels: Show available hotels
+  overbooking:
+    form:
+      check_in: Check-in date
+      check_out: Check-out date
+      min_price: Minimum price
+      max_price: Maximum price
+      room_type: Room type
+      people_amount: Amount of people
   settings:
     edit:
       header: Settings

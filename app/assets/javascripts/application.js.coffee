@@ -76,6 +76,7 @@ ready = ->
     allowClear: true
 
   attachSelectPicker()
+  attachCalendar()
 
   # turbolinks and ajax form hack
   $('form[data-remote="true"] [type="submit"]').on 'click', (e) ->
@@ -85,9 +86,15 @@ ready = ->
 attachSelectPicker = ->
   $('.selectpicker').selectpicker()
 
+attachCalendar = ->
+  $('.calendar_daterange input').daterangepicker
+    'singleDatePicker': true
+    'linkedCalendars': false
+
 $(document).on "ready page:load", ready
 $(document).ajaxComplete ->
   attachSelectPicker()
+  attachCalendar()
 
 # Turbolinks spinner and another one for displaying in photo uploading boxes
 $(document).on "page:fetch page:receive eventFormSent", ->

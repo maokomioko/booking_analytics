@@ -1,0 +1,111 @@
+.calendar_daterange
+  max-width: 192px
+  margin-left: auto
+  margin-right: auto
+  position: relative
+  .fa-calendar-o
+    position: absolute
+    color: #9a9da0
+    right: 25px
+    top: 10px
+    &:after
+      content: ""
+      position: absolute
+      background-color: currentColor
+      display: block
+      width: 3px
+      height: 3px
+      bottom: 3px
+      right: 3px
+      border-top: 1px solid #afb1b3
+  .month_name
+    position: absolute
+    left: 0
+    right: 0
+    margin: 5px auto
+    text-align: center
+    font-size: 16px
+  input
+    font-size: 16px
+    margin-top: 6px
+    padding-right: 40px
+    padding-left: 16px
+    border: 0px
+
+.daterangepicker.opensright
+  &:before, &:after
+    display: none
+
+.daterange_center .daterangepicker.dropdown-menu
+  margin-left: -30px
+
+.daterangepicker
+  td.active
+    background-color: #c3e4f6
+    border-color: #c3e4f6
+    color: #368ed2
+    &:hover
+      background-color: #c3e4f6
+      border-color: #c3e4f6
+      color: #368ed2
+  table
+    td
+      font-size: 10px
+      color: #96999c
+    th
+      color: #afb2b4
+      text-transform: uppercase
+      font-size: 10px
+  .calendar th
+    &.prev i, &.next i
+
+.daterangepicker .calendar th
+  &.prev i, &.next i
+    width: 10px
+    height: 16px
+    position: relative
+    top: 2px
+  &.prev i:before, &.next i:before
+    display: none
+  &.prev i
+    background: url("arrow-prev.png") no-repeat top left
+
+.drp_arrow.prev
+  background: url("arrow-prev.png") no-repeat top left
+
+.daterangepicker .calendar th.next i, .drp_arrow.next
+  background: url("arrow-next.png") no-repeat top left
+
+.daterangepicker .calendar th
+  &.prev:hover i, &.next:hover i
+    background-position: 0px -16px
+
+.drp_arrow
+  width: 10px
+  height: 16px
+  display: block
+  cursor: pointer
+  &.prev
+    background: url("arrow-prev.png") no-repeat top left
+  &:hover, &.hover
+    background-position: 0px -16px
+  &:active, &.active
+    background-position: 0px -32px
+  &.disabled, &:disabled
+    background-position: 0px -48px
+
+.daterangepicker .calendar th
+  &.prev:active i, &.next:active i
+    background-position: 0px -32px
+
+.daterangepicker .calendar th
+  &.prev:disabled i, &.next:disabled i
+    background-position: 0px -48px
+
+.calendar_daterange .drp_arrow
+  position: absolute
+  top: 9px
+  &.prev
+    left: -15px
+  &.next
+    right: -15px

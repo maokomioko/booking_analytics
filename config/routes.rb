@@ -53,7 +53,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :reservations, only: :index
+  resources :reservations, only: :index do
+    collection do
+      post :search
+    end
+  end
 
   resources :settings, only: [:index, :edit, :update]
 

@@ -7,8 +7,6 @@ gem 'bson_ext'
 #gem 'binding_of_caller'
 
 gem 'cancancan'
-gem 'carrierwave'
-
 gem 'celluloid'
 
 gem 'coffee-rails', '~> 4.1.0'
@@ -51,7 +49,6 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder'
 
-gem 'mini_magick'
 gem 'mime-types'
 gem 'mail-logger'
 
@@ -133,10 +130,9 @@ group :test do
   gem 'poltergeist', github: 'teampoltergeist/poltergeist'
   gem 'rspec-its'
   gem 'rspec-rails'
-  # gem 'rspec-sidekiq'
   gem 'simplecov', '>= 0.9', require: false
   gem 'shoulda-matchers', '~> 2.8.0'
-  gem 'shoulda-callback-matchers', '~> 1.1.2'
+  gem 'shoulda-callback-matchers', '~> 1.1.3'
   gem 'timecop'
   gem 'turn', require: false
   gem 'vcr'

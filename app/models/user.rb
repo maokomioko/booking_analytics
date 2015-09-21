@@ -16,7 +16,6 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  company_id             :integer
-#  avatar                 :string
 #  role                   :string
 #  invitation_token       :string
 #  invitation_created_at  :datetime
@@ -44,8 +43,6 @@ class User < ActiveRecord::Base
   has_many :actions
 
   belongs_to :company
-
-  mount_uploader :avatar, AvatarUploader
 
   is_impressionable
 

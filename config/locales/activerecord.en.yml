@@ -15,7 +15,7 @@ en:
       setting:
         districts: City districts
       user:
-        invitation_accepted_at: Join Date
+        invitation_accepted_at: Joined HC at
     errors:
       models:
         room:

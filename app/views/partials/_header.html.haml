@@ -19,11 +19,6 @@
         .col-xs-3.col-sm-3.col-md-3.col-lg-2
           - if current_user.present?
             .user_block
-              .user_avatar
-                - if current_user.avatar.present?
-                  = image_tag current_user.avatar.thumb, class: 'img-circle'
-                - else
-                  = image_tag 'default-avatar.png'
               .user_setting
                 .dropdown
                   %a{"data-toggle" => "dropdown", :href => "#"}

@@ -1,17 +1,15 @@
 %tr(data-user-id="#{ user.id }")
-  %td.center
-    - if user.avatar.present?
-      = image_tag user.avatar.thumb, alt: user.nickname
   %td= user.email
-  %td.hidden-xs= user.role
-  %td.hidden-xs
+  %td= user.role
+  %td
     - if user.invitation_accepted_at
       = user.invitation_accepted_at.strftime('%d.%m.%Y %H:%m')
     - else
-      %span.label.label-sm.label-warning= t('shared.invited')
+      %span.label.label-sm.label-warning= user.created_at
   %td.center
     - if can?(:destroy, user)
       = link_to [:company, user], method: :delete, remote: true,
-          class: 'btn btn-xs btn-bricky tooltips',
+          class: 'btn btn_delete',
           data: { "original-title" => t('shared.remove'), confirm: t('shared.are_you_sure') } do
-        = icon('times white')
+        = icon('trash')
+        = t('shared.remove_from_list')

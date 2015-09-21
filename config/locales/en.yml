@@ -17,7 +17,6 @@ en:
     activate: Activate
     remove: Remove
     remove_from_list: Remove from list
-    invited: Invited
     edit: Edit
     prev: Back
     next: Next
@@ -117,9 +116,6 @@ en:
     company_profile: Company profile
     manage_users: Manage users
     settings: Settings
-    company:
-      existing_users: Existing users
-      invite_new: Invite new users
   flash:
     info: Info!
     warning: Warning!

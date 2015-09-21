@@ -31,4 +31,4 @@
               %td
                 = link_to related_hotels_path(hotel_id: @hotel.booking_id, id: related_hotel.related.booking_id), class: 'btn btn_delete remove-related', remote: true, method: :delete do
                   = icon('trash')
-                  = t('shared.remove_from_list')
+                  = t('shared.remove')

@@ -11,7 +11,10 @@
     .has-feedback
       = f.number_field :max_price, class: 'form-control'
       = icon('eur form-control-feedback')
-  %td= t('settings.strategy.revenue')
+  %td
+    = fields_for 'room_settings[]', @room_settings[f.object.id] do |f|
+      = f.number_field :position, class: 'form-control', min: 1, max: 100, step: 1
+
   - if current_user.channel_manager.connector_type != 'empty' && can?(:update_connector_credentials, Room)
     %td.edit-cm
       - case current_user.channel_manager.connector_type

@@ -15,6 +15,7 @@ class RoomsController < ApplicationController
     if bulk_errors(@rooms).present?
       flash[:alert] = bulk_errors(@rooms)
     else
+      RoomSetting.update(bulk_update_room_settings_params.keys, bulk_update_room_settings_params.values)
       if params[:manual] && params[:manual] == 'true'
         flash[:success] = t('messages.room_updated')
       end
@@ -43,6 +44,15 @@ class RoomsController < ApplicationController
         next unless can?(:update, Room.find(room_id))
         whitelisted[room_id] = ActionController::Parameters.new(attr)
             .permit(*allowed_attributes)
+      end
+    end
+  end
+
+  def bulk_update_room_settings_params
+    params.require(:room_settings).tap do |whitelisted|
+      params[:room_settings].each do |(id, attr)|
+        next unless can?(:update, RoomSetting.find(id))
+        whitelisted[id] = ActionController::Parameters.new(attr).permit(:position)
       end
     end
   end

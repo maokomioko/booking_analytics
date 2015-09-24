@@ -40,10 +40,6 @@ Rails.application.routes.draw do
     put :bulk_update, on: :collection
   end
 
-  namespace :room_settings do
-    put :bulk_update, action: :bulk_update, as: :bulk_update
-  end
-
   resources :related_hotels do
     collection do
       get :search

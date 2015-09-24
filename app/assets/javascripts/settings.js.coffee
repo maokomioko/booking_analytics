@@ -5,7 +5,6 @@ class @Settings
     @roomsSubmit()
     @roomsAutoSave()
     @settingsSubmit()
-    @rankingSubmit()
     @tabHacks()
 
   initUserRatingSlider: ->
@@ -67,15 +66,6 @@ class @Settings
 
     $form.on 'ajax:complete', ->
       $('.settings-form').unblock()
-
-  rankingSubmit: ->
-    $form = $('.room-settings-form')
-
-    $form.on 'submit.rails', ->
-      blockElement $(@).parents('.tab-pane')
-
-    $form.on 'ajax:complete', ->
-      $(@).parents('.tab-pane').unblock()
 
   tabHacks: ->
     $('a[href="#competitors_tab"]').on 'shown.bs.tab', ->

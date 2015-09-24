@@ -1,18 +1,14 @@
 .container-fluid
   = content_for(:main_content_header) do
-    .page_header.h2.light
+    .page_header.h2.light.fixed
       %span.page_header_title= t('.header')
 
-  .tabbable
+  .tabbable.fixed
     %ul.nav.nav-tabs
       %li.active
         %a.btn{"data-toggle" => "tab", href: "#room_settings_tab"}
           %i.clip-circle-small
           = t('.room_settings')
-      %li
-        %a.btn{"data-toggle" => "tab", href: "#search_ranking_tab"}
-          %i.clip-rating-3
-          = t('.search_ranking')
       %li
         %a.btn{"data-toggle" => "tab", href: "#competitors_tab"}
           = t('.competitors_lookup')
@@ -26,15 +22,13 @@
       .separate
       = render 'channel_manager/form'
       .clearfix
+
     #room_settings_tab.tab-pane.active
       - if @channel_manager
         .h20px= t('channel_manager.edit.room_match_info').html_safe
       = render partial: 'rooms/form'
       .clearfix
-    #search_ranking_tab.tab-pane
-      .col-sm-5
-        = render partial: 'room_settings/form'
-      .clearfix
+
     #competitors_tab.tab-pane
       .competitors_block.width_control
         .row
@@ -47,4 +41,3 @@
             .right_side
               #map(style="height: 900px;")
       .clearfix
-

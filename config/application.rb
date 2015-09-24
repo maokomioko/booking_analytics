@@ -32,7 +32,7 @@ module BookingAnalytics
     config.railties_order = [:main_app, :all]
     config.active_record.raise_in_transactional_callbacks = true
 
-    CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
+    config.action_mailer.default charset: 'utf-8'
 
     # mapping custom errors
     config.action_dispatch.rescue_responses.merge! 'CanCan::AccessDenied' => :forbidden

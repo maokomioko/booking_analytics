@@ -4,11 +4,7 @@
       .row
         .col-xs-2.col-sm-3.col-md-3.col-lg-3
           = link_to main_app.root_path do
-            .logo
-              .image.pull-left
-                = image_tag 'logo.png', class: 'img-responsive'
-              .text.pull-left
-                = image_tag 'logo-text.png', class: 'img-responsive'
+            = image_tag 'logo.svg', class: 'logo img-responsive'
         .col-xs-7.col-sm-6.col-md-6.col-lg-7
           - if current_user.present? && current_user.setup_completed?
             .header_menu
@@ -22,7 +18,7 @@
               .user_setting
                 .dropdown
                   %a{"data-toggle" => "dropdown", :href => "#"}
-                    = current_user.nickname
+                    = current_user.email
                     = icon('chevron-down')
                   %ul.dropdown-menu{"aria-labelledby" => "dLabel", :role => "menu"}
                     %li
@@ -31,6 +27,6 @@
                       %li= link_to t('menu.company_profile'), [main_app, :edit, :company]
                       %li= link_to t('menu.manage_users'), [main_app, :company, :users]
                     %li
-                      %a(href="#") Payment
+                      %a(href="#")= t('menu.subscriptions')
                     %li
                       = link_to t('auth.buttons.logout'), main_app.destroy_user_session_path, method: :delete

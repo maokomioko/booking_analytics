@@ -8,6 +8,18 @@ class BlockAvailabilityExtractor
     @blocks = blocks
   end
 
+  def hotel_hash
+    @blocks.each_with_object({}) do |block, hash|
+      hash[block.data['hotel_id']] = block
+    end
+  end
+
+  def booking_ids
+    @blocks.map do |b|
+      b.data['hotel_id']
+    end.uniq
+  end
+
   # return all room's booking_ids
   # @return Array of String
   def room_ids

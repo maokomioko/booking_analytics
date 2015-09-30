@@ -15,8 +15,8 @@ class MarkerBuilder
       @partners = []
     end
 
-    @blocks = Overbooking::BlockExtractor.new(
-      Overbooking::Block.for_hotels(@hotels.map(&:booking_id)).today
+    @blocks = BlockAvailabilityExtractor.new(
+      BlockAvailability.for_hotels(@hotels.map(&:booking_id)).today
     ).hotel_hash
   end
 

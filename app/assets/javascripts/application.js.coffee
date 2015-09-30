@@ -29,6 +29,7 @@
 #= require jquery.cookie
 #= require select2
 
+
 #= require jquery.validate
 
 #= require inputmask
@@ -39,7 +40,6 @@
 #= require jQAllRangeSliders-min
 
 #= require graph/application
-#= require overbooking/application
 
 #= require_tree ../../../vendor/assets/javascripts/
 #= require js/jquery.icheck
@@ -65,9 +65,7 @@ ready = ->
     minScrollbarLength: 20
     suppressScrollX: true
 
-  $('input.i_check').iCheck
-    checkboxClass: 'icheckbox_flat-blue'
-    radioClass: 'iradio_flat-blue'
+  attachICheck()
 
   $('body').mouseup ->
     window.isMouseDown = false
@@ -90,11 +88,20 @@ attachCalendar = ->
   $('.calendar_daterange input').daterangepicker
     'singleDatePicker': true
     'linkedCalendars': false
+    locale: {
+      format: 'YYYY-MM-DD'
+    }
+
+attachICheck = ->
+   $('input.i_check').iCheck
+    checkboxClass: 'icheckbox_flat-blue'
+    radioClass: 'iradio_flat-blue'
 
 $(document).on "ready page:load", ready
 $(document).ajaxComplete ->
   attachSelectPicker()
   attachCalendar()
+  attachICheck()
 
 # Turbolinks spinner and another one for displaying in photo uploading boxes
 $(document).on "page:fetch page:receive eventFormSent", ->

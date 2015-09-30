@@ -25,7 +25,8 @@ class Ability
     cannot :update_booking_id, ChannelManager, company_id: user.company_id
 
     can [:index, :update], Hotel, id: user.channel_manager.try(:hotel).try(:id)
-    can :update, Room, hotel_id: user.channel_manager.try(:hotel).try(:booking_id)
+
+    can :update, Room, booking_hotel_id: user.company.try(:hotel).try(:booking_id)
     can :update_connector_credentials, Room
 
     can :manage, RoomSetting, setting_id: user.company.try(:setting).try(:id)

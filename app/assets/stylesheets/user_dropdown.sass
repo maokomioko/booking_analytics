@@ -1,0 +1,50 @@
+.header_block .user_block
+  position: relative
+
+.user_setting
+  margin-top: 15px
+  padding-bottom: 15px
+  float: right
+  > .dropdown
+    font-size: 12px
+    position: static
+    >
+      a
+        color: #fff
+        font-size: 15px
+        > .fa
+          position: relative
+          top: -1px
+          margin-left: 5px
+      .dropdown-menu
+        position: absolute
+        z-index: 5000
+        min-width: 96px
+        width: 100%
+        margin-top: 46px
+        border-radius: 0px
+        border-color: #e8e8e8
+        li
+          + li
+            margin-top: 5px
+        a
+          color: #96999c
+          padding: 10px 13.5%
+          font-size: 15px
+
+.header_menu
+  padding: 15px 0
+  text-align: center
+  ul
+    margin-bottom: 0px
+    > li > a
+      font-size: 16px
+      color: #fff
+      text-transform: lowercase
+      border-radius: 3px
+      padding: 6px 13px
+      &:hover, &.hover
+        background-color: #003e86
+      &:focus, &:active, &.active
+        background-color: #0a4c99
+

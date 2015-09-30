@@ -1,10 +1,12 @@
 class @Calendar
   constructor: ->
     connector = $('#calendar').data('channelManager')
-    return if connector == 'empty'
 
     @roomsList()
     @changeMonth()
+
+    return if connector == 'empty'
+
     @selectDates()
     @togglePriceControls()
     @setPrices()

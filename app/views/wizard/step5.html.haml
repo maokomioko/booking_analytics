@@ -1,3 +1,11 @@
+= content_for :step5_form do
+  - if @related.size > 0
+    = form_tag [:wizard, :step5_post], method: :post, class: 'step5-finish-form', remote: true do
+      = button_tag type: :submit, class: 'btn btn_apply pull-right' do
+        = t('.finish')
+        = icon('arrow-right')
+    .clearfix
+
 .container-fluid
   = render 'progressbar', active: 5
 
@@ -7,6 +15,8 @@
 
   .default_form.max_width2.center-block
     = render partial: 'settings/form'
+    = yield :step5_form
+
     .div(data-partial="related_hotels")
       = render template: 'related_hotels/edit'
     .separate
@@ -14,9 +24,4 @@
       = link_to wizard_step4_path, class: 'back_link pull-left' do
         = icon('arrow-left')
         = t('shared.back')
-      - if @related.size > 0
-        = form_tag [:wizard, :step5_post], method: :post, class: 'step5-finish-form', remote: true do
-          = button_tag type: :submit, class: 'btn btn_apply pull-right' do
-            = t('.finish')
-            = icon('arrow-right')
-        .clearfix
+      = yield :step5_form

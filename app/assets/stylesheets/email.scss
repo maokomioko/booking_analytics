@@ -159,7 +159,7 @@ body, #bodyTable {
 }
 
 #emailBody {
-  background-color: #FFFFFF;
+  background-color: #fff;
 }
 
 #emailFooter {
@@ -177,7 +177,7 @@ body, #bodyTable {
 }
 
 .buttonContent {
-  color: #FFFFFF;
+  color: #fff;
   font-family: Helvetica;
   font-size: 18px;
   font-weight: bold;
@@ -187,20 +187,20 @@ body, #bodyTable {
 }
 
 .buttonContent a {
-  color: #FFFFFF;
+  color: #fff;
   display: block;
   text-decoration: none !important;
   border: 0 !important;
 }
 
 .emailCalendar {
-  background-color: #FFFFFF;
+  background-color: #fff;
   border: 1px solid #CCCCCC;
 }
 
 .emailCalendarMonth {
   background-color: #205478;
-  color: #FFFFFF;
+  color: #fff;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: bold;
@@ -373,7 +373,7 @@ Inspired by Campaign Monitor's article on using phone numbers in email: http://w
 
 h1 {
   &.header {
-    color: #FFFFFF;
+    color: #fff;
     line-height: 100%;
     font-family: Helvetica,Arial,sans-serif;
     font-size: 35px;

@@ -1,11 +1,12 @@
 class ReservationsController < ApplicationController
-  helper Overbooking::ReservationsHelper
+  helper OverbookingHelper
 
   before_action :load_hotel
   #before_action :load_channel_manager
 
   def index
     @room_types = @hotel.rooms.map(&:roomtype).uniq
+    gon.rabl template: 'app/views/hotels/show.rabl'
 
     # @reservations = begin
     #   @channel_manager.connector.get_reservations
@@ -15,22 +16,21 @@ class ReservationsController < ApplicationController
   end
 
   def search
-    @hotel = current_engine_user.channel_manager.hotel
-
+    @occupancy = reservation_params[:max_occupancy]
     @partner_ids = @hotel.related.where(related_hotels: { is_overbooking: true }).pluck(:booking_id)
     price = params[:price].to_f
 
-    @blocks = Overbooking::Block
-      .for_hotels(@partner_ids)
-      .where("(data->>'arrival_date')::date <= ?", params[:arrival].to_date)
-      .where("(data->>'departure_date')::date >= ?", params[:departure].to_date)
-
-    # @blocks = Overbooking::Block.first(100) # for test
-
-    @blocks = Overbooking::BlockExtractor.new(@blocks).divide_by_money_and_occupancy(price, params[:occupancy].to_i)
+    @block_availabilities = BlockAvailability.for_hotels(@partner_ids)
+      .with_max_occupancy(@occupancy)
+      .by_arrival(reservation_params[:check_in])
+      .by_departure(reservation_params[:check_out])
   end
 
   protected
+
+  def reservation_params
+    params.require(:reservation).permit(:check_in, :check_out, :min_price, :max_price, :room_type, :max_occupancy)
+  end
 
   def load_channel_manager
     @channel_manager = current_user.channel_manager

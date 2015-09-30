@@ -11,11 +11,8 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  districts          :text             default([]), is an Array
-#  booking_page       :integer
-#  page_position      :integer
+#  hotel_id           :integer
 #  strategy           :string
-#  current_job        :string
-#  sidekiq_lock       :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -70,7 +67,7 @@ class Setting < ActiveRecord::Base
     end
   end
 
-  def user_ratings_range= (hash)
+  def user_ratings_range=(hash)
     @user_ratings_range = OpenStruct.new hash
     range = user_ratings_range.from..user_ratings_range.to
     self[:user_ratings] = range.to_a.map{ |x| (x.to_f / 10).to_s }

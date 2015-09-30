@@ -5,7 +5,6 @@ en:
     show:
       header: User timeline
   calendar:
-    title: Rate management
     custom_price: Custom price
     price_controls:
       apply: Apply prices
@@ -71,6 +70,32 @@ en:
       add_related: Add hotel to partners list
       become_partner: Name a partner
       remove_partner: Remove partnership
+  contacts:
+    desc: "Please fill in contact information for your hotel."
+    title: "Contact Information"
+    suggest: "Please select your hotel in order to fill up contact information."
+    edit:
+      header: "Edit %{hotel}'s %{contact_type}"
+      save: "Save contact"
+    new:
+      header: "Contact information"
+      save: "Add contact"
+  directions:
+    infowindow:
+      trace_route: Trace route to this hotel
+      driving: Driving
+      walking: Walking
+      transit: Public transit
+      print_header:
+        driving: "Driving route to %{destination}"
+        walking: "Walking route to %{destination}"
+        transit: "Public transit route to %{destination}"
+      room_name: Room type
+      room_max_occupancy: Max people
+      room_price: Price
+    show:
+      header: Build your routes between hotels
+      print: Print route
   reservations:
     index:
       thead:
@@ -85,19 +110,21 @@ en:
       children_count: Children
       show_available_hotels: Show available hotels
   overbooking:
+    description: "Use this form to find hotels with free rooms matching your params. Below you will find matching results with contact information.<br>
+                  Then you can pick up the room you want to ask about and hit 'Send request' button. Selected hotel will shortly receive a notification about your inquiry."
     form:
       check_in: Check-in date
       check_out: Check-out date
       min_price: Minimum price
       max_price: Maximum price
       room_type: Room type
-      people_amount: Amount of people
+      max_occupancy: People
+    send_request: Send request
   settings:
     edit:
       header: Settings
       related_hotels: "%{count} hotels matching your location criteria"
       room_settings: Per room configuration
-      search_ranking: Search ranking
       competitors_lookup: Competitors lookup
       channel_manager: Channel manager
     strategy:
@@ -117,6 +144,9 @@ en:
   users:
     index:
       header: User management
+      tabs:
+        first: Invite new users through this form
+        second: Manage existing users
   wizard:
     progressbar:
       step_number: "Step %{number}"

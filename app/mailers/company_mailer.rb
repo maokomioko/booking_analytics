@@ -5,4 +5,10 @@ class CompanyMailer < DefaultMailer
 
     mail to: emails
   end
+
+  def promotional_letter(company_id)
+    @company = Company.find(company_id)
+    emails = @company.users.map(&:email)
+    mail to: emails
+  end
 end

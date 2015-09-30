@@ -31,6 +31,7 @@ gem 'globalize', github: 'globalize/globalize'
 gem 'gmaps4rails'
 gem 'gon'
 gem 'google-analytics-turbolinks'
+gem 'google_directions'
 
 gem 'graph', path: 'graph'
 
@@ -58,13 +59,13 @@ gem 'non-stupid-digest-assets'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
-gem 'overbooking', path: 'overbooking'
 
 gem 'pg'
 gem 'premailer-rails'
 gem 'progress_bar'
 gem 'price_maker', path: 'price_maker'
 gem 'puma'
+gem 'phony_rails'
 
 gem 'rabl-rails'
 gem 'racc'
@@ -77,7 +78,7 @@ gem 'roadie-rails'
 gem 'rubysl', platform: :rbx
 
 gem 'sass-rails', '>= 5'
-gem 'select2-rails'
+gem 'select2-rails', '~> 3.5.9.3'
 gem 'stringex'
 gem 'sidekiq', github: 'mperham/sidekiq'
 gem 'sidekiq-middleware'
@@ -91,10 +92,12 @@ gem 'wicked_pdf'
 gem 'whenever'
 
 gem 'uglifier', '>= 1.3.0'
+gem 'underscore-rails'
 
 group :development do
   gem 'awesome_print', github: 'eoinkelly/awesome_print'
   gem 'thin'
+  gem 'spring'
 end
 
 group :development, :test do

@@ -1,0 +1,6 @@
+.form-group
+  = f.label :value, Contact::Phone.human_attribute_name(:value), class: 'col-sm-4 control-label'
+  .col-sm-6
+    .input-group
+      %span.input-group-addon= icon('phone')
+      = f.text_field :value, class: 'form-control with_validation phone'

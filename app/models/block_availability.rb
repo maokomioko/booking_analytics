@@ -8,14 +8,24 @@
 #  booking_id    :integer
 #  fetch_stamp   :string
 #
+# Indexes
+#
+#  index_active_block_availabilities_on_booking_id  (booking_id)
+#
 
 class BlockAvailability < ActiveRecord::Base
   self.table_name = 'active_block_availabilities'
 
   scope :for_hotels, -> (hotel_ids) { where("(data->>'hotel_id')::integer IN (?)", hotel_ids) }
 
-  scope :by_arrival, -> (date) { where("(data->>'arrival_date') = ?", date.to_date.strftime('%Y-%m-%d')) }
-  scope :by_departure, -> (date) { where("(data->>'departure_date') = ?", date.to_date.strftime('%Y-%m-%d')) }
+  scope :today, -> {
+    today = Date.tomorrow
+    where("(data->>'arrival_date')::date <= ?", today).
+    where("(data->>'departure_date')::date > ?", today)
+  }
+  scope :by_arrival, -> (date) { where("(data->>'arrival_date')::date = ?", date.to_date) }
+  scope :by_departure, -> (date) { where("(data->>'departure_date')::date = ?", date.to_date) }
+  scope :with_max_occupancy, -> (people) { where("data -> 'block' @> ?", [{'max_occupancy': "#{people}"}].to_json) }
 
   def block_prices(occupancy, room_booking_ids, price_position)
     [].tap do |arr|
@@ -24,21 +34,6 @@ class BlockAvailability < ActiveRecord::Base
       end
       arr.reject(&:blank?)
     end
-  end
-
-  def with_max_occupancy(people)
-    arr = []
-    [].push(self).flatten.each do |block_availability|
-      block_availability.data['block'].each do |block|
-        occupancy = block['max_occupancy'].to_i
-
-        if occupancy >= people.to_i
-          arr << block
-        end
-      end
-    end
-
-    arr
   end
 
   class << self

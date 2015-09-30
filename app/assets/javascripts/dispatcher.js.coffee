@@ -21,11 +21,14 @@ class Dispatcher
       when 'channel_manager:edit', 'channel_manager:new'
         new ChannelManagerForm()
       when 'related_hotels:edit'
-        new Related()
+        new RelatedHotels()
       when 'settings:edit'
+        new MapBuilder()
         new Settings()
-        new Related()
+        new RelatedHotels()
         new ChannelManagerForm()
+      when 'reservations:index'
+        new MapBuilder()
       when 'users:index'
         new Users()
       when 'payments:details'
@@ -37,7 +40,7 @@ class Dispatcher
     if page.match(/wizard:step/i)
       new Wizard()
       new ChannelManagerForm() # step 2
-      new Related() # step 5
+      new RelatedHotels() # step 5
 
 ready = ->
   new Dispatcher()

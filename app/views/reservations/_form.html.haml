@@ -1,0 +1,38 @@
+= form_for :reservation, url: search_reservations_path, method: :post, remote: true do |f|
+  .row
+    .col-xs-3
+      .form-group
+        = f.label :check_in, t('overbooking.form.check_in')
+        .calendar_daterange
+          = f.text_field :check_in, value: Date.today, class: 'form-control'
+          = icon('calendar-o')
+    .col-xs-3
+      .form-group
+        = f.label :check_out, t('overbooking.form.check_out')
+        .calendar_daterange
+          = f.text_field :check_out, value: Date.tomorrow, class: 'form-control'
+          = icon('calendar-o')
+    .col-xs-3
+      .form-group
+        = f.label :min_price, t('overbooking.form.min_price')
+        .has-feedback
+          = f.number_field :min_price, in: 1..1000, class: 'form-control'
+    .col-xs-3
+      .form-group
+        = f.label :max_price, t('overbooking.form.max_price')
+        .has-feedback
+          = f.number_field :max_price, in: 1..10000, class: 'form-control'
+  .row
+    .col-xs-6
+      .form-group
+        = f.label :room_type, t('overbooking.form.room_type')
+        = f.select :room_type, @room_types, {}, class: 'form-control selectpicker'
+    .col-xs-3
+      .form-group
+        = f.label :max_occupancy, t('overbooking.form.max_occupancy')
+        = f.number_field :max_occupancy, value: 2, in: 1..20, class: 'form-control'
+    .col-xs-3
+      .form-group
+        %button.btn.btn_apply{type: "submit"}
+          = icon('search')
+          = t('shared.search')

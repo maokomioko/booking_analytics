@@ -1,0 +1,8 @@
+.form-group
+  = f.label :custom_type, Contact::Other.human_attribute_name(:custom_type), class: 'col-sm-4 control-label'
+  .col-sm-6
+    = f.text_field :custom_type, class: 'form-control with_validation', placeholder: 'ICQ, AIM, mIRC, etc..'
+.form-group
+  = f.label :value, Contact::Other.human_attribute_name(:value), class: 'col-sm-4 control-label'
+  .col-sm-6
+    = f.text_field :value, class: 'form-control with_validation'

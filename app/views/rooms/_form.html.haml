@@ -9,7 +9,8 @@
         %th= Room.human_attribute_name(:name)
         %th= Room.human_attribute_name(:min_price)
         %th= Room.human_attribute_name(:max_price)
-        %th= t('settings.strategy.title')
+        - if controller_name != 'wizard'
+          %th= t('settings.strategy.title')
         - if current_user.channel_manager.connector_type != 'empty' && can?(:update_connector_credentials, Room)
           %th= t('labels.select_room')
     %tbody
@@ -33,7 +34,6 @@
           = link_to wizard_step3_path, class: 'back_link pull-left' do
             = icon('arrow-left')
             = t('shared.back')
-        %td
         %td
         %td
         - if current_user.channel_manager.connector_type != 'empty' && can?(:update_connector_credentials, Room)

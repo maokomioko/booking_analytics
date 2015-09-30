@@ -1,6 +1,6 @@
 en:
   meta:
-    title: Hotel Commander | v1.0
+    title: Hotel Commander | v1.1a
     description: Hotel revenue management software
     author: Hotel Commander
   shared:
@@ -20,6 +20,7 @@ en:
     edit: Edit
     prev: Back
     next: Next
+    add_contact: Add new contact
     are_you_sure: Are you sure?
     view_in_web: Open Web Page
   errors:
@@ -109,13 +110,14 @@ en:
       edit: Update settings
       update: Update settings
   menu:
-    rate_management: Rate management
-    overbooking: Overbooking
+    rate_management: Rate forecasting
+    overbooking: Overbooking management
     competitors_lookup: Competitors lookup
     profile: Edit my profile
     company_profile: Company profile
     manage_users: Manage users
     settings: Settings
+    subscriptions: Subscriptions
   flash:
     info: Info!
     warning: Warning!

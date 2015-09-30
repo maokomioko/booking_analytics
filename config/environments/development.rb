@@ -34,6 +34,17 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.action_mailer.delivery_method = :letter_opener
 
+  # config.action_mailer.default_url_options = { host: 'hotelcommander.net' }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   user_name: 'mikeeirih@me.com',
+  #   password: 'ySjWppj6lCh7hE643bsXtw',
+  #   address: 'smtp.mandrillapp.com',
+  #   port: 587,
+  #   enable_starttls_auto: true,
+  #   authentication: 'login'
+  # }
+
   config.dev_tweaks.autoload_rules do
     keep :all
 

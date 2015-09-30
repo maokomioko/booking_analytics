@@ -16,6 +16,21 @@ en:
         districts: City districts
       user:
         invitation_accepted_at: Joined HC at
+      contact/email:
+        value: E-mail address
+      contact/other:
+        value: Value
+        custom_type: Contact type
+      contact/phone:
+        value: Phone number
+      contact/skype:
+        value: Skype login
+      contact/telegram:
+        value: Telegam nickname
+      contact/viber:
+        value: Viber
+      contact/whatsapp:
+        value: WhatsApp
     errors:
       models:
         room:

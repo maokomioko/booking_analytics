@@ -14,3 +14,11 @@ en:
       empty: Without ChannelManager
       wubook: WuBook
       previo: Previo
+    contact_type:
+      phone: Phone
+      email: E-mail
+      skype: Skype
+      whatsapp: WhatsApp
+      viber: Viber
+      telegram: Telegram
+      other: Other

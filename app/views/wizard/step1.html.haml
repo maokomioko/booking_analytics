@@ -15,7 +15,7 @@
             = icon('arrow-right')
           .clearfix
     .text-center.light
-      .header.h3= t('overbooking.contacts.title')
+      .header.h3= t('contacts.title')
     .default_form.max_width.center-block
-      %p.hotel-contacts-info.text-center= t('overbooking.contacts.suggest')
-      .hotel-contacts{ data: { url: overbooking.hotels_contacts_by_hotel_path, 'contact-hotel-id' => @channel_manager.booking_id } }
+      %p.hotel-contacts-info.text-center= t('contacts.suggest')
+      .hotel-contacts{ data: { url: hotels_contacts_by_hotel_path, 'contact-hotel-id' => @channel_manager.booking_id } }

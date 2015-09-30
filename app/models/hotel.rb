@@ -15,8 +15,7 @@
 #  booking_id      :integer
 #  latitude        :decimal(10, 6)
 #  longitude       :decimal(10, 6)
-#  district        :string           default("{}")
-#  website_url     :string
+#  district        :text             default([]), is an Array
 #  phone           :string
 #  normalized_name :string
 #
@@ -51,6 +50,8 @@ class Hotel < ActiveRecord::Base
 
   has_many :channel_managers, foreign_key: :booking_id, primary_key: :booking_id
   has_many :rooms, foreign_key: :booking_hotel_id, primary_key: :booking_id
+
+  has_many :contacts
 
   has_many :related_hotels
   has_many :related,

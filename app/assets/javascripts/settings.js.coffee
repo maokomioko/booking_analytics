@@ -70,6 +70,3 @@ class @Settings
   tabHacks: ->
     $('a[href="#competitors_tab"]').on 'shown.bs.tab', ->
       $(window).trigger('resize') # fix slider
-      google.maps.event.trigger map.getMap(), 'resize' # fix Gmap
-      map.getMap().setZoom(15)
-      map.getMap().setCenter(new google.maps.LatLng(gon.hotel.lat, gon.hotel.lng))

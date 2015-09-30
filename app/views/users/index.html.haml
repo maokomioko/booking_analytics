@@ -6,7 +6,7 @@
   .row.profile_form
     .col-sm-12
       = form_for User.new, as: 'user', url: user_invitation_path, html: { method: :post, class: 'invitation-form' }, remote: true do |f|
-        %h3.light Invite new users through this form
+        %h3.light= t('users.index.tabs.first')
         .col-sm-4
           = f.label :email, t('devise.invitations.new.label'), class: 'control-label'
         .clearfix
@@ -18,7 +18,7 @@
 
   .row
     .col-sm-12
-      %h3.light Manage existing users
+      %h3.light= t('users.index.tabs.second')
       %table.table
         %thead
           %tr

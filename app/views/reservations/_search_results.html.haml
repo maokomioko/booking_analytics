@@ -1,0 +1,39 @@
+%h3.light= t('related_hotels.index.count', count: @block_availabilities.count)
+- @block_availabilities.each do |block_avail|
+  - hotel = Hotel.find_by(booking_id: block_avail.data['hotel_id'])
+  .checkboxes
+    .h16px= hotel.name
+    .separate2
+    .row
+      .col-xs-6
+        - block_avail.data['block'].each do |block|
+          - if block['max_occupancy'].to_i >= @occupancy.to_i
+            .checkbox
+              %label
+                = check_box_tag :block_id, block['block_id'], false, class: 'i_check'
+                %span.cost
+                  = number_to_euro(block['min_price']['price']) + " for 1 person"
+                  = "(max #{block['max_occupancy']} people)"
+                = block['name']
+
+      .col-xs-6
+        %ul.list-unstyled.contacts
+          %li
+            = icon('map-marker')
+            = link_to hotel.post_address, '#', data: {hotel_id: hotel.id, type: 'map-pin'}
+          - hotel.contacts.each do |contact|
+            %li
+              = icon contact_icon(contact.contact_name)
+              = contact.value
+              %p= contact.description.html_safe
+          %li
+            = icon('bold')
+            = link_to 'Booking.com website', hotel.url, class: 'text_link', target: '_blank'
+          - if hotel.website_url
+            %li
+              = icon('external-link')
+              = link_to hotel.website_url, hotel.website_url, class: 'text_link', target: '_blank'
+      .col-xs-12
+        = link_to '#', class: 'btn btn_apply' do
+          = icon('send')
+          = t('overbooking.send_request')

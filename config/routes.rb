@@ -3,7 +3,6 @@ require 'sidekiq-status/web'
 
 Rails.application.routes.draw do
   mount Graph::Engine, at: '/graph'
-  mount Overbooking::Engine, at: '/overbooking'
 
   authenticate :user, ->(u) { u.role == 'admin' } do
     mount Sidekiq::Web => '/sidekiq'
@@ -36,6 +35,11 @@ Rails.application.routes.draw do
     end
   end
 
+  scope 'hotels/:hotel_id', as: :hotel do
+    resources :contacts
+  end
+  get 'hotels/contacts/by_hotel', controller: :contacts, action: :by_hotel
+
   resources :rooms, only: [:update] do
     put :bulk_update, on: :collection
   end
@@ -49,10 +53,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :reservations, only: :index do
-    collection do
-      post :search
-    end
+  resources :reservations do
+    post :search, on: :collection
   end
 
   resources :settings, only: [:index, :edit, :update]

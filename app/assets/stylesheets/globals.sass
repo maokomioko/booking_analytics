@@ -34,3 +34,175 @@ body[data-page="settings:edit"]
   .logo
     margin-top: -10px
     width: 170px
+
+.steps_line
+  margin: 50px 0 40px
+  text-align: center
+  .step_point
+    &:last-child .step_progress
+      display: none
+    + .step_point
+      margin-left: 60px
+    &.active + .step_point.active:after
+      content: ""
+      display: block
+      position: absolute
+      top: 25px
+      right: 74px
+      height: 2px
+      width: 139px
+      background-color: #90daa9
+
+.step_point
+  display: inline-block
+  position: relative
+  min-width: 95px
+  .step_circle
+    z-index: 2
+    width: 54px
+    height: 54px
+    line-height: 52px
+    text-align: center
+    position: relative
+    border-radius: 100%
+    display: inline-block
+    border: 2px solid #e9e9e9
+  .step_number
+    color: #e9e9e9
+    font-size: 30px
+  .fa-check
+    display: none
+  .step_name
+    margin-top: 10px
+    font-size: 12px
+    color: #d4d4d4
+  .step_progress
+    top: 25px
+    left: 74px
+    width: 139px
+    height: 2px
+    position: absolute
+    background-color: #eeeeee
+  &.active, &.current
+    .step_name
+      color: #363a3f
+  &.active
+    .step_circle
+      border: 0
+      background-color: #46c26f
+      .step_number
+        color: #fff
+    .step_progress
+      background: rgb(143,215,175)
+  &.current
+    .step_circle
+      border: 0
+      background-color: #368ed2
+      -webkit-box-shadow: -2px 2px 5px 2px rgba(216, 216, 216, 1)
+      -moz-box-shadow: -2px 2px 5px 2px rgba(216, 216, 216, 1)
+      box-shadow: -2px 2px 5px 2px rgba(216, 216, 216, 1)
+    .step_number
+      color: #fff
+    .step_progress
+      background: rgb(138,188,226)
+
+.btn_grey
+  background-color: #e4e4e4
+  color: #575b60
+  &:focus, &:active, &.active
+    background-color: #cdcdcd
+
+.btn_grey, .btn_apply, .btn_set, .btn_reject, .btn_add, .btn_edit, .btn_delete, .btn_partner
+  -webkit-box-shadow: none
+  -moz-box-shadow: none
+  box-shadow: none
+  &:hover, &.hover
+    -webkit-box-shadow: 2px 2px 2px 0px rgba(206, 206, 206, 1)
+    -moz-box-shadow: 2px 2px 2px 0px rgba(206, 206, 206, 1)
+    box-shadow: 2px 2px 2px 0px rgba(206, 206, 206, 1)
+    .fa
+      color: #fff
+  &:active, &.active
+    .fa
+      color: #fff
+
+.btn_apply
+  background-color: #46c26f
+  color: #fff
+  &.disabled
+    background-color: #99deb0
+  &:focus, &:active, &.active
+    color: #fff
+    background-color: #3fae64
+  &:hover, &.hover
+    color: #fff
+    background-color: #46c26f
+
+.btn_set
+  background-color: #368ed2
+  color: #fff
+  &.disabled
+    background-color: #91c1e6
+  &:focus, &:active, &.active
+    color: #fff
+    background-color: #3080bd
+  &:hover, &.hover
+    color: #fff
+    background-color: #368ed2
+
+.btn_reject
+  background-color: #f13c5e
+  color: #fff
+  &.disabled
+    background-color: #f794a7
+  &:focus, &:active, &.active
+    color: #fff
+    background-color: #d83654
+  &:hover, &.hover
+    color: #fff
+    background-color: #f13c5e
+
+.btn_add
+  color: #fff
+  background-color: #b5b7b9
+  &:focus, &:active, &.active
+    background-color: #63676b
+    color: #fff
+  &:hover, &.hover
+    background-color: #818487
+    color: #fff
+  &.fa
+    color: #fff
+
+.btn_edit, .btn_delete
+  color: #b5b7b9
+  background-color: #f7f7f7
+
+.btn_edit
+  &:focus, &:active, &.active
+    background-color: #3080bd
+    color: #fff
+  &:hover, &.hover
+    background-color: #368ed2
+    color: #fff
+  .fa
+    color: #368ed2
+
+.btn_delete
+  &:focus, &:active, &.active
+    background-color: #d83654
+    color: #fff
+  &:hover, &.hover
+    background-color: #f5456a
+    color: #fff
+  .fa
+    color: #f5456a
+
+.btn_partner
+  color: #46c26f
+  &:hover, &.hover
+    background-color: #46c26f
+    color: #fff
+  &:focus, &:active, &.active
+    background-color: #3fae64
+    color: #fff

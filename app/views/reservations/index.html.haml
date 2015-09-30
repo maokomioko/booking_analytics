@@ -4,101 +4,18 @@
       %span.page_header_title= t('menu.overbooking')
 
       = link_to settings_path, class: 'btn btn_grey' do
-        =icon('cog')
+        = icon('cog')
         = t('menu.settings')
 
-  .overbooking_block.width_control
+  .overbooking_block.width_control{ data: {related_ids: @hotel.related.map(&:booking_id)} }
     .row
       .col-md-6
-        .left_side
-          .overbooking_form
-            .description_text
-              %p Use this form to find hotels with free rooms matching your params. Below you will find matching results with contact information.
-              %p Then you can pick up the room you want to ask about and hit "Send request" button. Selected hotel will shortly receive a notification about your inquiry.
-            .separate2
-
-            = form_for :overbooking, action: search_reservations_path, method: :post, remote: true do |f|
-              .inputs
-                .row
-                  .col-xs-3
-                    .form-group
-                      = f.label :check_in, t('overbooking.form.check_in')
-                      .calendar_daterange
-                        = f.text_field :check_in, class: 'form-control'
-                        = icon('calendar-o')
-                  .col-xs-3
-                    .form-group
-                      = f.label :check_out, t('overbooking.form.check_out')
-                      .calendar_daterange
-                        = f.text_field :check_out, class: 'form-control'
-                        = icon('calendar-o')
-                  .col-xs-3
-                    .form-group
-                      = f.label :min_price
-                      .has-feedback
-                        = f.number_field :min_price, in: 1..1000, class: 'form-control'
-                  .col-xs-3
-                    .form-group
-                      = f.label :max_price
-                      .has-feedback
-                        = f.number_field :max_price, in: 1..10000, class: 'form-control'
-                .row
-                  .col-xs-6
-                    .form-group
-                      = f.label :room_type
-                      = f.select :room_type, @room_types, {}, class: 'form-control selectpicker'
-                  .col-xs-3
-                    .form-group
-                      = f.label :people_amount
-                      = f.number_field :people_amount, in: 1..10, class: 'form-control'
-                  .col-xs-3
-                    .form-group
-                      %button.btn.btn_apply{type: "submit"}
-                        = icon('search')
-                        = t('shared.search')
+        .overbooking_form
+          .description_text
+            %p= t('overbooking.description').html_safe
+          .separate2
+          .inputs= render 'form'
           .separate
-
-
-  -# .row
-  -#   .col-sm-12
-  -#     - if current_user.channel_manager.connector_type == 'empty'
-  -#       .row
-  -#         .col-sm-6
-  -#           = render 'empty_connector'
-
-  -#     - unless @reservations
-  -#       %h3= t('errors.no_reservations')
-  -#     - else
-  -#       %table.table
-  -#         %thead
-  -#           %tr
-  -#             %th= t('.thead.reservation_period')
-  -#             %th= t('.thead.price')
-  -#             %th= t('.thead.room')
-  -#             %th= t('.thead.occupancy')
-  -#             %th= t('.thead.contacts')
-  -#             - if defined?(Overbooking::Engine)
-  -#               %th
-  -#         %tbody
-  -#           - @reservations.each do |reservation|
-  -#             %tr
-  -#               %td
-  -#                 = l reservation[:arrival], format: :short
-  -#                 &mdash;
-  -#                 = l reservation[:departure], format: :short
-  -#               %td= number_to_euro reservation[:price]
-  -#               %td
-  -#                 = Room.where(@channel_manager.connector_room_id_key => reservation[:room_ids]).map(&:name).to_sentence
-  -#                 %small
-  -#                   (
-  -#                   = t('.total')
-  -#                   = pluralize(reservation[:room_amount], t('.room'))
-  -#                   )
-  -#               %td
-  -#                 %p #{ t('.adults_count') } #{ reservation[:adults] }
-  -#                 %p #{ t('.children_count') } #{ reservation[:children] }
-  -#               %td
-  -#                 = [reservation[:contact_email], reservation[:contact_phone]].select(&:present?).to_sentence
-  -#               - if defined?(Overbooking::Engine)
-  -#                 %td
-  -#                   = link_to t('.show_available_hotels'), link_for_search_reservation(reservation), class: 'btn btn-teal'
+          #results_placeholder
+      .col-md-6
+        #map

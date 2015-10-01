@@ -5,9 +5,8 @@
 #= require underscore
 #= require gmaps/google
 
-# require jquery-ui/core
-# require jquery-ui/widget
 #= require jquery-ui/mouse
+#= require jquery-ui/datepicker
 
 #= require jquery.remotipart
 
@@ -21,7 +20,6 @@
 
 #= require bootstrap-hover-dropdown.min
 #= require bootstrap-tagsinput
-#= require bootstrap-fileupload.min
 
 #= require jquery.blockUI
 
@@ -85,12 +83,10 @@ attachSelectPicker = ->
   $('.selectpicker').selectpicker()
 
 attachCalendar = ->
-  $('.calendar_daterange input').daterangepicker
-    'singleDatePicker': true
-    'linkedCalendars': false
-    locale: {
-      format: 'YYYY-MM-DD'
-    }
+  $('.calendar_daterange input').datepicker
+    dateFormat: 'yy-mm-dd'
+    inline: true
+    showOtherMonths: true
 
 attachICheck = ->
    $('input.i_check').iCheck

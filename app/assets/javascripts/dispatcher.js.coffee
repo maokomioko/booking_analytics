@@ -29,6 +29,7 @@ class Dispatcher
         new ChannelManagerForm()
       when 'reservations:index'
         new MapBuilder()
+        new Reservation()
       when 'users:index'
         new Users()
       when 'payments:details'

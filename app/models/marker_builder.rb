@@ -8,7 +8,8 @@ class MarkerBuilder
     @hotels = Hotel.where(booking_id: hotel_booking_ids)
 
     if current_booking_id.present?
-      @partners = Hotel.find_by_booking_id(current_booking_id)
+      @hotel = Hotel.find_by_booking_id(current_booking_id)
+      @partners = @hotel
                       .related_hotels.where(is_overbooking: true)
                       .pluck(:related_id) & @hotels.pluck(:id)
     else
@@ -20,8 +21,8 @@ class MarkerBuilder
     ).hotel_hash
   end
 
-  def self.build(hotel_booking_ids)
-    new(hotel_booking_ids).build
+  def self.build(hotel_booking_ids, current_booking_id)
+    new(hotel_booking_ids, current_booking_id).build
   end
 
   def build
@@ -48,6 +49,7 @@ class MarkerBuilder
         locals: {
           hotel: hotel,
           partner: @partners.include?(hotel.id),
+          current_hotel: @hotel,
           block: @blocks[hotel.booking_id.to_s]
         }
     )

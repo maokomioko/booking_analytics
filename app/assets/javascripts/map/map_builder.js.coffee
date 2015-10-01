@@ -29,7 +29,7 @@ class @MapBuilder
         lng: gon.hotel.lng
         marker_title: gon.hotel.title
 
-      $.getJSON '/hotels/markers', { booking_ids: @related_ids }, (jsonData) ->
+      $.getJSON '/hotels/markers', { booking_ids: @related_ids, current_hotel_id: gon.hotel.booking_id }, (jsonData) ->
         markers = map.addMarkers(jsonData)
         map.bounds.extendWith(markers)
 
@@ -88,7 +88,7 @@ class @MapBuilder
         $img.attr('src', 'https://maps.googleapis.com/maps/api/staticmap?size=800x500&path=weight:5%7Ccolor:red%7Cenc:' + polyline)
 
       request =
-        origin: new google.maps.LatLng(window.hotel.lat, window.hotel.lng)
+        origin: new google.maps.LatLng(gon.hotel.lat, gon.hotel.lng)
         destination: new google.maps.LatLng($parent.data('lat'), $parent.data('lng'))
         travelMode: google.maps.TravelMode[travelMode]
 

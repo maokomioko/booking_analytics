@@ -55,6 +55,7 @@ Rails.application.routes.draw do
 
   resources :reservations do
     post :search, on: :collection
+    post 'notify_partner/:partner_id', action: :notify_partner, as: :notify_partner
   end
 
   resources :settings, only: [:index, :edit, :update]

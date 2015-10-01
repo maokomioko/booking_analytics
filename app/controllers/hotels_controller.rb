@@ -11,7 +11,7 @@ class HotelsController < ApplicationController
   end
 
   def markers
-    @hash = MarkerBuilder.build(params[:booking_ids])
+    @hash = MarkerBuilder.build(params[:booking_ids], params[:current_hotel_id])
     render json: @hash.to_json
   end
 end

@@ -26,6 +26,21 @@ class ReservationsController < ApplicationController
       .by_departure(reservation_params[:check_out])
   end
 
+   def notify_partner
+    @partner = @hotel.related.where(booking_id: params[:partner_id]).first
+    @map = params[:map]
+
+    if @partner.present?
+      DirectionsMailer.delay.notify_partner(
+        @hotel.booking_id,
+        @partner.booking_id,
+        @map
+      )
+    end
+
+    render nothing: true
+  end
+
   protected
 
   def reservation_params

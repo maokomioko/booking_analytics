@@ -1,9 +1,9 @@
 .container-fluid
   = content_for(:main_content_header) do
-    .page_header.h2.light.fixed
+    .page_header.h2.light
       %span.page_header_title= t('.header')
 
-  .tabbable.fixed
+  .tabbable
     %ul.nav.nav-tabs
       %li.active
         %a.btn{"data-toggle" => "tab", href: "#room_settings_tab"}
@@ -33,11 +33,10 @@
       .competitors_block.width_control
         .row
           .col-md-6
-            .left_side
-              = render 'form'
-              .div(data-partial="related_hotels")
-                = render template: 'related_hotels/edit'
+            = render 'form'
+            .separate
+            #results_placeholder(data-partial="related_hotels")
+              = render template: 'related_hotels/edit'
           .col-md-6.hidden-xs.hidden-sm
-            .right_side.fixed
-              #map
+            #map
       .clearfix

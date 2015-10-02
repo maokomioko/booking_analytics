@@ -5,7 +5,7 @@ class MarkerBuilder
   }
 
   def initialize(hotel_booking_ids, current_booking_id = nil)
-    @hotels = Hotel.where(booking_id: hotel_booking_ids)
+    @hotels = Hotel.where('booking_id IN (?)', hotel_booking_ids.split(','))
 
     if current_booking_id.present?
       @hotel = Hotel.find_by_booking_id(current_booking_id)

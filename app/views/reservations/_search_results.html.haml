@@ -1,7 +1,7 @@
 %h3.light= t('related_hotels.index.count', count: @block_availabilities.count)
 - @block_availabilities.each do |block_avail|
   - hotel = Hotel.find_by(booking_id: block_avail.data['hotel_id'])
-  .checkboxes
+  .checkboxes{ data: { hotel_id: hotel.booking_id } }
     .h16px= hotel.name
     .separate2
     .row

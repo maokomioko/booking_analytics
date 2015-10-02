@@ -1,11 +1,7 @@
 class @MapBuilder
   constructor: ->
     @setContainerHeight()
-
-    if $('body').attr('data-page') == 'reservations:index'
-      @related_ids_source('overbooking')
-    else
-      @related_ids_source('table')
+    window.markers = []
 
     @initMap()
     @initDirections()
@@ -13,9 +9,11 @@ class @MapBuilder
   setContainerHeight: ->
     $(window).on 'load resize', ->
       parent_h = $(window).height() - 155
+      results_parent = $('#results_placeholder').parent()
 
       $('#map').height(parent_h)
       $('#results_placeholder').height(parent_h - 300)
+      $('#results_placeholder').width(results_parent.width())
 
   initMap: =>
     window.map = Gmaps.build('Google')
@@ -29,37 +27,39 @@ class @MapBuilder
         lng: gon.hotel.lng
         marker_title: gon.hotel.title
 
-      $.getJSON '/hotels/markers', { booking_ids: @related_ids, current_hotel_id: gon.hotel.booking_id }, (jsonData) ->
-        markers = map.addMarkers(jsonData)
-        map.bounds.extendWith(markers)
-
-      google.maps.event.trigger map.getMap(), 'resize' # fix Gmap
-
-      map.getMap().setZoom 15
-      map.getMap().setCenter new (google.maps.LatLng)(gon.hotel.lat, gon.hotel.lng)
+      reloadMarkers()
+      centerMap()
 
       google.maps.event.addDomListener window, 'load',
       google.maps.event.addDomListener window, 'resize', ->
-        center = map.getCenter()
-        google.maps.event.trigger map, 'resize'
-        map.setCenter center
-        return
+        centerMap()
 
   initDirections: ->
     setDirectionsRenderer()
     traceRoute()
     initPrint()
 
-  related_ids_source: (source) ->
-    @related_ids =(
-      if source == 'overbooking'
-        $('[data-related-ids]').data('relatedIds')
-      else
-        $.map $('.related-hotels-table').find('tr[data-hotel-id]'), (el) ->
-          $(el).data('hotelId')
-      )
+  window.reloadMarkers = ->
+    console.log markers
+    unless markers == undefined
+      i = 0
+      while i < markers.length
+        markers[i].setMap(null)
+        markers[i] = null
+        i++
 
-    return @related_ids
+    $.getJSON '/hotels/markers', { booking_ids: related_ids, current_hotel_id: gon.hotel.booking_id }, (jsonData) =>
+      window.markers = window.map.addMarkers(jsonData)
+      map.bounds.extendWith(markers)
+
+  window.centerMap = ->
+    google.maps.event.trigger map.getMap(), 'resize'
+    map.getMap().setZoom 15
+    map.getMap().setCenter(new google.maps.LatLng(gon.hotel.lat, gon.hotel.lng))
+
+  related_ids = ->
+    $.map $(document).find('[data-hotel-id]'), (el) ->
+      $(el).data('hotelId')
 
   setDirectionsRenderer = ->
     window.directionsDisplay = new google.maps.DirectionsRenderer()

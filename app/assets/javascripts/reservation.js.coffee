@@ -1,6 +1,8 @@
 class @Reservation
   constructor: ->
     @validateCheckout()
+    @triggerSubmission()
+    @reloadMap()
 
   validateCheckout: ->
     $(document).on 'change', '.calendar_daterange input', ->
@@ -16,3 +18,11 @@ class @Reservation
 
         $('#reservation_check_out').val(date_to)
         $('#reservation_check_out').trigger('change')
+
+  triggerSubmission: ->
+    $(document).on 'ajax:success', '#overbooking_form', ->
+      $(document).trigger('ovbSubmitted')
+
+  reloadMap: ->
+    $(document).on 'ovbSubmitted', ->
+      window.reloadMarkers()

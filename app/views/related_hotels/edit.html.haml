@@ -2,33 +2,32 @@
   %h3.light
     = t('related_hotels.index.count', count: @related.length)
 
-  .col-sm-12
-    - if @related.length > 0
-      %table.table.manage_table.related-hotels-table
-        %thead
-          %tr
-            %th Booking ID
-            %th= t('related_hotels.index.hotel_name')
-            %th= t('.overbooking_partnership')
-            %th= t('shared.actions')
-        %tbody
-          - @related.each do |related_hotel|
-            %tr(data-hotel-id="#{ related_hotel.related.booking_id }")
-              %td= related_hotel.related.booking_id
-              %td
-                %strong= related_hotel.related.name
-                - if related_hotel.added_manually
-                  %span.label.label-default= RelatedHotel.human_attribute_name(:added_manually)
-                %br
-                %small= related_hotel.related.post_address
-              %td
-                = link_to disable_related_hotels_path(id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "btn bulk-overbooking #{related_hotel.is_overbooking ? '' : 'hidden'}" do
-                  = icon('trash')
-                  = t('.remove_partner')
-                = link_to enable_related_hotels_path(id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "btn btn-success bulk-overbooking #{related_hotel.is_overbooking ? 'hidden' : ''}" do
-                  = icon('chain')
-                  = t('.become_partner')
-              %td
-                = link_to related_hotels_path(hotel_id: @hotel.booking_id, id: related_hotel.related.booking_id), class: 'btn btn_delete remove-related', remote: true, method: :delete do
-                  = icon('trash')
-                  = t('shared.remove')
+  - if @related.length > 0
+    %table.table.manage_table.related-hotels-table
+      %thead
+        %tr
+          %th Booking ID
+          %th= t('related_hotels.index.hotel_name')
+          %th= t('.overbooking_partnership')
+          %th= t('shared.actions')
+      %tbody
+        - @related.each do |related_hotel|
+          %tr(data-hotel-id="#{ related_hotel.related.booking_id }")
+            %td= related_hotel.related.booking_id
+            %td
+              %strong= related_hotel.related.name
+              - if related_hotel.added_manually
+                %span.label.label-default= RelatedHotel.human_attribute_name(:added_manually)
+              %br
+              %small= related_hotel.related.post_address
+            %td
+              = link_to disable_related_hotels_path(id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "btn bulk-overbooking #{related_hotel.is_overbooking ? '' : 'hidden'}" do
+                = icon('trash')
+                = t('.remove_partner')
+              = link_to enable_related_hotels_path(id: @hotel.booking_id, ids: related_hotel.related.booking_id), remote: true, class: "btn btn-success bulk-overbooking #{related_hotel.is_overbooking ? 'hidden' : ''}" do
+                = icon('chain')
+                = t('.become_partner')
+            %td
+              = link_to related_hotels_path(hotel_id: @hotel.booking_id, id: related_hotel.related.booking_id), class: 'btn btn_delete remove-related', remote: true, method: :delete do
+                = icon('trash')
+                = t('shared.remove')

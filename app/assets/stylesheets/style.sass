@@ -813,10 +813,6 @@ body
   .form-group
     margin-bottom: -6px
 
-.overbooking_block .right_side, .competitors_block .right_side
-  margin-right: -15px
-  margin-left: -15px
-
 .walk_icon, .bus_icon, .car_icon
   width: 11px
   height: 13px
@@ -904,12 +900,17 @@ body
       top: 1px
 
 
-.competitors_block .add_hotels_line
-  margin-top: -5px
-  margin-bottom: 15px
-  .add_hotels_frm
-    display: none
-    margin-top: 24px
+.competitors_block
+  .col-md-6
+    position: relative
+    .separate
+      margin-top: 20px
+  .add_hotels_line
+    margin-top: -5px
+    margin-bottom: 15px
+    .add_hotels_frm
+      display: none
+      margin-top: 24px
   &.open .add_hotels_frm
     display: block
     .form-control

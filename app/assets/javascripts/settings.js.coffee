@@ -70,3 +70,4 @@ class @Settings
   tabHacks: ->
     $('a[href="#competitors_tab"]').on 'shown.bs.tab', ->
       $(window).trigger('resize') # fix slider
+      window.centerMap()

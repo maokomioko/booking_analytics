@@ -58,11 +58,6 @@ ready = ->
     email_rule = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
     event.cancel = !email_rule.test(event.item)
 
-  $('.panel-scroll').perfectScrollbar
-    wheelSpeed: 50
-    minScrollbarLength: 20
-    suppressScrollX: true
-
   attachICheck()
 
   $('body').mouseup ->

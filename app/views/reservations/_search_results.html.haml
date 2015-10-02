@@ -21,6 +21,9 @@
           %li
             = icon('map-marker')
             = link_to hotel.post_address, '#', data: {hotel_id: hotel.id, type: 'map-pin'}
+          %li
+            = render partial: 'travel_routes', locals: {hotel: hotel}
+
           - hotel.contacts.each do |contact|
             %li
               = icon contact_icon(contact.contact_name)

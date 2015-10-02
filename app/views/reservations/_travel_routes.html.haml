@@ -1,0 +1,6 @@
+= t('directions.route') + ':'
+%span.routes{ data: { booking_id: hotel.booking_id, lat: hotel.latitude.to_f, lng: hotel.longitude.to_f } }
+  - %w(driving walking transit).each do |travel_mode|
+    = link_to '#', data: { travel_mode: travel_mode.upcase } do
+      = icon transit_icon(travel_mode)
+      = t("directions.infowindow.#{ travel_mode }")

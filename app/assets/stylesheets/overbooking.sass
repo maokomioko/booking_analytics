@@ -21,11 +21,15 @@
   #map
     margin-top: -10px
 
+span.routes a
+  margin: 0 5px
+  &:first-of-type
+    margin-left: 10px
+
 .overbooking_form
   position: relative
   .col-xs-6
     margin-bottom: 10px
-  font-size: 12px
   .description_text
     color: #96999c
     margin-top: 18px
@@ -72,16 +76,13 @@
         width: 25px
         font-size: 18px
         color: #96999c
-      .directions
-        margin-left: 5%
-        padding-left: 16px
-        i
-          margin-left: 5px
-          margin-right: 10px
-          top: 4px
+
     .text_link
       border-bottom: 1px solid #91b9e0
       padding: 0px
+      &:hover
+        color: #23527c
+        border-color: #23527c
   .checkboxes .btn_apply
     padding: 7px 21px
     font-size: 12px
@@ -90,6 +91,9 @@
 
 #results_placeholder
   position: absolute
-  overflow-y: scroll
+  overflow-y: auto
   overflow-x: hidden
   height: 100%
+
+#directions-panel
+  overflow-y: auto

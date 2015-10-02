@@ -16,15 +16,11 @@
           = '- ' + hotel.class.human_attribute_name(:review_score) + ':'
           = hotel.review_score
 
+    = render partial: 'reservations/travel_routes', locals: {hotel: hotel}
+    .clearfix
+
     = t('related_hotels.show.address') + ':'
     %em= hotel.address
-
-  .col-sm-8
-    .btn-group.btn-group-sm.routes{ data: { lat: hotel.latitude.to_f, lng: hotel.longitude.to_f, booking_id: hotel.booking_id } }
-
-      - %w(driving walking transit).each do |travel_mode|
-        %a.btn.btn-default(href="#" data-travel-mode="#{ travel_mode.upcase }" data-print-header="#{ t(".print_header.#{ travel_mode }", destination: hotel.name) }")
-          = t(".#{ travel_mode }")
 
   - if block.present?
     .space12

@@ -25,4 +25,15 @@ module OverbookingHelper
       type
     end
   end
+
+  def transit_icon(type)
+    case type
+    when 'walking'
+      'male'
+    when 'driving'
+      'car'
+    when 'transit'
+      'bus'
+    end
+  end
 end

@@ -8,12 +8,7 @@ class @MapBuilder
 
   setContainerHeight: ->
     $(window).on 'load resize', ->
-      parent_h = $(window).height() - 155
-      results_parent = $('#results_placeholder').parent()
-
-      $('#map').height(parent_h)
-      $('#results_placeholder').height(parent_h - 300)
-      $('#results_placeholder').width(results_parent.width())
+      setMapHeight()
 
   initMap: =>
     window.map = Gmaps.build('Google')
@@ -40,7 +35,6 @@ class @MapBuilder
     initPrint()
 
   window.reloadMarkers = ->
-    console.log markers
     unless markers == undefined
       i = 0
       while i < markers.length
@@ -98,9 +92,22 @@ class @MapBuilder
           directionsDisplay.setMap(map.getMap())
           directionsDisplay.setPanel document.getElementById("directions-panel")
 
-          preparePrint(response)
+          $('#directions-panel').addClass('col-md-4').removeClass('hidden')
+          setMapHeight()
+
+          #preparePrint(response)
 
       return
+
+  setMapHeight = ->
+    results_parent = $('#results_placeholder').parent()
+    parent_h = $(window).height() - 155
+    $('#map').height(parent_h)
+
+    $('#results_placeholder').height(parent_h - 300)
+    $('#results_placeholder').width(results_parent.width())
+
+    $('#directions-panel').height($('#map').height() - 10)
 
   initPrint = ->
     $(document).on 'click', '#print-button', (e) ->

@@ -30,7 +30,8 @@
     .col-xs-3
       .form-group
         = f.label :max_occupancy, t('overbooking.form.max_occupancy')
-        = f.number_field :max_occupancy, value: 2, in: 1..20, class: 'form-control'
+        .has-feedback
+          = f.number_field :max_occupancy, value: 2, in: 1..20, class: 'form-control'
     .col-xs-3
       .form-group
         %button.btn.btn_apply{type: "submit"}

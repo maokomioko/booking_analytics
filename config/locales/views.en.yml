@@ -81,8 +81,8 @@ en:
       header: "Contact information"
       save: "Add contact"
   directions:
+    route: Directions
     infowindow:
-      trace_route: Trace route to this hotel
       driving: Driving
       walking: Walking
       transit: Public transit

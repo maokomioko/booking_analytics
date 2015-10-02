@@ -85,7 +85,6 @@ en:
       title: Sign up
       subtitle: One step from the awesomeness!
       form_title: Give us some info.
-      company_info: Company information
     password_restore:
       title: Password reset
       subtitle: Password reset instructions will be sent to this email.

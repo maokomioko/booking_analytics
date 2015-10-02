@@ -15,7 +15,6 @@
         .form-group
           = f.label :password_confirmation
           = f.password_field :password_confirmation, class: 'form-control password_confirmation_validation'
-        %p.part_name= t('auth.new_account.company_info')
         .separate2
         = f.fields_for :company, resource.build_company do |fc|
           .form-group
@@ -27,10 +26,9 @@
           .form-group
             = fc.label :reg_address
             = fc.text_field :reg_address, class: 'form-control'
-        .checkbox
-          %label
-            %input.i_check.with_validation{type: 'checkbox', name: 'agree'}
-            = t('.iam_agree')
+        %label
+          %input.i_check.with_validation{type: 'checkbox', name: 'agree'}
+          = t('.iam_agree')
         .separate
         .form_btns
           = link_to new_session_path(resource_name), class: 'back_link pull-left' do

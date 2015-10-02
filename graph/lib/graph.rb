@@ -1,6 +1,3 @@
-require 'raphael-rails'
-require 'morrisjs-rails'
-require 'momentjs-rails'
 require 'haml-rails'
 require 'sass-rails'
 
@@ -13,7 +10,7 @@ module Graph
 
   mattr_accessor :source_table
   @@source_table = :archive_block_availabilities
-  
+
   mattr_accessor :room_class
   @@room_class = '::Room'
 

@@ -17,10 +17,9 @@
         .row.form-group.checkbox_login
           .col-xs-6
             - if devise_mapping.rememberable?
-              .checkbox
-                %label
-                  = f.check_box :remember_me, class: 'i_check'
-                  = t('auth.new.keep_signed_in')
+              %label
+                = f.check_box :remember_me
+                = t('auth.new.keep_signed_in')
           .col-xs-6
             = f.button type: 'submit', class: 'btn btn_apply pull-right' do
               = icon('sign-in')

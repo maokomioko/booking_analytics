@@ -1,7 +1,5 @@
-#= require raphael
-#= require morris
-#= require moment
-#= require moment/en-gb
+#= require_tree .
+#= require_self
 
 graphReady = ->
   # strict

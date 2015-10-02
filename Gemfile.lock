@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: 5542d127b0c95777a2cc9db1e2e837611a0aa6dd
+  revision: 91e09a793d596457ebc6336f31a17624c5940a81
   specs:
     capybara (2.6.0.dev)
       mime-types (>= 1.16)
@@ -33,10 +33,10 @@ GIT
 
 GIT
   remote: git://github.com/mperham/sidekiq.git
-  revision: 7a727c61cfd3f174d32e3a231b14833b61b897fe
+  revision: 0b59ed8c2bc74823ae579b99e37295bbdb2b416b
   specs:
     sidekiq (3.5.1)
-      celluloid (~> 0.17.0)
+      celluloid (~> 0.17.2)
       connection_pool (~> 2.2, >= 2.2.0)
       json (~> 1.0)
       redis (~> 3.2, >= 3.2.1)
@@ -44,7 +44,7 @@ GIT
 
 GIT
   remote: git://github.com/plataformatec/devise.git
-  revision: 2ccffc80b020cb3ac21b5b1ecbdfc9cba9e0804b
+  revision: 9f37b6eff7b4f9b0441be5a687b3091db82befc4
   specs:
     devise (3.5.2)
       bcrypt (~> 3.0)
@@ -63,9 +63,9 @@ GIT
 
 GIT
   remote: git://github.com/teampoltergeist/poltergeist.git
-  revision: 08323d35198429cd4b23968fd6f828c0fca663aa
+  revision: 4784adbaecf5d66762b7063785a13cd1d7d0e22c
   specs:
-    poltergeist (1.6.0)
+    poltergeist (1.7.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
@@ -81,12 +81,9 @@ PATH
   remote: graph
   specs:
     graph (0.0.1)
-      coffee-rails (~> 4.1)
+      coffee-rails (>= 4.1)
       haml-rails
-      momentjs-rails
-      morrisjs-rails
-      rails (~> 4.2)
-      raphael-rails
+      rails (>= 4.2)
       sass-rails (>= 5)
 
 PATH
@@ -188,46 +185,22 @@ GEM
     capybara-screenshot (1.0.11)
       capybara (>= 1.0, < 3)
       launchy
-    celluloid (0.17.1.2)
-      bundler
+    celluloid (0.17.2)
       celluloid-essentials
       celluloid-extras
       celluloid-fsm
       celluloid-pool
       celluloid-supervision
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
       timers (>= 4.1.1)
-    celluloid-essentials (0.20.2.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
+    celluloid-essentials (0.20.5)
       timers (>= 4.1.1)
-    celluloid-extras (0.20.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
+    celluloid-extras (0.20.5)
       timers (>= 4.1.1)
-    celluloid-fsm (0.20.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
+    celluloid-fsm (0.20.5)
       timers (>= 4.1.1)
-    celluloid-pool (0.20.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
+    celluloid-pool (0.20.5)
       timers (>= 4.1.1)
-    celluloid-supervision (0.20.1.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
+    celluloid-supervision (0.20.5)
       timers (>= 4.1.1)
     choice (0.2.0)
     chronic (0.10.2)
@@ -255,14 +228,13 @@ GEM
       devise (~> 3.2)
     devise-encryptable (0.2.0)
       devise (>= 2.1.0)
-    devise_invitable (1.5.2)
+    devise_invitable (1.5.3)
       actionmailer (>= 3.2.6, < 5)
       devise (>= 3.2.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
-    dotenv (2.0.2)
     draper (1.4.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -330,7 +302,7 @@ GEM
     impressionist (1.5.1)
       httpclient (~> 2.2)
       nokogiri (~> 1.5)
-    jbuilder (2.3.1)
+    jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.5)
@@ -379,14 +351,9 @@ GEM
     mime-types (2.6.2)
     mini_portile (0.6.2)
     minitest (5.8.1)
-    momentjs-rails (2.10.3)
-      railties (>= 3.1)
-    morrisjs-rails (0.5.1)
-      railties (> 3.1, < 5)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    nenv (0.2.0)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
     net-scp (1.2.1)
@@ -482,7 +449,7 @@ GEM
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
-    rails-erd (1.4.2)
+    rails-erd (1.4.3)
       activerecord (>= 3.2)
       activesupport (>= 3.2)
       choice (~> 0.2.0)
@@ -495,7 +462,6 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
-    raphael-rails (2.1.2)
     rb-readline (0.5.3)
     redis (3.2.1)
     redis-actionpack (4.0.1)
@@ -538,7 +504,6 @@ GEM
     rspec-its (1.2.0)
       rspec-core (>= 3.0.0)
       rspec-expectations (>= 3.0.0)
-    rspec-logsplit (0.1.3)
     rspec-mocks (3.3.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)

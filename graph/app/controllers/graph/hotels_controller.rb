@@ -2,6 +2,8 @@ module Graph
   class HotelsController < Graph.parent_controller.constantize
     helper Graph::FormHelper
 
+    respond_to :js, except: :index
+
     def index
       hotel = current_user.hotels.first
 

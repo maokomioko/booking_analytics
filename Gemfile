@@ -76,6 +76,7 @@ gem 'redis-rails'
 gem 'remotipart', '~> 1.2.1'
 gem 'require_reloader'
 gem 'roadie-rails'
+gem 'rollbar'
 gem 'rubysl', platform: :rbx
 
 gem 'sass-rails', '>= 5'
@@ -103,12 +104,15 @@ end
 
 group :development, :test do
   gem 'annotate'
+
   gem 'capistrano'
-  gem 'capistrano-rvm', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
+  gem 'capistrano-rails-console', require: false
+  gem 'capistrano-rvm', require: false
   gem 'capistrano-sidekiq', require: false
-  gem 'capistrano3-puma', require: false
+  gem 'capistrano-unicorn-nginx', require: false
+
   gem 'quiet_assets'
   gem 'rails-dev-tweaks'
   gem 'rails-erd'

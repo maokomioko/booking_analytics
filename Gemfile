@@ -95,6 +95,7 @@ gem 'whenever'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'underscore-rails'
+gem 'unicorn'
 
 group :development do
   gem 'awesome_print', github: 'eoinkelly/awesome_print'

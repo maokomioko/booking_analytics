@@ -45,6 +45,8 @@ Rails.application.configure do
   #   authentication: 'login'
   # }
 
+  RequireReloader.watch_local_gems!
+
   config.dev_tweaks.autoload_rules do
     keep :all
 

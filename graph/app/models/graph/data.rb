@@ -15,19 +15,15 @@ module Graph
     end
 
     def self.date_format
-      '%d.%m.%Y'
+      '%Y-%m-%d'
     end
 
     def initialize(period)
       @period = self.class.format_period(period)
     end
 
-    def data
-      @period.map { |day| { xkey.to_sym => day } }
-    end
-
-    def xkey
-      'day'
+    def xkeys
+     [['x'] + @period]
     end
 
     def ykeys

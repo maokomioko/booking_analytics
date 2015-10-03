@@ -10,40 +10,34 @@ module Graph
                    .order("room_prices.date ASC")
       end
 
-      def data
-        prices = room_prices_by_date
-
-        super.map do |old_hash|
-          date = old_hash[:day]
-
-          old_hash.deep_merge(@rooms.map(&:id).inject({}) do |hash, room_id|
-            hash[room_id] = prices[room_id][date]
-            hash
-          end)
-        end
+      def merged
+        xkeys + ykeys
       end
 
       def ykeys
-        super + @rooms.map(&:id)
+        room_prices_by_date
       end
 
       def labels
-        super + @rooms.map(&:name)
+        super + @rooms.collect{|x| [x.name, Hotel.find_by(booking_id: x.booking_hotel_id).name]}
       end
 
       private
 
-      # { %room_id%: { %date%: %price% } }
       def room_prices_by_date
-        @rooms.inject({}) do |hash, room|
-          hash[room.id] ||= {}
-          room.room_prices.each do |price|
-            hash[room.id][price.date.strftime(Graph::Data.date_format)] =
-              price.price
+        parent_arr = [].tap do |parent|
+          @rooms.each do |room|
+            values_arr = [].tap do |values|
+              values << "#{Hotel.find_by(booking_id: room.booking_hotel_id).try(:name)} (#{room.name})"
+              values << room.room_prices.map(&:price)
+            end
+            parent << values_arr.flatten
           end
 
-          hash
+          parent
         end
+
+        parent_arr
       end
     end
   end

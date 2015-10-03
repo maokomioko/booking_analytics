@@ -2,8 +2,11 @@ en:
   graph:
     hotels:
       index:
-        header: Analytics
-        settings_header: Setup options for graphics
+        header: Competitors lookup
+        settings_header: Setup options for graphs
         date_range: Date range
         hotel: Your hotel
         show_graph: Show graph
+      submenu:
+        table: Comparison table
+        graphs: Market information

@@ -2,7 +2,7 @@ module Graph
   class HotelsController < Graph.parent_controller.constantize
     helper Graph::FormHelper
 
-    respond_to :js, except: :index
+    #respond_to :js, except: :index
 
     def index
       hotel = current_user.hotels.first
@@ -25,6 +25,8 @@ module Graph
 
       period = graph_params[:date_from].to_date..graph_params[:date_to].to_date
       @data = Data::Room.new(room_ids, period)
+
+      puts "RESULTS - #{@data.merged}"
     end
 
     def competitors

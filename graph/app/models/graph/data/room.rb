@@ -3,9 +3,9 @@ module Graph
     class Room < Data
       attr_accessor :rooms
 
-      def initialize(room_ids, period)
+      def initialize(room_ids, related_booking_ids, period)
         super(period)
-        @rooms = Graph.room.includes(:room_prices).where(id: room_ids)
+        @rooms = Graph.room.includes(:room_prices).where('rooms.id IN (?) OR rooms.booking_hotel_id IN (?)', room_ids, related_booking_ids)
                    .where(room_prices: { date: period })
                    .order("room_prices.date ASC")
       end

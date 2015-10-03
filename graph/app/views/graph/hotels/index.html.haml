@@ -6,39 +6,25 @@
         = link_to settings_path, class: 'btn btn_grey' do
           =icon('cog')
           = t('menu.settings')
-      .tabs_block
-        = link_to t('graph.hotels.submenu.table'), '#', class: 'btn tab_link'
-        = link_to t('graph.hotels.submenu.graphs'), '#', class: 'btn tab_link active'
+      .tabbable
+        %ul.nav.nav-tabs
+          %li
+            = link_to t('graph.hotels.submenu.table'), '#', class: 'btn'
+          %li
+            = link_to t('graph.hotels.submenu.graphs'), graph.hotels_path, class: "btn #{active_link_class(graph.hotels_path)}"
 
-    .analytics_block
-      .row
-        .col-sm-8.col-sm-offset-2
-          .panel.panel-default
-            .panel-heading
-              %i.clip-stats
-              = t('.settings_header')
-            .panel-body
-              = form_for @form, url: [:simple, :hotels], remote: true, method: :get, html: { class: 'form-horizontal graph-options' } do |f|
-                .form-group
-                .form-group
-                  = f.label :id, t('.date_range'), class: 'col-sm-2 control-label'
-                  .col-sm-10
-                    %p
-                    #date-range-slider.slider-purple
-                  = f.hidden_field :date_from
-                  = f.hidden_field :date_to
-                .form-group
-                  = f.label :booking_id, t('.hotel'), class: 'col-sm-2 control-label'
-                  .col-sm-10
-                    = f.select :booking_id, options_for_hotels, {}, class: 'form-control search-select'
-                - if @form.booking_id
-                  = render 'room_fields', f: f, booking_id: @form.booking_id
-                .form-group
-                  = f.label :related_booking_id, t('.related'), class: 'col-sm-2 control-label'
-                  .col-sm-10
-                    -#= f.select :related_booking_id, options_for_related
-                .form-group
-                  .col-sm-2.col-sm-offset-2
-                    = submit_tag t('.show_graph'), class: 'btn btn-success btn-squared graph-options-submit'
+    .row
+      .col-sm-4
+        .panel.panel-default
+          .h20px.text-center= t('.settings_header')
+          .panel-body
+            = render partial: 'form', locals: { form: @form, pattern: 'graph.hotels.index' }
 
-      #graph-container
+      .col-sm-8
+        .panel.panel-default
+          .panel-body
+            #graph-container
+              %ol
+                %li= t('graph.howto.step_1')
+                %li= t('graph.howto.step_2')
+                %li= t('graph.howto.step_3')

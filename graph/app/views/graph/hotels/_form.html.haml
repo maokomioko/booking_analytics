@@ -1,0 +1,27 @@
+= form_for form, url: [:simple, :hotels], remote: true, method: :get, html: { class: 'form-horizontal graph-options' } do |f|
+
+  .form-group
+    = f.label :id, t("#{pattern}.date_range"), class: 'col-sm-3 control-label'
+    .col-sm-9
+      %p
+      #date-range-slider.slider-purple
+    = f.hidden_field :date_from
+    = f.hidden_field :date_to
+
+  .form-group
+    = f.label :booking_id, t("#{pattern}.hotel"), class: 'col-sm-3 control-label'
+    .col-sm-9
+      = f.select :booking_id, options_for_hotels, {}, class: 'form-control search-select'
+
+  - if @form.booking_id
+    = render partial: 'room_fields', locals: { f: f, booking_id: @form.booking_id, pattern: pattern }
+
+  .form-group
+    = f.label :related_booking_ids, t("#{pattern}.related"), class: 'col-sm-3 control-label'
+    .col-sm-9
+      = f.select :related_booking_ids, options_for_related(@form.booking_id), {}, multiple: true, class: 'form-control search-select'
+
+  .form-group
+    = button_tag type: :submit, class: 'btn btn_apply btn-squared graph-options-submit pull-right' do
+      = icon('line-chart')
+      = t("#{pattern}.show_graph")

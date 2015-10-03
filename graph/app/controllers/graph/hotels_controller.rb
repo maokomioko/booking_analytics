@@ -24,9 +24,7 @@ module Graph
                   .pluck(:id)
 
       period = graph_params[:date_from].to_date..graph_params[:date_to].to_date
-      @data = Data::Room.new(room_ids, period)
-
-      puts "RESULTS - #{@data.merged}"
+      @data = Data::Room.new(room_ids, graph_params[:related_booking_ids], period)
     end
 
     def competitors
@@ -47,14 +45,14 @@ module Graph
 
     def graph_params
       # HACK for select2 empty value
-      %i(room_id).each do |field|
+      %i(room_id related_booking_ids).each do |field|
         if params[:form][field].present?
           params[:form][field].select!(&:present?)
         end
       end
 
       params.require(:form).permit(:date_from, :date_to, :booking_id,
-                                     room_id: [], related_booking_id: [])
+                                     room_id: [], related_booking_ids: [])
     end
   end
 end

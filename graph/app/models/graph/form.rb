@@ -5,6 +5,6 @@ module Graph
     include ActiveModel::Conversion
 
     attr_accessor :date_from, :date_to, :booking_id, :room_id,
-                  :related_booking_id
+                  :related_booking_ids
   end
 end

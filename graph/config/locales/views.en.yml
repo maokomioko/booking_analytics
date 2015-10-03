@@ -3,10 +3,16 @@ en:
     hotels:
       index:
         header: Competitors lookup
-        settings_header: Setup options for graphs
+        settings_header: Graph options
         date_range: Date range
         hotel: Your hotel
-        show_graph: Show graph
+        rooms: Hotel rooms
+        related: Сompetitors
+        show_graph: Display market data
       submenu:
         table: Comparison table
         graphs: Market information
+    howto:
+      step_1: Select one or more rooms from your hotel,
+      step_2: Then select one or more related hotels to see corresponding room prices,
+      step_3: Once you are ready, hit the "Display market data", you will see the graph.

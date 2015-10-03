@@ -25,7 +25,7 @@ class BlockAvailability < ActiveRecord::Base
   }
   scope :by_arrival, -> (date) { where("(data->>'arrival_date')::date = ?", date.to_date) }
   scope :by_departure, -> (date) { where("(data->>'departure_date')::date = ?", date.to_date) }
-  scope :with_max_occupancy, -> (people) { where("data -> 'block' @> ?", [{'max_occupancy': "#{people}"}].to_json) }
+  scope :with_max_occupancy, -> (people) { where("data -> 'block' @> ?", [{max_occupancy: "#{people}"}].to_json) }
 
   def block_prices(occupancy, room_booking_ids, price_position)
     [].tap do |arr|

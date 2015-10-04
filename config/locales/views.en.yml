@@ -110,7 +110,7 @@ en:
       children_count: Children
       show_available_hotels: Show available hotels
   overbooking:
-    description: "Use this form to find hotels with free rooms matching your params. Below you will find matching results with contact information.<br>
+    description: "Use this form to find hotels with free rooms matching your parameters. Below you will find matching results with contact information.<br>
                   Then you can pick up the room you want to ask about and hit 'Send request' button. Selected hotel will shortly receive a notification about your inquiry."
     form:
       check_in: Check-in date

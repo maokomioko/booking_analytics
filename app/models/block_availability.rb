@@ -46,7 +46,7 @@ class BlockAvailability < ActiveRecord::Base
         return value if value
       end
 
-      return nil
+      ArchiveBlockAvailability.last_available
     end
 
     def with_min_price(from_price, to_price)

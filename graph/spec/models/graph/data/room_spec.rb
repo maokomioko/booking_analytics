@@ -61,8 +61,8 @@ module Graph
       end
     end
 
-    describe '#room_prices_by_date' do
-      let(:described_hash) { @object.send(:room_prices_by_date) }
+    describe '#prices_by_date' do
+      let(:described_hash) { @object.send(:prices_by_date) }
 
       it 'root keys contains all room ids' do
         expect(described_hash.keys).to match_array(@rooms.map(&:id))

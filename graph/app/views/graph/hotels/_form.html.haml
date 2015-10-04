@@ -22,6 +22,6 @@
       = f.select :related_booking_ids, options_for_related(@form.booking_id), {}, multiple: true, class: 'form-control search-select'
 
   .form-group
-    = button_tag type: :submit, class: 'btn btn_apply btn-squared graph-options-submit pull-right' do
+    = button_tag type: :submit, class: 'btn btn_apply btn-squared pull-right' do
       = icon('line-chart')
       = t("#{pattern}.show_graph")

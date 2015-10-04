@@ -17,5 +17,17 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 #
+every :hour do
+  runner "ActiveCompaniesWorker.perform_async"
+end
+
+every :day, at: '12pm' do
+  runner "SubscriptionsWorker.perform_async"
+end
+
+every :thursday, at: '12pm' do
+  runner "WeeklyPriceReportWorker.perform_async"
+end
+
 
 # Learn more: http://github.com/javan/whenever

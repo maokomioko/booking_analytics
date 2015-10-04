@@ -85,7 +85,6 @@ gem 'stringex'
 gem 'sidekiq', github: 'mperham/sidekiq'
 gem 'sidekiq-middleware'
 gem 'sidekiq-status'
-gem 'sidetiq'
 gem 'sinatra', require: false
 
 gem 'turbolinks', github: 'rails/turbolinks'

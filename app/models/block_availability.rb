@@ -32,11 +32,23 @@ class BlockAvailability < ActiveRecord::Base
       filtered_blocks(occupancy, room_booking_ids).each do |block|
         arr << block.fetch('incremental_price').map { |x| x['price'].to_f }.sort[price_position]
       end
-      arr.reject(&:blank?)
+      arr.reject(&:blank?).compact
     end
   end
 
   class << self
+    def for_room_to_date(hotel_booking_id, room_id, arrival_date)
+      room = Room.find(room_id)
+
+      for_hotels([hotel_booking_id]).by_arrival(arrival_date).each do |block_availability|
+        value = block_availability.block_prices(room.max_people, [room.booking_id], 0)[0]
+
+        return value if value
+      end
+
+      return nil
+    end
+
     def with_min_price(from_price, to_price)
       arr = []
       all.each do |block_availability|

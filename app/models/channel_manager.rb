@@ -126,4 +126,10 @@ class ChannelManager < ActiveRecord::Base
     RoomSetting.delete(setting.room_settings)
     setting.send(:create_room_settings)
   end
+
+  def get_room_prices(room_obj_id)
+    RoomPrice.where(room_id: room_obj_id)
+     .within_dates(Date.today..3.month.from_now.to_date)
+     .date_groupped
+  end
 end

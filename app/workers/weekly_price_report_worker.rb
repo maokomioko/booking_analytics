@@ -1,10 +1,7 @@
 class WeeklyPriceReportWorker
   include Sidekiq::Worker
-  include Sidetiq::Schedulable
 
   sidekiq_options retry: false, unique: true
-
-  recurrence { daily.hour_of_day(8) } # UTC time
 
   def perform
     Company.includes(:users).find_each do |company|

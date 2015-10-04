@@ -1,10 +1,7 @@
 class ActiveCompaniesWorker
   include Sidekiq::Worker
-  include Sidetiq::Schedulable
 
   sidekiq_options retry: false
-
-  recurrence { hourly.minute_of_hour(0, 10, 20, 30, 40, 50) }
 
   def perform
     Company.where("last_activity > current_timestamp - interval '30 minutes'").find_each do |company|

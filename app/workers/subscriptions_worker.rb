@@ -1,10 +1,7 @@
 class SubscriptionsWorker
   include Sidekiq::Worker
-  include Sidetiq::Schedulable
 
   sidekiq_options retry: false
-
-  recurrence { daily }
 
   def perform
     Company.find_each do |company|

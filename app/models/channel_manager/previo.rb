@@ -60,11 +60,7 @@ class ChannelManager::Previo < ChannelManager
       rates = [rates] unless rates.is_a?(Array)
 
       default_price = rates.first['nrrPrice'] || rates.first['price']
-
-      room_prices = RoomPrice
-                        .where(room_id: room_obj_id)
-                        .within_dates(Date.today..3.month.from_now.to_date)
-                        .date_groupped
+      room_prices = get_room_prices(room_obj_id)
 
       (plan['from'].to_date..plan['to'].to_date).to_a.each do |date|
         next if date > 3.month.from_now.to_date

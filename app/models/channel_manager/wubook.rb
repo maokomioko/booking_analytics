@@ -47,9 +47,7 @@ class ChannelManager::Wubook < ChannelManager
   def setup_room_prices(room_id, room_obj_id)
     return unless room_id.present?
 
-    room_prices = RoomPrice.where(room_id: room_obj_id)
-                           .within_dates(Date.today..3.month.from_now.to_date)
-                           .date_groupped
+    room_prices = get_room_prices(room_obj_id)
 
     price_array = connector.get_plan_prices(non_refundable_pid, [room_id]).map { |_key, value| value }[0]
     price_array.each_with_index do |price, i|

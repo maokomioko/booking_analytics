@@ -27,7 +27,21 @@ class ChannelManager::Empty < ChannelManager
   end
 
   def setup_room_prices(room_id, room_obj_id)
-    true
+    return unless room_id.present?
+
+    room_prices = get_room_prices(room_obj_id)
+
+    dates = [*Date.today..Date.today + 3.month]
+    dates.each do |date|
+      rp = if room_prices[date].present?
+        room_prices[date].last
+      else
+        RoomPrice.new(room_id: room_obj_id, date: date)
+      end
+
+      rp.default_price = BlockAvailability.for_room_to_date(booking_id, room_obj_id, date)
+      rp.save
+    end
   end
 
   def list_plans
@@ -35,10 +49,6 @@ class ChannelManager::Empty < ChannelManager
   end
 
   def apply_room_prices(room_id, dates, custom_price = nil)
-    true
-  end
-
-  def sync_rooms
     true
   end
 end

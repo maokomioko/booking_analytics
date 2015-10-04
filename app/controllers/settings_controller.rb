@@ -13,9 +13,10 @@ class SettingsController < ApplicationController
 
   def edit
     @hotel = @setting.hotel
-    @related = ensure_related_existence(@hotel, @setting.company)
+    company = @setting.company
+    @related = ensure_related_existence(@hotel, company)
 
-    @channel_manager = @setting.company.channel_manager
+    @channel_manager = company.channel_manager
 
     gon.rabl template: 'app/views/hotels/show.rabl'
 

@@ -11,18 +11,6 @@ module PriceMaker
       g.helper_specs false
     end
 
-    initializer 'price_maker.concerns' do
-      ActionDispatch::Reloader.to_prepare do
-        if (Room.connection rescue nil)
-          Room.send(:include, PriceMaker::ChannelManager)
-        end
-
-        if (Hotel.connection rescue nil)
-          Hotel.send(:include, PriceMaker::HotelAmenities)
-        end
-      end
-    end
-
     initializer 'price_maker.load_workers' do
       Dir["#{root}/app/workers/**/*.rb"].each { |file| require file }
     end

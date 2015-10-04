@@ -1,17 +1,15 @@
-= content_for(:main_content_header) do
-  .page-header
-    %h1
-      Error 403
-      %small Forbidden
+.container-fluid
+  = content_for(:main_content_header) do
+    .page_header.h2.light.text-center
+      Error 403 |
+      %span.page_header_title Forbidden
 
-.row
-  .col-sm-12.page-error
-    .error-number.teal 403
-    .error-details.col-sm-6.col-sm-offset-3
-      %h3 Oops! You are stuck at 403
-      %p
-        Sorry you are not allowed to access this page
-        %br
-        Check the URL you entered for any mistakes and try again.
-        %br
-        = link_to 'Return home', main_app.root_path, class: 'btn btn-teal btn-return'
+  .row
+    .center-block.panel.panel-default{style: 'width: 450px'}
+      .panel-body
+        %p
+          Sorry you are not allowed to access this page
+          %br
+          Check the URL you entered for any mistakes and try again.
+          %br
+          = link_to 'Return home', main_app.root_path, class: 'btn btn-teal btn-return'

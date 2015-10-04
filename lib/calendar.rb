@@ -21,7 +21,7 @@ class Calendar < Struct.new(:view, :date, :month_offset, :callback, :prices)
   end
 
   def day_cell(day, i)
-    content_tag :td, view.capture(day, &callback), date: day, class: [day_classes(day), mark_as_previous_month(day, i)]
+    content_tag :td, view.capture(day, &callback), date: day, class: day_classes(day)
   end
 
   def day_classes(day)
@@ -33,6 +33,7 @@ class Calendar < Struct.new(:view, :date, :month_offset, :callback, :prices)
       classes << 'active' if t_price.enabled && !t_price.locked
     end
 
+    classes << 'previous' if day < Date.today
     classes << 'today' if day == Date.today
     classes << 'clickable' if day >= Date.today
     classes << 'hidden' if (day - Date.today).to_i.abs >= 90
@@ -66,14 +67,6 @@ class Calendar < Struct.new(:view, :date, :month_offset, :callback, :prices)
     content_tag :tr, class: 'new_month' do
       content_tag :td, colspan: 7 do
         day.strftime("%B")
-      end
-    end
-  end
-
-  def mark_as_previous_month(day, i)
-    if i < 7
-      if day.month < (day + 7 - i).month
-        return 'previous'
       end
     end
   end

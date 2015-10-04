@@ -3,8 +3,8 @@
     = content_for :main_content_header do
       .page_header.h2.light
         %span.page_header_title= t('.header')
-        = link_to settings_path, class: 'btn btn_grey' do
-          =icon('cog')
+        = link_to settings_path, class: 'btn btn_grey', data: { no_turbolink: true } do
+          = icon('cog')
           = t('menu.settings')
       .tabbable
         %ul.nav.nav-tabs

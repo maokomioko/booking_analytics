@@ -3,7 +3,7 @@
     = content_for(:main_content_header) do
       .page_header.h2.light.fixed
         %span.page_header_title= t('menu.rate_management')
-        = link_to settings_path, class: 'btn btn_grey' do
+        = link_to settings_path, class: 'btn btn_grey', data: { no_turbolink: true } do
           =icon('cog')
           = t('menu.settings')
 

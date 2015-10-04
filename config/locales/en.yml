@@ -26,7 +26,7 @@ en:
   errors:
     booking_id: Hotel doesn't exist
     hotel_name: Hotel name can't be blank
-    price_value_missing: No price
+    price_value_missing: No suggestion
     unauthorized: Unauthorized
     no_ch_manager: No channel manager defined
     no_reservations: Sorry, we couldn't find any reservations in your Channel Manager.

@@ -14,7 +14,12 @@ class SettingsController < ApplicationController
   def edit
     @hotel = @setting.hotel
     @related_hotels = @hotel.related
-    @related = @hotel.related_hotels.includes(:related)
+    @related = begin
+      @hotel.related_hotels.includes(:related)
+    rescue
+      @hotel.related_ids = []
+      @hotel.amenities_calc(company.id, true)
+    end
 
     @channel_manager = @setting.company.channel_manager
 

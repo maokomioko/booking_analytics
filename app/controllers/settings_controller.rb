@@ -13,13 +13,7 @@ class SettingsController < ApplicationController
 
   def edit
     @hotel = @setting.hotel
-    @related_hotels = @hotel.related
-    @related = begin
-      @hotel.related_hotels.includes(:related)
-    rescue
-      @hotel.related_ids = []
-      @hotel.amenities_calc(company.id, true)
-    end
+    @related = ensure_related_existence(@hotel, @setting.company)
 
     @channel_manager = @setting.company.channel_manager
 
@@ -57,6 +51,17 @@ class SettingsController < ApplicationController
   end
 
   protected
+
+  def ensure_related_existence(hotel, company)
+    begin
+      hotels = hotel.related_hotels.includes(:related)
+      hotels.map(&:name)
+      hotels
+    rescue
+      hotel.related_ids = []
+      hotel.amenities_calc(company.id, true)
+    end
+  end
 
   def force_fetch_prices_and_rooms
     cm = @setting.company.channel_manager

@@ -48,11 +48,18 @@ module Graph
     end
 
     def competitors_prices_by_date
+      occupancy = @rooms.map(&:max_people).sort
       parent_arr = [].tap do |parent|
 
         @competitors_hotels.each do |hotel|
 
-          hotel.rooms.each do |room|
+          rooms = (if occupancy.flatten.compact
+                      hotel.rooms.where('max_people IN (?)', occupancy)
+                    else
+                      hotel.rooms
+                    end)
+
+          rooms.each do |room|
             values_arr = [].tap do |values|
                 values << "#{hotel.try(:name)} (#{room.name})"
                 @dates.each do |date|
@@ -61,7 +68,6 @@ module Graph
             end
             parent << values_arr.flatten.compact
           end
-
           parent
         end
 

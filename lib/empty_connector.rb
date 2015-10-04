@@ -1,6 +1,7 @@
 require 'abstract_connector'
 
 class EmptyConnector < AbstractConnector
+
   def initialize
   end
 
@@ -12,7 +13,8 @@ class EmptyConnector < AbstractConnector
     true
   end
 
-  def get_plan_prices(a = nil, b = nil)
+  def get_plan_prices(plan_id = nil, room_ids)
+
     true
   end
 

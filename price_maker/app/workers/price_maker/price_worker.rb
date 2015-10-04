@@ -12,12 +12,11 @@ module PriceMaker
       setting = ::Setting.find(setting_id)
       hotel = setting.hotel
 
-      # prevent queue stacking of workers
-      # for example: user submit 5 times settings form
+      # prevent workers queue stacking when user submits Settings form multiple times
       return true if setting.sidekiq_lock
 
       if setting.current_job?
-        # wait while old task complete
+        # wait while old task completes
         if Sidekiq::Status.working?(setting.current_job)
           setting.lock!
 
@@ -31,7 +30,7 @@ module PriceMaker
           rescue Exception
             retry
           end
-        # unschedule current planning job
+        # unschedule current planned job
         elsif Sidekiq::Status.queued?(setting.current_job)
           setting.lock!
           Sidekiq::Status.unschedule setting.current_job

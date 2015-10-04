@@ -1,5 +1,5 @@
 ##
-## Concern for Room
+## Room Concern
 ##
 module PriceMaker
   module ChannelManager
@@ -14,13 +14,17 @@ module PriceMaker
         if hotel_room_ids
           desired_position = RoomSetting.where(setting_id: setting_id, room_id: id).pluck(:position).first || 1
           dates = [*Date.today..Date.today + 3.month]
+
           dates.each do |date|
+
             begin
               price = PriceMaker::Algorithm.new(hotel_room_ids, max_people_fallback, date, date + 1.day, desired_position).best_price
 
               rp = RoomPrice.find_or_initialize_by(date: date, room: self)
               rp.default_price = 0 if rp.default_price.nil?
 
+              # Fallback to max_price/min_price provided by customer
+              # if our price out of boundaries
               if max_price > 0 && price > max_price
                 price = max_price
               end
@@ -35,9 +39,13 @@ module PriceMaker
             rescue
               puts 'Empty result'
             end
+
           end
+
         end
+
       end
+
 
       private
 

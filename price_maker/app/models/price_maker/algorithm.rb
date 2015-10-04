@@ -1,11 +1,11 @@
 module PriceMaker
   class Algorithm
     HOTELS_PER_PAGE = 15
-    PRICE_STEP = 0.5 # 50 cents \m/
+    PRICE_STEP = 0.43 # 50 cents \m/
 
     attr_reader :get_top_prices, :price_tiers
 
-    # @param   hotel_room_ids     [ [hotel_booking_id, [room_booking_id, room_booking_id]], [hotel_booking_id, []] ]
+    # @param  hotel_room_ids  [ [hotel_booking_id, [room_booking_id, room_booking_id]], [hotel_booking_id, []] ]
     def initialize(hotel_room_ids, occupancy, arrival, departure, desired_position)
       @hotel_room_ids = hotel_room_ids
       @occupancy      = occupancy

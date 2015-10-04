@@ -66,6 +66,6 @@ module ApplicationHelper
   end
 
   def number_to_euro(amount)
-    number_to_currency(amount, unit: 'EUR').gsub(' ', '&nbsp')
+    number_to_currency(amount, unit: 'EUR', delimiter: " ", format: "%n %u")
   end
 end

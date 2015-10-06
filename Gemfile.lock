@@ -33,7 +33,7 @@ GIT
 
 GIT
   remote: git://github.com/mperham/sidekiq.git
-  revision: 0b59ed8c2bc74823ae579b99e37295bbdb2b416b
+  revision: aa6a5115fedd9e53880831700038aff70912a69d
   specs:
     sidekiq (3.5.1)
       celluloid (~> 0.17.2)
@@ -758,7 +758,7 @@ GEM
     spoon (0.0.4)
       ffi
     spring (1.4.0)
-    sprockets (3.3.5)
+    sprockets (3.4.0)
       rack (> 1, < 3)
     sprockets-rails (2.3.3)
       actionpack (>= 3.0)

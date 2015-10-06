@@ -32,12 +32,12 @@
     #competitors_tab.tab-pane
       .competitors_block.width_control
         .row
-          .col-md-6
+          .col-md-5
             = render 'form'
             .separate
             #results_placeholder(data-partial="related_hotels")
               = render template: 'related_hotels/edit'
-          .col-md-6
+          .col-md-7
             #directions-panel.hidden
             #map
       .clearfix

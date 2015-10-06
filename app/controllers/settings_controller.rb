@@ -55,13 +55,13 @@ class SettingsController < ApplicationController
 
   def ensure_related_existence(hotel, company)
     begin
-      hotels = hotel.related_hotels.includes(:related)
-      hotels.map(&:name)
+      hotel.related.map(&:name)
       hotels
     rescue
       hotel.related_ids = []
       hotel.amenities_calc(company.id, true)
     end
+    hotel.related_hotels.includes(:related)
   end
 
   def force_fetch_prices_and_rooms

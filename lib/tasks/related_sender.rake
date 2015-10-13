@@ -2,8 +2,8 @@
 #  rake ID=1654 related_sender
 #  rake BOOKING_ID=1146825
 #  rake NAME=Orebitska
-desc 'generate HTML document with related hotels for desired hotel'
-task :related_sender => :environment do
+desc 'generates HTML document with related hotels for desired hotel'
+task related_sender: :environment do
   value = ENV['ID'] || ENV['BOOKING_ID'] || ENV['NAME']
   field = if ENV['ID'].present?
             'id'

@@ -6,71 +6,87 @@
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     %meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
     %meta(name="format-detection" content="telephone=no")
-    :plain
-      <!--[if mso 12]>
-            <style type="text/css">
-                .flexibleContainer{display:block !important; width:100% !important;}
-            </style>
-        <![endif]-->
-        <!--[if mso 14]>
-            <style type="text/css">
-                .flexibleContainer{display:block !important; width:100% !important;}
-            </style>
-        <![endif]-->
-  %body(bgcolor="#E1E1E1" leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0")
-    %center(style="background-color:#E1E1E1;")
-      %table#bodyTable(border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" style="table-layout: fixed;max-width:100% !important;width: 100% !important;min-width: 100% !important;")
-        %tr
-          %td(align="center" valign="top" id="bodyCell")
-            =# HEADER
-            %table#emailHeader(bgcolor="#E1E1E1" border="0" cellpadding="0" cellspacing="0" width="500")
-              %tr
-                %td(align="center" valign="top")
-                  %table.flexibleContainer(border="0" cellpadding="10" cellspacing="0" width="500")
-                    %tr
-                      %td.flexibleContainerCell(valign="top" width="500")
-                        %table(align="left" border="0" cellpadding="0" cellspacing="0" width="100%")
+  %body
+    %center.wrapper
+      %table.gmail
+        %tbody
+          %tr
+            %td  
+      %table.preheader.centered
+        %tbody
+          %tr
+            %td
+              %table
+                %tbody
+                  %tr
+                    %td.title
+                    %td.webversion
+      %table.header.centered
+        %tbody
+          %tr
+            %td.logo.emb-logo-padding-box
+              #emb-email-header.logo-center
+                %a{:href => "http://hotelcommander.net", :style => "font-weight: bold;text-decoration: none;transition: opacity 0.2s ease-in;color: #41637e"}
+                  %img{:alt => "HotelCommander", :height => "78", :src => "http://hotelcommander.net/images/hc_logo.png", :style => "border: 0;-ms-interpolation-mode: bicubic;display: block;Margin-left: auto;Margin-right: auto;max-width: 385px", :width => "257"}/
+      %table.border
+        %tbody
+          %tr
+            %td
+      %table.centered
+        %tbody
+          %tr
+            %td.border
+              %table.one-col
+                %tbody
+                  %tr
+                    %td.column
+                      %div{style: 'padding-top: 32px'}
+                      %table.contents
+                        %tbody
                           %tr
-                            %td#invisibleIntroduction.flexibleContainerBox(align="left" valign="middle" style="display:none !important;")
-                              %table(border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:100%;")
-                                %tr
-                                  %td.textContent(align="left")
-                                    %div(style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;")
-                                      = yield(:invisible)
-                            %td.flexibleContainerBox(align="right" valign="middle")
-                              %table(border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:100%;")
-                                %tr
-                                  %td.textContent(align="left")
-            =# END HEADER
-
-            %table#emailBody(bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="800")
-              %tr
-                %td(align="center" valign="top")
-                  %table(border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#fff;" bgcolor="#3498db")
-                    %tr
-                      %td(align="center" valign="top")
-                        %table.flexibleContainer(border="0" cellpadding="0" cellspacing="0" width="500")
+                            %td.padded
+                              = yield
+                      %div
+                        .column-bottom
+      %table.footer.centered{:style => "border-collapse: collapse;border-spacing: 0;Margin-left: auto;Margin-right: auto;width: 602px"}
+        %tbody
+          %tr
+            %td.social{:align => "center", :style => "padding: 0;vertical-align: top;padding-top: 32px;padding-bottom: 22px;font-family: Georgia,serif;border-bottom: 1px solid #e9e9e9"}
+              %table{:style => "border-collapse: collapse;border-spacing: 0"}
+                %tbody
+                  %tr
+                    %td.social-link{:style => "padding: 0;vertical-align: top"}
+                      %table{:style => "border-collapse: collapse;border-spacing: 0"}
+                        %tbody
                           %tr
-                            %td.flexibleContainerCell(align="center" valign="top" width="500")
-                              %table(border="0" cellpadding="30" cellspacing="0" width="100%")
-                                %tr
-                                  %td.textContent(align="center" valign="top")
-                                    = yield(:header)
-
-              = yield
-
-            %table#emailFooter(bgcolor="#E1E1E1" border="0" cellpadding="0" cellspacing="0" width="500")
-              %tr
-                %td(align="center" valign="top")
-                  %table(border="0" cellpadding="0" cellspacing="0" width="100%")
-                    %tr
-                      %td(align="center" valign="top")
-                        %table.flexibleContainer(border="0" cellpadding="0" cellspacing="0" width="500")
+                            %td{:style => "padding: 0;vertical-align: top"}
+                              %a{:href => "https://www.facebook.com/hotelcommander"}
+                                %img{:height => "21", :src => "https://i5.createsend1.com/static/eb/master/01-mason/images/facebook-dark.png", :style => "border: 0;-ms-interpolation-mode: bicubic;display: block", :width => "26"}/
+                            %td.social-text{:style => "padding: 0;vertical-align: middle !important;height: 21px;font-size: 10px;font-weight: bold;letter-spacing: 0.05em;text-transform: uppercase;color: #999"}
+                              %a{:href => "https://www.facebook.com/hotelcommander"} Like
+                    %td.social-link{:style => "padding: 0;vertical-align: top"}
+                    %td.social-link{:style => "padding: 0;vertical-align: top"}
+          %tr
+            %td{:style => "padding: 0;vertical-align: top"}
+              %table{:style => "border-collapse: collapse;border-spacing: 0"}
+                %tbody
+                  %tr
+                    %td.address{:style => "padding: 0;vertical-align: top;width: 250px;padding-top: 32px;padding-bottom: 64px;font-family: Georgia,serif"}
+                      %table.contents{:style => "border-collapse: collapse;border-spacing: 0;table-layout: fixed;width: 100%"}
+                        %tbody
                           %tr
-                            %td.flexibleContainerCell(align="center" valign="top" width="500")
-                              %table(border="0" cellpadding="30" cellspacing="0" width="100%")
-                                %tr
-                                  %td(valign="top" bgcolor="#E1E1E1")
-                                    .footer
-                                      %div
-                                        Copyright &#169; #{ Date.today.year } HotelCommander. All rights reserved.
+                            %td.padded
+                              .address{:style => "width: 250px;padding-top: 32px;padding-bottom: 64px;font-family: Georgia,serif"}
+                                %div Punto Di Unione s.r.o, Czech Republic, Prague
+                    %td.subscription{:style => "padding: 0;vertical-align: top;width: 350px;padding-top: 32px;padding-bottom: 64px"}
+                      %table.contents{:style => "border-collapse: collapse;border-spacing: 0;table-layout: fixed;width: 100%"}
+                        %tbody
+                          %tr
+                            %td.padded
+                              .permission
+                              .campaign
+                                %span.block
+                                  %span
+                                    Preferences
+                                    %span.hide   |  
+                                %span.block Unsubscribe

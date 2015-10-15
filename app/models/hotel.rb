@@ -29,7 +29,7 @@
 #
 
 class Hotel < ActiveRecord::Base
-  include HotelProperties
+  include HotelProperties, HotelRailsAdmin
 
   scope :contains_facilities, -> (ids) { includes(:facilities).where(hotel_facilities: { id: ids }) }
   scope :with_facilities, -> (ids) { contains_facilities(ids).select { |h| (ids - h.facilities.map(&:id)).size.zero? } }
@@ -52,7 +52,13 @@ class Hotel < ActiveRecord::Base
   has_many :channel_managers, foreign_key: :booking_id, primary_key: :booking_id
   has_many :rooms, foreign_key: :booking_hotel_id, primary_key: :booking_id
 
-  has_many :contacts
+  has_many :contacts do
+    def fancy_order_by_type
+      group_by(&:contact_type).collect{|x, v| ["#{x}: #{v.length}"]}.join(', ')
+    end
+  end
+
+  has_many :email_newsletters, dependent: :destroy
 
   has_many :related_hotels
   has_many :related,

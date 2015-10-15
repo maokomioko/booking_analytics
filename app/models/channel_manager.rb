@@ -100,7 +100,6 @@ class ChannelManager < ActiveRecord::Base
       @connector_type || self.class.name.split('::').last.downcase
     end
 
-    self.type = ChannelManager.define_type(value)
     value
   end
 
@@ -114,7 +113,7 @@ class ChannelManager < ActiveRecord::Base
   end
 
   def self.define_type(connector_type = nil)
-    connector_type.nil? ? 'ChannelManager::' + connector_type.classify : 'ChannelManager::Empty'
+    !connector_type.nil? ? 'ChannelManager::' + connector_type.classify : 'ChannelManager::Empty'
   end
 
   private

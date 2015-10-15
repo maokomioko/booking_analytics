@@ -27,19 +27,32 @@ class Contact < ActiveRecord::Base
   validates_presence_of :value
   validates_inclusion_of :contact_type, in: TYPES, allow_blank: true
 
-  def self.define_type(contact_type = nil)
-    !contact_type.nil? ? 'Contact::' + contact_type.classify : 'Contact::Other'
-  end
-
-  def contact_type
-    if type.nil?
-      @contact_type
-    else
-      @contact_type || self.class.name.split('::').last.downcase
+  rails_admin do
+    navigation_label 'Hotels'
+    list do
+      field :id
+      field :hotel
+      field :contact_type
+      field :value
+      field :description
     end
   end
 
   def contact_name
     contact_type
+  end
+
+  def contact_type
+    value = if type.nil?
+      @contact_type
+    else
+      @contact_type || self.class.name.split('::').last.downcase
+    end
+
+    value
+  end
+
+  def self.define_type(contact_type = nil)
+    !contact_type.nil? ? 'Contact::' + contact_type.classify : 'Contact::Other'
   end
 end

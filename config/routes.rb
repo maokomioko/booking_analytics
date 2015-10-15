@@ -2,6 +2,7 @@ require 'sidekiq/web'
 require 'sidekiq-status/web'
 
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Graph::Engine, at: '/graph'
 
   authenticate :user, ->(u) { u.role == 'admin' } do

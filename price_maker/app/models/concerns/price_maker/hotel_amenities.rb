@@ -9,7 +9,8 @@ module PriceMaker
       # returns booking_id for related hotels
       def amenities_calc(company_id = nil, force = false)
         if related_ids.blank? || force
-          settings  = Company.find(company_id).setting_fallback if company_id
+          #settings  = settings_rescue(company_id, id)
+          settings = Company.find(company_id).setting_fallback if company_id
           amenities = get_base_facilities
 
           args = [id]
@@ -53,6 +54,17 @@ module PriceMaker
       def get_base_facilities
         Hotel.base_facilities_cache.map(&:id) & facility_ids
       end
+
+      private
+
+      # def settings_rescue(company_id = nil, hotel_id)
+      #   if company_id
+      #     Company.find(company_id).setting_fallback
+      #   else
+      #     c
+      #     company = Company.new
+      #   end
+      # end
     end
   end
 end

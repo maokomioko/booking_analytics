@@ -1,7 +1,6 @@
 class DefaultMailer < ActionMailer::Base
   include Roadie::Rails::Automatic
 
-  default from: 'no-reply@hotelcommander.net'
-
+  default from: 'mike@hotelcommander.net'
   layout 'email'
 end

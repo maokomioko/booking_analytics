@@ -1,0 +1,23 @@
+%p
+  Hello,
+  = @hotel.name + ' owner!'
+  %br
+  Would you like to be able to track your competitors 24/7 and use this knowledge to create marketing strategies that take advantage of your competitors' weaknesses, and improve your own business performance?
+%p Hotel Commander will keep you up to date with all the information relevant to your hotel.
+%p Here is a sample of what we can do for your business:
+%ul
+  %li The highest and the lowest rates in your market segment
+  %li Average competitor rates in your segment
+  %li Historical rated
+  %li Your average booking.com position
+  %li Your current position
+%p
+  %img{:src => "http://app.hotelcommander.net/uploads/graph.png", :width => "100%"}/
+%p
+  If you would you like to be able to access this kind of information sign up
+  %strong{:style => "font-weight: bold"} for free
+  at
+  %a{:href => "http://hotelcommander.net", :style => "transition: opacity 0.2s ease-in;color: #41637e"} www.hotelcommander.net
+%p Best regards,
+%p Hotel Commander Team
+= render partial: 'hotels/competitors_table', locals: {hotel: @hotel}

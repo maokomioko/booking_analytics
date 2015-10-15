@@ -1,4 +1,9 @@
 en:
+  admin:
+    actions:
+      info_letter:
+        bulk_link: Send newsletter
+        menu: Send newsletter
   meta:
     title: Hotel Commander | v1.1a
     description: Hotel revenue management software

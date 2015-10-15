@@ -22,7 +22,7 @@ task related_sender: :environment do
   hotel = Hotel.where(field => value).first
 
   if hotel.present?
-    print "OK\n".green
+    print "OK\n"
   else
     puts "No hotels found."
     next
@@ -30,7 +30,7 @@ task related_sender: :environment do
 
   print "Build map info... "
   markers = MarkerBuilder.build(hotel.related.pluck(:booking_id)).to_json
-  print "OK\n".green
+  print "OK\n"
 
   print "Render HTML file... "
   html = ApplicationController.new.render_to_string(

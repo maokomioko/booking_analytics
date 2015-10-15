@@ -7,6 +7,7 @@ class Ability
     if user
       case user.role
       when 'admin'
+        can :access, :rails_admin
         can :manage, :all
       when 'manager'
         manager_abilities

@@ -27,12 +27,8 @@ class Contact < ActiveRecord::Base
   validates_presence_of :value
   validates_inclusion_of :contact_type, in: TYPES, allow_blank: true
 
-  def self.define_type(contact_type)
-    if contact_type.present?
-      'Contact::' + contact_type.classify
-    else
-      self.name
-    end
+  def self.define_type(contact_type = nil)
+    !contact_type.nil? ? 'Contact::' + contact_type.classify : 'Contact::Other'
   end
 
   def contact_type

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :calendar, controller: :calendar
 
-  resources :channel_manager, contoller: 'channel_manager', except: [:edit] do
+  resources :channel_manager, contoller: 'channel_manager', except: [:new, :edit] do
     collection do
       post :update_prices
     end

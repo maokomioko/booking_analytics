@@ -52,6 +52,7 @@ class ChannelManager < ActiveRecord::Base
 
       plans.collect{|x| [name.call(x), x['priId']]}
     end
+
   rescue ConnectorError => e
     return [['', '']]
   end
@@ -93,11 +94,14 @@ class ChannelManager < ActiveRecord::Base
   end
 
   def connector_type
-    if type.nil?
+    value = if type.nil?
       @connector_type
     else
       @connector_type || self.class.name.split('::').last.downcase
     end
+
+    self.type = ChannelManager.define_type(value)
+    value
   end
 
   # create rooms and fill initial prices
@@ -109,12 +113,8 @@ class ChannelManager < ActiveRecord::Base
     end
   end
 
-  def self.define_type(connector_type)
-    if connector_type.present?
-      'ChannelManager::' + connector_type.classify
-    else
-      self.name
-    end
+  def self.define_type(connector_type = nil)
+    connector_type.nil? ? 'ChannelManager::' + connector_type.classify : 'ChannelManager::Empty'
   end
 
   private

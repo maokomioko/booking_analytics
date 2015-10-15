@@ -18,13 +18,13 @@ task related_sender: :environment do
     next
   end
 
-  print "Search hotel... "
+  print "Looking for hotels... "
   hotel = Hotel.where(field => value).first
 
   if hotel.present?
     print "OK\n".green
   else
-    puts "No hotel found."
+    puts "No hotels found."
     next
   end
 

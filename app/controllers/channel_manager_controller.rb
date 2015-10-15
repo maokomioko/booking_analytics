@@ -1,31 +1,6 @@
 class ChannelManagerController < ApplicationController
   load_and_authorize_resource
-  before_filter :set_channel_manager, only: [:edit, :update]
-
-  def new
-    unless current_user.channel_manager
-      @channel_manager = ChannelManager.new
-    end
-  end
-
-  def create
-    @channel_manager = ChannelManager.new(channel_manager_params)
-    @channel_manager.company = current_user.company
-
-    @channel_manager.default_pid = 1
-    @channel_manager.non_refundable_pid = 1
-
-    if @channel_manager.save && cm_credentials_correct?
-      @channel_manager.update_columns(default_pid: nil, non_refundable_pid: nil)
-      redirect_to match_plans_channel_manager_path(id: @channel_manager.id)
-    else
-      if @channel_manager.errors.any?
-        flash[:error] = @channel_manager.errors.full_messages.to_sentence
-      end
-
-      render :new
-    end
-  end
+  before_filter :set_channel_manager, only: :update
 
   def match_plans
     if @channel_manager.connector_type == 'empty'

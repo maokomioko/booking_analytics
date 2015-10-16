@@ -1,1 +1,22 @@
-%p= hotel.name
+- @hotel.related.each do |related_hotel|
+  %p
+  %h3= related_hotel.name
+  %table.price-table
+    - dates = [*Date.today..Date.today + 6.day]
+    %tr.dates
+      - dates.each do |date|
+        %td{style: ''}
+          = date.strftime('%a')
+          %span= date.strftime('%d')
+    - related_hotel.rooms.each do |room|
+      %tr.room_details
+        %td{colspan: 7}
+          %h4{style: 'text-align: center'}= room.name
+      %tr.prices
+        - room.room_prices.where(date: dates).each do |price|
+          %td
+            - if price.default_price > 0
+              %b= price.default_price.to_s
+              %span EUR
+            - else
+              Sold out

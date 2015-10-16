@@ -177,6 +177,11 @@ table.wrapper
       img
         height: auto !important
         width: 100% !important
+    table.price-table
+      td
+        span
+          margin-top: 15px
+          display: block
 
 td.border
   width: 1px
@@ -319,6 +324,22 @@ table.divider
   blockquote
     padding-left: 16px
 
+.price-table
+  border-collapse: collapse
+  text-align: center
+  width: 100%
+  tr.dates
+    td
+      padding: 10px 0
+      color: #fff
+      text-align: center
+      background-color: #275caa
+  tr.prices
+    td
+      padding: 10px 0
+      color: #fff
+      background-color: #1fc4f4
+
 .one-col-feature
   width: 600px
   .column-top
@@ -455,7 +476,6 @@ table.divider
 .wrapper
   h2, h3
     font-family: Georgia,serif
-  p, ol, ul, .image
   p, ol, ul, .image, .btn a
     font-family: Georgia,serif
 
@@ -464,8 +484,6 @@ table.divider
 
 .mso .logo div
   font-family: sans-serif !important
-
-.title, .webversion, .facebook, .twitter, .forward, .permission, .left, .right, .social, .address, .campaign
 
 .title, .webversion, .facebook, .twitter, .forward, .permission, .left, .right, .social, .address, .campaign
   font-family: Georgia,serif
@@ -603,10 +621,6 @@ body, .wrapper, .emb-editor-canvas
       text-align: center !important
     .preheader table
       width: 318px !important
-    .border td
-      width: 318px !important
-      &.border
-        width: 1px !important
     .image .border td
       width: auto !important
     .title

@@ -29,6 +29,9 @@ class Contact < ActiveRecord::Base
 
   rails_admin do
     navigation_label 'Hotels'
+    object_label_method do
+      :custom_label_method
+    end
     list do
       field :id
       field :hotel
@@ -50,6 +53,10 @@ class Contact < ActiveRecord::Base
     end
 
     value
+  end
+
+  def custom_label_method
+    "(#{contact_type}) #{value}"
   end
 
   def self.define_type(contact_type = nil)

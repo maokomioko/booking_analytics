@@ -50,7 +50,9 @@ class Hotel < ActiveRecord::Base
   }
 
   has_many :channel_managers, foreign_key: :booking_id, primary_key: :booking_id
-  has_many :rooms, foreign_key: :booking_hotel_id, primary_key: :booking_id
+  has_many :rooms, foreign_key: :booking_hotel_id, primary_key: :booking_id, dependent: :destroy
+
+  accepts_nested_attributes_for :rooms
 
   has_many :contacts do
     def fancy_order_by_type

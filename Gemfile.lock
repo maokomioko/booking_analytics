@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: 6659722b7d16eb48676a5e0a595ee5da913f5f5b
+  revision: dfd985fdf2a82690217edd94110615d6ebe17821
   specs:
     capybara (2.6.0.dev)
       mime-types (>= 1.16)
@@ -33,10 +33,10 @@ GIT
 
 GIT
   remote: git://github.com/mperham/sidekiq.git
-  revision: 0fd04ba0ea86fb44c3b8e34e98aea8a877f1b2ed
+  revision: c556c85b689af3a4f6a1da76c9f8b5208b9753c3
   specs:
-    sidekiq (3.5.1)
-      celluloid (~> 0.17.2)
+    sidekiq (4.0.0.pre2)
+      concurrent-ruby (= 1.0.0.pre4)
       connection_pool (~> 2.2, >= 2.2.0)
       json (~> 1.0)
       redis (~> 3.2, >= 3.2.1)
@@ -44,7 +44,7 @@ GIT
 
 GIT
   remote: git://github.com/plataformatec/devise.git
-  revision: 9f37b6eff7b4f9b0441be5a687b3091db82befc4
+  revision: 4477bab1aa049d014846cc9ae3e2a5b2690e6520
   specs:
     devise (3.5.2)
       bcrypt (~> 3.0)
@@ -56,14 +56,14 @@ GIT
 
 GIT
   remote: git://github.com/rails/turbolinks.git
-  revision: 83d4b3d2c52a681f07900c28adb28bc8da604733
+  revision: 90d4132be6275edd997beeb66bf3876b0207291d
   specs:
     turbolinks (3.0.0)
       coffee-rails
 
 GIT
   remote: git://github.com/teampoltergeist/poltergeist.git
-  revision: c66df1e29e5cb1d2c13ac92c91bc976c6837288d
+  revision: 35f28e17cb13215999c3a9400c7f423febed23a9
   specs:
     poltergeist (1.7.0)
       capybara (~> 2.1)
@@ -152,11 +152,11 @@ GEM
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
     browser (1.0.1)
-    bson (1.12.3)
-    bson_ext (1.12.3)
-      bson (~> 1.12.3)
+    bson (1.12.4)
+    bson_ext (1.12.4)
+      bson (~> 1.12.4)
     builder (3.2.2)
-    bullet (4.14.9)
+    bullet (4.14.10)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
     callsite (0.0.11)
@@ -214,13 +214,14 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     colorize (0.7.7)
+    concurrent-ruby (1.0.0.pre4)
     connection_pool (2.2.0)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     css_parser (1.3.7)
       addressable
     daemons (1.2.3)
-    database_cleaner (1.5.0)
+    database_cleaner (1.5.1)
     date_validator (0.8.1)
       activemodel
     debug_inspector (0.0.2)
@@ -258,7 +259,7 @@ GEM
       ruby-progressbar (~> 1.4)
     gaffe (1.0.2)
       rails (>= 3.2.0)
-    geocoder (1.2.11)
+    geocoder (1.2.12)
     git-version-bump (0.15.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -280,7 +281,7 @@ GEM
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
     hashdiff (0.2.2)
-    hashie (3.4.2)
+    hashie (3.4.3)
     here_places (0.1.0)
       faraday (~> 0.9.1)
     highline (1.7.8)
@@ -314,7 +315,7 @@ GEM
     json_spec (1.1.4)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
-    jwt (1.5.1)
+    jwt (1.5.2)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -346,7 +347,7 @@ GEM
     method_source (0.8.2)
     mime-types (2.6.2)
     mini_portile (0.6.2)
-    minitest (5.8.1)
+    minitest (5.8.2)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -370,20 +371,20 @@ GEM
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
-    omniauth-facebook (2.0.1)
+    omniauth-facebook (3.0.0)
       omniauth-oauth2 (~> 1.2)
     omniauth-linkedin (0.2.0)
       omniauth-oauth (~> 1.0)
     omniauth-oauth (1.1.0)
       oauth
       omniauth (~> 1.0)
-    omniauth-oauth2 (1.3.1)
+    omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     options (2.3.2)
     orm_adapter (0.5.0)
     pg (0.18.3)
-    phony (2.15.4)
+    phony (2.15.7)
     phony_rails (0.12.10)
       activesupport (>= 3.0)
       phony (~> 2.12)
@@ -408,7 +409,7 @@ GEM
       activesupport (>= 3.1)
       railties (>= 3.1)
       thread_safe (~> 0.3.1)
-    racc (1.4.12)
+    racc (1.4.13)
     rack (1.6.4)
     rack-contrib (1.4.0)
       git-version-bump (~> 0.15)
@@ -486,7 +487,7 @@ GEM
       redis-actionpack (~> 4)
       redis-activesupport (~> 4)
       redis-store (~> 1.1.0)
-    redis-store (1.1.6)
+    redis-store (1.1.7)
       redis (>= 2.2)
     remotipart (1.2.1)
     request_store (1.2.0)
@@ -499,7 +500,7 @@ GEM
     roadie-rails (1.0.6)
       railties (>= 3.0, < 4.3)
       roadie (~> 3.0)
-    rollbar (2.4.0)
+    rollbar (2.5.2)
       multi_json
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
@@ -527,7 +528,7 @@ GEM
     rspec-support (3.3.0)
     ruby-graphviz (1.2.2)
     ruby-progressbar (1.7.5)
-    ruby_parser (3.7.1)
+    ruby_parser (3.7.2)
       sexp_processor (~> 4.1)
     rubysl (2.1.0)
       rubysl-abbrev (~> 2.0)
@@ -792,15 +793,15 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
-    unicorn (4.9.0)
+    unicorn (5.0.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
     uniform_notifier (1.9.0)
-    vcr (2.9.3)
+    vcr (3.0.0)
     warden (1.2.3)
       rack (>= 1.0)
-    webmock (1.22.1)
+    webmock (1.22.3)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff

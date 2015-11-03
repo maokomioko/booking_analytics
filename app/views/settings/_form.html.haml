@@ -29,9 +29,12 @@
             { include_blank: false },
             multiple: true,
             class: 'form-control search-select'
+          %button.btn.btn_apply{type: 'submit'}
+            = icon('check')
+            = t('shared.update')
         .col-xs-6
           = f.label :user_ratings
-          #user-rating-slider.slider-purple
+          #user-rating-slider
           = f.fields_for :user_ratings_range, f.object.user_ratings_range do |rf|
             = rf.hidden_field :from, id: 'user-rating-from'
             = rf.hidden_field :to, id: 'user-rating-to'

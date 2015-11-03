@@ -697,7 +697,6 @@
             if (!this.dragging) {
                 return;
             }
-
             var x = e.pageX || e.originalEvent.touches && e.originalEvent.touches[0].pageX;
             this.coords.x_pointer = x - this.coords.x_gap;
 
@@ -737,7 +736,7 @@
                 this.is_finish = true;
                 this.callOnFinish();
             }
-            
+
             this.dragging = false;
         },
 

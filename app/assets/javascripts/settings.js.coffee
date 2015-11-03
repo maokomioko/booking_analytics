@@ -8,22 +8,22 @@ class @Settings
     @tabHacks()
 
   initUserRatingSlider: ->
-    $slider = $('#user-rating-slider')
-
-    $slider.rangeSlider
-      bounds:
-        min: 0
-        max: 100
-      defaultValues:
-        min: $('#user-rating-from').val()
-        max: $('#user-rating-to').val()
+    $ratings_slider = $('#user-rating-slider')
+    $ratings_slider.ionRangeSlider
+      type: 'double'
+      min: 0
+      max: 100
+      from: $('#user-rating-from').val()
+      to: $('#user-rating-to').val()
       step: 1
-      formatter: (val) -> val / 10
+      grid: true
+      grid_num: 1
+      prettify: (val) -> val / 10
+      onUpdate: (data) ->
+        $('#user-rating-from').val(data.from)
+        $('#user-rating-to').val(data.to)
 
-    $slider.bind 'userValuesChanged', (e, data) ->
-      $('#user-rating-from').val(data.values.min)
-      $('#user-rating-to').val(data.values.max)
-      $('.settings-form').trigger('submit.rails')
+    window.slider = $ratings_slider.data("ionRangeSlider")
 
   toggleSearchBar: ->
     $link = $('.text_link')

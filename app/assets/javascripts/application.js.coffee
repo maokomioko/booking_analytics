@@ -5,7 +5,6 @@
 #= require underscore
 #= require gmaps/google
 
-#= require jquery-ui/mouse
 #= require jquery-ui/datepicker
 
 #= require jquery.remotipart
@@ -23,10 +22,8 @@
 
 #= require jquery.blockUI
 
-#= require jquery.mousewheel
 #= require jquery.cookie
 #= require select2
-
 
 #= require jquery.validate
 
@@ -34,8 +31,6 @@
 #= require jquery.inputmask
 #= require inputmask.extensions
 #= require inputmask.phone.extensions
-
-#= require jQAllRangeSliders-min
 
 #= require graph/application
 

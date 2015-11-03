@@ -1,12 +1,10 @@
 = form_for form, url: [:simple, :hotels], remote: true, method: :get, html: { class: 'form-horizontal graph-options' } do |f|
 
   .form-group
-    = f.label :id, t("#{pattern}.date_range"), class: 'col-sm-3 control-label'
-    .col-sm-9
-      %p
-      #date-range-slider.slider-purple
-    = f.hidden_field :date_from
-    = f.hidden_field :date_to
+    .col-sm-12
+      #date-range-slider
+      = f.hidden_field :date_from
+      = f.hidden_field :date_to
 
   .form-group
     = f.label :booking_id, t("#{pattern}.hotel"), class: 'col-sm-3 control-label'

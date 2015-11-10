@@ -35,6 +35,7 @@ en:
     unauthorized: Unauthorized
     no_ch_manager: No channel manager defined
     no_reservations: Sorry, we couldn't find any reservations in your Channel Manager.
+    min_related_hotels_not_found: We need to have at least 4 related hotels in your town.
   labels:
     cm_login: Your login for Channel Manager
     cm_password: Your password for Channel Manager

@@ -15,7 +15,9 @@ class RoomsController < ApplicationController
     if bulk_errors(@rooms).present?
       flash[:alert] = bulk_errors(@rooms)
     else
-      RoomSetting.update(bulk_update_room_settings_params.keys, bulk_update_room_settings_params.values)
+      if params[:room_settings].present?
+        RoomSetting.update(bulk_update_room_settings_params.keys, bulk_update_room_settings_params.values)
+      end
       if params[:manual] && params[:manual] == 'true'
         flash[:success] = t('messages.room_updated')
       end

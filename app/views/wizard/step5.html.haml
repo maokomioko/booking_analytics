@@ -4,6 +4,8 @@
       = button_tag type: :submit, class: 'btn btn_apply pull-right' do
         = t('.finish')
         = icon('arrow-right')
+  - else
+    %p.pull-right{style: 'margin-top: -20px'}= t('errors.min_related_hotels_not_found')
     .clearfix
 
 .container-fluid
@@ -19,9 +21,10 @@
 
     .div(data-partial="related_hotels")
       = render template: 'related_hotels/edit'
+    .clearfix
     .separate
     .form_btns
       = link_to wizard_step4_path, class: 'back_link pull-left' do
         = icon('arrow-left')
-        = t('shared.back')
-      = yield :step5_form
+        = t('shared.prev')
+      .clearfix

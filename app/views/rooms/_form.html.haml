@@ -33,7 +33,7 @@
         %td
           = link_to wizard_step3_path, class: 'back_link pull-left' do
             = icon('arrow-left')
-            = t('shared.back')
+            = t('shared.prev')
         %td
         %td
         - if current_user.channel_manager.connector_type != 'empty' && can?(:update_connector_credentials, Room)

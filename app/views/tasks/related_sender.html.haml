@@ -75,13 +75,13 @@
                 %th
             %tbody
               - @related_hotels.each do |related_hotel|
-                %tr(data-booking-id="#{related_hotel.related.booking_id}")
-                  %td= related_hotel.related.booking_id
-                  %td= related_hotel.related.name
+                %tr(data-booking-id="#{related_hotel.try(:related).try(:booking_id)}")
+                  %td= related_hotel.try(:related).try(:booking_id)
+                  %td= related_hotel.try(:related).try(:name)
                   %td
                     - related_hotel.related.exact_class.to_i.times do
                       .star
-                  %td= related_hotel.related.post_address
+                  %td=related_hotel.try(:related).try(:post_address)
                   %td
                     = button_tag 'Show on map', class: 'btn btn-link show-on-map'
 
